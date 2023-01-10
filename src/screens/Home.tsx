@@ -1,5 +1,5 @@
-import {Text} from 'react-native';
+import {Button} from '@rneui/base';
 
 export default function Home() {
-  return <Text>Home</Text>;
+  return <Button>My Button</Button>;
 }
