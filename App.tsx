@@ -9,23 +9,19 @@
  */
 
 import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+
 import {ThemeProvider} from '@rneui/themed';
 import React from 'react';
 import {RecoilRoot} from 'recoil';
-import Home from './src/screens/Home';
+import AppNavigator from './src/Navigator/AppNavigator';
 import {theme} from './src/theme';
-
-const Stack = createNativeStackNavigator();
 
 const App = () => {
   return (
     <RecoilRoot>
       <ThemeProvider theme={theme}>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="Home">
-            <Stack.Screen name="Home" component={Home} />
-          </Stack.Navigator>
+          <AppNavigator />
         </NavigationContainer>
       </ThemeProvider>
     </RecoilRoot>
