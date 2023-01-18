@@ -13,12 +13,14 @@ import {NavigationContainer} from '@react-navigation/native';
 import {ThemeProvider} from '@rneui/themed';
 //import React from 'react';
 import {RecoilRoot} from 'recoil';
+import SMSWatcher from './src/features/SMSWatcher';
 import AppNavigator from './src/Navigator/AppNavigator';
 import {theme} from './src/theme';
 
 const App = () => {
   return (
     <RecoilRoot>
+      <SMSWatcher />
       <ThemeProvider theme={theme}>
         <NavigationContainer>
           <AppNavigator />
