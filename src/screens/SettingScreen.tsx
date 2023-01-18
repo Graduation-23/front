@@ -2,6 +2,8 @@ import {StyleSheet, ScrollView} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {ListItem} from '@rneui/themed';
 import ListItems from '../components/ListItems';
+import {useState} from 'react';
+import DialogActions from '../components/DialogActions';
 
 export default function SettingScreen() {
   // const app = [
@@ -23,6 +25,11 @@ export default function SettingScreen() {
   //   });
   //   return a;
   // };
+  const [visible, setVisible] = useState(false);
+  const toggleDialog = () => {
+    setVisible(!visible);
+  };
+
   return (
     <SafeAreaView style={styles.Container}>
       <ScrollView>
@@ -47,9 +54,24 @@ export default function SettingScreen() {
           <ListItem.Title style={styles.title}>개인</ListItem.Title>
         </ListItem>
         <ListItems icon="user" label="회원 정보" color="#fce085" />
-        <ListItems icon="user" label="로그아웃" color="#fce085" />
+        <ListItems
+          icon="user"
+          label="로그아웃"
+          color="#fce085"
+          onPress={() => {
+            toggleDialog();
+          }}
+        />
         <ListItems icon="user" label="회원 탈퇴" color="#e64c4c" />
       </ScrollView>
+      {visible && (
+        <DialogActions
+          visible={visible}
+          toggleDialog={toggleDialog}
+          title="로그아웃"
+          contents="로그아웃 하시겠습니까?"
+        />
+      )}
     </SafeAreaView>
   );
 }
