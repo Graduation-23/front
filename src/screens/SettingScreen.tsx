@@ -1,30 +1,43 @@
-import {useState} from 'react';
 import {Text} from '@rneui/base';
 import {SafeAreaView} from 'react-native';
 import {ListItem} from '@rneui/themed';
+import Icon from 'react-native-vector-icons/Feather';
 
 export default function SettingScreen() {
-  const [text, setText] = useState('왕');
   return (
     <SafeAreaView style={{alignItems: 'center', justifyContent: 'center'}}>
-      <ListItem.Title style={{backgroundColor: 'skyblue', width: '100%'}}>
-        <Text>제목</Text>
-        <ListItem.Subtitle>
-          <Text>서브</Text>
-          <ListItem.Content>
-            <Text>아아ㅏ아아ㅏ</Text>
-          </ListItem.Content>
-        </ListItem.Subtitle>
-      </ListItem.Title>
-
-      <ListItem.Subtitle
-        style={{width: '100%', backgroundColor: 'pink'}}
-        onPress={() => {
-          setText('냥?');
-        }}>
-        <Text>{text}</Text>
-      </ListItem.Subtitle>
-      <Text>안뇽!</Text>
+      {/*금융 관련 */}
+      <ListItem style={{width: '100%'}}>
+        <ListItem.Title style={{fontSize: 20, fontWeight: 'bold'}}>
+          금융
+        </ListItem.Title>
+      </ListItem>
+      <ListItem style={{borderColor: 'black', borderBottomWidth: 1}}>
+        <Icon name="user" size={40} color="#fce085" />
+        <ListItem.Title style={{width: '75%'}}>
+          <Text style={{fontSize: 20}}>카드(계좌) 등록</Text>
+        </ListItem.Title>
+        <ListItem.Chevron size={40} />
+      </ListItem>
+      {/*회원 관련 */}
+      <ListItem style={{width: '100%'}}>
+        <ListItem.Title style={{fontSize: 20, fontWeight: 'bold'}}>
+          개인
+        </ListItem.Title>
+      </ListItem>
+      <ListItem style={{borderColor: 'black', borderBottomWidth: 1}}>
+        <Icon name="user" size={40} color="#fce085" />
+        <ListItem.Title style={{width: '75%'}}>
+          <Text style={{fontSize: 20}}>회원 정보</Text>
+        </ListItem.Title>
+        <ListItem.Chevron size={40} />
+      </ListItem>
+      <ListItem>
+        <Icon name="user" size={40} color="#fce085" />
+        <ListItem.Title style={{width: '90%'}}>
+          <Text style={{fontSize: 20}}>회원 탈퇴</Text>
+        </ListItem.Title>
+      </ListItem>
     </SafeAreaView>
   );
 }
