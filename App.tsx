@@ -11,7 +11,7 @@
 import {NavigationContainer} from '@react-navigation/native';
 
 import {ThemeProvider} from '@rneui/themed';
-import React from 'react';
+//import React from 'react';
 import {RecoilRoot} from 'recoil';
 import AppNavigator from './src/Navigator/AppNavigator';
 import {theme} from './src/theme';
