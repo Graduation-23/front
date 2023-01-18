@@ -6,16 +6,16 @@ import Icon from 'react-native-vector-icons/Feather';
 interface Props {
   icon: string;
   label: string;
+  color: string;
 }
 
-const ListItems = ({icon, label}: Props) => {
+const ListItems = ({icon, label, color}: Props) => {
   return (
-    <ListItem style={styles.Border}>
-      <Icon name={icon} size={40} color="#fce085" />
+    <ListItem>
+      <Icon name={icon} size={40} color={color} />
       <ListItem.Subtitle style={styles.Subtitle}>
         <Text style={styles.Text}>{label}</Text>
       </ListItem.Subtitle>
-      <ListItem.Chevron size={40} />
     </ListItem>
   );
 };
@@ -23,12 +23,8 @@ const ListItems = ({icon, label}: Props) => {
 export default ListItems;
 
 const styles = StyleSheet.create({
-  Border: {
-    borderColor: 'black',
-    borderBottomWidth: 1,
-  },
   Subtitle: {
-    width: '75%',
+    width: '85%',
   },
   Text: {
     fontSize: 20,
