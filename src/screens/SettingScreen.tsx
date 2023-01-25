@@ -5,7 +5,7 @@ import ListItems from '../components/ListItems';
 import {useState} from 'react';
 import DialogActions from '../components/DialogActions';
 
-export default function SettingScreen() {
+export default function SettingScreen({navigation}: any) {
   // const app = [
   //   {k: 0, iconName: 'user', label: '공지', color: '#fce'},
   //   {k: 1, iconName: 'user', label: '업데이트 내역', color: '#fce'},
@@ -46,14 +46,35 @@ export default function SettingScreen() {
         <ListItem>
           <ListItem.Title style={styles.title}>금융</ListItem.Title>
         </ListItem>
-        <ListItems icon="user" label="카드(계좌) 등록" color="#fce085" />
-        <ListItems icon="user" label="결제 내역 연동" color="#fce085" />
+        <ListItems
+          icon="user"
+          label="카드(계좌) 등록"
+          color="#fce085"
+          onPress={() => {
+            navigation.navigate('CardRegister');
+          }}
+        />
+        <ListItems
+          icon="user"
+          label="결제 내역 연동"
+          color="#fce085"
+          onPress={() => {
+            navigation.navigate('LinkUpPayment');
+          }}
+        />
 
         {/*회원 관련 */}
         <ListItem>
           <ListItem.Title style={styles.title}>개인</ListItem.Title>
         </ListItem>
-        <ListItems icon="user" label="회원 정보" color="#fce085" />
+        <ListItems
+          icon="user"
+          label="회원 정보"
+          color="#fce085"
+          onPress={() => {
+            navigation.navigate('UserInfo');
+          }}
+        />
         <ListItems
           icon="user"
           label="로그아웃"
