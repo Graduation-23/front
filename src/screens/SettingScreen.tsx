@@ -4,6 +4,7 @@ import {ListItem} from '@rneui/themed';
 import ListItems from '../components/ListItems';
 import {useState} from 'react';
 import DialogActions from '../components/DialogActions';
+import WithdrawalDialog from '../components/WithdrawalDialog';
 
 export default function SettingScreen({navigation}: any) {
   // const app = [
@@ -26,8 +27,14 @@ export default function SettingScreen({navigation}: any) {
   //   return a;
   // };
   const [visible, setVisible] = useState(false);
+  const [visible2, setVisible2] = useState(false);
+
   const toggleDialog = () => {
     setVisible(!visible);
+  };
+
+  const toggleInputDialog = () => {
+    setVisible2(!visible2);
   };
 
   return (
@@ -83,7 +90,14 @@ export default function SettingScreen({navigation}: any) {
             toggleDialog();
           }}
         />
-        <ListItems icon="user" label="회원 탈퇴" color="#e64c4c" />
+        <ListItems
+          icon="user"
+          label="회원 탈퇴"
+          color="#e64c4c"
+          onPress={() => {
+            toggleInputDialog();
+          }}
+        />
       </ScrollView>
       {visible && (
         <DialogActions
@@ -92,6 +106,9 @@ export default function SettingScreen({navigation}: any) {
           title="로그아웃"
           contents="로그아웃 하시겠습니까?"
         />
+      )}
+      {visible2 && (
+        <WithdrawalDialog visible={visible2} toggleDialog={toggleInputDialog} />
       )}
     </SafeAreaView>
   );
