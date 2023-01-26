@@ -1,14 +1,15 @@
-import {View} from 'react-native';
+// import {View} from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
-import UText from '../components/UText';
+import {AppText} from '../components/AppText';
 
 export default function HomeScreen() {
   return (
-    <View style={{backgroundColor: 'white'}}>
-      <UText smooth style={{fontSize: 24, color: 'black'}}>
-        hello
-      </UText>
-    </View>
+    <SafeAreaView style={{backgroundColor: 'white'}}>
+      <AppText.Title family="round-a" style={{fontSize: 35}}>
+        안녕하세요. Hello
+      </AppText.Title>
+    </SafeAreaView>
   );
 }
 
