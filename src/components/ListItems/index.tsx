@@ -1,7 +1,7 @@
 import {ListItem} from '@rneui/themed';
 import {AppText} from '../AppText';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
-import Icon from 'react-native-vector-icons/Feather';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 interface Props {
   icon: string;

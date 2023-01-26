@@ -48,7 +48,7 @@ export default function SettingScreen({navigation}: any) {
           </ListItem.Title>
         </ListItem>
         {/* mapping() */}
-        <ListItems icon="bell" label="공지" color="#74828a" />
+        <ListItems icon="notifications" label="공지" color="#74828a" />
         <ListItems icon="trending-up" label="업데이트 내역" color="#a878fb" />
         <ListItems icon="bar-chart" label="현재 버전" color="#f9c165" />
 
@@ -90,7 +90,7 @@ export default function SettingScreen({navigation}: any) {
           }}
         />
         <ListItems
-          icon="power"
+          icon="logout"
           label="로그아웃"
           color="#e64c4c"
           onPress={() => {
@@ -98,7 +98,7 @@ export default function SettingScreen({navigation}: any) {
           }}
         />
         <ListItems
-          icon="x"
+          icon="close"
           label="회원 탈퇴"
           color="#e64c4c"
           onPress={() => {
