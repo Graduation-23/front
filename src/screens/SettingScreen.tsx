@@ -5,6 +5,7 @@ import ListItems from '../components/ListItems';
 import {useState} from 'react';
 import DialogActions from '../components/DialogActions';
 import WithdrawalDialog from '../components/WithdrawalDialog';
+import {AppText} from '../components/AppText';
 
 export default function SettingScreen({navigation}: any) {
   // const app = [
@@ -42,29 +43,33 @@ export default function SettingScreen({navigation}: any) {
       <ScrollView>
         {/*앱 관련 */}
         <ListItem>
-          <ListItem.Title style={styles.title}>앱</ListItem.Title>
+          <ListItem.Title style={styles.title}>
+            <AppText family="round-d">앱</AppText>
+          </ListItem.Title>
         </ListItem>
         {/* mapping() */}
-        <ListItems icon="user" label="공지" color="#fce" />
-        <ListItems icon="user" label="업데이트 내역" color="#fce" />
-        <ListItems icon="user" label="현재 버전" color="#fce" />
+        <ListItems icon="bell" label="공지" color="#74828a" />
+        <ListItems icon="trending-up" label="업데이트 내역" color="#a878fb" />
+        <ListItems icon="bar-chart" label="현재 버전" color="#f9c165" />
 
         {/*금융 관련 */}
         <ListItem>
-          <ListItem.Title style={styles.title}>금융</ListItem.Title>
+          <ListItem.Title style={styles.title}>
+            <AppText family="round-d">금융</AppText>
+          </ListItem.Title>
         </ListItem>
         <ListItems
-          icon="user"
+          icon="credit-card"
           label="카드(계좌) 등록"
-          color="#fce085"
+          color="#85d8fc"
           onPress={() => {
             navigation.navigate('CardRegister');
           }}
         />
         <ListItems
-          icon="user"
+          icon="link"
           label="결제 내역 연동"
-          color="#fce085"
+          color="#5ed2b1"
           onPress={() => {
             navigation.navigate('LinkUpPayment');
           }}
@@ -72,10 +77,12 @@ export default function SettingScreen({navigation}: any) {
 
         {/*회원 관련 */}
         <ListItem>
-          <ListItem.Title style={styles.title}>개인</ListItem.Title>
+          <ListItem.Title style={styles.title}>
+            <AppText family="round-d">개인</AppText>
+          </ListItem.Title>
         </ListItem>
         <ListItems
-          icon="user"
+          icon="info"
           label="회원 정보"
           color="#fce085"
           onPress={() => {
@@ -83,15 +90,15 @@ export default function SettingScreen({navigation}: any) {
           }}
         />
         <ListItems
-          icon="user"
+          icon="power"
           label="로그아웃"
-          color="#fce085"
+          color="#e64c4c"
           onPress={() => {
             toggleDialog();
           }}
         />
         <ListItems
-          icon="user"
+          icon="x"
           label="회원 탈퇴"
           color="#e64c4c"
           onPress={() => {
@@ -120,7 +127,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   title: {
-    fontSize: 20,
+    fontSize: 28,
     fontWeight: 'bold',
     width: '100%',
     marginBottom: -10,

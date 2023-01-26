@@ -1,6 +1,6 @@
 import {ListItem} from '@rneui/themed';
-import {Text} from '@rneui/base';
-import {StyleSheet, TouchableOpacity} from 'react-native';
+import {AppText} from '../AppText';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 
 interface Props {
@@ -14,9 +14,17 @@ const ListItems = ({icon, label, color, onPress}: Props) => {
   return (
     <TouchableOpacity onPress={onPress}>
       <ListItem>
-        <Icon name={icon} size={40} color={color} />
+        <View
+          style={{
+            backgroundColor: color,
+            borderRadius: 8,
+          }}>
+          <Icon name={icon} size={20} color="white" style={styles.Icons} />
+        </View>
         <ListItem.Subtitle style={styles.Subtitle}>
-          <Text style={styles.Text}>{label}</Text>
+          <AppText family="round-c" style={styles.Text}>
+            {label}
+          </AppText>
         </ListItem.Subtitle>
       </ListItem>
     </TouchableOpacity>
@@ -26,10 +34,13 @@ const ListItems = ({icon, label, color, onPress}: Props) => {
 export default ListItems;
 
 const styles = StyleSheet.create({
+  Icons: {
+    padding: 5,
+  },
   Subtitle: {
     width: '85%',
   },
   Text: {
-    fontSize: 20,
+    fontSize: 25,
   },
 });
