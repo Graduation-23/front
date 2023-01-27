@@ -4,7 +4,7 @@ import {ListItem} from '@rneui/themed';
 import ListItems from '../components/ListItems';
 import {useState} from 'react';
 import DialogActions from '../components/DialogActions';
-import WithdrawalDialog from '../components/WithdrawalDialog';
+import WithdrawalDialog from '../features/WithdrawalDialog';
 import {AppText} from '../components/AppText';
 
 export default function SettingScreen({navigation}: any) {
