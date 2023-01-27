@@ -1,9 +1,9 @@
-import {TextProps} from 'react-native';
+import {TextProps} from '@rneui/base';
 import {AppTextBase} from './AppTextBase';
 import {AppTextTitle} from './AppTextTitle';
 
 export interface AppTextProps extends TextProps {
-  children: string;
+  text?: string;
   /**
    * - round-a : Cafe24Oneprettynight
    * - round-b : 온글잎 으앙
@@ -11,6 +11,9 @@ export interface AppTextProps extends TextProps {
    * - round-d : 온글잎 케이고딩민서체
    */
   family?: 'round-a' | 'round-b' | 'round-c' | 'round-d';
+  ul?: boolean;
+  center?: boolean;
+  viewStyle?: object;
 }
 
 export const AppText = Object.assign(AppTextBase, {

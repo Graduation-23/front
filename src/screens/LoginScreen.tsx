@@ -1,22 +1,73 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {Button} from '@rneui/base';
-import {SafeAreaView} from 'react-native';
+import {Button, Input} from '@rneui/base';
+
+import {SafeAreaView, StyleSheet, View} from 'react-native';
 import {AppText} from '../components/AppText';
+import PlainButton from '../components/PlainButton';
 import {AuthorizationStackParamList} from '../Navigator/AuthorizationNavigator';
 
 const LoginScreen = ({
   navigation,
 }: NativeStackScreenProps<AuthorizationStackParamList, 'Login'>) => {
   return (
-    <SafeAreaView>
-      <AppText>Login Screen</AppText>
-      <Button onPress={() => navigation.navigate('Signup')}>Go Sign up</Button>
-      <Button
-        onPress={() => navigation.getParent()?.navigate('ContentNavigator')}>
-        Go Content
-      </Button>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.titleStyle}>
+        <AppText.Title text="Login Screen" family="round-d" />
+      </View>
+
+      <View style={styles.fullWidth}>
+        <Input
+          inputStyle={styles.input}
+          label={<AppText text="아이디" />}
+          placeholder="아이디 입력..."
+        />
+        <Input
+          inputStyle={styles.input}
+          label={<AppText text="비밀번호" />}
+          secureTextEntry={true}
+          placeholder="비밀번호 입력..."
+        />
+        <Button>로그인</Button>
+      </View>
+
+      <View style={styles.additionalLinkView}>
+        <PlainButton
+          title={<AppText center ul text="회원가입" />}
+          onPress={() => navigation.navigate('Signup')}
+        />
+        <PlainButton
+          title={<AppText center ul text="넘어가기" />}
+          onPress={() => navigation.getParent()?.navigate('ContentNavigator')}
+        />
+      </View>
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '100%',
+  },
+  additionalLinkView: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  input: {
+    backgroundColor: 'white',
+    padding: 6,
+  },
+  fullWidth: {
+    overflow: 'hidden',
+    width: 350,
+  },
+  titleStyle: {
+    marginBottom: 40,
+    marginTop: -75,
+  },
+});
 
 export default LoginScreen;
