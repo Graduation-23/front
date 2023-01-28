@@ -1,14 +1,20 @@
-import {Text} from '@rneui/themed';
-import {View, StyleSheet, TouchableOpacity} from 'react-native';
+import {ListItem} from '@rneui/themed';
+import {View, StyleSheet, TouchableOpacity, ScrollView} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {AppText} from '../components/AppText';
+import ListItems from '../components/ListItems';
+import {useState} from 'react';
 
 const UserInfoScreen = () => {
+  const [expanded, setExpanded] = useState(false);
+
   return (
     <SafeAreaView style={styles.Container}>
       <View style={styles.ProfileBox}>
         <View style={styles.tmp}>
-          <Text style={{color: 'white'}}>Profile</Text>
+          <AppText family="round-c" style={{color: 'white'}}>
+            Profile
+          </AppText>
         </View>
       </View>
       <View style={styles.Info}>
@@ -24,11 +30,57 @@ const UserInfoScreen = () => {
           </AppText>
         </TouchableOpacity>
       </View>
-      <View style={styles.List}>
-        <AppText family="round-c" style={{fontSize: 28, color: 'white'}}>
-          리스트 들어갈거예요
-        </AppText>
-      </View>
+      <ScrollView style={{width: '100%'}}>
+        <View style={styles.List}>
+          <ListItem.Accordion
+            content={
+              <ListItem.Content>
+                <ListItem.Title>
+                  <AppText family="round-d" style={{fontSize: 22}}>
+                    등록된 카드
+                  </AppText>
+                </ListItem.Title>
+              </ListItem.Content>
+            }
+            isExpanded={expanded}
+            onPress={() => {
+              setExpanded(!expanded);
+            }}>
+            <ListItems icon="home" label="one" color="blue" />
+            <ListItems icon="close" label="two" color="blue" />
+            <ListItems icon="crop" label="three" color="blue" />
+            <ListItems icon="bedtime" label="four" color="blue" />
+            <ListItems icon="tag" label="five" color="blue" />
+            <ListItems icon="add" label="카드 등록하기" color="blue" />
+          </ListItem.Accordion>
+          <ListItem>
+            <ListItem.Title>
+              <AppText family="round-d" style={{fontSize: 22}}>
+                생년월일
+              </AppText>
+            </ListItem.Title>
+            <ListItem.Content
+              style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
+              <AppText family="round-d" style={{fontSize: 22}}>
+                2001.01.01
+              </AppText>
+            </ListItem.Content>
+          </ListItem>
+          <ListItem>
+            <ListItem.Title>
+              <AppText family="round-d" style={{fontSize: 22}}>
+                가입일자
+              </AppText>
+            </ListItem.Title>
+            <ListItem.Content
+              style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
+              <AppText family="round-d" style={{fontSize: 22}}>
+                2023.01.28
+              </AppText>
+            </ListItem.Content>
+          </ListItem>
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -39,6 +91,8 @@ const styles = StyleSheet.create({
   Container: {
     alignItems: 'center',
     //justifyContent: 'center',
+    height: '100%',
+    flex: 1,
   },
   ProfileBox: {
     alignItems: 'center',
@@ -46,7 +100,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
     marginTop: 10,
     width: '100%',
-    height: '40%',
+    height: '25%',
     borderColor: 'skyblue',
     borderWidth: 5,
   },
