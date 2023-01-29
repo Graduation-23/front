@@ -46,12 +46,90 @@ const UserInfoScreen = () => {
             onPress={() => {
               setExpanded(!expanded);
             }}>
-            <ListItems icon="home" label="one" color="blue" />
-            <ListItems icon="close" label="two" color="blue" />
-            <ListItems icon="crop" label="three" color="blue" />
-            <ListItems icon="bedtime" label="four" color="blue" />
-            <ListItems icon="tag" label="five" color="blue" />
-            <ListItems icon="add" label="카드 등록하기" color="blue" />
+            <ListItem.Swipeable
+              rightContent={() => (
+                <TouchableOpacity
+                  style={{
+                    height: '100%',
+                    backgroundColor: 'red',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
+                  <AppText>DELETE</AppText>
+                </TouchableOpacity>
+              )}>
+              <ListItems icon="home" label="one" color="blue" />
+            </ListItem.Swipeable>
+            <ListItem.Swipeable
+              rightContent={() => (
+                <TouchableOpacity
+                  style={{
+                    height: '100%',
+                    backgroundColor: 'red',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
+                  <AppText>DELETE</AppText>
+                </TouchableOpacity>
+              )}>
+              <ListItems icon="close" label="two" color="blue" />
+            </ListItem.Swipeable>
+            <ListItem.Swipeable
+              rightContent={() => (
+                <TouchableOpacity
+                  style={{
+                    height: '100%',
+                    backgroundColor: 'red',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
+                  <AppText>DELETE</AppText>
+                </TouchableOpacity>
+              )}>
+              <ListItems icon="crop" label="three" color="blue" />
+            </ListItem.Swipeable>
+            <ListItem.Swipeable
+              rightContent={() => (
+                <TouchableOpacity
+                  style={{
+                    height: '100%',
+                    backgroundColor: 'red',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
+                  <AppText>DELETE</AppText>
+                </TouchableOpacity>
+              )}>
+              <ListItems icon="bedtime" label="four" color="blue" />
+            </ListItem.Swipeable>
+            <ListItem.Swipeable
+              rightContent={() => (
+                <TouchableOpacity
+                  style={{
+                    height: '100%',
+                    backgroundColor: 'red',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
+                  <AppText>DELETE</AppText>
+                </TouchableOpacity>
+              )}>
+              <ListItems icon="tag" label="five" color="blue" />
+            </ListItem.Swipeable>
+            <ListItem.Swipeable
+              rightContent={() => (
+                <TouchableOpacity
+                  style={{
+                    height: '100%',
+                    backgroundColor: 'red',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
+                  <AppText>DELETE</AppText>
+                </TouchableOpacity>
+              )}>
+              <ListItems icon="add" label="카드 등록하기" color="blue" />
+            </ListItem.Swipeable>
           </ListItem.Accordion>
           <ListItem>
             <ListItem.Title>
@@ -116,7 +194,7 @@ const styles = StyleSheet.create({
   },
   List: {
     width: '100%',
-    backgroundColor: 'black',
+    //backgroundColor: 'black',
     borderColor: 'skyblue',
     borderWidth: 5,
   },
