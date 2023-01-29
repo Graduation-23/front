@@ -12,32 +12,41 @@ interface Props {
 
 const ListItems = ({icon, label, color, onPress}: Props) => {
   return (
-    <TouchableOpacity onPress={onPress}>
-      <ListItem>
-        <View
-          style={{
-            backgroundColor: color,
-            borderRadius: 8,
-          }}>
-          <Icon name={icon} size={20} color="white" style={styles.Icons} />
-        </View>
-        <ListItem.Subtitle style={styles.Subtitle}>
-          <AppText family="round-c" style={styles.Text}>
-            {label}
-          </AppText>
-        </ListItem.Subtitle>
-      </ListItem>
-    </TouchableOpacity>
+    <>
+      <View
+        style={
+          (styles.IFrame,
+          {backgroundColor: color, borderRadius: 8, marginRight: 10})
+        }>
+        <Icon name={icon} size={20} color="white" style={styles.Icons} />
+      </View>
+      <TouchableOpacity onPress={onPress} style={styles.Btn}>
+        <ListItem.Content>
+          <ListItem.Title style={styles.Title}>
+            <AppText family="round-c" style={styles.Text}>
+              {label}
+            </AppText>
+          </ListItem.Title>
+        </ListItem.Content>
+      </TouchableOpacity>
+    </>
   );
 };
 
 export default ListItems;
 
 const styles = StyleSheet.create({
+  IFrame: {
+    borderRadius: 8,
+    marginRight: 10,
+  },
   Icons: {
     padding: 5,
   },
-  Subtitle: {
+  Btn: {
+    width: '100%',
+  },
+  Title: {
     width: '85%',
   },
   Text: {
