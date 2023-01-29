@@ -14,16 +14,15 @@ const ListItems = ({icon, label, color, onPress}: Props) => {
   return (
     <>
       <View
-        style={{
-          backgroundColor: color,
-          borderRadius: 8,
-          marginRight: 10,
-        }}>
+        style={
+          (styles.IFrame,
+          {backgroundColor: color, borderRadius: 8, marginRight: 10})
+        }>
         <Icon name={icon} size={20} color="white" style={styles.Icons} />
       </View>
-      <TouchableOpacity onPress={onPress} style={{width: '100%'}}>
+      <TouchableOpacity onPress={onPress} style={styles.Btn}>
         <ListItem.Content>
-          <ListItem.Title style={styles.Subtitle}>
+          <ListItem.Title style={styles.Title}>
             <AppText family="round-c" style={styles.Text}>
               {label}
             </AppText>
@@ -37,10 +36,17 @@ const ListItems = ({icon, label, color, onPress}: Props) => {
 export default ListItems;
 
 const styles = StyleSheet.create({
+  IFrame: {
+    borderRadius: 8,
+    marginRight: 10,
+  },
   Icons: {
     padding: 5,
   },
-  Subtitle: {
+  Btn: {
+    width: '100%',
+  },
+  Title: {
     width: '85%',
   },
   Text: {

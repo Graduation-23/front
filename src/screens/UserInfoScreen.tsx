@@ -2,8 +2,9 @@ import {ListItem} from '@rneui/themed';
 import {View, StyleSheet, TouchableOpacity, ScrollView} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {AppText} from '../components/AppText';
-import ListItems from '../components/ListItems';
 import {useState} from 'react';
+import SwipeableList from '../components/SwipeableList';
+import {AppTextTitle} from '../components/AppText/AppTextTitle';
 
 const UserInfoScreen = () => {
   const [expanded, setExpanded] = useState(false);
@@ -36,9 +37,7 @@ const UserInfoScreen = () => {
             content={
               <ListItem.Content>
                 <ListItem.Title>
-                  <AppText family="round-d" style={{fontSize: 22}}>
-                    등록된 카드
-                  </AppText>
+                  <AppTextTitle family="round-d">등록된 카드</AppTextTitle>
                 </ListItem.Title>
               </ListItem.Content>
             }
@@ -46,96 +45,46 @@ const UserInfoScreen = () => {
             onPress={() => {
               setExpanded(!expanded);
             }}>
-            <ListItem.Swipeable
-              rightContent={() => (
-                <TouchableOpacity
-                  style={{
-                    height: '100%',
-                    backgroundColor: 'red',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}>
-                  <AppText>DELETE</AppText>
-                </TouchableOpacity>
-              )}>
-              <ListItems icon="home" label="one" color="blue" />
-            </ListItem.Swipeable>
-            <ListItem.Swipeable
-              rightContent={() => (
-                <TouchableOpacity
-                  style={{
-                    height: '100%',
-                    backgroundColor: 'red',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}>
-                  <AppText>DELETE</AppText>
-                </TouchableOpacity>
-              )}>
-              <ListItems icon="close" label="two" color="blue" />
-            </ListItem.Swipeable>
-            <ListItem.Swipeable
-              rightContent={() => (
-                <TouchableOpacity
-                  style={{
-                    height: '100%',
-                    backgroundColor: 'red',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}>
-                  <AppText>DELETE</AppText>
-                </TouchableOpacity>
-              )}>
-              <ListItems icon="crop" label="three" color="blue" />
-            </ListItem.Swipeable>
-            <ListItem.Swipeable
-              rightContent={() => (
-                <TouchableOpacity
-                  style={{
-                    height: '100%',
-                    backgroundColor: 'red',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}>
-                  <AppText>DELETE</AppText>
-                </TouchableOpacity>
-              )}>
-              <ListItems icon="bedtime" label="four" color="blue" />
-            </ListItem.Swipeable>
-            <ListItem.Swipeable
-              rightContent={() => (
-                <TouchableOpacity
-                  style={{
-                    height: '100%',
-                    backgroundColor: 'red',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}>
-                  <AppText>DELETE</AppText>
-                </TouchableOpacity>
-              )}>
-              <ListItems icon="tag" label="five" color="blue" />
-            </ListItem.Swipeable>
-            <ListItem.Swipeable
-              rightContent={() => (
-                <TouchableOpacity
-                  style={{
-                    height: '100%',
-                    backgroundColor: 'red',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}>
-                  <AppText>DELETE</AppText>
-                </TouchableOpacity>
-              )}>
-              <ListItems icon="add" label="카드 등록하기" color="blue" />
-            </ListItem.Swipeable>
+            <SwipeableList
+              text="Delete"
+              icon="home"
+              label="one"
+              icolor="green"
+            />
+            <SwipeableList
+              text="Delete"
+              icon="close"
+              label="two"
+              icolor="orange"
+            />
+            <SwipeableList
+              text="Delete"
+              icon="bedtime"
+              label="three"
+              icolor="lightgreen"
+            />
+            <SwipeableList
+              text="Delete"
+              icon="crop"
+              label="four"
+              icolor="violet"
+            />
+            <SwipeableList
+              text="Delete"
+              icon="edit"
+              label="five"
+              icolor="brown"
+            />
+            <SwipeableList
+              text="Delete"
+              icon="add"
+              label="카드 추가하기"
+              icolor="black"
+            />
           </ListItem.Accordion>
           <ListItem>
             <ListItem.Title>
-              <AppText family="round-d" style={{fontSize: 22}}>
-                생년월일
-              </AppText>
+              <AppTextTitle family="round-d">생년월일</AppTextTitle>
             </ListItem.Title>
             <ListItem.Content
               style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
@@ -146,9 +95,7 @@ const UserInfoScreen = () => {
           </ListItem>
           <ListItem>
             <ListItem.Title>
-              <AppText family="round-d" style={{fontSize: 22}}>
-                가입일자
-              </AppText>
+              <AppTextTitle family="round-d">가입일자</AppTextTitle>
             </ListItem.Title>
             <ListItem.Content
               style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
@@ -168,13 +115,11 @@ export default UserInfoScreen;
 const styles = StyleSheet.create({
   Container: {
     alignItems: 'center',
-    //justifyContent: 'center',
     height: '100%',
     flex: 1,
   },
   ProfileBox: {
     alignItems: 'center',
-    //justifyContent: 'center',
     backgroundColor: 'black',
     marginTop: 10,
     width: '100%',
@@ -194,7 +139,6 @@ const styles = StyleSheet.create({
   },
   List: {
     width: '100%',
-    //backgroundColor: 'black',
     borderColor: 'skyblue',
     borderWidth: 5,
   },
