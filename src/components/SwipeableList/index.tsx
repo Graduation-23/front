@@ -15,8 +15,8 @@ const SwipeableList = ({text, icon, label, icolor}: Props) => {
     <>
       <ListItem.Swipeable
         rightWidth={60}
-        rightContent={() => (
-          <TouchableOpacity style={styles.Btn}>
+        rightContent={(action): any => (
+          <TouchableOpacity style={styles.Btn} onPress={action}>
             <AppText family="round-c" style={styles.Text}>
               {text}
             </AppText>

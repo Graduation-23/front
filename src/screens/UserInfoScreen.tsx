@@ -86,9 +86,8 @@ const UserInfoScreen = () => {
             <ListItem.Title>
               <AppTextTitle family="round-d">생년월일</AppTextTitle>
             </ListItem.Title>
-            <ListItem.Content
-              style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
-              <AppText family="round-d" style={{fontSize: 22}}>
+            <ListItem.Content style={styles.AlignRight}>
+              <AppText family="round-d" style={styles.Size22}>
                 2001.01.01
               </AppText>
             </ListItem.Content>
@@ -97,9 +96,8 @@ const UserInfoScreen = () => {
             <ListItem.Title>
               <AppTextTitle family="round-d">가입일자</AppTextTitle>
             </ListItem.Title>
-            <ListItem.Content
-              style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
-              <AppText family="round-d" style={{fontSize: 22}}>
+            <ListItem.Content style={styles.AlignRight}>
+              <AppText family="round-d" style={styles.Size22}>
                 2023.01.28
               </AppText>
             </ListItem.Content>
@@ -145,5 +143,12 @@ const styles = StyleSheet.create({
   Text: {
     color: 'gray',
     fontSize: 30,
+  },
+  Size22: {
+    fontSize: 22,
+  },
+  AlignRight: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
   },
 });
