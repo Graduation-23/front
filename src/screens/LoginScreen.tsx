@@ -32,7 +32,7 @@ const LoginScreen = ({
       </View>
 
       <View style={styles.socialView}>
-        <ExternalLinkButton url="http://account-diary.kro.kr:8080/auth/google/uri">
+        <ExternalLinkButton url="http://account-diary.kro.kr:8080/api/auth/google/uri">
           <AppText center text="Sign in using Google" />
         </ExternalLinkButton>
       </View>
