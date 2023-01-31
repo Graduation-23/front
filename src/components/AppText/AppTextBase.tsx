@@ -1,17 +1,57 @@
-import {StyleSheet, Text} from 'react-native';
+import {StyleSheet, View} from 'react-native';
+import {Text} from '@rneui/base';
 import {AppTextProps} from '.';
 
-export const AppTextBase = ({family, style, ...props}: AppTextProps) => {
-  return (
+export const AppTextBase = ({
+  family,
+  style,
+  ul,
+  text,
+  children,
+  viewStyle,
+  center,
+  ...props
+}: AppTextProps) => {
+  const core = (
     <Text
       {...props}
-      style={[styles.text, family && familyStyles[family], style]}
+      children={text ? text : children}
+      style={[
+        textStyles.text,
+        family && familyStyles[family],
+        center && textStyles.center,
+        style,
+      ]}
     />
+  );
+
+  return ul ? (
+    <View
+      children={core}
+      style={[viewStyles.base, viewStyles.underline, viewStyle]}
+    />
+  ) : (
+    core
   );
 };
 
-const styles = StyleSheet.create({
-  text: {},
+const textStyles = StyleSheet.create({
+  text: {
+    fontSize: 14,
+  },
+  center: {
+    textAlign: 'center',
+  },
+});
+
+const viewStyles = StyleSheet.create({
+  base: {
+    padding: 0,
+    paddingBottom: 1,
+  },
+  underline: {
+    borderBottomWidth: 1,
+  },
 });
 
 const familyStyles = StyleSheet.create<{
