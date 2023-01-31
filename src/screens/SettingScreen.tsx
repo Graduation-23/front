@@ -4,7 +4,7 @@ import {ListItem} from '@rneui/themed';
 import ListItems from '../components/ListItems';
 import {useState} from 'react';
 import DialogActions from '../components/DialogActions';
-import WithdrawalDialog from '../features/User/WithdrawalDialog';
+import WithdrawalDialog from '../features/WithdrawalDialog';
 import {AppText} from '../components/AppText';
 
 export default function SettingScreen({navigation}: any) {
@@ -48,9 +48,15 @@ export default function SettingScreen({navigation}: any) {
           </ListItem.Title>
         </ListItem>
         {/* mapping() */}
-        <ListItems icon="notifications" label="공지" color="#74828a" />
-        <ListItems icon="trending-up" label="업데이트 내역" color="#a878fb" />
-        <ListItems icon="bar-chart" label="현재 버전" color="#f9c165" />
+        <ListItem>
+          <ListItems icon="notifications" label="공지" color="#74828a" />
+        </ListItem>
+        <ListItem>
+          <ListItems icon="trending-up" label="업데이트 내역" color="#a878fb" />
+        </ListItem>
+        <ListItem>
+          <ListItems icon="bar-chart" label="현재 버전" color="#f9c165" />
+        </ListItem>
 
         {/*금융 관련 */}
         <ListItem>
@@ -58,53 +64,62 @@ export default function SettingScreen({navigation}: any) {
             <AppText family="round-d">금융</AppText>
           </ListItem.Title>
         </ListItem>
-        <ListItems
-          icon="credit-card"
-          label="카드(계좌) 등록"
-          color="#85d8fc"
-          onPress={() => {
-            navigation.navigate('CardRegister');
-          }}
-        />
-        <ListItems
-          icon="link"
-          label="결제 내역 연동"
-          color="#5ed2b1"
-          onPress={() => {
-            navigation.navigate('LinkUpPayment');
-          }}
-        />
-
+        <ListItem>
+          <ListItems
+            icon="credit-card"
+            label="카드(계좌) 등록"
+            color="#85d8fc"
+            onPress={() => {
+              navigation.navigate('CardRegister');
+            }}
+          />
+        </ListItem>
+        <ListItem>
+          <ListItems
+            icon="link"
+            label="결제 내역 연동"
+            color="#5ed2b1"
+            onPress={() => {
+              navigation.navigate('LinkUpPayment');
+            }}
+          />
+        </ListItem>
         {/*회원 관련 */}
         <ListItem>
           <ListItem.Title style={styles.title}>
             <AppText family="round-d">개인</AppText>
           </ListItem.Title>
         </ListItem>
-        <ListItems
-          icon="info"
-          label="회원 정보"
-          color="#fce085"
-          onPress={() => {
-            navigation.navigate('UserInfo');
-          }}
-        />
-        <ListItems
-          icon="logout"
-          label="로그아웃"
-          color="#e64c4c"
-          onPress={() => {
-            toggleDialog();
-          }}
-        />
-        <ListItems
-          icon="close"
-          label="회원 탈퇴"
-          color="#e64c4c"
-          onPress={() => {
-            toggleInputDialog();
-          }}
-        />
+        <ListItem>
+          <ListItems
+            icon="info"
+            label="회원 정보"
+            color="#fce085"
+            onPress={() => {
+              navigation.navigate('UserInfo');
+            }}
+          />
+        </ListItem>
+        <ListItem>
+          <ListItems
+            icon="logout"
+            label="로그아웃"
+            color="#e64c4c"
+            onPress={() => {
+              toggleDialog();
+            }}
+          />
+        </ListItem>
+        <ListItem>
+          <ListItems
+            icon="close"
+            label="회원 탈퇴"
+            color="#e64c4c"
+            onPress={() => {
+              toggleInputDialog();
+            }}
+          />
+        </ListItem>
       </ScrollView>
       {visible && (
         <DialogActions
