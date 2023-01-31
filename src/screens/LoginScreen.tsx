@@ -3,6 +3,7 @@ import {Button, Input} from '@rneui/base';
 
 import {SafeAreaView, StyleSheet, View} from 'react-native';
 import {AppText} from '../components/AppText';
+import ExternalLinkButton from '../components/ExternalLinkButton';
 import PlainButton from '../components/PlainButton';
 import {AuthorizationStackParamList} from '../Navigator/AuthorizationNavigator';
 
@@ -30,6 +31,12 @@ const LoginScreen = ({
         <Button>로그인</Button>
       </View>
 
+      <View style={styles.socialView}>
+        <ExternalLinkButton url="http://account-diary.kro.kr:8080/auth/google/uri">
+          <AppText center text="Sign in using Google" />
+        </ExternalLinkButton>
+      </View>
+
       <View style={styles.additionalLinkView}>
         <PlainButton
           title={<AppText center ul text="회원가입" />}
@@ -55,6 +62,9 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  socialView: {
+    margin: 10,
   },
   input: {
     backgroundColor: 'white',
