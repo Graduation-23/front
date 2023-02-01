@@ -1,6 +1,5 @@
 import {Component, ReactNode} from 'react';
 import {Platform} from 'react-native';
-// import '../../../types/react-native-android-sms-listener';
 import SmsListener from 'react-native-android-sms-listener';
 import {requestSMSPermission, smsCallback} from '../../utils/smsHelper';
 

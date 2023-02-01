@@ -26,7 +26,7 @@ export default function AuthorizationNavigator({route, navigation}: any) {
         },
       });
 
-      const isNew = route.params['isNew'] === 'true';
+      const isNew = route.params['fresh'] === 'true';
 
       ToastAndroid.show(`첫 방문 여부: ${isNew}`, ToastAndroid.SHORT);
 
