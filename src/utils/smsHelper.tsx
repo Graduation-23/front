@@ -16,12 +16,17 @@ type SmsCallbackType = (data: {
 export const smsCallback: SmsCallbackType = data => {
   if (!filterPhoneNumber(data.originatingAddress)) return;
 
-  console.info(data);
+  console.info(getExpenses(data.body));
 };
 
-const TargetPhoneNumbers = ['15881600'];
+const TargetPhoneNumbers = ['+8215881600'];
 
 const filterPhoneNumber = (phoneNumber: string) => {
-  console.log(phoneNumber);
   return TargetPhoneNumbers.indexOf(phoneNumber) !== -1;
+};
+
+const ExpensesRegex = /[\d|,]+(?=원|₩)/g;
+
+const getExpenses = (value: string) => {
+  return value.match(ExpensesRegex);
 };
