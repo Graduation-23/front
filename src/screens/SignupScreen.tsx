@@ -6,10 +6,20 @@ import {Button, Input} from '@rneui/base';
 import {SafeAreaView, StyleSheet, View} from 'react-native';
 import {AppText} from '../components/AppText';
 import PlainButton from '../components/PlainButton';
+import useSignUp from '../hooks/useSignUp';
+import signUp from '../api/signUp';
 
 const SignupScreen = ({
   navigation,
 }: NativeStackScreenProps<AuthorizationStackParamList, 'Signup'>) => {
+  const {user, hlr, getUser} = useSignUp();
+
+  const handleSignUp = () => {
+    if (user.correct && user.password.length > 5) {
+      signUp(getUser()).then(console.log);
+    }
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.titleStyle}>
@@ -18,23 +28,36 @@ const SignupScreen = ({
 
       <View style={styles.fullWidth}>
         <Input
+          value={user.id}
+          onChangeText={hlr.setId}
           inputStyle={styles.input}
           label={<AppText text="아이디" />}
           placeholder="아이디 입력..."
         />
         <Input
+          value={user.password}
+          onChangeText={hlr.setPassword}
           inputStyle={styles.input}
           label={<AppText text="비밀번호" />}
           secureTextEntry={true}
           placeholder="비밀번호 입력..."
         />
         <Input
+          value={user.pwForCheck}
+          onChangeText={hlr.setPwForCheck}
           inputStyle={styles.input}
           label={<AppText text="비밀번호 확인" />}
           secureTextEntry={true}
           placeholder="비밀번호 재입력..."
         />
-        <Button>회원가입</Button>
+        <Input
+          value={user.nickname}
+          onChangeText={hlr.setNickname}
+          inputStyle={styles.input}
+          label={<AppText text="닉네임" />}
+          placeholder="닉네임 입력..."
+        />
+        <Button onPress={handleSignUp}>회원가입</Button>
       </View>
 
       <View style={styles.additionalLinkView}>

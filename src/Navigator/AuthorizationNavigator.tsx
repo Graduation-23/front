@@ -1,10 +1,11 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {useEffect} from 'react';
+import {ToastAndroid} from 'react-native';
 import {useRecoilState} from 'recoil';
-import tokenAtom from '../atom/token';
+import {setAuthHeader} from '../api/client';
+import userAtom from '../atom/userAtom';
 import LoginScreen from '../screens/LoginScreen';
 import SignupScreen from '../screens/SignupScreen';
-import {getItemAsync} from '../utils/storage';
 
 export type AuthorizationStackParamList = {
   Login: undefined;
@@ -14,27 +15,30 @@ export type AuthorizationStackParamList = {
 const Stack = createNativeStackNavigator<AuthorizationStackParamList>();
 
 export default function AuthorizationNavigator({route, navigation}: any) {
-  const [token, setToken] = useRecoilState(tokenAtom);
-
-  useEffect(() => {
-    getItemAsync<string>('refreshToken')
-      .then(setToken)
-      .catch(err => {
-        if (err) console.log('no refreshToken in Storage');
-      });
-  }, [setToken]);
+  const [user, setUser] = useRecoilState(userAtom);
 
   useEffect(() => {
     if (route.params && route.params.error === 'false') {
-      setToken(route.params.refresh);
+      setAuthHeader({
+        token: {
+          access: route.params['access'],
+          refresh: route.params['refresh'],
+        },
+      });
+
+      const isNew = route.params['isNew'] === 'true';
+
+      ToastAndroid.show(`첫 방문 여부: ${isNew}`, ToastAndroid.SHORT);
+
+      setUser({name: 'google'});
     }
-  }, [route, setToken]);
+  }, [route, setUser]);
 
   useEffect(() => {
-    if (token && token.length > 0) {
+    if (user) {
       navigation.navigate('ContentNavigator');
     }
-  }, [token, navigation]);
+  }, [navigation, user]);
 
   return (
     <Stack.Navigator
