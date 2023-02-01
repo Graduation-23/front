@@ -1,35 +1,41 @@
 import {Component, ReactNode} from 'react';
-import SmsReader from 'react-native-sms-reader';
+// import '../../../types/react-native-android-sms-listener';
+import SmsListener from 'react-native-android-sms-listener';
+import {requestSMSPermission, smsCallback} from '../../utils/smsHelper';
 
 export type SMSWatcherProps = {};
 
-export default class ReadSMSComponent extends Component {
+export default class ReadSMSComponent extends Component<
+  {},
+  {
+    subscriber: {remove: () => void} | null;
+  }
+> {
   constructor(props: SMSWatcherProps | Readonly<SMSWatcherProps>) {
     super(props);
+    this.state = {
+      subscriber: null,
+    };
   }
 
   render(): ReactNode {
     return <></>;
   }
 
-  componentWillMount = () => {
+  componentDidMount = () => {
     this.startReadSMS();
   };
 
   startReadSMS = async () => {
-    const hasPermission = await SmsReader.requestReadSMSPermission();
-    console.log(hasPermission);
-    if (hasPermission) {
-      SmsReader.startReadSMS((status, sms) => {
-        console.log('hello');
-        if (status === 'success') {
-          console.log('Great!! you have received new sms:', sms);
-        }
-      });
+    if (await requestSMSPermission()) {
+      let subscriber: any = SmsListener.addListener(smsCallback);
+      this.setState({subscriber});
     }
   };
 
   componentWillUnmount = () => {
-    SmsReader.stopReadSMS();
+    if (this.state.subscriber) {
+      this.state.subscriber.remove();
+    }
   };
 }
