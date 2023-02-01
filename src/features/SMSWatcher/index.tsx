@@ -1,4 +1,5 @@
 import {Component, ReactNode} from 'react';
+import {Platform} from 'react-native';
 // import '../../../types/react-native-android-sms-listener';
 import SmsListener from 'react-native-android-sms-listener';
 import {requestSMSPermission, smsCallback} from '../../utils/smsHelper';
@@ -23,7 +24,7 @@ export default class ReadSMSComponent extends Component<
   }
 
   componentDidMount = () => {
-    this.startReadSMS();
+    if (Platform.OS === 'android') this.startReadSMS();
   };
 
   startReadSMS = async () => {
