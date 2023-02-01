@@ -2,14 +2,27 @@ import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {Button, Input} from '@rneui/base';
 
 import {SafeAreaView, StyleSheet, View} from 'react-native';
+import {useSetRecoilState} from 'recoil';
+import signIn from '../api/signIn';
+import userAtom from '../atom/userAtom';
 import {AppText} from '../components/AppText';
 import ExternalLinkButton from '../components/ExternalLinkButton';
 import PlainButton from '../components/PlainButton';
+import useSignIn from '../hooks/useSingIn';
 import {AuthorizationStackParamList} from '../Navigator/AuthorizationNavigator';
 
 const LoginScreen = ({
   navigation,
 }: NativeStackScreenProps<AuthorizationStackParamList, 'Login'>) => {
+  const setUser = useSetRecoilState(userAtom);
+  const {auth, hlr} = useSignIn();
+
+  const handleSignIn = () => {
+    signIn(auth).then(data => {
+      setUser(data);
+    });
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.titleStyle}>
@@ -18,17 +31,21 @@ const LoginScreen = ({
 
       <View style={styles.fullWidth}>
         <Input
+          value={auth.id}
+          onChangeText={hlr.setId}
           inputStyle={styles.input}
           label={<AppText text="아이디" />}
           placeholder="아이디 입력..."
         />
         <Input
+          value={auth.password}
+          onChangeText={hlr.setPassword}
           inputStyle={styles.input}
           label={<AppText text="비밀번호" />}
           secureTextEntry={true}
           placeholder="비밀번호 입력..."
         />
-        <Button>로그인</Button>
+        <Button onPress={handleSignIn}>로그인</Button>
       </View>
 
       <View style={styles.socialView}>
