@@ -16,7 +16,7 @@ const BirthRegScreen = ({
         <PlainButton
           title={<AppText center text="넘어가기" />}
           onPress={() => {
-            navigation.navigate('Login');
+            navigation.navigate('Card');
           }}
         />
       </View>
