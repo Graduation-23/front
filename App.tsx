@@ -14,6 +14,7 @@ import {ThemeProvider} from '@rneui/themed';
 import {ActivityIndicator} from 'react-native';
 //import React from 'react';
 import {RecoilRoot} from 'recoil';
+import AuthenticationSecretary from './src/features/AuthenticationSecretary';
 import SMSWatcher from './src/features/SMSWatcher';
 import AppNavigator from './src/Navigator/AppNavigator';
 import {theme} from './src/theme';
@@ -23,6 +24,7 @@ const App = () => {
   return (
     <RecoilRoot>
       <SMSWatcher />
+      <AuthenticationSecretary />
       <ThemeProvider theme={theme}>
         <NavigationContainer
           linking={linking}
