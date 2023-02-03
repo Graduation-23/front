@@ -67,7 +67,8 @@ const SignupScreen = ({
         />
         <PlainButton
           title={<AppText center ul text="넘어가기" />}
-          onPress={() => navigation.getParent()?.navigate('ContentNavigator')}
+          onPress={() => navigation.navigate('Birth')}
+          // onPress={() => navigation.getParent()?.navigate('ContentNavigator')}
         />
       </View>
     </SafeAreaView>

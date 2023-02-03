@@ -6,10 +6,15 @@ import {setAuthHeader} from '../api/client';
 import userAtom from '../atom/userAtom';
 import LoginScreen from '../screens/LoginScreen';
 import SignupScreen from '../screens/SignupScreen';
+import BirthRegScreen from '../screens/BirthRegScreen';
+import CardRegScreen from '../screens/CardRegScreen';
+//import {getItemAsync} from '../utils/storage';
 
 export type AuthorizationStackParamList = {
   Login: undefined;
   Signup: undefined;
+  Birth: undefined;
+  Card: undefined;
 };
 
 const Stack = createNativeStackNavigator<AuthorizationStackParamList>();
@@ -46,6 +51,8 @@ export default function AuthorizationNavigator({route, navigation}: any) {
       screenOptions={{headerShown: false}}>
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Signup" component={SignupScreen} />
+      <Stack.Screen name="Birth" component={BirthRegScreen} />
+      <Stack.Screen name="Card" component={CardRegScreen} />
     </Stack.Navigator>
   );
 }
