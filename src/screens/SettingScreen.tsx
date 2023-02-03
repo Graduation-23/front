@@ -6,6 +6,7 @@ import {useState} from 'react';
 import DialogActions from '../components/DialogActions';
 import WithdrawalDialog from '../features/WithdrawalDialog';
 import {AppText} from '../components/AppText';
+import {saveRefreshToken} from '../utils/refreshToken';
 
 export default function SettingScreen({navigation}: any) {
   // const app = [
@@ -124,7 +125,10 @@ export default function SettingScreen({navigation}: any) {
       {visible && (
         <DialogActions
           visible={visible}
-          toggleDialog={toggleDialog}
+          toggleDialog={() => {
+            saveRefreshToken('');
+            toggleDialog();
+          }}
           title="로그아웃"
           contents="로그아웃 하시겠습니까?"
         />

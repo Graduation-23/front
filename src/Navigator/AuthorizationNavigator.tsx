@@ -1,14 +1,12 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {useEffect} from 'react';
-import {ToastAndroid} from 'react-native';
-import {useRecoilState} from 'recoil';
-import {setAuthHeader} from '../api/client';
+import {useRecoilValue} from 'recoil';
 import userAtom from '../atom/userAtom';
 import LoginScreen from '../screens/LoginScreen';
 import SignupScreen from '../screens/SignupScreen';
 import BirthRegScreen from '../screens/BirthRegScreen';
 import CardRegScreen from '../screens/CardRegScreen';
-//import {getItemAsync} from '../utils/storage';
+import useGoogleAccount from '../hooks/useGoogleAccount';
 
 export type AuthorizationStackParamList = {
   Login: undefined;
@@ -20,28 +18,14 @@ export type AuthorizationStackParamList = {
 const Stack = createNativeStackNavigator<AuthorizationStackParamList>();
 
 export default function AuthorizationNavigator({route, navigation}: any) {
-  const [user, setUser] = useRecoilState(userAtom);
+  const user = useRecoilValue(userAtom);
 
-  useEffect(() => {
-    if (route.params && route.params.error === 'false') {
-      setAuthHeader({
-        token: {
-          access: route.params['access'],
-          refresh: route.params['refresh'],
-        },
-      });
-
-      const isNew = route.params['fresh'] === 'true';
-
-      ToastAndroid.show(`첫 방문 여부: ${isNew}`, ToastAndroid.SHORT);
-
-      setUser({name: 'google'});
-    }
-  }, [route, setUser]);
+  useGoogleAccount(route.params);
 
   useEffect(() => {
     if (user) {
-      navigation.navigate('ContentNavigator');
+      console.log(user);
+      navigation.navigate(user.fresh ? 'Birth' : 'ContentNavigator');
     }
   }, [navigation, user]);
 

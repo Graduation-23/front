@@ -3,6 +3,8 @@ import {Button, Input} from '@rneui/base';
 
 import {SafeAreaView, StyleSheet, View} from 'react-native';
 import {useSetRecoilState} from 'recoil';
+import {setAuthHeader} from '../api/client';
+import fetchUserInfo from '../api/fetchUserInfo';
 import signIn from '../api/signIn';
 import userAtom from '../atom/userAtom';
 import {AppText} from '../components/AppText';
@@ -19,7 +21,8 @@ const LoginScreen = ({
 
   const handleSignIn = () => {
     signIn(auth).then(data => {
-      setUser(data);
+      setAuthHeader(data);
+      fetchUserInfo().then(setUser);
     });
   };
 

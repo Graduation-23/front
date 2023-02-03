@@ -16,7 +16,7 @@ const CardRegScreen = ({
         <PlainButton
           title={<AppText center text="넘어가기" />}
           onPress={() => {
-            navigation.navigate('Login');
+            navigation.getParent()?.navigate('ContentNavigator');
           }}
         />
       </View>
