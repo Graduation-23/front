@@ -1,3 +1,4 @@
+import {ResponseEntity} from '../../types/api';
 import client from './client';
 
 export type NewAuthenticationType = {
@@ -7,10 +8,10 @@ export type NewAuthenticationType = {
 };
 
 export default function signUp(authentication: NewAuthenticationType) {
-  return new Promise((res, rej) => {
+  return new Promise<ResponseEntity['token']>((res, rej) => {
     client
       .post('/auth/signup', authentication)
-      .then(data => res(data.data))
+      .then(response => res(response.data.token))
       .catch(rej);
   });
 }

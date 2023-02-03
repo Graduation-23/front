@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import {NewAuthenticationType} from '../api/signUp';
 
-interface SignUpDataType extends NewAuthenticationType {
+export interface SignUpDataType extends NewAuthenticationType {
   pwForCheck: string;
   correct: boolean;
 }

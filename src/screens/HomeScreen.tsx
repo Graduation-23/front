@@ -1,13 +1,17 @@
 // import {View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {useRecoilValue} from 'recoil';
+import userAtom from '../atom/userAtom';
 
 import {AppText} from '../components/AppText';
 
 export default function HomeScreen() {
+  const user = useRecoilValue(userAtom);
+
   return (
     <SafeAreaView style={{backgroundColor: 'white'}}>
       <AppText.Title family="round-a" style={{fontSize: 35}}>
-        안녕하세요. Hello
+        {user && user.nickname}님 안녕하세요.
       </AppText.Title>
     </SafeAreaView>
   );

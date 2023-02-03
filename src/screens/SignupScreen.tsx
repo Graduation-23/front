@@ -6,17 +6,29 @@ import {Button, Input} from '@rneui/base';
 import {SafeAreaView, StyleSheet, View} from 'react-native';
 import {AppText} from '../components/AppText';
 import PlainButton from '../components/PlainButton';
-import useSignUp from '../hooks/useSignUp';
+import useSignUp, {SignUpDataType} from '../hooks/useSignUp';
 import signUp from '../api/signUp';
+import {setAuthHeader} from '../api/client';
+import fetchUserInfo from '../api/fetchUserInfo';
+import {useSetRecoilState} from 'recoil';
+import userAtom from '../atom/userAtom';
+
+const isValid = (user: SignUpDataType) => {
+  return user.correct && user.password.length > 5;
+};
 
 const SignupScreen = ({
   navigation,
 }: NativeStackScreenProps<AuthorizationStackParamList, 'Signup'>) => {
+  const setUser = useSetRecoilState(userAtom);
   const {user, hlr, getUser} = useSignUp();
 
   const handleSignUp = () => {
-    if (user.correct && user.password.length > 5) {
-      signUp(getUser()).then(console.log);
+    if (isValid(user)) {
+      signUp(getUser()).then(token => {
+        setAuthHeader(token);
+        fetchUserInfo(true).then(setUser);
+      });
     }
   };
 

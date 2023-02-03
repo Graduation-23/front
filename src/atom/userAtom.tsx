@@ -1,8 +1,7 @@
 import {atom} from 'recoil';
+import {IUser} from '../api/fetchUserInfo';
 
-type User = {name: string};
-
-const userAtom = atom<User | null>({
+const userAtom = atom<IUser | null>({
   key: 'userAtom',
   default: null,
 });
