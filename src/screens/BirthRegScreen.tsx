@@ -6,27 +6,25 @@ import PlainButton from '../components/PlainButton';
 import {AuthorizationStackParamList} from '../Navigator/AuthorizationNavigator';
 import {useState} from 'react';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import {format} from 'date-fns';
+import ko from 'date-fns/esm/locale/ko/index.js';
 
 const BirthRegScreen = ({
   navigation,
 }: NativeStackScreenProps<AuthorizationStackParamList, 'Birth'>) => {
-  const [date, onChangeDate] = useState(new Date());
-  const [mode, setMode] = useState('date');
+  const [date, setDate] = useState(new Date());
+  //const [mode, setMode] = useState('date');
   const [visible, setVisible] = useState(false);
 
   const onPressDate = () => {
-    setMode('date');
+    //setMode('date');
     setVisible(true);
   };
 
-  // const onPressTime = () => {
-  //   setMode('time');
-  //   setVisible(true);
-  // };
-
-  const onConfirm = ({selectedDate}: any) => {
+  const onConfirm = (selectedDate: any) => {
+    setDate(selectedDate);
+    console.log(selectedDate);
     setVisible(false);
-    onChangeDate(selectedDate);
   };
 
   const onCancel = () => {
@@ -36,7 +34,10 @@ const BirthRegScreen = ({
     <SafeAreaView>
       <View>
         <Text>BirthRegScreen 입니다.</Text>
-        <Text> 날짜 :</Text>
+        <View>
+          {/* <Text>{`날짜 : ${date}`}</Text> */}
+          <Text>{format(new Date(date), 'PPP', {locale: ko})}</Text>
+        </View>
         <PlainButton
           title={<AppText center text="날짜 선택" />}
           onPress={onPressDate}
@@ -50,9 +51,13 @@ const BirthRegScreen = ({
       </View>
       <DateTimePickerModal
         isVisible={visible}
-        mode={mode}
         onConfirm={onConfirm}
+        onChange={d => {
+          console.log(d);
+          setDate(d);
+        }}
         onCancel={onCancel}
+        date={date}
       />
     </SafeAreaView>
   );
