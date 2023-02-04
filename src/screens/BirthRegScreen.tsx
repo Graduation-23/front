@@ -95,8 +95,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     height: '100%',
-    paddingTop: 100,
-    paddingBottom: 100,
   },
   Title: {
     marginBottom: 35,
