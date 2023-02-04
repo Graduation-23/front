@@ -49,7 +49,11 @@ const BirthRegScreen = ({
       <View style={styles.SelectBtn}>
         <PlainButton
           title={
-            <AppText family="round-c" text="날짜 선택" style={{fontSize: 24}} />
+            <AppText
+              family="round-b"
+              text="날짜 선택"
+              style={styles.FontSize24}
+            />
           }
           onPress={onPressDate}
         />
@@ -57,7 +61,7 @@ const BirthRegScreen = ({
       <View style={styles.Btns}>
         <PlainButton
           title={
-            <AppText family="round-c" text="SKIP" style={{fontSize: 24}} />
+            <AppText family="round-b" text="SKIP" style={styles.FontSize24} />
           }
           onPress={() => {
             navigation.navigate('Card');
@@ -65,7 +69,7 @@ const BirthRegScreen = ({
         />
         <PlainButton
           title={
-            <AppText family="round-c" text="NEXT" style={{fontSize: 24}} />
+            <AppText family="round-b" text="NEXT" style={styles.FontSize24} />
           }
           onPress={() => {
             navigation.navigate('Card');
@@ -114,6 +118,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-end',
     marginTop: 70,
+  },
+  FontSize24: {
+    fontSize: 24,
   },
 });
 
