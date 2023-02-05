@@ -5,10 +5,11 @@ import {AppText} from '../components/AppText';
 import PlainButton from '../components/PlainButton';
 import {AuthorizationStackParamList} from '../Navigator/AuthorizationNavigator';
 import {useState} from 'react';
-import DateTimePickerModal from 'react-native-modal-datetime-picker';
+// import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import {format} from 'date-fns';
 import ko from 'date-fns/esm/locale/ko/index.js';
 import {Input} from '@rneui/themed';
+import DatePicker from 'react-native-date-picker';
 
 const BirthRegScreen = ({
   navigation,
@@ -20,15 +21,15 @@ const BirthRegScreen = ({
     setVisible(true);
   };
 
-  const onConfirm = (selectedDate: any) => {
-    setDate(selectedDate);
-    console.log(selectedDate);
-    setVisible(false);
-  };
+  // const onConfirm = (selectedDate: any) => {
+  //   setDate(selectedDate);
+  //   console.log(selectedDate);
+  //   setVisible(false);
+  // };
 
-  const onCancel = () => {
-    setVisible(false);
-  };
+  // const onCancel = () => {
+  //   setVisible(false);
+  // };
   return (
     <SafeAreaView style={styles.Container}>
       <View style={styles.Title}>
@@ -76,7 +77,21 @@ const BirthRegScreen = ({
           }}
         />
       </View>
-      <DateTimePickerModal
+      <DatePicker // 날짜 선택 모달 라이브러리 (react-native-datepicker)
+        modal
+        mode="date"
+        open={visible}
+        date={date}
+        //locale="kr"
+        onConfirm={(d): any => {
+          setVisible(false);
+          setDate(d);
+        }}
+        onCancel={() => {
+          setVisible(false);
+        }}
+      />
+      {/* <DateTimePickerModal
         isVisible={visible}
         onConfirm={onConfirm}
         onChange={d => {
@@ -85,7 +100,7 @@ const BirthRegScreen = ({
         }}
         onCancel={onCancel}
         date={date}
-      />
+      /> */}
     </SafeAreaView>
   );
 };
