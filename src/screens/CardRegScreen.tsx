@@ -1,17 +1,19 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {CheckBox, Input} from '@rneui/themed';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, Modal} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {AppText} from '../components/AppText';
 import PlainButton from '../components/PlainButton';
 import {AuthorizationStackParamList} from '../Navigator/AuthorizationNavigator';
 import {useState} from 'react';
+import ColorPicker from 'react-native-wheel-color-picker';
 
 const CardRegScreen = ({
   navigation,
 }: NativeStackScreenProps<AuthorizationStackParamList, 'Card'>) => {
   const [selectedIndex, setIndex] = useState(0);
   const [cardNick, setNick] = useState('');
+  const [show, setShow] = useState(false);
 
   const onChangeNick = (nick: string) => {
     setNick(nick);
@@ -74,6 +76,34 @@ const CardRegScreen = ({
           onChangeText={onChangeNick}
           value={cardNick}
         />
+      </View>
+
+      <View style={styles.ModalContainer}>
+        <PlainButton
+          title={
+            <AppText family="round-d" text="COLOR" style={styles.FontSize20} />
+          }
+          onPress={() => {
+            setShow(true);
+          }}
+        />
+        <Modal visible={show} transparent={true}>
+          <View style={{backgroundColor: 'pink'}}>
+            <ColorPicker thumbSize={40} sliderSize={30} gapSize={30} />
+            <PlainButton
+              title={
+                <AppText
+                  family="round-d"
+                  text="확인"
+                  style={styles.FontSize20}
+                />
+              }
+              onPress={() => {
+                setShow(false);
+              }}
+            />
+          </View>
+        </Modal>
       </View>
 
       <View style={styles.SelectBtn}>
@@ -149,6 +179,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     marginTop: 20,
   },
+  ModalContainer: {width: '80%', marginTop: 10},
   FontSize24: {
     fontSize: 24,
   },
