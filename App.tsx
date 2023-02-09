@@ -9,23 +9,27 @@
  */
 
 import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {ThemeProvider} from '@rneui/themed';
-import React from 'react';
-import {RecoilRoot} from 'recoil';
-import Home from './src/screens/Home';
-import {theme} from './src/theme';
 
-const Stack = createNativeStackNavigator();
+import {ThemeProvider} from '@rneui/themed';
+import {ActivityIndicator} from 'react-native';
+//import React from 'react';
+import {RecoilRoot} from 'recoil';
+import AuthenticationSecretary from './src/features/AuthenticationSecretary';
+import SMSWatcher from './src/features/SMSWatcher';
+import AppNavigator from './src/Navigator/AppNavigator';
+import {theme} from './src/theme';
+import {linking} from './src/utils/linking';
 
 const App = () => {
   return (
     <RecoilRoot>
+      <SMSWatcher />
+      <AuthenticationSecretary />
       <ThemeProvider theme={theme}>
-        <NavigationContainer>
-          <Stack.Navigator initialRouteName="Home">
-            <Stack.Screen name="Home" component={Home} />
-          </Stack.Navigator>
+        <NavigationContainer
+          linking={linking}
+          fallback={<ActivityIndicator color="blue" size="large" />}>
+          <AppNavigator />
         </NavigationContainer>
       </ThemeProvider>
     </RecoilRoot>
