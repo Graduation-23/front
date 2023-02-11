@@ -1,12 +1,13 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {CheckBox, Input} from '@rneui/themed';
-import {View, StyleSheet, Modal} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {AppText} from '../components/AppText';
 import PlainButton from '../components/PlainButton';
 import {AuthorizationStackParamList} from '../Navigator/AuthorizationNavigator';
 import {useState} from 'react';
-import ColorPicker from 'react-native-wheel-color-picker';
+//import ColorPicker from 'react-native-wheel-color-picker';
+import ColorPickerModal from '../features/ColorPickerModal';
 
 const CardRegScreen = ({
   navigation,
@@ -14,9 +15,18 @@ const CardRegScreen = ({
   const [selectedIndex, setIndex] = useState(0);
   const [cardNick, setNick] = useState('');
   const [show, setShow] = useState(false);
+  const [color, setColor] = useState('');
 
   const onChangeNick = (nick: string) => {
     setNick(nick);
+  };
+
+  const toggleColorModal = () => {
+    setShow(!show);
+  };
+
+  const selectColor = (icolor: string) => {
+    setColor(icolor);
   };
 
   return (
@@ -87,25 +97,17 @@ const CardRegScreen = ({
             setShow(true);
           }}
         />
-        <Modal visible={show} transparent={true}>
-          <View style={{backgroundColor: 'pink'}}>
-            <ColorPicker thumbSize={40} sliderSize={30} gapSize={30} />
-            <PlainButton
-              title={
-                <AppText
-                  family="round-d"
-                  text="확인"
-                  style={styles.FontSize20}
-                />
-              }
-              onPress={() => {
-                setShow(false);
-              }}
-            />
-          </View>
-        </Modal>
       </View>
-
+      {show && (
+        <ColorPickerModal
+          visible={show}
+          toggle={toggleColorModal}
+          icolor={color}
+          selectColor={selectColor}
+        />
+      )}
+      <AppText text={`선택한 색상 : ${color}`} style={styles.FontSize20} />
+      {/* <View style={{width: 10, height: 10}}> </View> */}
       <View style={styles.SelectBtn}>
         <PlainButton
           title={
