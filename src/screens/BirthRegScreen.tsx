@@ -78,17 +78,22 @@ const BirthRegScreen = ({
         />
       </View>
       <DatePicker // 날짜 선택 모달 라이브러리 (react-native-datepicker)
+        title="생일 선택"
         modal
         mode="date"
         open={visible}
         date={date}
-        //locale="kr"
+        confirmText="선택"
+        cancelText="취소"
         onConfirm={(d): any => {
           setVisible(false);
           setDate(d);
         }}
         onCancel={() => {
           setVisible(false);
+        }}
+        onDateChange={d => {
+          console.log(d);
         }}
       />
       {/* <DateTimePickerModal
