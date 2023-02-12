@@ -1,22 +1,43 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {CheckBox, Input} from '@rneui/themed';
-import {View, StyleSheet, Modal} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {AppText} from '../components/AppText';
 import PlainButton from '../components/PlainButton';
 import {AuthorizationStackParamList} from '../Navigator/AuthorizationNavigator';
 import {useState} from 'react';
-import ColorPicker from 'react-native-wheel-color-picker';
+//import ColorPicker from 'react-native-wheel-color-picker';
+import ColorPickerModal from '../features/ColorPickerModal';
+import createFinance from '../api/createFinance';
 
 const CardRegScreen = ({
   navigation,
 }: NativeStackScreenProps<AuthorizationStackParamList, 'Card'>) => {
-  const [selectedIndex, setIndex] = useState(0);
+  const [type, setType] = useState('Card');
   const [cardNick, setNick] = useState('');
   const [show, setShow] = useState(false);
+  const [color, setColor] = useState('');
 
   const onChangeNick = (nick: string) => {
     setNick(nick);
+  };
+
+  const toggleColorModal = () => {
+    setShow(!show);
+  };
+
+  const selectColor = (icolor: string) => {
+    setColor(icolor);
+  };
+
+  const handleRegister = () => {
+    createFinance({
+      type: type,
+      description: 'test',
+      anothername: 'cardNick',
+      colorcode: color,
+    });
+    console.log('카드 등록');
   };
 
   return (
@@ -43,8 +64,8 @@ const CardRegScreen = ({
           title={
             <AppText family="round-d" text="카드" style={styles.FontSize20} />
           }
-          checked={selectedIndex === 0}
-          onPress={() => setIndex(0)}
+          checked={type === 'Card'}
+          onPress={() => setType('Card')}
           checkedIcon="dot-circle-o"
           uncheckedIcon="circle-o"
           checkedColor="black"
@@ -58,12 +79,13 @@ const CardRegScreen = ({
               style={styles.FontSize20}
             />
           }
-          checked={selectedIndex === 1}
-          onPress={() => setIndex(1)}
+          checked={type === 'Account'}
+          onPress={() => setType('Account')}
           checkedIcon="dot-circle-o"
           uncheckedIcon="circle-o"
           checkedColor="black"
           containerStyle={styles.CheckBox}
+          checkedTitle="Account"
         />
       </View>
 
@@ -87,33 +109,23 @@ const CardRegScreen = ({
             setShow(true);
           }}
         />
-        <Modal visible={show} transparent={true}>
-          <View style={{backgroundColor: 'pink'}}>
-            <ColorPicker thumbSize={40} sliderSize={30} gapSize={30} />
-            <PlainButton
-              title={
-                <AppText
-                  family="round-d"
-                  text="확인"
-                  style={styles.FontSize20}
-                />
-              }
-              onPress={() => {
-                setShow(false);
-              }}
-            />
-          </View>
-        </Modal>
       </View>
-
+      {show && (
+        <ColorPickerModal
+          visible={show}
+          toggle={toggleColorModal}
+          icolor={color}
+          selectColor={selectColor}
+        />
+      )}
+      <AppText text={`선택한 색상 : ${color}`} style={styles.FontSize20} />
+      {/* <View style={{width: 10, height: 10}}> </View> */}
       <View style={styles.SelectBtn}>
         <PlainButton
           title={
             <AppText family="round-b" text="확인" style={styles.FontSize24} />
           }
-          onPress={() => {
-            console.log('카드 등록');
-          }}
+          onPress={handleRegister}
         />
       </View>
       <View style={styles.Btns}>
