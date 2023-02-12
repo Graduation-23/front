@@ -1,6 +1,6 @@
 import {StyleProp, View, ViewStyle} from 'react-native';
 import DiaryView from '../features/DiaryView';
-// import DiaryViewHeader from '../features/DiaryViewHeader';
+import DiaryViewHeader from '../features/DiaryViewHeader';
 
 const KindOfStyle = ['container'] as const;
 
@@ -15,6 +15,9 @@ const styles: {[Key in (typeof KindOfStyle)[number]]: StyleProp<ViewStyle>} = {
 export default function DiaryScreen({navigation}: any) {
   return (
     <View style={styles.container}>
+      <DiaryViewHeader
+        navigateToWrite={() => navigation.navigate('DiaryWrite')}
+      />
       <DiaryView />
     </View>
   );
