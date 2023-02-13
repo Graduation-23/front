@@ -1,34 +1,24 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {useEffect} from 'react';
+
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import {Content} from '../constants/screen';
 
 import HomeScreen from '../screens/HomeScreen';
 import AccountBookNavigator from './AccountBookNavigator';
 import DiaryNavigator from './DiaryNavigator';
 import SettingNavigator from './SettingNavigator';
 
-import userAtom from '../atom/userAtom';
-import {useRecoilValue} from 'recoil';
 //MaterialCommunityIcons.loadFont();
 
 const Tab = createBottomTabNavigator();
 
-export default function ContentNavigator({navigation}: any) {
-  const user = useRecoilValue(userAtom);
-
-  useEffect(() => {
-    if (!user) {
-      navigation.navigate('AuthorizationNavigator');
-    }
-    console.log('우와');
-  }, [user, navigation]);
-
+export default function ContentNavigator() {
   return (
     <Tab.Navigator
       screenOptions={{headerShown: false, tabBarActiveTintColor: '#3182F7'}}
-      initialRouteName="HomeNavigator">
+      initialRouteName={Content.HomeTab}>
       <Tab.Screen
-        name="HomeNavigator"
+        name={Content.HomeTab}
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: ({color, size}) => (
@@ -38,7 +28,7 @@ export default function ContentNavigator({navigation}: any) {
         component={HomeScreen}
       />
       <Tab.Screen
-        name="DiaryNavigator"
+        name={Content.DiaryTab}
         options={{
           tabBarLabel: 'Diary',
           tabBarIcon: ({color, size}) => (
@@ -48,7 +38,7 @@ export default function ContentNavigator({navigation}: any) {
         component={DiaryNavigator}
       />
       <Tab.Screen
-        name="BookNavigator"
+        name={Content.BookTab}
         options={{
           tabBarLabel: 'Pay',
           tabBarIcon: ({color, size}) => (
@@ -58,7 +48,7 @@ export default function ContentNavigator({navigation}: any) {
         component={AccountBookNavigator}
       />
       <Tab.Screen
-        name="SettingNavigator"
+        name={Content.SettingTab}
         options={{
           tabBarLabel: 'Setting',
           tabBarIcon: ({color, size}) => (

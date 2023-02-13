@@ -17,9 +17,9 @@ const isValid = (user: SignUpDataType) => {
   return user.correct && user.password.length > 5;
 };
 
-const SignupScreen = ({
+const SignUpScreen = ({
   navigation,
-}: NativeStackScreenProps<AuthorizationStackParamList, 'Signup'>) => {
+}: NativeStackScreenProps<AuthorizationStackParamList, 'SignUp'>) => {
   const setUser = useSetRecoilState(userAtom);
   const {user, hlr, getUser} = useSignUp();
 
@@ -113,4 +113,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SignupScreen;
+export default SignUpScreen;

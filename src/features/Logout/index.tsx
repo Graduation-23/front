@@ -18,8 +18,7 @@ const Logout = ({visible, toggleDialog}: Props) => {
 
   const handlePress = useCallback(() => {
     saveRefreshToken('').then(() => {
-      setUser({} as any);
-      console.log('로그아웃 로직');
+      setUser(null);
       toggleDialog();
     });
   }, [setUser, toggleDialog]);

@@ -11,3 +11,13 @@ export interface ResponseEntity<T = {}> {
   data: T;
   token: IToken;
 }
+
+export interface IDiary {
+  id: number;
+  title: string;
+  weather: string;
+  content: string;
+  created: string;
+  images: string[];
+  user: string;
+}
