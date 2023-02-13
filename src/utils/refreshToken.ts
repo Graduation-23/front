@@ -17,5 +17,5 @@ export const getRefreshToken = () => {
 };
 
 export const saveRefreshToken = (token: string) => {
-  setItemAsync<RefreshTokenType>(REFRESH_TOKEN_KEY, {token});
+  return setItemAsync<RefreshTokenType>(REFRESH_TOKEN_KEY, {token});
 };
