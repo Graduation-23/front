@@ -28,11 +28,11 @@ const App = () => {
     <RecoilRoot>
       <QueryClientProvider client={queryClient}>
         <SMSWatcher />
-        <AuthenticationSecretary />
         <ThemeProvider theme={theme}>
           <NavigationContainer
             linking={linking}
             fallback={<ActivityIndicator color="blue" size="large" />}>
+            <AuthenticationSecretary />
             <AppNavigator />
           </NavigationContainer>
         </ThemeProvider>

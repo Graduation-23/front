@@ -1,7 +1,5 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {useEffect} from 'react';
-import {useRecoilValue} from 'recoil';
-import userAtom from '../atom/userAtom';
+
 import LoginScreen from '../screens/LoginScreen';
 import SignupScreen from '../screens/SignupScreen';
 import BirthRegScreen from '../screens/BirthRegScreen';
@@ -17,17 +15,8 @@ export type AuthorizationStackParamList = {
 
 const Stack = createNativeStackNavigator<AuthorizationStackParamList>();
 
-export default function AuthorizationNavigator({route, navigation}: any) {
-  const user = useRecoilValue(userAtom);
-
+export default function AuthorizationNavigator({route}: any) {
   useGoogleAccount(route.params);
-
-  useEffect(() => {
-    if (user) {
-      console.log(user);
-      navigation.navigate(user.fresh ? 'Birth' : 'ContentNavigator');
-    }
-  }, [navigation, user]);
 
   return (
     <Stack.Navigator
