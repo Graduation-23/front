@@ -18,7 +18,7 @@ export default function DiaryScreen({navigation}: any) {
       <DiaryViewHeader
         navigateToWrite={() => navigation.navigate('DiaryWrite')}
       />
-      <DiaryView />
+      <DiaryView navigation={navigation} />
     </View>
   );
 }
