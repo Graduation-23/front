@@ -2,15 +2,16 @@ import {useNavigation} from '@react-navigation/native';
 import {useEffect} from 'react';
 import {useRecoilValue} from 'recoil';
 import userAtom from '../atom/userAtom';
+import {Auth, Entry} from '../constants/screen';
 
 export default function usePassport() {
   const {navigate} = useNavigation<any>();
   const user = useRecoilValue(userAtom);
   useEffect(() => {
     if (user) {
-      navigate(user.fresh ? 'Birth' : 'ContentNavigator');
+      navigate(user.fresh ? Auth.Birth : Entry.Content);
     } else {
-      navigate('AuthorizationNavigator');
+      navigate(Entry.Auth);
     }
   }, [user, navigate]);
 }
