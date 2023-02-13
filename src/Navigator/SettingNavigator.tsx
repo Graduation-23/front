@@ -3,12 +3,18 @@ import SettingScreen from '../screens/SettingScreen';
 import UserInfoScreen from '../screens/UserInfoScreen';
 //import CardRegScreen from '../screens/CardRegScreen';
 import LinkPaymentScreen from '../screens/LinkPaymentScreen';
+import AuthorizationNavigator from './AuthorizationNavigator';
 
 const Stack = createNativeStackNavigator();
 
 export default function SettingNavigator() {
   return (
     <Stack.Navigator initialRouteName="Setting">
+      <Stack.Screen
+        name="Home"
+        component={AuthorizationNavigator}
+        options={{headerShown: false}}
+      />
       {/* 설정 스크린 */}
       <Stack.Screen name="Setting" component={SettingScreen} />
       {/* 카드 등록, 결제내역 연동, 회원정보 */}

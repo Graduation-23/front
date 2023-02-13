@@ -3,10 +3,11 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {ListItem} from '@rneui/themed';
 import ListItems from '../components/ListItems';
 import {useState} from 'react';
-import DialogActions from '../components/DialogActions';
+//import DialogActions from '../components/DialogActions';
 import WithdrawalDialog from '../features/WithdrawalDialog';
 import {AppText} from '../components/AppText';
-import {saveRefreshToken} from '../utils/refreshToken';
+//import {saveRefreshToken} from '../utils/refreshToken';
+import Logout from '../features/Logout';
 
 export default function SettingScreen({navigation}: any) {
   // const app = [
@@ -122,7 +123,7 @@ export default function SettingScreen({navigation}: any) {
           />
         </ListItem>
       </ScrollView>
-      {visible && (
+      {/* {visible && (
         <DialogActions
           visible={visible}
           toggleDialog={() => {
@@ -131,6 +132,13 @@ export default function SettingScreen({navigation}: any) {
           }}
           title="로그아웃"
           contents="로그아웃 하시겠습니까?"
+        />
+      )} */}
+      {visible && (
+        <Logout
+          visible={visible}
+          toggleDialog={toggleDialog}
+          nav={navigation}
         />
       )}
       {visible2 && (
