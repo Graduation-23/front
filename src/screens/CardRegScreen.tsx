@@ -6,25 +6,34 @@ import {AppText} from '../components/AppText';
 import PlainButton from '../components/PlainButton';
 import {AuthorizationStackParamList} from '../Navigator/AuthorizationNavigator';
 import {useState} from 'react';
-//import ColorPicker from 'react-native-wheel-color-picker';
 import ColorPickerModal from '../features/ColorPickerModal';
 import createFinance from '../api/createFinance';
-import {Auth} from '../constants/screen';
+import RegCompleteDialog from '../features/RegCompleteDialog';
 
 const CardRegScreen = ({
   navigation,
 }: NativeStackScreenProps<AuthorizationStackParamList, 'Card'>) => {
   const [type, setType] = useState('Card');
   const [cardNick, setNick] = useState('');
+  const [cardDes, setDes] = useState('');
   const [show, setShow] = useState(false);
-  const [color, setColor] = useState('');
+  const [color, setColor] = useState('#ffffff');
+  const [visible, setVisible] = useState(false);
 
   const onChangeNick = (nick: string) => {
     setNick(nick);
   };
 
+  const onChangeDes = (des: string) => {
+    setDes(des);
+  };
+
   const toggleColorModal = () => {
     setShow(!show);
+  };
+
+  const toggleCompModal = () => {
+    setVisible(!visible);
   };
 
   const selectColor = (icolor: string) => {
@@ -34,8 +43,8 @@ const CardRegScreen = ({
   const handleRegister = () => {
     createFinance({
       type: type,
-      description: 'test',
-      anothername: 'cardNick',
+      description: cardDes,
+      anothername: cardNick,
       colorcode: color,
     });
     console.log('카드 등록');
@@ -100,17 +109,51 @@ const CardRegScreen = ({
           value={cardNick}
         />
       </View>
+      <View style={styles.InputContainer}>
+        <Input
+          label={
+            <AppText
+              family="round-d"
+              text="세부사항"
+              style={styles.FontSize20}
+            />
+          }
+          placeholder="세부사항 작성"
+          onChangeText={onChangeDes}
+          value={cardDes}
+        />
+      </View>
 
       <View style={styles.ModalContainer}>
         <PlainButton
           title={
-            <AppText family="round-d" text="COLOR" style={styles.FontSize20} />
+            <AppText
+              family="round-d"
+              text="COLOR 선택"
+              style={styles.FontSize20}
+            />
           }
           onPress={() => {
             setShow(true);
           }}
         />
       </View>
+      <View style={styles.ModalContainer}>
+        <AppText
+          family="round-d"
+          text="  선택한 색상 : "
+          style={styles.FontSize20}
+        />
+        <View
+          style={{
+            borderWidth: 2,
+            paddingHorizontal: 10,
+            backgroundColor: color,
+          }}>
+          <AppText family="round-d" text="미리보기" style={styles.FontSize20} />
+        </View>
+      </View>
+
       {show && (
         <ColorPickerModal
           visible={show}
@@ -119,23 +162,14 @@ const CardRegScreen = ({
           selectColor={selectColor}
         />
       )}
-      <AppText text={`선택한 색상 : ${color}`} style={styles.FontSize20} />
-      {/* <View style={{width: 10, height: 10}}> </View> */}
-      <View style={styles.SelectBtn}>
-        <PlainButton
-          title={
-            <AppText family="round-b" text="확인" style={styles.FontSize24} />
-          }
-          onPress={handleRegister}
-        />
-      </View>
+
       <View style={styles.Btns}>
         <PlainButton
           title={
             <AppText family="round-b" text="SKIP" style={styles.FontSize24} />
           }
           onPress={() => {
-            navigation.navigate(Auth.Card);
+            toggleCompModal();
           }}
         />
         <PlainButton
@@ -143,10 +177,18 @@ const CardRegScreen = ({
             <AppText family="round-b" text="NEXT" style={styles.FontSize24} />
           }
           onPress={() => {
-            navigation.navigate(Auth.Card);
+            handleRegister;
+            toggleCompModal();
           }}
         />
       </View>
+      {visible && (
+        <RegCompleteDialog
+          visible={visible}
+          toggleDialog={toggleCompModal}
+          nav={navigation}
+        />
+      )}
     </SafeAreaView>
   );
 };
@@ -159,7 +201,7 @@ const styles = StyleSheet.create({
   },
   Title: {
     marginBottom: 35,
-    marginTop: 50,
+    marginTop: 40,
   },
   AlignRight: {
     flexDirection: 'row',
@@ -169,19 +211,20 @@ const styles = StyleSheet.create({
     width: '90%',
     flexDirection: 'row',
     justifyContent: 'flex-end',
-    marginBottom: 40,
+    marginBottom: 20,
   },
   Btns: {
     width: '90%',
     flexDirection: 'row',
     justifyContent: 'flex-end',
-    marginTop: 40,
+    marginTop: 20,
   },
   CheckBoxContainer: {
     width: '90%',
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    marginTop: 50,
+    marginTop: 20,
+    marginBottom: 10,
   },
   CheckBox: {
     backgroundColor: '#f2f2f2',
@@ -190,9 +233,12 @@ const styles = StyleSheet.create({
     width: '80%',
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    marginTop: 20,
   },
-  ModalContainer: {width: '80%', marginTop: 10},
+  ModalContainer: {
+    width: '80%',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+  },
   FontSize24: {
     fontSize: 24,
   },
