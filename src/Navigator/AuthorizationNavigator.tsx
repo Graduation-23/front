@@ -1,42 +1,27 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {useEffect} from 'react';
-import {useRecoilValue} from 'recoil';
-import userAtom from '../atom/userAtom';
+
 import LoginScreen from '../screens/LoginScreen';
-import SignupScreen from '../screens/SignupScreen';
+import SignUpScreen from '../screens/SignUpScreen';
 import BirthRegScreen from '../screens/BirthRegScreen';
 import CardRegScreen from '../screens/CardRegScreen';
 import useGoogleAccount from '../hooks/useGoogleAccount';
+import {Auth} from '../constants/screen';
 
-export type AuthorizationStackParamList = {
-  Login: undefined;
-  Signup: undefined;
-  Birth: undefined;
-  Card: undefined;
-};
+export type AuthorizationStackParamList = Record<keyof typeof Auth, undefined>;
 
 const Stack = createNativeStackNavigator<AuthorizationStackParamList>();
 
-export default function AuthorizationNavigator({route, navigation}: any) {
-  const user = useRecoilValue(userAtom);
-
+export default function AuthorizationNavigator({route}: any) {
   useGoogleAccount(route.params);
-
-  useEffect(() => {
-    if (user) {
-      console.log(user);
-      navigation.navigate(user.fresh ? 'Birth' : 'ContentNavigator');
-    }
-  }, [navigation, user]);
 
   return (
     <Stack.Navigator
-      initialRouteName="Login"
+      initialRouteName={Auth.Login}
       screenOptions={{headerShown: false}}>
-      <Stack.Screen name="Login" component={LoginScreen} />
-      <Stack.Screen name="Signup" component={SignupScreen} />
-      <Stack.Screen name="Birth" component={BirthRegScreen} />
-      <Stack.Screen name="Card" component={CardRegScreen} />
+      <Stack.Screen name={Auth.Login} component={LoginScreen} />
+      <Stack.Screen name={Auth.SignUp} component={SignUpScreen} />
+      <Stack.Screen name={Auth.Birth} component={BirthRegScreen} />
+      <Stack.Screen name={Auth.Card} component={CardRegScreen} />
     </Stack.Navigator>
   );
 }
