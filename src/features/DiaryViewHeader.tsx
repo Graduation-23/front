@@ -1,39 +1,12 @@
-import {Button} from '@rneui/base';
 import {View} from 'react-native';
-import DatePicker from 'react-native-date-picker';
-import {AppText} from '../components/AppText';
+import DiaryWriteButton from './DiaryWriteButton';
 
-type DiaryViewHeaderProps = {
-  navigateToWrite(): void;
-};
+type DiaryViewHeaderProps = {};
 
-export default function DiaryViewHeader({
-  navigateToWrite,
-}: DiaryViewHeaderProps) {
+export default function DiaryViewHeader({}: DiaryViewHeaderProps) {
   return (
     <View>
-      <Button onPress={navigateToWrite}>
-        <AppText.Title text="Write" />
-      </Button>
-      <DatePicker
-        title="일기 날짜"
-        modal
-        mode="date"
-        open={visible}
-        date={date}
-        confirmText="선택"
-        cancelText="취소"
-        onConfirm={(d): any => {
-          setVisible(false);
-          setDate(d);
-        }}
-        onCancel={() => {
-          setVisible(false);
-        }}
-        onDateChange={d => {
-          console.log(d);
-        }}
-      />
+      <DiaryWriteButton />
     </View>
   );
 }

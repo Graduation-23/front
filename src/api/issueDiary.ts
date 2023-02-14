@@ -1,9 +1,9 @@
 import client from './client';
 
 export default function issueDiary(date: string) {
-  return new Promise((resolve, reject) => {
+  return new Promise<number>((resolve, reject) => {
     client
-      .post(`/diary?diarydate=${date}`)
+      .post(`/diary?date=${date}`)
       .then(r => resolve(r.data.data))
       .catch(reject);
   });

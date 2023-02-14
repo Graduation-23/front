@@ -14,7 +14,6 @@ type DiaryViewProps = {
 
 export default function DiaryView({navigation}: DiaryViewProps) {
   const {data} = useDiary();
-  console.log(data);
   return (
     <ScrollView>
       <DiaryListView
