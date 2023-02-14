@@ -8,10 +8,12 @@ export default function usePassport() {
   const {navigate} = useNavigation<any>();
   const user = useRecoilValue(userAtom);
   useEffect(() => {
-    if (user) {
-      navigate(user.fresh ? Auth.Birth : Entry.Content);
-    } else {
-      navigate(Entry.Auth);
-    }
+    setTimeout(() => {
+      if (user) {
+        navigate(user.fresh ? Auth.Birth : Entry.Content);
+      } else {
+        navigate(Entry.Auth);
+      }
+    }, 100);
   }, [user, navigate]);
 }
