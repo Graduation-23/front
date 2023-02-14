@@ -15,9 +15,7 @@ const styles: {[Key in (typeof KindOfStyle)[number]]: StyleProp<ViewStyle>} = {
 export default function DiaryScreen({navigation}: any) {
   return (
     <View style={styles.container}>
-      <DiaryViewHeader
-        navigateToWrite={() => navigation.navigate('DiaryWrite')}
-      />
+      <DiaryViewHeader />
       <DiaryView navigation={navigation} />
     </View>
   );
