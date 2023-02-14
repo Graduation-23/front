@@ -1,5 +1,5 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {CheckBox, Input} from '@rneui/themed';
+import {Input} from '@rneui/themed';
 import {View, StyleSheet} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {AppText} from '../components/AppText';
@@ -10,6 +10,7 @@ import ColorPickerModal from '../features/ColorPickerModal';
 import createFinance from '../api/createFinance';
 import RegCompleteDialog from '../features/CardRegister/RegCompleteDialog';
 import CardRegHeader from '../features/CardRegister/CardRegHeader';
+import CardRegItem from '../features/CardRegister/CardRegItem';
 
 const CardRegScreen = ({
   navigation,
@@ -54,37 +55,7 @@ const CardRegScreen = ({
   return (
     <SafeAreaView style={styles.Container}>
       <CardRegHeader />
-
-      <View style={styles.CheckBoxContainer}>
-        <CheckBox
-          title={
-            <AppText family="round-d" text="카드" style={styles.FontSize20} />
-          }
-          checked={type === 'Card'}
-          onPress={() => setType('Card')}
-          checkedIcon="dot-circle-o"
-          uncheckedIcon="circle-o"
-          checkedColor="black"
-          containerStyle={styles.CheckBox}
-        />
-        <CheckBox
-          title={
-            <AppText
-              family="round-d"
-              text="계좌 번호"
-              style={styles.FontSize20}
-            />
-          }
-          checked={type === 'Account'}
-          onPress={() => setType('Account')}
-          checkedIcon="dot-circle-o"
-          uncheckedIcon="circle-o"
-          checkedColor="black"
-          containerStyle={styles.CheckBox}
-          checkedTitle="Account"
-        />
-      </View>
-
+      <CardRegItem /> {/**CheckBox, Inputs, ColorPicker, Buttons */}
       <View style={styles.InputContainer}>
         <Input
           label={
@@ -109,7 +80,6 @@ const CardRegScreen = ({
           value={cardDes}
         />
       </View>
-
       <View style={styles.ModalContainer}>
         <PlainButton
           title={
@@ -139,7 +109,6 @@ const CardRegScreen = ({
           <AppText family="round-d" text="미리보기" style={styles.FontSize20} />
         </View>
       </View>
-
       {show && (
         <ColorPickerModal
           visible={show}
@@ -148,7 +117,6 @@ const CardRegScreen = ({
           selectColor={selectColor}
         />
       )}
-
       <View style={styles.Btns}>
         <PlainButton
           title={
