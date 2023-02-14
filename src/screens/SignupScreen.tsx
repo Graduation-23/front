@@ -12,6 +12,7 @@ import {setAuthHeader} from '../api/client';
 import fetchUserInfo from '../api/fetchUserInfo';
 import {useSetRecoilState} from 'recoil';
 import userAtom from '../atom/userAtom';
+import {Auth} from '../constants/screen';
 
 const isValid = (user: SignUpDataType) => {
   return user.correct && user.password.length > 5;
@@ -75,11 +76,11 @@ const SignUpScreen = ({
       <View style={styles.additionalLinkView}>
         <PlainButton
           title={<AppText center ul text="로그인" />}
-          onPress={() => navigation.navigate('Login')}
+          onPress={() => navigation.navigate(Auth.Login)}
         />
         <PlainButton
           title={<AppText center ul text="넘어가기" />}
-          onPress={() => navigation.navigate('Birth')}
+          onPress={() => navigation.navigate(Auth.Birth)}
           // onPress={() => navigation.getParent()?.navigate('ContentNavigator')}
         />
       </View>

@@ -10,6 +10,7 @@ import userAtom from '../atom/userAtom';
 import {AppText} from '../components/AppText';
 import ExternalLinkButton from '../components/ExternalLinkButton';
 import PlainButton from '../components/PlainButton';
+import {Auth, Entry} from '../constants/screen';
 import useSignIn from '../hooks/useSingIn';
 import {AuthorizationStackParamList} from '../Navigator/AuthorizationNavigator';
 
@@ -60,11 +61,11 @@ const LoginScreen = ({
       <View style={styles.additionalLinkView}>
         <PlainButton
           title={<AppText center ul text="회원가입" />}
-          onPress={() => navigation.navigate('Signup')}
+          onPress={() => navigation.navigate(Auth.SignUp)}
         />
         <PlainButton
           title={<AppText center ul text="넘어가기" />}
-          onPress={() => navigation.getParent()?.navigate('ContentNavigator')}
+          onPress={() => navigation.getParent()?.navigate(Entry.Content)}
         />
       </View>
     </SafeAreaView>
