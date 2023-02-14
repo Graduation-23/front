@@ -10,6 +10,7 @@ import {format} from 'date-fns';
 import ko from 'date-fns/esm/locale/ko/index.js';
 import {Input} from '@rneui/themed';
 import DatePicker from 'react-native-date-picker';
+import {Auth} from '../constants/screen';
 
 const BirthRegScreen = ({
   navigation,
@@ -65,7 +66,7 @@ const BirthRegScreen = ({
             <AppText family="round-b" text="SKIP" style={styles.FontSize24} />
           }
           onPress={() => {
-            navigation.navigate('Card');
+            navigation.navigate(Auth.Card);
           }}
         />
         <PlainButton
@@ -73,7 +74,7 @@ const BirthRegScreen = ({
             <AppText family="round-b" text="NEXT" style={styles.FontSize24} />
           }
           onPress={() => {
-            navigation.navigate('Card');
+            navigation.navigate(Auth.Card);
           }}
         />
       </View>

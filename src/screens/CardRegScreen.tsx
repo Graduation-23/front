@@ -9,6 +9,7 @@ import {useState} from 'react';
 //import ColorPicker from 'react-native-wheel-color-picker';
 import ColorPickerModal from '../features/ColorPickerModal';
 import createFinance from '../api/createFinance';
+import {Auth} from '../constants/screen';
 
 const CardRegScreen = ({
   navigation,
@@ -134,7 +135,7 @@ const CardRegScreen = ({
             <AppText family="round-b" text="SKIP" style={styles.FontSize24} />
           }
           onPress={() => {
-            navigation.navigate('Card');
+            navigation.navigate(Auth.Card);
           }}
         />
         <PlainButton
@@ -142,7 +143,7 @@ const CardRegScreen = ({
             <AppText family="round-b" text="NEXT" style={styles.FontSize24} />
           }
           onPress={() => {
-            navigation.navigate('Card');
+            navigation.navigate(Auth.Card);
           }}
         />
       </View>

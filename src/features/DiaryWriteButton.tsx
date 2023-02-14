@@ -1,17 +1,19 @@
 import {Button} from '@rneui/base';
-import {View} from 'react-native';
+import {useState} from 'react';
 import DatePicker from 'react-native-date-picker';
 import {AppText} from '../components/AppText';
+import {useIssueDiaryId} from '../query/diary';
 
-type DiaryViewHeaderProps = {
-  navigateToWrite(): void;
-};
+export default function DiaryWriteButton() {
+  const [visible, setVisibleModal] = useState(false);
+  const {mutate} = useIssueDiaryId();
 
-export default function DiaryViewHeader({
-  navigateToWrite,
-}: DiaryViewHeaderProps) {
+  const handleConfirm = () => {
+    mutate();
+  };
+
   return (
-    <View>
+    <>
       <Button onPress={navigateToWrite}>
         <AppText.Title text="Write" />
       </Button>
@@ -20,20 +22,16 @@ export default function DiaryViewHeader({
         modal
         mode="date"
         open={visible}
-        date={date}
+        date={new Date()}
         confirmText="선택"
         cancelText="취소"
         onConfirm={(d): any => {
-          setVisible(false);
-          setDate(d);
+          setVisibleModal(false);
         }}
         onCancel={() => {
-          setVisible(false);
-        }}
-        onDateChange={d => {
-          console.log(d);
+          setVisibleModal(false);
         }}
       />
-    </View>
+    </>
   );
 }
