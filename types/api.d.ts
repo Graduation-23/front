@@ -20,4 +20,5 @@ export interface IDiary {
   created: string;
   images: string[];
   user: string;
+  date: string;
 }
