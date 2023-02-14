@@ -8,7 +8,8 @@ import {AuthorizationStackParamList} from '../Navigator/AuthorizationNavigator';
 import {useState} from 'react';
 import ColorPickerModal from '../features/ColorPickerModal';
 import createFinance from '../api/createFinance';
-import RegCompleteDialog from '../features/RegCompleteDialog';
+import RegCompleteDialog from '../features/CardRegister/RegCompleteDialog';
+import CardRegHeader from '../features/CardRegister/CardRegHeader';
 
 const CardRegScreen = ({
   navigation,
@@ -52,22 +53,7 @@ const CardRegScreen = ({
 
   return (
     <SafeAreaView style={styles.Container}>
-      <View style={styles.Title}>
-        <AppText.Title text="CARD / ACCOUNT" family="round-d" />
-      </View>
-
-      <View>
-        <AppText.Title
-          text="사용하실 카드(계좌)를 등록해주세요 !"
-          family="round-c"
-        />
-        <View style={styles.AlignRight}>
-          <AppText
-            text="최대 5개까지 등록 가능합니다. (0/5)"
-            family="round-c"
-          />
-        </View>
-      </View>
+      <CardRegHeader />
 
       <View style={styles.CheckBoxContainer}>
         <CheckBox

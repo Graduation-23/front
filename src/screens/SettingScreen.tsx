@@ -8,6 +8,7 @@ import WithdrawalDialog from '../features/WithdrawalDialog';
 import {AppText} from '../components/AppText';
 //import {saveRefreshToken} from '../utils/refreshToken';
 import Logout from '../features/Logout';
+import {Auth} from '../constants/screen';
 
 export default function SettingScreen({navigation}: any) {
   // const app = [
@@ -72,7 +73,7 @@ export default function SettingScreen({navigation}: any) {
             label="카드(계좌) 등록"
             color="#85d8fc"
             onPress={() => {
-              navigation.navigate('CardRegister');
+              navigation.navigate(Auth.Card);
             }}
           />
         </ListItem>
