@@ -1,5 +1,4 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {Input} from '@rneui/themed';
 import {View, StyleSheet} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {AppText} from '../components/AppText';
@@ -7,7 +6,7 @@ import PlainButton from '../components/PlainButton';
 import {AuthorizationStackParamList} from '../Navigator/AuthorizationNavigator';
 import {useState} from 'react';
 import ColorPickerModal from '../features/ColorPickerModal';
-import createFinance from '../api/createFinance';
+//import createFinance from '../api/createFinance';
 import RegCompleteDialog from '../features/CardRegister/RegCompleteDialog';
 import CardRegHeader from '../features/CardRegister/CardRegHeader';
 import CardRegItem from '../features/CardRegister/CardRegItem';
@@ -15,20 +14,9 @@ import CardRegItem from '../features/CardRegister/CardRegItem';
 const CardRegScreen = ({
   navigation,
 }: NativeStackScreenProps<AuthorizationStackParamList, 'Card'>) => {
-  const [type, setType] = useState('Card');
-  const [cardNick, setNick] = useState('');
-  const [cardDes, setDes] = useState('');
   const [show, setShow] = useState(false);
   const [color, setColor] = useState('#ffffff');
   const [visible, setVisible] = useState(false);
-
-  const onChangeNick = (nick: string) => {
-    setNick(nick);
-  };
-
-  const onChangeDes = (des: string) => {
-    setDes(des);
-  };
 
   const toggleColorModal = () => {
     setShow(!show);
@@ -42,44 +30,21 @@ const CardRegScreen = ({
     setColor(icolor);
   };
 
-  const handleRegister = () => {
-    createFinance({
-      type: type,
-      description: cardDes,
-      anothername: cardNick,
-      colorcode: color,
-    });
-    console.log('카드 등록');
-  };
+  // const handleRegister = () => {
+  //   createFinance({
+  //     type: type,
+  //     description: cardDes,
+  //     anothername: cardNick,
+  //     colorcode: color,
+  //   });
+  //   console.log('카드 등록');
+  // };
 
   return (
     <SafeAreaView style={styles.Container}>
       <CardRegHeader />
-      <CardRegItem /> {/**CheckBox, Inputs, ColorPicker, Buttons */}
-      <View style={styles.InputContainer}>
-        <Input
-          label={
-            <AppText family="round-d" text="별칭" style={styles.FontSize20} />
-          }
-          placeholder="별칭 입력"
-          onChangeText={onChangeNick}
-          value={cardNick}
-        />
-      </View>
-      <View style={styles.InputContainer}>
-        <Input
-          label={
-            <AppText
-              family="round-d"
-              text="세부사항"
-              style={styles.FontSize20}
-            />
-          }
-          placeholder="세부사항 작성"
-          onChangeText={onChangeDes}
-          value={cardDes}
-        />
-      </View>
+      <CardRegItem />
+
       <View style={styles.ModalContainer}>
         <PlainButton
           title={
@@ -131,7 +96,7 @@ const CardRegScreen = ({
             <AppText family="round-b" text="NEXT" style={styles.FontSize24} />
           }
           onPress={() => {
-            handleRegister;
+            //handleRegister;
             toggleCompModal();
           }}
         />
@@ -153,10 +118,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     height: '100%',
   },
-  Title: {
-    marginBottom: 35,
-    marginTop: 40,
-  },
   AlignRight: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
@@ -172,21 +133,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-end',
     marginTop: 20,
-  },
-  CheckBoxContainer: {
-    width: '90%',
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    marginTop: 20,
-    marginBottom: 10,
-  },
-  CheckBox: {
-    backgroundColor: '#f2f2f2',
-  },
-  InputContainer: {
-    width: '80%',
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
   },
   ModalContainer: {
     width: '80%',
