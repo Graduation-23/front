@@ -20,7 +20,7 @@ export default function DiaryReadScreen({route}: any) {
     <View>
       <Button onPress={() => navigate(Diary.Write, {diaryId})}>수정</Button>
       <AppText.Title>{data?.title}</AppText.Title>
-      <AppText>{data?.created}</AppText>
+      {/* <AppText>{data?.created}</AppText> */}
       <AppText>{data?.weather}</AppText>
       <AppText>{data?.content}</AppText>
     </View>

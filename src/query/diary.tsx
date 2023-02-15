@@ -1,4 +1,5 @@
 import {useMutation, useQuery} from 'react-query';
+import deleteDiary from '../api/deleteDiary';
 import fetchDiary from '../api/fetchDiary';
 import fetchDiaryById from '../api/fetchDiaryById';
 import issueDiary from '../api/issueDiary';
@@ -20,4 +21,8 @@ export const useIssueDiaryId = () => {
 
 export const useUpdateDiary = () => {
   return useMutation(['diary-update'], updateDiary);
+};
+
+export const useDeleteDiary = () => {
+  return useMutation<unknown, unknown, number>(['diary-delete', deleteDiary]);
 };

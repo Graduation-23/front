@@ -1,6 +1,6 @@
 import {StyleProp, View, ViewStyle} from 'react-native';
-import DiaryView from '../features/DiaryView';
-import DiaryViewHeader from '../features/DiaryViewHeader';
+import DiaryView from '../features/Diary/DiaryView';
+import DiaryViewHeader from '../features/Diary/DiaryViewHeader';
 
 const KindOfStyle = ['container'] as const;
 

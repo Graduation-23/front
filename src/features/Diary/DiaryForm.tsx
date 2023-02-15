@@ -3,13 +3,13 @@ import {Button} from '@rneui/base';
 import {Input} from '@rneui/themed';
 import {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {IDiary} from '../../types/api';
+import {IDiary} from '../../../types/api';
 
-import {AppText} from '../components/AppText';
-import {Diary} from '../constants/screen';
-import useEditDiary from '../hooks/useEditDiary';
-import {useUpdateDiary} from '../query/diary';
-import SpendCategoryDialog from './Category/SpendCategoryDialog';
+import {AppText} from '../../components/AppText';
+import {Diary} from '../../constants/screen';
+import useEditDiary from '../../hooks/useEditDiary';
+import {useUpdateDiary} from '../../query/diary';
+import SpendCategoryDialog from '../Category/SpendCategoryDialog';
 
 type DiaryFormProps = {} & IDiary;
 

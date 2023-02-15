@@ -2,10 +2,10 @@ import {useNavigation} from '@react-navigation/native';
 import {Button} from '@rneui/base';
 import {useState} from 'react';
 import DatePicker from 'react-native-date-picker';
-import {AppText} from '../components/AppText';
-import {Diary} from '../constants/screen';
-import {useIssueDiaryId} from '../query/diary';
-import {formatYMD} from '../utils/date';
+import {AppText} from '../../components/AppText';
+import {Diary} from '../../constants/screen';
+import {useIssueDiaryId} from '../../query/diary';
+import {formatYMD} from '../../utils/date';
 
 export default function DiaryWriteButton() {
   const [visible, setVisibleModal] = useState(false);

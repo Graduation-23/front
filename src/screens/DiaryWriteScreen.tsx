@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
-import DiaryForm from '../features/DiaryForm';
+import DiaryForm from '../features/Diary/DiaryForm';
 import WidgetForm from '../features/WidgetForm';
 import {useDiaryById} from '../query/diary';
 
