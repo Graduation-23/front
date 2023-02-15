@@ -24,11 +24,11 @@ export interface IDiary {
 }
 
 export interface IFinance {
-  anothername: string;
-  colorcode: string;
-  description: string;
+  user: string;
   id: number;
   type: string;
-  user: string;
+  anothername: string;
+  description: string;
+  colorcode: string;
   version: number;
 }
