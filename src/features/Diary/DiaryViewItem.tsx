@@ -15,11 +15,13 @@ export default function DiaryViewItem({data}: ListViewItemProps<IDiary>) {
   };
   return (
     <TouchableOpacity onPress={handlePress} style={styles.item}>
-      <AppText.Subtitle bold>{data.date.slice(5)}</AppText.Subtitle>
-      <AppText>{data.title}</AppText>
+      <View style={styles.title}>
+        <AppText.Subtitle bold>{data.date.slice(5)}</AppText.Subtitle>
+        <AppText style={{paddingLeft: 5}}>{data.title}</AppText>
+      </View>
       <View>
-        <AppText text={data.weather} />
-        <AppText text={data.content} />
+        {/* <AppText text={data.weather} /> */}
+        {/* <AppText text={data.content} /> */}
       </View>
       <DiaryPreviewGallery
         thumbnailIdx={data.thumbnailIdx}
@@ -39,5 +41,10 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     margin: 10,
     padding: 10,
+  },
+  title: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'baseline',
   },
 });
