@@ -1,13 +1,15 @@
 import {useEffect, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
-import DiaryForm from '../features/DiaryForm';
+import DiaryForm from '../features/Diary/DiaryForm';
 import WidgetForm from '../features/WidgetForm';
 import {useDiaryById} from '../query/diary';
 
 export default function DiaryWriteScreen({route}: any) {
   const diaryId = route.params.diaryId;
 
-  if (!diaryId) throw Error('There is no Diary Id');
+  if (!diaryId) {
+    throw Error('There is no Diary Id');
+  }
 
   const [isData, setIsData] = useState(false);
 

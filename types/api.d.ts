@@ -17,10 +17,10 @@ export interface IDiary {
   title: string;
   weather: string;
   content: string;
-  created: string;
-  images: string[];
   user: string;
   date: string;
+  imageUrls: string[];
+  thumbnailIdx: number;
 }
 
 export interface IFinance {
