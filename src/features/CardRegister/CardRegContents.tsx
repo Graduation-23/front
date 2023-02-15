@@ -1,15 +1,15 @@
 import {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
+import CardRegBtns from './CardRegBtns';
 import CardRegColorPicker from './CardRegColorPicker';
 import CardRegInput from './CardRegInput';
 import CardRegRadioBox from './CardRegRadioBox';
 
-type CardRegItemProps = {
-  //type: string;
-  //setType: (t: string) => void;
+type CardRegContentsProps = {
+  nav: any;
 };
 
-export default function CardRegItem({}: CardRegItemProps) {
+export default function CardRegItem({nav}: CardRegContentsProps) {
   const [type, setType] = useState('Card');
   const [cardNick, setCardNick] = useState('');
   const [cardDes, setCardDes] = useState('');
@@ -52,6 +52,13 @@ export default function CardRegItem({}: CardRegItemProps) {
         onChangeColor={onChangeColor}
         show={show}
         onChangeShow={onChangeShow}
+      />
+      <CardRegBtns
+        nav={nav}
+        type={type}
+        cardDes={cardDes}
+        cardNick={cardNick}
+        colorcode={color}
       />
     </>
   );

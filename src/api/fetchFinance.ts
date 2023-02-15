@@ -7,7 +7,7 @@ export default function fetchFinance() {
       .get('/finance')
       .then(response => {
         res(response.data.data);
-        console.log('?');
+        console.log(response.data.data);
       })
       .catch(rej);
   });
