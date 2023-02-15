@@ -1,7 +1,9 @@
 import {IDiary} from '../../types/api';
 import client from './client';
 
-interface updateDiaryEntryVariables extends IDiary {}
+export interface updateDiaryEntryVariables extends IDiary {
+  newImages: Blob[];
+}
 
 export default function updateDiary(entry: updateDiaryEntryVariables) {
   const form = new FormData();
