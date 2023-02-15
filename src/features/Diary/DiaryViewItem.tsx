@@ -15,10 +15,9 @@ export default function DiaryViewItem({data}: ListViewItemProps<IDiary>) {
 
   return (
     <TouchableOpacity onPress={handlePress} style={styles.item}>
-      <AppText.Title>{data.date.slice(5)}</AppText.Title>
+      <AppText.Subtitle>{data.date.slice(5)}</AppText.Subtitle>
       <View>
         <AppText.Title text={data.title} />
-        {/* <AppText.Title text={data.created} /> */}
         <AppText text={data.weather} />
         <AppText text={data.content} />
       </View>
