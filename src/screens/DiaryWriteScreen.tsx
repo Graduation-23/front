@@ -7,7 +7,9 @@ import {useDiaryById} from '../query/diary';
 export default function DiaryWriteScreen({route}: any) {
   const diaryId = route.params.diaryId;
 
-  if (!diaryId) throw Error('There is no Diary Id');
+  if (!diaryId) {
+    throw Error('There is no Diary Id');
+  }
 
   const [isData, setIsData] = useState(false);
 

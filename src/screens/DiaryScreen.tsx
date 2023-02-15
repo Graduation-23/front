@@ -12,11 +12,11 @@ const styles: {[Key in (typeof KindOfStyle)[number]]: StyleProp<ViewStyle>} = {
   },
 };
 
-export default function DiaryScreen({navigation}: any) {
+export default function DiaryScreen({}: any) {
   return (
     <View style={styles.container}>
       <DiaryViewHeader />
-      <DiaryView navigation={navigation} />
+      <DiaryView />
     </View>
   );
 }

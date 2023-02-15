@@ -8,18 +8,13 @@ import DiaryViewItem from './DiaryViewItem';
 
 const DiaryListView = ListView<IDiary>;
 
-type DiaryViewProps = {
-  navigation: any;
-};
+type DiaryViewProps = {};
 
-export default function DiaryView({navigation}: DiaryViewProps) {
+export default function DiaryView({}: DiaryViewProps) {
   const {data} = useDiary();
   return (
     <ScrollView>
-      <DiaryListView
-        items={data || []}
-        getId={item => item.id}
-        payload={navigation}>
+      <DiaryListView items={data || []} getId={item => item.id}>
         {DiaryViewItem}
       </DiaryListView>
     </ScrollView>

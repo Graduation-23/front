@@ -1,15 +1,16 @@
+import {useNavigation} from '@react-navigation/native';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {IDiary} from '../../../types/api';
 import {AppText} from '../../components/AppText';
 import {ListViewItemProps} from '../../components/Item/ListViewItem';
+import {Diary} from '../../constants/screen';
 // import CDNImage from '../components/CDNImage';
 
-export default function DiaryViewItem({
-  data,
-  payload,
-}: ListViewItemProps<IDiary>) {
+export default function DiaryViewItem({data}: ListViewItemProps<IDiary>) {
+  const {navigate} = useNavigation<any>();
+
   const handlePress = () => {
-    payload.navigate('DiaryRead', {diaryId: data.id});
+    navigate(Diary.Read, {diaryId: data.id});
   };
 
   return (
