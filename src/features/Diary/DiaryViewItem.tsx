@@ -1,25 +1,23 @@
-import {useNavigation} from '@react-navigation/native';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {IDiary} from '../../../types/api';
 import {AppText} from '../../components/AppText';
 import {ListViewItemProps} from '../../components/Item/ListViewItem';
-import {Diary} from '../../constants/screen';
 import DiaryPreviewGallery from './DiaryPreviewGallery';
 // import CDNImage from '../components/CDNImage';
 
-export default function DiaryViewItem({data}: ListViewItemProps<IDiary>) {
-  const {navigate} = useNavigation<any>();
-
-  const handlePress = () => {
-    navigate(Diary.Read, {diaryId: data.id});
-  };
+export default function DiaryViewItem({
+  data,
+  navigate,
+}: ListViewItemProps<IDiary>) {
   return (
-    <TouchableOpacity onPress={handlePress} style={styles.item}>
-      <AppText.Subtitle bold>{data.date.slice(5)}</AppText.Subtitle>
-      <AppText>{data.title}</AppText>
+    <TouchableOpacity onPress={navigate} style={styles.item}>
+      <View style={styles.title}>
+        <AppText.Subtitle bold>{data.date.slice(5)}</AppText.Subtitle>
+        <AppText style={{paddingLeft: 5}}>{data.title}</AppText>
+      </View>
       <View>
-        <AppText text={data.weather} />
-        <AppText text={data.content} />
+        {/* <AppText text={data.weather} /> */}
+        {/* <AppText text={data.content} /> */}
       </View>
       <DiaryPreviewGallery
         thumbnailIdx={data.thumbnailIdx}
@@ -39,5 +37,10 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     margin: 10,
     padding: 10,
+  },
+  title: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'baseline',
   },
 });
