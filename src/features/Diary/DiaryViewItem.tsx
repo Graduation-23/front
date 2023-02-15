@@ -4,6 +4,7 @@ import {IDiary} from '../../../types/api';
 import {AppText} from '../../components/AppText';
 import {ListViewItemProps} from '../../components/Item/ListViewItem';
 import {Diary} from '../../constants/screen';
+import DiaryPreviewGallery from './DiaryPreviewGallery';
 // import CDNImage from '../components/CDNImage';
 
 export default function DiaryViewItem({data}: ListViewItemProps<IDiary>) {
@@ -12,15 +13,18 @@ export default function DiaryViewItem({data}: ListViewItemProps<IDiary>) {
   const handlePress = () => {
     navigate(Diary.Read, {diaryId: data.id});
   };
-
   return (
     <TouchableOpacity onPress={handlePress} style={styles.item}>
-      <AppText.Subtitle>{data.date.slice(5)}</AppText.Subtitle>
+      <AppText.Subtitle bold>{data.date.slice(5)}</AppText.Subtitle>
+      <AppText>{data.title}</AppText>
       <View>
-        <AppText.Title text={data.title} />
         <AppText text={data.weather} />
         <AppText text={data.content} />
       </View>
+      <DiaryPreviewGallery
+        thumbnailIdx={data.thumbnailIdx}
+        imageUrls={data.imageUrls}
+      />
     </TouchableOpacity>
   );
 }

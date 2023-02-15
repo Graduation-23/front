@@ -20,5 +20,5 @@ export interface IDiary {
   user: string;
   date: string;
   imageUrls: string[];
-  thumbnailIdx: string;
+  thumbnailIdx: number;
 }
