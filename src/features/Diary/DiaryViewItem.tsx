@@ -15,24 +15,23 @@ export default function DiaryViewItem({data}: ListViewItemProps<IDiary>) {
 
   return (
     <TouchableOpacity onPress={handlePress} style={styles.item}>
+      <AppText.Title>{data.date.slice(5)}</AppText.Title>
       <View>
         <AppText.Title text={data.title} />
         {/* <AppText.Title text={data.created} /> */}
         <AppText text={data.weather} />
         <AppText text={data.content} />
       </View>
-      {/* {Array.isArray(data.images) && data.images.length > 0 ? (
-        <CDNImage url={data.images[0]} />
-      ) : (
-        <></>
-      )} */}
     </TouchableOpacity>
   );
 }
 
+const bgColor = 'rgba(213, 229, 251, 0.66)';
+
 const styles = StyleSheet.create({
   item: {
-    borderColor: '#444',
+    backgroundColor: bgColor,
+    borderColor: bgColor,
     borderWidth: 1,
     borderRadius: 5,
     margin: 10,
