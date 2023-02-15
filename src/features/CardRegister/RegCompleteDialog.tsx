@@ -2,14 +2,15 @@ import {Dialog} from '@rneui/themed';
 import {AppText} from '../../components/AppText';
 import {View} from 'react-native';
 import {Entry} from '../../constants/screen';
+import {useNavigation} from '@react-navigation/native';
 
 interface Props {
   visible: boolean;
   toggleDialog: () => void;
-  nav: any;
 }
 
-const RegCompleteDialog = ({visible, toggleDialog, nav}: Props) => {
+const RegCompleteDialog = ({visible, toggleDialog}: Props) => {
+  const {navigate} = useNavigation<any>();
   return (
     <View>
       <Dialog isVisible={visible} onBackdropPress={toggleDialog}>
@@ -23,7 +24,7 @@ const RegCompleteDialog = ({visible, toggleDialog, nav}: Props) => {
             onPress={() => {
               toggleDialog();
               //nav.navigate('Birth');
-              nav.navigate(Entry.Content);
+              navigate(Entry.Content);
             }}
           />
         </Dialog.Actions>

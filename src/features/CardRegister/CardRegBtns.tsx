@@ -4,9 +4,11 @@ import PlainButton from '../../components/PlainButton';
 import {useState} from 'react';
 import RegCompleteDialog from './RegCompleteDialog';
 import createFinance from '../../api/createFinance';
+import {useNavigation} from '@react-navigation/native';
+import {Entry, Content} from '../../constants/screen';
 
 type CardRegBtnProps = {
-  nav: any;
+  from: string;
   type: string;
   cardDes: string;
   cardNick: string;
@@ -14,13 +16,16 @@ type CardRegBtnProps = {
 };
 
 export default function CardRegBtns({
-  nav,
+  from,
   type,
   cardDes,
   cardNick,
   colorcode,
 }: CardRegBtnProps) {
   const [visible, setVisible] = useState(false);
+
+  const routeFrom = from;
+  const {navigate} = useNavigation<any>();
 
   const handleRegister = () => {
     createFinance({
@@ -37,31 +42,46 @@ export default function CardRegBtns({
   };
   return (
     <>
-      <View style={styles.Btns}>
-        <PlainButton
-          title={
-            <AppText family="round-b" text="SKIP" style={styles.FontSize24} />
-          }
-          onPress={() => {
-            toggleCompModal();
-          }}
-        />
-        <PlainButton
-          title={
-            <AppText family="round-b" text="NEXT" style={styles.FontSize24} />
-          }
-          onPress={() => {
-            handleRegister();
-            toggleCompModal();
-          }}
-        />
-      </View>
+      {routeFrom === 'signup' ? (
+        <View style={styles.Btns}>
+          <PlainButton
+            title={
+              <AppText family="round-b" text="SKIP" style={styles.FontSize24} />
+            }
+            onPress={() => {
+              toggleCompModal();
+            }}
+          />
+          <PlainButton
+            title={
+              <AppText family="round-b" text="NEXT" style={styles.FontSize24} />
+            }
+            onPress={() => {
+              handleRegister();
+              toggleCompModal();
+            }}
+          />
+        </View>
+      ) : (
+        <View style={styles.Btns}>
+          <PlainButton
+            title={
+              <AppText
+                family="round-b"
+                text="Register"
+                style={styles.FontSize24}
+              />
+            }
+            onPress={() => {
+              handleRegister();
+              navigate(Entry.Content, {tab: Content.SettingTab});
+            }}
+          />
+        </View>
+      )}
+
       {visible && (
-        <RegCompleteDialog
-          visible={visible}
-          toggleDialog={toggleCompModal}
-          nav={nav}
-        />
+        <RegCompleteDialog visible={visible} toggleDialog={toggleCompModal} />
       )}
     </>
   );
