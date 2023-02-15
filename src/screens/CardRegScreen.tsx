@@ -5,29 +5,19 @@ import {AppText} from '../components/AppText';
 import PlainButton from '../components/PlainButton';
 import {AuthorizationStackParamList} from '../Navigator/AuthorizationNavigator';
 import {useState} from 'react';
-import ColorPickerModal from '../features/ColorPickerModal';
+//import ColorPickerModal from '../features/ColorPickerModal';
 //import createFinance from '../api/createFinance';
 import RegCompleteDialog from '../features/CardRegister/RegCompleteDialog';
 import CardRegHeader from '../features/CardRegister/CardRegHeader';
-import CardRegItem from '../features/CardRegister/CardRegItem';
+import CardRegContents from '../features/CardRegister/CardRegContents';
 
 const CardRegScreen = ({
   navigation,
 }: NativeStackScreenProps<AuthorizationStackParamList, 'Card'>) => {
-  const [show, setShow] = useState(false);
-  const [color, setColor] = useState('#ffffff');
   const [visible, setVisible] = useState(false);
-
-  const toggleColorModal = () => {
-    setShow(!show);
-  };
 
   const toggleCompModal = () => {
     setVisible(!visible);
-  };
-
-  const selectColor = (icolor: string) => {
-    setColor(icolor);
   };
 
   // const handleRegister = () => {
@@ -43,45 +33,8 @@ const CardRegScreen = ({
   return (
     <SafeAreaView style={styles.Container}>
       <CardRegHeader />
-      <CardRegItem />
+      <CardRegContents />
 
-      <View style={styles.ModalContainer}>
-        <PlainButton
-          title={
-            <AppText
-              family="round-d"
-              text="COLOR 선택"
-              style={styles.FontSize20}
-            />
-          }
-          onPress={() => {
-            setShow(true);
-          }}
-        />
-      </View>
-      <View style={styles.ModalContainer}>
-        <AppText
-          family="round-d"
-          text="  선택한 색상 : "
-          style={styles.FontSize20}
-        />
-        <View
-          style={{
-            borderWidth: 2,
-            paddingHorizontal: 10,
-            backgroundColor: color,
-          }}>
-          <AppText family="round-d" text="미리보기" style={styles.FontSize20} />
-        </View>
-      </View>
-      {show && (
-        <ColorPickerModal
-          visible={show}
-          toggle={toggleColorModal}
-          icolor={color}
-          selectColor={selectColor}
-        />
-      )}
       <View style={styles.Btns}>
         <PlainButton
           title={
