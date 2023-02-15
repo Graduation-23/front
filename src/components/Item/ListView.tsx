@@ -1,13 +1,13 @@
 import {Fragment, ReactNode} from 'react';
 import {View, ViewProps} from 'react-native';
-import {AppText} from '../AppText';
 import {ListViewItemProps} from './ListViewItem';
 
 export type ListViewProps<T> = {
   items: T[];
   children(props: ListViewItemProps<T>): JSX.Element;
-  getId?(item: T): any;
+  getId(item: T): string | number;
   titleEl: ReactNode;
+  navigate(id: string | number): void;
 } & Omit<ViewProps, 'children'>;
 
 export default function ListView<T = unknown>({
@@ -15,14 +15,19 @@ export default function ListView<T = unknown>({
   children,
   getId,
   titleEl,
+  navigate,
   ...props
 }: ListViewProps<T>) {
   return (
     <View {...props}>
       {titleEl}
       {items.map((el, i) => (
-        <Fragment key={getId ? getId(el) : i}>
-          {children({index: i, data: el})}
+        <Fragment key={getId(el)}>
+          {children({
+            index: i,
+            data: el,
+            navigate: navigate.bind(null, getId(el)),
+          })}
         </Fragment>
       ))}
     </View>

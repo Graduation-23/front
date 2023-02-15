@@ -1,11 +1,11 @@
 import {useNavigation} from '@react-navigation/native';
-import {Button} from '@rneui/base';
+import {Text} from '@rneui/base';
 import {useState} from 'react';
+import {View} from 'react-native';
 import DatePicker from 'react-native-date-picker';
-import {AppText} from '../../components/AppText';
-import {Diary} from '../../constants/screen';
-import {useIssueDiaryId} from '../../query/diary';
-import {formatYMD} from '../../utils/date';
+import {Diary} from '../../../constants/screen';
+import {useIssueDiaryId} from '../../../query/diary';
+import {formatYMD} from '../../../utils/date';
 
 export default function DiaryWriteButton() {
   const [visible, setVisibleModal] = useState(false);
@@ -17,10 +17,11 @@ export default function DiaryWriteButton() {
   };
 
   return (
-    <>
-      <Button onPress={() => setVisibleModal(true)}>
-        <AppText.Title text="Write" />
-      </Button>
+    <View>
+      <Text style={{color: '#29b6f6'}} onPress={() => setVisibleModal(true)}>
+        작성
+      </Text>
+
       <DatePicker
         title="일기 날짜"
         modal
@@ -37,6 +38,6 @@ export default function DiaryWriteButton() {
           setVisibleModal(false);
         }}
       />
-    </>
+    </View>
   );
 }
