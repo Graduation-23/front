@@ -10,6 +10,7 @@ export const AppTextBase = ({
   children,
   viewStyle,
   center,
+  bold,
   ...props
 }: AppTextProps) => {
   const core = (
@@ -20,6 +21,7 @@ export const AppTextBase = ({
         textStyles.text,
         family && familyStyles[family],
         center && textStyles.center,
+        bold && textStyles.bold,
         style,
       ]}
     />
@@ -41,6 +43,9 @@ const textStyles = StyleSheet.create({
   },
   center: {
     textAlign: 'center',
+  },
+  bold: {
+    fontWeight: 'bold',
   },
 });
 
