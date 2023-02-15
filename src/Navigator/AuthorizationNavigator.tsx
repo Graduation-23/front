@@ -1,7 +1,7 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import LoginScreen from '../screens/LoginScreen';
-import SignUpScreen from '../screens/SignUpScreen';
+import SignUpScreen from '../screens/SignupScreen';
 import BirthRegScreen from '../screens/BirthRegScreen';
 import CardRegScreen from '../screens/CardRegScreen';
 import useGoogleAccount from '../hooks/useGoogleAccount';

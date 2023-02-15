@@ -1,7 +1,7 @@
 import {Dialog} from '@rneui/themed';
-import {AppText} from '../components/AppText';
+import {AppText} from '../../components/AppText';
 import {View} from 'react-native';
-import {Entry} from '../constants/screen';
+import {Entry} from '../../constants/screen';
 
 interface Props {
   visible: boolean;
@@ -24,7 +24,6 @@ const RegCompleteDialog = ({visible, toggleDialog, nav}: Props) => {
               toggleDialog();
               //nav.navigate('Birth');
               nav.navigate(Entry.Content);
-              console.log('Yes');
             }}
           />
         </Dialog.Actions>

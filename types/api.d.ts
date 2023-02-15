@@ -22,3 +22,13 @@ export interface IDiary {
   user: string;
   date: string;
 }
+
+export interface IFinance {
+  user: string;
+  id: number;
+  type: string;
+  anothername: string;
+  description: string;
+  colorcode: string;
+  version: number;
+}
