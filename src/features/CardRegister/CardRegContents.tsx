@@ -6,10 +6,10 @@ import CardRegInput from './CardRegInput';
 import CardRegRadioBox from './CardRegRadioBox';
 
 type CardRegContentsProps = {
-  nav: any;
+  from: string;
 };
 
-export default function CardRegItem({nav}: CardRegContentsProps) {
+export default function CardRegItem({from}: CardRegContentsProps) {
   const [type, setType] = useState('Card');
   const [cardNick, setCardNick] = useState('');
   const [cardDes, setCardDes] = useState('');
@@ -54,7 +54,7 @@ export default function CardRegItem({nav}: CardRegContentsProps) {
         onChangeShow={onChangeShow}
       />
       <CardRegBtns
-        nav={nav}
+        from={from}
         type={type}
         cardDes={cardDes}
         cardNick={cardNick}

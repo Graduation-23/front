@@ -9,6 +9,7 @@ import {AppText} from '../components/AppText';
 //import {saveRefreshToken} from '../utils/refreshToken';
 import Logout from '../features/Logout';
 import {Auth} from '../constants/screen';
+import {useNavigation} from '@react-navigation/native';
 
 export default function SettingScreen({navigation}: any) {
   // const app = [
@@ -32,6 +33,11 @@ export default function SettingScreen({navigation}: any) {
   // };
   const [visible, setVisible] = useState(false);
   const [visible2, setVisible2] = useState(false);
+
+  const from = 'setting';
+
+  //const before2 = route.params.before2;
+  const {navigate} = useNavigation<any>();
 
   const toggleDialog = () => {
     setVisible(!visible);
@@ -73,7 +79,7 @@ export default function SettingScreen({navigation}: any) {
             label="카드(계좌) 등록"
             color="#85d8fc"
             onPress={() => {
-              navigation.navigate(Auth.Card);
+              navigate(Auth.Card, {from: from});
             }}
           />
         </ListItem>

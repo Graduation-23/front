@@ -1,47 +1,19 @@
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
+//import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {StyleSheet} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {AuthorizationStackParamList} from '../Navigator/AuthorizationNavigator';
+//import {AuthorizationStackParamList} from '../Navigator/AuthorizationNavigator';
 //import ColorPickerModal from '../features/ColorPickerModal';
 //import createFinance from '../api/createFinance';
 //import RegCompleteDialog from '../features/CardRegister/RegCompleteDialog';
 import CardRegHeader from '../features/CardRegister/CardRegHeader';
 import CardRegContents from '../features/CardRegister/CardRegContents';
 
-const CardRegScreen = ({
-  navigation,
-}: NativeStackScreenProps<AuthorizationStackParamList, 'Card'>) => {
+const CardRegScreen = ({route}: any) => {
+  const from = route.params.from;
   return (
     <SafeAreaView style={styles.Container}>
       <CardRegHeader />
-      <CardRegContents nav={navigation} />
-
-      {/* <View style={styles.Btns}>
-        <PlainButton
-          title={
-            <AppText family="round-b" text="SKIP" style={styles.FontSize24} />
-          }
-          onPress={() => {
-            toggleCompModal();
-          }}
-        />
-        <PlainButton
-          title={
-            <AppText family="round-b" text="NEXT" style={styles.FontSize24} />
-          }
-          onPress={() => {
-            //handleRegister;
-            toggleCompModal();
-          }}
-        />
-      </View>
-      {visible && (
-        <RegCompleteDialog
-          visible={visible}
-          toggleDialog={toggleCompModal}
-          nav={navigation}
-        />
-      )} */}
+      <CardRegContents from={from} />
     </SafeAreaView>
   );
 };
