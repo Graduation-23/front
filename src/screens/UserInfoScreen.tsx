@@ -4,40 +4,39 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {AppText} from '../components/AppText';
 import {useState} from 'react';
 import SwipeableList from '../components/SwipeableList';
-import {AppTextTitle} from '../components/AppText/AppTextTitle';
+import {useRecoilValue} from 'recoil';
+import userAtom from '../atom/userAtom';
 
 const UserInfoScreen = () => {
   const [expanded, setExpanded] = useState(false);
+  const user = useRecoilValue(userAtom);
 
   return (
     <SafeAreaView style={styles.Container}>
+      {/**Header (Profile) */}
       <View style={styles.ProfileBox}>
-        <View style={styles.tmp}>
+        <View style={styles.Profile}>
           <AppText family="round-c" style={{color: 'white'}}>
             Profile
           </AppText>
         </View>
       </View>
       <View style={styles.Info}>
-        <AppText family="round-c" style={{fontSize: 22}}>
-          이름 OR 닉네임
-        </AppText>
-        <AppText family="round-c" style={{fontSize: 24}}>
-          email@gmail.com
-        </AppText>
         <TouchableOpacity>
-          <AppText family="round-c" style={{fontSize: 18}}>
-            편집
-          </AppText>
+          <AppText family="round-c" text="✏편집" />
         </TouchableOpacity>
+        <AppText family="round-b" text={`${user?.nickname}님`} />
+        <AppText family="round-b" text={`id : ${user?.id}`} />
       </View>
+
+      {/**ScrollView (Card, Birth, Created) */}
       <ScrollView style={{width: '100%'}}>
         <View style={styles.List}>
           <ListItem.Accordion
             content={
               <ListItem.Content>
                 <ListItem.Title>
-                  <AppTextTitle family="round-d">등록된 카드</AppTextTitle>
+                  <AppText family="round-d" text="등록된 카드" />
                 </ListItem.Title>
               </ListItem.Content>
             }
@@ -75,31 +74,21 @@ const UserInfoScreen = () => {
               label="five"
               icolor="brown"
             />
-            <SwipeableList
-              text="Delete"
-              icon="add"
-              label="카드 추가하기"
-              icolor="black"
-            />
           </ListItem.Accordion>
           <ListItem>
             <ListItem.Title>
-              <AppTextTitle family="round-d">생년월일</AppTextTitle>
+              <AppText family="round-d" text="생년월일" />
             </ListItem.Title>
             <ListItem.Content style={styles.AlignRight}>
-              <AppText family="round-d" style={styles.Size22}>
-                2001.01.01
-              </AppText>
+              <AppText family="round-d" text={`${user?.nickname}`} />
             </ListItem.Content>
           </ListItem>
           <ListItem>
             <ListItem.Title>
-              <AppTextTitle family="round-d">가입일자</AppTextTitle>
+              <AppText family="round-d" text="가입일자" />
             </ListItem.Title>
             <ListItem.Content style={styles.AlignRight}>
-              <AppText family="round-d" style={styles.Size22}>
-                2023.01.28
-              </AppText>
+              <AppText family="round-d" text={`${user?.created}`} />
             </ListItem.Content>
           </ListItem>
         </View>
@@ -118,14 +107,11 @@ const styles = StyleSheet.create({
   },
   ProfileBox: {
     alignItems: 'center',
-    backgroundColor: 'black',
-    marginTop: 10,
+    marginTop: 20,
     width: '100%',
-    height: '25%',
-    borderColor: 'skyblue',
-    borderWidth: 5,
+    height: '20%',
   },
-  tmp: {
+  Profile: {
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#3f3f3f',
@@ -137,8 +123,6 @@ const styles = StyleSheet.create({
   },
   List: {
     width: '100%',
-    borderColor: 'skyblue',
-    borderWidth: 5,
   },
   Text: {
     color: 'gray',

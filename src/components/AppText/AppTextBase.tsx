@@ -43,7 +43,7 @@ export const AppTextBase = ({
 
 const textStyles = StyleSheet.create({
   text: {
-    fontSize: 14,
+    fontSize: 20,
   },
   center: {
     textAlign: 'center',
