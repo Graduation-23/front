@@ -11,6 +11,8 @@ export const AppTextBase = ({
   viewStyle,
   center,
   bold,
+  mh,
+  mv,
   ...props
 }: AppTextProps) => {
   const core = (
@@ -22,6 +24,8 @@ export const AppTextBase = ({
         family && familyStyles[family],
         center && textStyles.center,
         bold && textStyles.bold,
+        mh && textBlackBoxStyles.mh(mh),
+        mv && textBlackBoxStyles.mv(mv),
         style,
       ]}
     />
@@ -48,6 +52,15 @@ const textStyles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
+
+const textBlackBoxStyles = {
+  mh: (level: number) => ({
+    marginHorizontal: level,
+  }),
+  mv: (level: number) => ({
+    marginVertical: level,
+  }),
+};
 
 const viewStyles = StyleSheet.create({
   base: {

@@ -16,6 +16,8 @@ export interface AppTextProps extends TextProps {
   center?: boolean;
   viewStyle?: object;
   bold?: boolean;
+  mh?: number;
+  mv?: number;
 }
 
 export const AppText = Object.assign(AppTextBase, {

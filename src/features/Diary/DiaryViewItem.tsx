@@ -16,8 +16,8 @@ export default function DiaryViewItem({
         <AppText style={{paddingLeft: 5}}>{data.title}</AppText>
       </View>
       <View>
-        {/* <AppText text={data.weather} /> */}
-        {/* <AppText text={data.content} /> */}
+        <AppText text={data.weather} />
+        <AppText text={data.content} />
       </View>
       <DiaryPreviewGallery
         thumbnailIdx={data.thumbnailIdx}
