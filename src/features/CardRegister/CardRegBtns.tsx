@@ -6,6 +6,7 @@ import RegCompleteDialog from './RegCompleteDialog';
 import createFinance from '../../api/createFinance';
 import {useNavigation} from '@react-navigation/native';
 import {Entry, Content} from '../../constants/screen';
+import CardRegAlert from './CardRegAlert';
 
 type CardRegBtnProps = {
   from: string;
@@ -23,6 +24,7 @@ export default function CardRegBtns({
   colorcode,
 }: CardRegBtnProps) {
   const [visible, setVisible] = useState(false);
+  const [alert, setAlert] = useState(false);
 
   const routeFrom = from;
   const {navigate} = useNavigation<any>();
@@ -33,8 +35,13 @@ export default function CardRegBtns({
       description: cardDes,
       anothername: cardNick,
       colorcode: colorcode,
+    }).catch(() => {
+      toggleErrModal();
     });
     console.log('카드 등록');
+  };
+  const toggleErrModal = () => {
+    setAlert(!alert);
   };
 
   const toggleCompModal = () => {
@@ -83,6 +90,7 @@ export default function CardRegBtns({
       {visible && (
         <RegCompleteDialog visible={visible} toggleDialog={toggleCompModal} />
       )}
+      {alert && <CardRegAlert visible={alert} toggleAlert={toggleErrModal} />}
     </>
   );
 }
