@@ -1,14 +1,25 @@
+/* eslint-disable no-lone-blocks */
 import {Dialog} from '@rneui/themed';
 import {Text, View} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import {Entry} from '../../constants/screen';
 
 interface Props {
   visible: boolean;
   toggleDialog: () => void;
   title: string;
   contents: string;
+  from: string;
 }
 
-const DialogActions = ({visible, toggleDialog, title, contents}: Props) => {
+const DialogActions = ({
+  visible,
+  toggleDialog,
+  title,
+  contents,
+  from,
+}: Props) => {
+  const {navigate} = useNavigation<any>();
   return (
     <View>
       <Dialog isVisible={visible} onBackdropPress={toggleDialog}>
@@ -16,17 +27,13 @@ const DialogActions = ({visible, toggleDialog, title, contents}: Props) => {
         <Text>{contents}</Text>
         <Dialog.Actions>
           <Dialog.Button
-            title="아니오"
+            title="확인"
             onPress={() => {
-              toggleDialog();
-              console.log('No');
-            }}
-          />
-          <Dialog.Button
-            title="예"
-            onPress={() => {
-              toggleDialog();
-              console.log('Yes');
+              {
+                from === 'Complete'
+                  ? (navigate(Entry.Content), toggleDialog())
+                  : toggleDialog();
+              }
             }}
           />
         </Dialog.Actions>
