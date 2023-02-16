@@ -10,6 +10,7 @@ import useEditDiary from '../../hooks/useEditDiary';
 import {useUpdateDiary} from '../../query/diary';
 import WeatherSelector from '../../components/Weather/WeatherSelector';
 import {weatherKorMap} from '../../utils/date';
+import ImageUpload from '../../components/ImageUpload';
 
 type DiaryFormProps = {} & IDiary;
 
@@ -61,6 +62,8 @@ export default function DiaryForm(diary: DiaryFormProps) {
           placeholder="내용 입력..."
         />
       </View>
+      <ImageUpload setNewImages={bind('newImages')} />
+
       <Button buttonStyle={styles.button} onPress={handleFinish}>
         작성 완료
       </Button>
