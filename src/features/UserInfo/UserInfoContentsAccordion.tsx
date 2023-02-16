@@ -5,12 +5,16 @@ import SwipeableList from '../../components/SwipeableList';
 import {useState} from 'react';
 import {useRecoilValue} from 'recoil';
 import userAtom from '../../atom/userAtom';
+import {useFinance} from '../../query/finance';
 
 export default function UserInfoContentsAccordion() {
   const user = useRecoilValue(userAtom);
   const [expanded, setExpanded] = useState(false);
+  const {data} = useFinance();
+
   return (
     <>
+      {/* {data?.map(d => console.log(`아 ?${d.colorcode}`))} */}
       <View style={styles.List}>
         <ListItem.Accordion
           content={
@@ -24,31 +28,14 @@ export default function UserInfoContentsAccordion() {
           onPress={() => {
             setExpanded(!expanded);
           }}>
-          <SwipeableList text="Delete" icon="home" label="one" icolor="green" />
-          <SwipeableList
-            text="Delete"
-            icon="close"
-            label="two"
-            icolor="orange"
-          />
-          <SwipeableList
-            text="Delete"
-            icon="bedtime"
-            label="three"
-            icolor="lightgreen"
-          />
-          <SwipeableList
-            text="Delete"
-            icon="crop"
-            label="four"
-            icolor="violet"
-          />
-          <SwipeableList
-            text="Delete"
-            icon="edit"
-            label="five"
-            icolor="brown"
-          />
+          {data?.map(d => (
+            <SwipeableList
+              text="Delete"
+              icon="home"
+              label={d.anothername}
+              icolor={d.colorcode}
+            />
+          ))}
         </ListItem.Accordion>
         <ListItem>
           <ListItem.Title>
