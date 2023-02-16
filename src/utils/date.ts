@@ -7,6 +7,17 @@ export function formatYMD(date: Date) {
   return [year, month, day].join('-');
 }
 
+export function orderBy<T>(
+  entry: T[],
+  ascending: boolean,
+  getYear: (element: T) => string = el => el as any,
+) {
+  return Array.from(entry).sort((lhs, rhs) => {
+    let cmp = getYear(lhs).localeCompare(getYear(rhs));
+    return ascending ? cmp : -cmp;
+  });
+}
+
 export function groupByYear<T>(entry: T[], getYear: (element: T) => string) {
   return entry.reduce((acc, cur) => {
     const year = getYear(cur);
