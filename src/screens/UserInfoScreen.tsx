@@ -6,6 +6,7 @@ import {useState} from 'react';
 import SwipeableList from '../components/SwipeableList';
 import {useRecoilValue} from 'recoil';
 import userAtom from '../atom/userAtom';
+import UserInfoHeader from '../features/UserInfo/UserInfoHeader';
 
 const UserInfoScreen = () => {
   const [expanded, setExpanded] = useState(false);
@@ -14,7 +15,8 @@ const UserInfoScreen = () => {
   return (
     <SafeAreaView style={styles.Container}>
       {/**Header (Profile) */}
-      <View style={styles.ProfileBox}>
+      <UserInfoHeader />
+      {/* <View style={styles.ProfileBox}>
         <View style={styles.Profile}>
           <AppText family="round-c" style={{color: 'white'}}>
             Profile
@@ -27,7 +29,7 @@ const UserInfoScreen = () => {
         </TouchableOpacity>
         <AppText family="round-b" text={`${user?.nickname}님`} />
         <AppText family="round-b" text={`id : ${user?.id}`} />
-      </View>
+      </View> */}
 
       {/**ScrollView (Card, Birth, Created) */}
       <ScrollView style={{width: '100%'}}>
