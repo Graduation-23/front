@@ -49,7 +49,23 @@ export default function CardRegBtns({
   };
   return (
     <>
-      {routeFrom === 'signup' ? (
+      {routeFrom === 'setting' ? (
+        <View style={styles.Btns}>
+          <PlainButton
+            title={
+              <AppText
+                family="round-b"
+                text="Register"
+                style={styles.FontSize24}
+              />
+            }
+            onPress={() => {
+              handleRegister();
+              navigate(Entry.Content, {tab: Content.SettingTab});
+            }}
+          />
+        </View>
+      ) : (
         <View style={styles.Btns}>
           <PlainButton
             title={
@@ -66,22 +82,6 @@ export default function CardRegBtns({
             onPress={() => {
               handleRegister();
               toggleCompModal();
-            }}
-          />
-        </View>
-      ) : (
-        <View style={styles.Btns}>
-          <PlainButton
-            title={
-              <AppText
-                family="round-b"
-                text="Register"
-                style={styles.FontSize24}
-              />
-            }
-            onPress={() => {
-              handleRegister();
-              navigate(Entry.Content, {tab: Content.SettingTab});
             }}
           />
         </View>
