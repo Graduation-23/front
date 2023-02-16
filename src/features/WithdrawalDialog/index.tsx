@@ -34,7 +34,7 @@ const WithdrawalDialog = ({visible, toggleDialog}: Props) => {
           <Dialog.Button
             title="탈퇴"
             onPress={() => {
-              deleteUser(userPw);
+              deleteUser({password: userPw});
               // if (userPw === 'id') {
               //   deleteUser(userPw);
               //   toggleDialog();

@@ -9,7 +9,7 @@ import CardRegHeader from '../features/CardRegister/CardRegHeader';
 import CardRegContents from '../features/CardRegister/CardRegContents';
 
 const CardRegScreen = ({route}: any) => {
-  const from = route.params.from;
+  const from = route.params?.from;
   return (
     <SafeAreaView style={styles.Container}>
       <CardRegHeader />
