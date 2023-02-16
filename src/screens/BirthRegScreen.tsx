@@ -10,11 +10,10 @@ import DatePicker from 'react-native-date-picker';
 import {Auth} from '../constants/screen';
 import {useNavigation} from '@react-navigation/native';
 
-const BirthRegScreen = ({route}: any) => {
+const BirthRegScreen = ({}: any) => {
   const [date, setDate] = useState(new Date());
   const [visible, setVisible] = useState(false);
 
-  const from = route.params.from;
   const {navigate} = useNavigation<any>();
 
   const onPressDate = () => {
@@ -65,7 +64,7 @@ const BirthRegScreen = ({route}: any) => {
             <AppText family="round-b" text="SKIP" style={styles.FontSize24} />
           }
           onPress={() => {
-            navigate(Auth.Card, {from});
+            navigate(Auth.Card);
           }}
         />
         <PlainButton
@@ -74,7 +73,7 @@ const BirthRegScreen = ({route}: any) => {
           }
           onPress={() => {
             // ToDo : 생일 등록
-            navigate(Auth.Card, {from});
+            navigate(Auth.Card);
           }}
         />
       </View>

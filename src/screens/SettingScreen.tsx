@@ -130,17 +130,6 @@ export default function SettingScreen({navigation}: any) {
           />
         </ListItem>
       </ScrollView>
-      {/* {visible && (
-        <DialogActions
-          visible={visible}
-          toggleDialog={() => {
-            saveRefreshToken('');
-            toggleDialog();
-          }}
-          title="로그아웃"
-          contents="로그아웃 하시겠습니까?"
-        />
-      )} */}
       {visible && (
         <Logout
           visible={visible}

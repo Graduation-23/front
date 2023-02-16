@@ -20,8 +20,6 @@ const SignUpScreen = ({}: any) => {
   const {user, hlr, getUser} = useSignUp();
   const {navigate} = useNavigation<any>();
 
-  const from = 'signup';
-
   const handleSignUp = () => {
     if (isValid(user)) {
       signUp(getUser()).then(token => {
@@ -78,7 +76,7 @@ const SignUpScreen = ({}: any) => {
         />
         <PlainButton
           title={<AppText center ul text="넘어가기" />}
-          onPress={() => navigate(Auth.Birth, {from: from})}
+          onPress={() => navigate(Auth.Birth)}
           // onPress={() => navigation.getParent()?.navigate('ContentNavigator')}
         />
       </View>
