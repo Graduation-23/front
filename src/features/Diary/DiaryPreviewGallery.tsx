@@ -15,8 +15,8 @@ export default function DiaryPreviewGallery({
     <ScrollView>
       <Image
         style={{
-          width: 85,
-          height: 85,
+          width: 70,
+          height: 70,
         }}
         source={{
           uri:
