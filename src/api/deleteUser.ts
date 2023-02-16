@@ -5,6 +5,6 @@ export default function deleteUser(password: {password: string}) {
     client
       .delete('/user', {params: password})
       .then(res => resolve(res.data))
-      .catch(reject);
+      .catch(() => console.log(reject, '왕'));
   });
 }
