@@ -1,4 +1,5 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {AppText} from '../components/AppText';
 import {Diary} from '../constants/screen';
 import DiaryUpdateButton from '../features/Diary/Header/DiaryUpdateButton';
 import DiaryWriteButton from '../features/Diary/Header/DiaryWriteButton';
@@ -21,7 +22,15 @@ export default function DiaryNavigator() {
           },
         }}
       />
-      <Stack.Screen name={Diary.Write} component={DiaryWriteScreen} />
+      <Stack.Screen
+        name={Diary.Write}
+        component={DiaryWriteScreen}
+        options={{
+          headerTitle() {
+            return <AppText.Subtitle family="round-b" text="읽기 편집" />;
+          },
+        }}
+      />
       <Stack.Screen
         name={Diary.Read}
         component={DiaryReadScreen}

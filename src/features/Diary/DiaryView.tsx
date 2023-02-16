@@ -1,11 +1,13 @@
 // import {Button} from '@rneui/base';
 
 import {useNavigation} from '@react-navigation/native';
-import {SearchBar} from '@rneui/base';
 import {useMemo, useState} from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import {IDiary} from '../../../types/api';
 import {AppText} from '../../components/AppText';
+import DateRangeSearchButton, {
+  RangeDate,
+} from '../../components/DateRangeSearhButton';
 import {ListView} from '../../components/Item';
 import OrderByButton from '../../components/OrderByButton';
 import {Diary} from '../../constants/screen';
@@ -24,6 +26,7 @@ export default function DiaryView({}: DiaryViewProps) {
   const {data} = useDiary();
   const {navigate} = useNavigation<any>();
   const [order, setOrder] = useState(true);
+  const [range, setRange] = useState<RangeDate>([new Date(), new Date()]);
 
   const group = useMemo(() => groupByYear(data || [], getYear), [data]);
 
@@ -34,6 +37,11 @@ export default function DiaryView({}: DiaryViewProps) {
   return (
     <ScrollView>
       <View style={styles.toolbar}>
+        {/* <DateRangeSearchButton
+          range={range}
+          setRange={setRange}
+          onRangeConfirm={r => console.log(r)}
+        /> */}
         <OrderByButton ascending={order} setAscending={setOrder} />
       </View>
       {orderBy(Object.keys(group), order).map(year => (

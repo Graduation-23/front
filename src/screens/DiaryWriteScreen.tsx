@@ -31,7 +31,7 @@ export default function DiaryWriteScreen({route}: any) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
+    backgroundColor: '#fff',
     width: '100%',
     minHeight: '100%',
   },
