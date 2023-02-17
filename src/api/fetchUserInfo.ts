@@ -6,6 +6,7 @@ export type IUser = {
   created: Date;
   accessType: string;
   fresh: boolean;
+  birth: string;
 };
 
 export default function fetchUserInfo(fresh = false) {
