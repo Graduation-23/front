@@ -11,16 +11,29 @@ import {useUpdateDiary} from '../../query/diary';
 import WeatherSelector from '../../components/Weather/WeatherSelector';
 import {weatherKorMap} from '../../utils/date';
 import ImageUpload from '../../components/ImageUpload';
+import {DIARY_IMG_COUNT_LIMIT} from '../../constants/img';
+import DiaryPreviewGallery from './DiaryPreviewGallery';
+import {useMemo} from 'react';
+import {Photo} from '../../utils/photo';
 
 type DiaryFormProps = {} & IDiary;
 
 export default function DiaryForm(diary: DiaryFormProps) {
   const {mutateAsync: save} = useUpdateDiary();
   const {navigate} = useNavigation<any>();
-  const {diary: data, bind} = useEditDiary(diary);
+  const {diary: data, set, bind} = useEditDiary(diary);
 
   const handleFinish = () => {
     save(data).then(() => navigate(Diary.Read, {diaryId: data.id}));
+  };
+
+  const previewImages = useMemo(
+    () => [...data.imageUrls, ...data.newImages.map(el => el.uri)],
+    [data.imageUrls, data.newImages],
+  );
+
+  const appendNewImages = (newImages: Photo[]) => {
+    set('newImages', [...data.newImages, ...newImages]);
   };
 
   return (
@@ -62,7 +75,15 @@ export default function DiaryForm(diary: DiaryFormProps) {
           placeholder="내용 입력..."
         />
       </View>
-      <ImageUpload setNewImages={bind('newImages')} />
+
+      <DiaryPreviewGallery imageUrls={previewImages}>
+        <ImageUpload
+          style={{backgroundColor: '#bab9b994'}}
+          selectionLimit={DIARY_IMG_COUNT_LIMIT - data.imageUrls.length}
+          setNewImages={appendNewImages}>
+          <AppText.Subtitle text="+" />
+        </ImageUpload>
+      </DiaryPreviewGallery>
 
       <Button buttonStyle={styles.button} onPress={handleFinish}>
         작성 완료

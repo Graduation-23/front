@@ -1,4 +1,4 @@
-interface Photo {
+export interface Photo {
   fileName: string;
   fileSize: number;
   type: string;

@@ -7,6 +7,7 @@ type IDiaryForUpdate = updateDiaryEntryVariables;
 export default function useEditDiary(initialDiary: IDiary) {
   const [diary, setDiary] = useState<IDiaryForUpdate>({
     ...initialDiary,
+    imageUrls: initialDiary.imageUrls || [],
     newImages: [],
   });
 

@@ -1,9 +1,10 @@
 import {IDiary} from '../../types/api';
 import logger from '../utils/logger';
+import {Photo} from '../utils/photo';
 import client from './client';
 
 export interface updateDiaryEntryVariables extends IDiary {
-  newImages: Blob[];
+  newImages: Photo[];
 }
 
 export default function updateDiary(entry: updateDiaryEntryVariables) {
@@ -17,7 +18,6 @@ export default function updateDiary(entry: updateDiaryEntryVariables) {
     } else {
       item.forEach((el, i) => {
         form.append(`${key}[${i}]`, el);
-        console.log(el);
       });
     }
   }
