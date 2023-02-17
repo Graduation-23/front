@@ -30,10 +30,12 @@ export default function UserInfoContentsAccordion() {
           }}>
           {data?.map(d => (
             <SwipeableList
+              key={d.id}
               text="Delete"
               icon="home"
               label={d.anothername}
               icolor={d.colorcode}
+              id={d.id}
             />
           ))}
         </ListItem.Accordion>

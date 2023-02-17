@@ -2,21 +2,26 @@ import ListItems from '../ListItems';
 import {ListItem} from '@rneui/themed';
 import {AppText} from '../AppText';
 import {TouchableOpacity, StyleSheet} from 'react-native';
+import {useDeleteFinance} from '../../query/finance';
 
 interface Props {
   text: string;
   icon: string;
   label: string;
   icolor: string;
+  id: number;
 }
 
-const SwipeableList = ({text, icon, label, icolor}: Props) => {
+const SwipeableList = ({text, icon, label, icolor, id}: Props) => {
+  const {mutateAsync: del} = useDeleteFinance();
   return (
     <>
       <ListItem.Swipeable
         rightWidth={60}
-        rightContent={(action): any => (
-          <TouchableOpacity style={styles.Btn} onPress={action}>
+        rightContent={(): any => (
+          <TouchableOpacity
+            style={styles.Btn}
+            onPress={() => del({financeId: id})}>
             <AppText family="round-c" style={styles.Text}>
               {text}
             </AppText>
