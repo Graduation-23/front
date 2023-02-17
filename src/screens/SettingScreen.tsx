@@ -53,7 +53,7 @@ export default function SettingScreen({navigation}: any) {
         {/*앱 관련 */}
         <ListItem>
           <ListItem.Title style={styles.title}>
-            <AppText family="round-d">앱</AppText>
+            <AppText.Title family="round-d">앱</AppText.Title>
           </ListItem.Title>
         </ListItem>
         {/* mapping() */}
@@ -70,7 +70,7 @@ export default function SettingScreen({navigation}: any) {
         {/*금융 관련 */}
         <ListItem>
           <ListItem.Title style={styles.title}>
-            <AppText family="round-d">금융</AppText>
+            <AppText.Title family="round-d">금융</AppText.Title>
           </ListItem.Title>
         </ListItem>
         <ListItem>
@@ -96,7 +96,7 @@ export default function SettingScreen({navigation}: any) {
         {/*회원 관련 */}
         <ListItem>
           <ListItem.Title style={styles.title}>
-            <AppText family="round-d">개인</AppText>
+            <AppText.Title family="round-d">개인</AppText.Title>
           </ListItem.Title>
         </ListItem>
         <ListItem>

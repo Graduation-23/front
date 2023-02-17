@@ -42,7 +42,7 @@ export default function UserInfoContentsAccordion() {
             <AppText family="round-d" text="생년월일" />
           </ListItem.Title>
           <ListItem.Content style={styles.AlignRight}>
-            <AppText family="round-d" text={`${user?.nickname}`} />
+            <AppText family="round-d" text={`${user?.birth}`} />
           </ListItem.Content>
         </ListItem>
         <ListItem>
