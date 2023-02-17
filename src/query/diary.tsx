@@ -34,7 +34,7 @@ export const useUpdateDiary = () => {
 export const useDeleteDiary = () => {
   const queryClient = useQueryClient();
 
-  return useMutation<unknown, unknown, number>(['diary', deleteDiary], {
+  return useMutation<unknown, unknown, number>(['diary'], deleteDiary, {
     onSuccess: () => queryClient.invalidateQueries('diary'),
   });
 };

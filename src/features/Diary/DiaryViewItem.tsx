@@ -8,9 +8,13 @@ import DiaryPreviewGallery from './DiaryPreviewGallery';
 export default function DiaryViewItem({
   data,
   navigate,
+  remove,
 }: ListViewItemProps<IDiary>) {
   return (
-    <TouchableOpacity onPress={navigate} style={styles.item}>
+    <TouchableOpacity
+      onPress={navigate}
+      onLongPress={remove}
+      style={styles.item}>
       <View style={styles.title}>
         <AppText.Subtitle bold>{data.date.slice(5)}</AppText.Subtitle>
         <AppText style={{paddingLeft: 5}}>{data.title}</AppText>

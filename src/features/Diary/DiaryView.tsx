@@ -5,13 +5,10 @@ import {useMemo, useState} from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import {IDiary} from '../../../types/api';
 import {AppText} from '../../components/AppText';
-import DateRangeSearchButton, {
-  RangeDate,
-} from '../../components/DateRangeSearhButton';
 import {ListView} from '../../components/Item';
 import OrderByButton from '../../components/OrderByButton';
 import {Diary} from '../../constants/screen';
-import {useDiary} from '../../query/diary';
+import {useDeleteDiary, useDiary} from '../../query/diary';
 import {groupByYear, orderBy} from '../../utils/date';
 import DiaryViewItem from './DiaryViewItem';
 
@@ -26,22 +23,14 @@ export default function DiaryView({}: DiaryViewProps) {
   const {data} = useDiary();
   const {navigate} = useNavigation<any>();
   const [order, setOrder] = useState(true);
-  const [range, setRange] = useState<RangeDate>([new Date(), new Date()]);
+  const {mutate: remove} = useDeleteDiary();
 
   const group = useMemo(() => groupByYear(data || [], getYear), [data]);
 
-  const handleNavigation = (id: number) => {
-    navigate(Diary.Read, {diaryId: id});
-  };
-
+  const handleNavigation = (id: number) => navigate(Diary.Read, {diaryId: id});
   return (
     <ScrollView>
       <View style={styles.toolbar}>
-        {/* <DateRangeSearchButton
-          range={range}
-          setRange={setRange}
-          onRangeConfirm={r => console.log(r)}
-        /> */}
         <OrderByButton ascending={order} setAscending={setOrder} />
       </View>
       {orderBy(Object.keys(group), order).map(year => (
@@ -50,6 +39,7 @@ export default function DiaryView({}: DiaryViewProps) {
           titleEl={<AppText text={year} />}
           items={orderBy(group[year], order, getMMDD)}
           navigate={handleNavigation}
+          remove={remove}
           getId={item => item.id}>
           {DiaryViewItem}
         </DiaryListView>
