@@ -1,4 +1,4 @@
-import {useMutation, useQuery} from 'react-query';
+import {useMutation, useQuery, useQueryClient} from 'react-query';
 import fetchFinance from '../api/fetchFinance';
 import fetchFinanceById from '../api/fetchFinanceById';
 import createFinance from '../api/createFinance';
@@ -25,8 +25,11 @@ export const useCreateFinance = () => {
 };
 
 export const useDeleteFinance = () => {
-  const mutation = useMutation(deleteFinanceById, {
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation(['finance'], deleteFinanceById, {
     onSuccess: () => {
+      queryClient.invalidateQueries('finance');
       console.log('카드 삭제 성공');
     },
     onError: () => {

@@ -1,11 +1,11 @@
 import {View, StyleSheet} from 'react-native';
 import {ListItem} from '@rneui/themed';
 import {AppText} from '../../components/AppText';
-import SwipeableList from '../../components/SwipeableList';
 import {useState} from 'react';
 import {useRecoilValue} from 'recoil';
 import userAtom from '../../atom/userAtom';
 import {useFinance} from '../../query/finance';
+import UserInfoCardList from './UserInfoCardList';
 
 export default function UserInfoContentsAccordion() {
   const user = useRecoilValue(userAtom);
@@ -14,7 +14,6 @@ export default function UserInfoContentsAccordion() {
 
   return (
     <>
-      {/* {data?.map(d => console.log(`아 ?${d.colorcode}`))} */}
       <View style={styles.List}>
         <ListItem.Accordion
           content={
@@ -29,9 +28,8 @@ export default function UserInfoContentsAccordion() {
             setExpanded(!expanded);
           }}>
           {data?.map(d => (
-            <SwipeableList
+            <UserInfoCardList
               key={d.id}
-              text="Delete"
               icon="home"
               label={d.anothername}
               icolor={d.colorcode}
