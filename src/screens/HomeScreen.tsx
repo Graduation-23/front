@@ -1,28 +1,39 @@
-// import {View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useRecoilValue} from 'recoil';
-import userAtom from '@atom/userAtom';
-import {AppText} from '@components/AppText';
-// import {useFinance} from '@query/finance';
-
-//import {Image} from 'react-native';
-//import cotton_flower from '../assets/flowers/cotton_flower.png';
+import userAtom from '../atom/userAtom';
+import {AppText} from '../components/AppText';
+import GrowingPlant from '../features/Home/GrowingPlant';
 
 export default function HomeScreen() {
   const user = useRecoilValue(userAtom);
   // const {data} = useFinance();
   return (
-    <SafeAreaView style={{backgroundColor: 'white'}}>
+    <SafeAreaView style={styles.Container}>
       <AppText.Title family="round-a" style={{fontSize: 35}}>
-        {user && user.nickname}님 안녕하세요.
+        {user && user.nickname}님이 키우고 있는 식물들이에용~
       </AppText.Title>
-      {/* <AppText family="round-a" style={{fontSize: 30}}>
-        {`출력 : ${data} 입니다`}
-      </AppText> */}
-      {/* <Image source={cotton_flower} style={{backgroundColor: '#f2f2f2'}} /> */}
+      <View style={styles.PlantContainer}>
+        <GrowingPlant kind="tree" level={9} type="spring_tree" />
+        <GrowingPlant kind="flower" level={7} type="marigold" />
+      </View>
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  Container: {
+    height: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  PlantContainer: {
+    flexDirection: 'row',
+    alignItems: 'baseline',
+    justifyContent: 'center',
+    padding: 10,
+  },
+});
 
 //<Calendar
 //   dayComponent={({date, state}) => {

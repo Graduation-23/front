@@ -1,5 +1,5 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {Entry} from '@constants/screen';
+import {Entry} from '@/constants/screen';
 import AuthorizationNavigator from './AuthorizationNavigator';
 import ContentNavigator from './ContentNavigator';
 
