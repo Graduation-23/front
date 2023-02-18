@@ -15,7 +15,7 @@ export default function HomeScreen() {
           {user && user.nickname}님이 키우고 있는 식물들이에용~
         </AppText.Title>
         <View style={styles.Container}>
-          <GrowingPlant kind="tree" level={5} type="bamboo" />
+          <GrowingPlant kind="tree" level={1} type="bamboo" />
           <GrowingPlant kind="flower" level={0} type="acacia" />
         </View>
       </View>
@@ -25,8 +25,11 @@ export default function HomeScreen() {
 
 const styles = StyleSheet.create({
   Container: {
+    height: '100%',
     flexDirection: 'row',
     alignItems: 'baseline',
+    justifyContent: 'center',
+    backgroundColor: 'white',
     paddingBottom: 10,
   },
 });

@@ -10,6 +10,16 @@ export default function Tree({
 }: LevelImageProps) {
   if (level >= MAX_TREE_LEVEL) {
     return <Image style={{width, height}} source={TreeType[type as ITree]} />;
+  } else {
+    switch (level) {
+      case 1:
+        return (
+          <Image style={{width: 100, height: 120}} source={TreeImage[level]} />
+        );
+      default:
+        return (
+          <Image style={{width, height}} source={TreeType[type as ITree]} />
+        );
+    }
   }
-  return <Image style={{width, height}} source={TreeImage[level]} />;
 }
