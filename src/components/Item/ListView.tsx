@@ -7,8 +7,8 @@ export type ListViewProps<T> = {
   children(props: ListViewItemProps<T>): JSX.Element;
   getId(item: T): string | number;
   titleEl: ReactNode;
-  navigate(id: string | number): void;
-  remove(id: string | number): void;
+  onPress(id: string | number): void;
+  onLongPress(id: string | number): void;
 } & Omit<ViewProps, 'children'>;
 
 export default function ListView<T = unknown>({
@@ -16,8 +16,8 @@ export default function ListView<T = unknown>({
   children,
   getId,
   titleEl,
-  remove,
-  navigate,
+  onLongPress,
+  onPress,
   ...props
 }: ListViewProps<T>) {
   return (
@@ -28,8 +28,8 @@ export default function ListView<T = unknown>({
           {children({
             index: i,
             data: el,
-            navigate: navigate.bind(null, getId(el)),
-            remove: remove.bind(null, getId(el)),
+            onPress: onPress.bind(null, getId(el)),
+            onLongPress: onLongPress.bind(null, getId(el)),
           })}
         </Fragment>
       ))}
