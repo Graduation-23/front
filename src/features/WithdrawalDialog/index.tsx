@@ -1,6 +1,7 @@
 import {Dialog, Input} from '@rneui/themed';
 import {View, Text} from 'react-native';
 import {useState} from 'react';
+import deleteUser from '../../api/deleteUser';
 
 interface Props {
   visible: boolean;
@@ -8,9 +9,9 @@ interface Props {
 }
 
 const WithdrawalDialog = ({visible, toggleDialog}: Props) => {
-  const [userId, setUserId] = useState('');
+  const [userPw, setUserPw] = useState('');
   const onChangeInput = (text: string) => {
-    setUserId(text);
+    setUserPw(text);
   };
   return (
     <View>
@@ -18,8 +19,8 @@ const WithdrawalDialog = ({visible, toggleDialog}: Props) => {
         <Dialog.Title title="회원 탈퇴" />
         <Text>회원 탈퇴 하시겠습니까?</Text>
         <Input
-          placeholder="본인 ID를 작성해주세요."
-          value={userId}
+          placeholder="본인 비밀번호를 입력해주세요."
+          value={userPw}
           onChangeText={onChangeInput}
         />
         <Dialog.Actions>
@@ -33,12 +34,14 @@ const WithdrawalDialog = ({visible, toggleDialog}: Props) => {
           <Dialog.Button
             title="탈퇴"
             onPress={() => {
-              if (userId === 'id') {
-                toggleDialog();
-                console.log(userId, '탈퇴!');
-              } else {
-                console.log(userId, '안대');
-              }
+              deleteUser({password: userPw});
+              // if (userPw === 'id') {
+              //   deleteUser(userPw);
+              //   toggleDialog();
+              //   console.log(userPw, '탈퇴!');
+              // } else {
+              //   console.log(userPw, '안대');
+              // }
             }}
           />
         </Dialog.Actions>

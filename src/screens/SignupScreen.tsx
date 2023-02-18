@@ -1,8 +1,4 @@
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
-
-import {AuthorizationStackParamList} from '../Navigator/AuthorizationNavigator';
 import {Button, Input} from '@rneui/base';
-
 import {SafeAreaView, StyleSheet, View} from 'react-native';
 import {AppText} from '@components/AppText';
 import PlainButton from '@components/PlainButton';
@@ -13,16 +9,16 @@ import fetchUserInfo from '@api/fetchUserInfo';
 import {useSetRecoilState} from 'recoil';
 import userAtom from '@atom/userAtom';
 import {Auth} from '@constants/screen';
+import {useNavigation} from '@react-navigation/native';
 
 const isValid = (user: SignUpDataType) => {
   return user.correct && user.password.length > 5;
 };
 
-const SignUpScreen = ({
-  navigation,
-}: NativeStackScreenProps<AuthorizationStackParamList, 'SignUp'>) => {
+const SignUpScreen = ({}: any) => {
   const setUser = useSetRecoilState(userAtom);
   const {user, hlr, getUser} = useSignUp();
+  const {navigate} = useNavigation<any>();
 
   const handleSignUp = () => {
     if (isValid(user)) {
@@ -76,11 +72,11 @@ const SignUpScreen = ({
       <View style={styles.additionalLinkView}>
         <PlainButton
           title={<AppText center ul text="로그인" />}
-          onPress={() => navigation.navigate(Auth.Login)}
+          onPress={() => navigate(Auth.Login)}
         />
         <PlainButton
           title={<AppText center ul text="넘어가기" />}
-          onPress={() => navigation.navigate(Auth.Birth)}
+          onPress={() => navigate(Auth.Birth)}
           // onPress={() => navigation.getParent()?.navigate('ContentNavigator')}
         />
       </View>

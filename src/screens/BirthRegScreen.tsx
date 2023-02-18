@@ -1,22 +1,20 @@
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {View, StyleSheet} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {AppText} from '@components/AppText';
 import PlainButton from '@components/PlainButton';
-import {AuthorizationStackParamList} from '../Navigator/AuthorizationNavigator';
 import {useState} from 'react';
-// import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import {format} from 'date-fns';
 import ko from 'date-fns/esm/locale/ko/index.js';
 import {Input} from '@rneui/themed';
 import DatePicker from 'react-native-date-picker';
 import {Auth} from '@constants/screen';
+import {useNavigation} from '@react-navigation/native';
 
-const BirthRegScreen = ({
-  navigation,
-}: NativeStackScreenProps<AuthorizationStackParamList, 'Birth'>) => {
+const BirthRegScreen = ({}: any) => {
   const [date, setDate] = useState(new Date());
   const [visible, setVisible] = useState(false);
+
+  const {navigate} = useNavigation<any>();
 
   const onPressDate = () => {
     setVisible(true);
@@ -66,7 +64,7 @@ const BirthRegScreen = ({
             <AppText family="round-b" text="SKIP" style={styles.FontSize24} />
           }
           onPress={() => {
-            navigation.navigate(Auth.Card);
+            navigate(Auth.Card);
           }}
         />
         <PlainButton
@@ -74,7 +72,8 @@ const BirthRegScreen = ({
             <AppText family="round-b" text="NEXT" style={styles.FontSize24} />
           }
           onPress={() => {
-            navigation.navigate(Auth.Card);
+            // ToDo : 생일 등록
+            navigate(Auth.Card);
           }}
         />
       </View>

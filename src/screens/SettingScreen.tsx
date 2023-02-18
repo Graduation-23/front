@@ -3,12 +3,13 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {ListItem} from '@rneui/themed';
 import ListItems from '@components/ListItems';
 import {useState} from 'react';
-//import DialogActions from '@components/DialogActions';
+//import DialogActions from '../components/DialogActions';
 import WithdrawalDialog from '@features/WithdrawalDialog';
 import {AppText} from '@components/AppText';
 //import {saveRefreshToken} from '@utils/refreshToken';
 import Logout from '@features/Logout';
 import {Auth} from '@constants/screen';
+import {useNavigation} from '@react-navigation/native';
 
 export default function SettingScreen({navigation}: any) {
   // const app = [
@@ -33,6 +34,11 @@ export default function SettingScreen({navigation}: any) {
   const [visible, setVisible] = useState(false);
   const [visible2, setVisible2] = useState(false);
 
+  const from = 'setting';
+
+  //const before2 = route.params.before2;
+  const {navigate} = useNavigation<any>();
+
   const toggleDialog = () => {
     setVisible(!visible);
   };
@@ -47,7 +53,7 @@ export default function SettingScreen({navigation}: any) {
         {/*앱 관련 */}
         <ListItem>
           <ListItem.Title style={styles.title}>
-            <AppText family="round-d">앱</AppText>
+            <AppText.Title family="round-d">앱</AppText.Title>
           </ListItem.Title>
         </ListItem>
         {/* mapping() */}
@@ -64,7 +70,7 @@ export default function SettingScreen({navigation}: any) {
         {/*금융 관련 */}
         <ListItem>
           <ListItem.Title style={styles.title}>
-            <AppText family="round-d">금융</AppText>
+            <AppText.Title family="round-d">금융</AppText.Title>
           </ListItem.Title>
         </ListItem>
         <ListItem>
@@ -73,7 +79,7 @@ export default function SettingScreen({navigation}: any) {
             label="카드(계좌) 등록"
             color="#85d8fc"
             onPress={() => {
-              navigation.navigate(Auth.Card);
+              navigate(Auth.Card, {from: from});
             }}
           />
         </ListItem>
@@ -90,7 +96,7 @@ export default function SettingScreen({navigation}: any) {
         {/*회원 관련 */}
         <ListItem>
           <ListItem.Title style={styles.title}>
-            <AppText family="round-d">개인</AppText>
+            <AppText.Title family="round-d">개인</AppText.Title>
           </ListItem.Title>
         </ListItem>
         <ListItem>
@@ -124,17 +130,6 @@ export default function SettingScreen({navigation}: any) {
           />
         </ListItem>
       </ScrollView>
-      {/* {visible && (
-        <DialogActions
-          visible={visible}
-          toggleDialog={() => {
-            saveRefreshToken('');
-            toggleDialog();
-          }}
-          title="로그아웃"
-          contents="로그아웃 하시겠습니까?"
-        />
-      )} */}
       {visible && (
         <Logout
           visible={visible}

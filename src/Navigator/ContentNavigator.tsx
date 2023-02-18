@@ -1,5 +1,4 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {Content} from '@constants/screen';
 
@@ -12,11 +11,13 @@ import SettingNavigator from './SettingNavigator';
 
 const Tab = createBottomTabNavigator();
 
-export default function ContentNavigator() {
+export default function ContentNavigator({route}: any) {
+  const tab = route.params?.tab;
+
   return (
     <Tab.Navigator
       screenOptions={{headerShown: false, tabBarActiveTintColor: '#3182F7'}}
-      initialRouteName={Content.HomeTab}>
+      initialRouteName={tab ? tab : Content.HomeTab}>
       <Tab.Screen
         name={Content.HomeTab}
         options={{
