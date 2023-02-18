@@ -5,7 +5,6 @@ import flower_growings3 from '../assets/growings/flower_growings3.png';
 import flower_growings4 from '../assets/growings/flower_growings4.png';
 import flower_growings5 from '../assets/growings/flower_growings5.png';
 import flower_growings6 from '../assets/growings/flower_growings6.png';
-import flower_growings7 from '../assets/growings/flower_growings7.png';
 import acacia from '../assets/flowers/acacia.png';
 import apricot from '../assets/flowers/apricot.png';
 import azalea from '../assets/flowers/azalea.png';
@@ -61,7 +60,7 @@ import willow from '../assets/trees/willow.png';
 import winter_tree from '../assets/trees/winter_tree.png';
 import {ImageSourcePropType} from 'react-native';
 
-export const MAX_FLOWER_LEVEL = 8;
+export const MAX_FLOWER_LEVEL = 7;
 export const MAX_TREE_LEVEL = 9;
 
 export type IFlower =
@@ -168,7 +167,6 @@ export const FlowerImage = [
   flower_growings4,
   flower_growings5,
   flower_growings6,
-  flower_growings7,
 ];
 
 export const TreeImage = [

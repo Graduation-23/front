@@ -9,15 +9,13 @@ export default function HomeScreen() {
   const user = useRecoilValue(userAtom);
   // const {data} = useFinance();
   return (
-    <SafeAreaView>
-      <View>
-        <AppText.Title family="round-a" style={{fontSize: 35}}>
-          {user && user.nickname}님이 키우고 있는 식물들이에용~
-        </AppText.Title>
-        <View style={styles.Container}>
-          <GrowingPlant kind="tree" level={1} type="bamboo" />
-          <GrowingPlant kind="flower" level={0} type="acacia" />
-        </View>
+    <SafeAreaView style={styles.Container}>
+      <AppText.Title family="round-a" style={{fontSize: 35}}>
+        {user && user.nickname}님이 키우고 있는 식물들이에용~
+      </AppText.Title>
+      <View style={styles.PlantContainer}>
+        <GrowingPlant kind="tree" level={9} type="spring_tree" />
+        <GrowingPlant kind="flower" level={7} type="marigold" />
       </View>
     </SafeAreaView>
   );
@@ -26,11 +24,14 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   Container: {
     height: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  PlantContainer: {
     flexDirection: 'row',
     alignItems: 'baseline',
     justifyContent: 'center',
-    backgroundColor: 'white',
-    paddingBottom: 10,
+    padding: 10,
   },
 });
 
