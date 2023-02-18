@@ -5,8 +5,8 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 //import ColorPickerModal from '../features/ColorPickerModal';
 //import createFinance from '../api/createFinance';
 //import RegCompleteDialog from '../features/CardRegister/RegCompleteDialog';
-import CardRegHeader from '../features/CardRegister/CardRegHeader';
-import CardRegContents from '../features/CardRegister/CardRegContents';
+import CardRegHeader from '@features/CardRegister/CardRegHeader';
+import CardRegContents from '@features/CardRegister/CardRegContents';
 
 const CardRegScreen = ({route}: any) => {
   const from = route.params?.from;

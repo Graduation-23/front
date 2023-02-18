@@ -1,14 +1,14 @@
 import {StyleSheet, ScrollView} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {ListItem} from '@rneui/themed';
-import ListItems from '../components/ListItems';
+import ListItems from '@components/ListItems';
 import {useState} from 'react';
 //import DialogActions from '../components/DialogActions';
-import WithdrawalDialog from '../features/WithdrawalDialog';
-import {AppText} from '../components/AppText';
-//import {saveRefreshToken} from '../utils/refreshToken';
-import Logout from '../features/Logout';
-import {Auth} from '../constants/screen';
+import WithdrawalDialog from '@features/WithdrawalDialog';
+import {AppText} from '@components/AppText';
+//import {saveRefreshToken} from '@utils/refreshToken';
+import Logout from '@features/Logout';
+import {Auth} from '@constants/screen';
 import {useNavigation} from '@react-navigation/native';
 
 export default function SettingScreen({navigation}: any) {

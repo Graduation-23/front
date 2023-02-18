@@ -1,6 +1,6 @@
-import {IDiary} from '../../types/api';
-import logger from '../utils/logger';
-import {Photo} from '../utils/photo';
+import {IDiary} from '@type/api';
+import logger from '@utils/logger';
+import {Photo} from '@utils/photo';
 import client from './client';
 
 export interface updateDiaryEntryVariables extends IDiary {

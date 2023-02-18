@@ -2,19 +2,19 @@ import {useNavigation} from '@react-navigation/native';
 import {Button} from '@rneui/base';
 import {Input} from '@rneui/themed';
 import {StyleSheet, View} from 'react-native';
-import {IDiary} from '../../../types/api';
+import {IDiary} from '@type/api';
 
-import {AppText} from '../../components/AppText';
-import {Diary} from '../../constants/screen';
-import useEditDiary from '../../hooks/useEditDiary';
-import {useUpdateDiary} from '../../query/diary';
-import WeatherSelector from '../../components/Weather/WeatherSelector';
-import {weatherKorMap} from '../../utils/date';
-import ImageUpload from '../../components/ImageUpload';
-import {DIARY_IMG_COUNT_LIMIT} from '../../constants/img';
+import {AppText} from '@components/AppText';
+import {Diary} from '@constants/screen';
+import useEditDiary from '@hooks/useEditDiary';
+import {useUpdateDiary} from '@query/diary';
+import WeatherSelector from '@components/Weather/WeatherSelector';
+import {weatherKorMap} from '@utils/date';
+import ImageUpload from '@components/ImageUpload';
+import {DIARY_IMG_COUNT_LIMIT} from '@constants/img';
 import DiaryPreviewGallery from './DiaryPreviewGallery';
 import {useMemo} from 'react';
-import {Photo} from '../../utils/photo';
+import {Photo} from '@utils/photo';
 
 type DiaryFormProps = {} & IDiary;
 

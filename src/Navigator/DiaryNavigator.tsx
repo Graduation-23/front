@@ -1,11 +1,11 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {AppText} from '../components/AppText';
-import {Diary} from '../constants/screen';
-import DiaryReadScreen from '../screens/DiaryReadScreen';
-import DiaryScreen from '../screens/DiaryScreen';
-import DiaryWriteScreen from '../screens/DiaryWriteScreen';
-import DiaryWriteButton from '../features/Diary/Header/DiaryWriteButton';
-import DiaryUpdateButton from '../features/Diary/Header/DiaryUpdateButton';
+import {AppText} from '@components/AppText';
+import {Diary} from '@constants/screen';
+import DiaryReadScreen from '@screens/DiaryReadScreen';
+import DiaryScreen from '@screens/DiaryScreen';
+import DiaryWriteScreen from '@screens/DiaryWriteScreen';
+import DiaryWriteButton from '@features/Diary/Header/DiaryWriteButton';
+import DiaryUpdateButton from '@features/Diary/Header/DiaryUpdateButton';
 
 const Stack = createNativeStackNavigator();
 

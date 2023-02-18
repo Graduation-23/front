@@ -1,14 +1,14 @@
 import {Button, Input} from '@rneui/base';
 import {SafeAreaView, StyleSheet, View} from 'react-native';
-import {AppText} from '../components/AppText';
-import PlainButton from '../components/PlainButton';
-import useSignUp, {SignUpDataType} from '../hooks/useSignUp';
-import signUp from '../api/signUp';
-import {setAuthHeader} from '../api/client';
-import fetchUserInfo from '../api/fetchUserInfo';
+import {AppText} from '@components/AppText';
+import PlainButton from '@components/PlainButton';
+import useSignUp, {SignUpDataType} from '@hooks/useSignUp';
+import signUp from '@api/signUp';
+import {setAuthHeader} from '@api/client';
+import fetchUserInfo from '@api/fetchUserInfo';
 import {useSetRecoilState} from 'recoil';
-import userAtom from '../atom/userAtom';
-import {Auth} from '../constants/screen';
+import userAtom from '@atom/userAtom';
+import {Auth} from '@constants/screen';
 import {useNavigation} from '@react-navigation/native';
 
 const isValid = (user: SignUpDataType) => {

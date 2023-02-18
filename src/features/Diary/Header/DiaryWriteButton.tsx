@@ -3,9 +3,9 @@ import {Text} from '@rneui/base';
 import {useState} from 'react';
 import {View} from 'react-native';
 import DatePicker from 'react-native-date-picker';
-import {Diary} from '../../../constants/screen';
-import {useIssueDiaryId} from '../../../query/diary';
-import {formatYMD} from '../../../utils/date';
+import {Diary} from '@constants/screen';
+import {useIssueDiaryId} from '@query/diary';
+import {formatYMD} from '@utils/date';
 
 export default function DiaryWriteButton() {
   const [visible, setVisibleModal] = useState(false);

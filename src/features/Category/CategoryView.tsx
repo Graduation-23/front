@@ -1,5 +1,5 @@
 import {View} from 'react-native';
-import category from '../../constants/category';
+import category from '@constants/category';
 import CategoryItem from './CategoryItem';
 
 type CategoryViewProps = {

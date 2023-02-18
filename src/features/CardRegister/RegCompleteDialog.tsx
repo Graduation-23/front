@@ -1,4 +1,4 @@
-import DialogActions from '../../components/DialogActions';
+import DialogActions from '@components/DialogActions';
 
 interface Props {
   visible: boolean;

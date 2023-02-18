@@ -1,5 +1,5 @@
 import {ButtonProps, Button} from '@rneui/base';
-import {useDeleteDiary} from '../../query/diary';
+import {useDeleteDiary} from '@query/diary';
 
 interface DiaryDeleteButtonProps extends ButtonProps {
   diaryId: number;

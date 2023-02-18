@@ -1,8 +1,8 @@
 import {StyleSheet, ScrollView} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
-import UserInfoHeader from '../features/UserInfo/UserInfoHeader';
-import UserInfoContentsAccordion from '../features/UserInfo/UserInfoContentsAccordion';
+import UserInfoHeader from '@features/UserInfo/UserInfoHeader';
+import UserInfoContentsAccordion from '@features/UserInfo/UserInfoContentsAccordion';
 
 const UserInfoScreen = () => {
   return (

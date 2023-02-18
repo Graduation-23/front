@@ -1,5 +1,5 @@
-import {setAuthHeader} from '../api/client';
-import requestRevokeToken from '../api/requestRevokeToken';
+import {setAuthHeader} from '@api/client';
+import requestRevokeToken from '@api/requestRevokeToken';
 import {getRefreshToken} from './refreshToken';
 
 export interface IToken {

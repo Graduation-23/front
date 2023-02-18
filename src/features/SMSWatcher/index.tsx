@@ -1,7 +1,7 @@
 import {Component, ReactNode} from 'react';
 import {Platform} from 'react-native';
 import SmsListener from 'react-native-android-sms-listener';
-import {requestSMSPermission, smsCallback} from '../../utils/smsHelper';
+import {requestSMSPermission, smsCallback} from '@utils/smsHelper';
 
 export type SMSWatcherProps = {};
 
