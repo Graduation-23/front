@@ -1,4 +1,4 @@
-import {ResponseEntity} from '../../types/api';
+import {ResponseEntity} from '@type/api';
 import client, {setRefreshToken} from './client';
 
 export default function requestRevokeToken(refreshToken: string) {

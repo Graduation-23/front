@@ -1,8 +1,8 @@
 import {Dialog} from '@rneui/themed';
 import {View, Text, StyleSheet} from 'react-native';
-//import {AppTextTitle} from '../../components/AppText/AppTextTitle';
+//import {AppTextTitle} from '@components/AppText/AppTextTitle';
 import ColorPicker from 'react-native-wheel-color-picker';
-//import {AppText} from '../../components/AppText';
+//import {AppText} from '@components/AppText';
 
 type PickerProps = {
   visible: boolean;

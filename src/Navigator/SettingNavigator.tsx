@@ -1,9 +1,9 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import SettingScreen from '../screens/SettingScreen';
-import UserInfoScreen from '../screens/UserInfoScreen';
-//import CardRegScreen from '../screens/CardRegScreen';
-import LinkPaymentScreen from '../screens/LinkPaymentScreen';
-import {Setting} from '../constants/screen';
+import SettingScreen from '@screens/SettingScreen';
+import UserInfoScreen from '@screens/UserInfoScreen';
+//import CardRegScreen from '@screens/CardRegScreen';
+import LinkPaymentScreen from '@screens/LinkPaymentScreen';
+import {Setting} from '@constants/screen';
 
 const Stack = createNativeStackNavigator();
 

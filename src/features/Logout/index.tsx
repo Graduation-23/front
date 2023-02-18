@@ -1,11 +1,11 @@
 import {Dialog} from '@rneui/themed';
 import {View} from 'react-native';
 import {useSetRecoilState} from 'recoil';
-import {AppText} from '../../components/AppText';
-import {saveRefreshToken} from '../../utils/refreshToken';
-import userAtom from '../../atom/userAtom';
+import {AppText} from '@components/AppText';
+import {saveRefreshToken} from '@utils/refreshToken';
+import userAtom from '@atom/userAtom';
 import {useCallback} from 'react';
-//import DialogActions from '../../components/DialogActions';
+//import DialogActions from '@components/DialogActions';
 
 interface Props {
   visible: boolean;

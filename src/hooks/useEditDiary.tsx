@@ -1,6 +1,6 @@
 import {useState} from 'react';
-import {IDiary} from '../../types/api';
-import {updateDiaryEntryVariables} from '../api/updateDiary';
+import {IDiary} from '@type/api';
+import {updateDiaryEntryVariables} from '@api/updateDiary';
 
 type IDiaryForUpdate = updateDiaryEntryVariables;
 

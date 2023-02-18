@@ -1,4 +1,4 @@
-import {IDiary} from '../../types/api';
+import {IDiary} from '@type/api';
 import client from './client';
 
 export default function fetchDiary() {

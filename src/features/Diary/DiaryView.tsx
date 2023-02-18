@@ -3,13 +3,13 @@
 import {useNavigation} from '@react-navigation/native';
 import {useMemo, useState} from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
-import {IDiary} from '../../../types/api';
-import {AppText} from '../../components/AppText';
-import {ListView} from '../../components/Item';
-import OrderByButton from '../../components/OrderByButton';
-import {Diary} from '../../constants/screen';
-import {useDeleteDiary, useDiary} from '../../query/diary';
-import {groupByYear, orderBy} from '../../utils/date';
+import {IDiary} from '@type/api';
+import {AppText} from '@components/AppText';
+import {ListView} from '@components/Item';
+import OrderByButton from '@components/OrderByButton';
+import {Diary} from '@constants/screen';
+import {useDeleteDiary, useDiary} from '@query/diary';
+import {groupByYear, orderBy} from '@utils/date';
 import DiaryViewItem from './DiaryViewItem';
 
 const DiaryListView = ListView<IDiary>;

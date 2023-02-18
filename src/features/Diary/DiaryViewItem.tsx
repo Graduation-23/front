@@ -1,9 +1,9 @@
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
-import {IDiary} from '../../../types/api';
-import {AppText} from '../../components/AppText';
-import {ListViewItemProps} from '../../components/Item/ListViewItem';
+import {IDiary} from '@type/api';
+import {AppText} from '@components/AppText';
+import {ListViewItemProps} from '@components/Item/ListViewItem';
 import DiaryPreviewGallery from './DiaryPreviewGallery';
-// import CDNImage from '../components/CDNImage';
+// import CDNImage from '@components/CDNImage';
 
 export default function DiaryViewItem({
   data,

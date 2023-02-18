@@ -1,8 +1,8 @@
 import {useMutation, useQuery, useQueryClient} from 'react-query';
-import fetchFinance from '../api/fetchFinance';
-import fetchFinanceById from '../api/fetchFinanceById';
-import createFinance from '../api/createFinance';
-import deleteFinanceById from '../api/deleteFinanceById';
+import fetchFinance from '@api/fetchFinance';
+import fetchFinanceById from '@api/fetchFinanceById';
+import createFinance from '@api/createFinance';
+import deleteFinanceById from '@api/deleteFinanceById';
 
 export const useFinance = () => {
   return useQuery(['finance'], fetchFinance);

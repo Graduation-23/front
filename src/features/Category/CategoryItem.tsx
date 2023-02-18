@@ -1,5 +1,5 @@
 import {StyleSheet, TouchableOpacity} from 'react-native';
-import {AppText} from '../../components/AppText';
+import {AppText} from '@components/AppText';
 
 type CategoryItemProps = {
   onClick(): void;

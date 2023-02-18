@@ -1,8 +1,8 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import {Content} from '../constants/screen';
+import {Content} from '@constants/screen';
 
-import HomeScreen from '../screens/HomeScreen';
+import HomeScreen from '@screens/HomeScreen';
 import AccountBookNavigator from './AccountBookNavigator';
 import DiaryNavigator from './DiaryNavigator';
 import SettingNavigator from './SettingNavigator';

@@ -1,13 +1,13 @@
 import {View, StyleSheet} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {AppText} from '../components/AppText';
-import PlainButton from '../components/PlainButton';
+import {AppText} from '@components/AppText';
+import PlainButton from '@components/PlainButton';
 import {useState} from 'react';
 import {format} from 'date-fns';
 import ko from 'date-fns/esm/locale/ko/index.js';
 import {Input} from '@rneui/themed';
 import DatePicker from 'react-native-date-picker';
-import {Auth} from '../constants/screen';
+import {Auth} from '@constants/screen';
 import {useNavigation} from '@react-navigation/native';
 
 const BirthRegScreen = ({}: any) => {

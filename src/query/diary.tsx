@@ -1,9 +1,9 @@
 import {useMutation, useQuery, useQueryClient} from 'react-query';
-import deleteDiary from '../api/deleteDiary';
-import fetchDiary from '../api/fetchDiary';
-import fetchDiaryById from '../api/fetchDiaryById';
-import issueDiary from '../api/issueDiary';
-import updateDiary from '../api/updateDiary';
+import deleteDiary from '@api/deleteDiary';
+import fetchDiary from '@api/fetchDiary';
+import fetchDiaryById from '@api/fetchDiaryById';
+import issueDiary from '@api/issueDiary';
+import updateDiary from '@api/updateDiary';
 
 export const useDiary = () => {
   return useQuery(['diary'], fetchDiary);

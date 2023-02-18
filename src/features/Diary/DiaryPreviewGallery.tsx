@@ -1,7 +1,7 @@
 import {Image} from '@rneui/base';
 import {ReactNode} from 'react';
 import {ScrollView, View} from 'react-native';
-// import {DEFAULT_IMG_SOURCE} from '../../constants/img';
+// import {DEFAULT_IMG_SOURCE} from '@constants/img';
 
 interface DiaryPreviewGalleryProps {
   thumbnailIdx?: number;
