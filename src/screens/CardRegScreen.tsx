@@ -2,11 +2,11 @@ import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {StyleSheet} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {AuthorizationStackParamList} from '../Navigator/AuthorizationNavigator';
-//import ColorPickerModal from '../features/ColorPickerModal';
-//import createFinance from '../api/createFinance';
-//import RegCompleteDialog from '../features/CardRegister/RegCompleteDialog';
-import CardRegHeader from '../features/CardRegister/CardRegHeader';
-import CardRegContents from '../features/CardRegister/CardRegContents';
+//import ColorPickerModal from '@features/ColorPickerModal';
+//import createFinance from '@api/createFinance';
+//import RegCompleteDialog from '@features/CardRegister/RegCompleteDialog';
+import CardRegHeader from '@features/CardRegister/CardRegHeader';
+import CardRegContents from '@features/CardRegister/CardRegContents';
 
 const CardRegScreen = ({
   navigation,

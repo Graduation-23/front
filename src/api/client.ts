@@ -1,6 +1,6 @@
 import axios from 'axios';
-import {ResponseEntity} from '../../types/api';
-import {saveRefreshToken} from '../utils/refreshToken';
+import {ResponseEntity} from '@type/api';
+import {saveRefreshToken} from '@utils/refreshToken';
 import {BASE_URL} from './constants';
 
 const ACCESS_HEADER_KEY = 'Authorization';

@@ -1,6 +1,6 @@
 import {View} from 'react-native';
-import {AppText} from '../components/AppText';
-import {useDiaryById} from '../query/diary';
+import {AppText} from '@components/AppText';
+import {useDiaryById} from '@query/diary';
 
 export default function DiaryReadScreen({route}: any) {
   const diaryId = route.params.diaryId;

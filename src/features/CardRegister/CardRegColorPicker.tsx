@@ -1,6 +1,6 @@
 import {View, StyleSheet} from 'react-native';
-import PlainButton from '../../components/PlainButton';
-import {AppText} from '../../components/AppText';
+import PlainButton from '@components/PlainButton';
+import {AppText} from '@components/AppText';
 import ColorPickerModal from '../ColorPickerModal';
 
 type CardRegColorPickerProps = {

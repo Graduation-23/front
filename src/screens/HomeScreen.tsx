@@ -1,9 +1,9 @@
 // import {View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useRecoilValue} from 'recoil';
-import userAtom from '../atom/userAtom';
-import {AppText} from '../components/AppText';
-// import {useFinance} from '../query/finance';
+import userAtom from '@atom/userAtom';
+import {AppText} from '@components/AppText';
+// import {useFinance} from '@query/finance';
 
 //import {Image} from 'react-native';
 //import cotton_flower from '../assets/flowers/cotton_flower.png';

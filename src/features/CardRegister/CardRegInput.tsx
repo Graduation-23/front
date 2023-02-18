@@ -1,6 +1,6 @@
 import {Input} from '@rneui/themed';
 import {View, StyleSheet} from 'react-native';
-import {AppText} from '../../components/AppText';
+import {AppText} from '@components/AppText';
 
 type CardRegInputProps = {
   text: string;

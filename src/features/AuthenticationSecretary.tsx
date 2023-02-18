@@ -1,5 +1,5 @@
-import useInitializeUser from '../hooks/useInitializeUser';
-import usePassport from '../hooks/usePassport';
+import useInitializeUser from '@hooks/useInitializeUser';
+import usePassport from '@hooks/usePassport';
 
 const AuthenticationSecretary = () => {
   useInitializeUser();

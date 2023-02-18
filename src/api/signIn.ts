@@ -1,4 +1,4 @@
-import {ResponseEntity} from '../../types/api';
+import {ResponseEntity} from '@type/api';
 import client from './client';
 
 export type AuthenticationType = {

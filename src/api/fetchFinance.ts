@@ -1,4 +1,4 @@
-import {IFinance} from '../../types/api';
+import {IFinance} from '@type/api';
 import client from './client';
 
 export default function fetchFinance() {

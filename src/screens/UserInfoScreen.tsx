@@ -1,10 +1,10 @@
 import {ListItem} from '@rneui/themed';
 import {View, StyleSheet, TouchableOpacity, ScrollView} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {AppText} from '../components/AppText';
+import {AppText} from '@components/AppText';
 import {useState} from 'react';
-import SwipeableList from '../components/SwipeableList';
-import {AppTextTitle} from '../components/AppText/AppTextTitle';
+import SwipeableList from '@components/SwipeableList';
+import {AppTextTitle} from '@components/AppText/AppTextTitle';
 
 const UserInfoScreen = () => {
   const [expanded, setExpanded] = useState(false);

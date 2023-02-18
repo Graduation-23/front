@@ -1,6 +1,6 @@
 import {useNavigation} from '@react-navigation/native';
 import {Text} from '@rneui/base';
-import {Diary} from '../../../constants/screen';
+import {Diary} from '@constants/screen';
 
 interface DiaryUpdateButtonProps {
   id: number | undefined;

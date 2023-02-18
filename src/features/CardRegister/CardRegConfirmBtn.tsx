@@ -1,8 +1,8 @@
-import {AppText} from '../../components/AppText';
+import {AppText} from '@components/AppText';
 import {View, StyleSheet} from 'react-native';
-import PlainButton from '../../components/PlainButton';
-import createFinance from '../../api/createFinance';
-import {Setting} from '../../constants/screen';
+import PlainButton from '@components/PlainButton';
+import createFinance from '@api/createFinance';
+import {Setting} from '@constants/screen';
 
 type CardRegConfirmBtnProps = {
   nav: any;

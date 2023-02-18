@@ -7,8 +7,8 @@ import {
   ViewStyle,
 } from 'react-native';
 import {launchImageLibrary} from 'react-native-image-picker';
-import logger from '../utils/logger';
-import {transformPhotoForUpload} from '../utils/photo';
+import logger from '@utils/logger';
+import {transformPhotoForUpload} from '@utils/photo';
 
 interface ImageUploadProps {
   style?: StyleProp<ViewStyle>;
