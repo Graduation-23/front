@@ -17,7 +17,6 @@ export default function UserInfoHeader({}: UserInfoHeaderProps) {
       </View>
       <View style={styles.Info}>
         <AppText family="round-b" text={`${user?.nickname}님`} />
-        <AppText family="round-b" text={`id : ${user?.id}`} />
       </View>
     </>
   );

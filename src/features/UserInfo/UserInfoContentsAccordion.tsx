@@ -16,6 +16,14 @@ export default function UserInfoContentsAccordion() {
   return (
     <>
       <View style={styles.List}>
+        <ListItem>
+          <ListItem.Title>
+            <AppText family="round-d" text="ID" />
+          </ListItem.Title>
+          <ListItem.Content style={styles.AlignRight}>
+            <AppText family="round-d" text={`${user?.id}`} />
+          </ListItem.Content>
+        </ListItem>
         <ListItem.Accordion
           content={
             <ListItem.Content>
@@ -31,10 +39,11 @@ export default function UserInfoContentsAccordion() {
           {data?.map((d: IFinance) => (
             <UserInfoCardList
               key={d.id}
-              icon="home"
+              icon={d.type}
               label={d.anothername}
               icolor={d.colorcode}
               id={d.id}
+              des={d.description}
             />
           ))}
         </ListItem.Accordion>
