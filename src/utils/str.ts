@@ -5,3 +5,11 @@ export function leftPad(value: number) {
 
   return `0${value}`;
 }
+
+export function bindFirstParameter<T extends (...args: any) => any>(
+  fn: T,
+  firstParameterValue: Parameters<T>[0],
+  bindingObject: any = null,
+) {
+  return fn.bind(bindingObject, firstParameterValue);
+}

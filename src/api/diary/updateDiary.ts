@@ -1,7 +1,7 @@
 import {IDiary} from '@type/api';
 import logger from '@utils/logger';
 import {Photo} from '@utils/photo';
-import client from './client';
+import client from '@api/client';
 
 export interface updateDiaryEntryVariables extends IDiary {
   newImages: Photo[];

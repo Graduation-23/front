@@ -6,14 +6,20 @@ import DatePicker from 'react-native-date-picker';
 import {Diary} from '@constants/screen';
 import {useIssueDiaryId} from '@query/diary';
 import {formatYMD} from '@utils/date';
+import {useIssueWidget} from '@query/widget';
+import WidgetBuilder from '@utils/widget';
 
 export default function DiaryWriteButton() {
   const [visible, setVisibleModal] = useState(false);
   const {navigate} = useNavigation<any>();
-  const {mutateAsync: issueId} = useIssueDiaryId();
+  const {mutateAsync: issueDiary} = useIssueDiaryId();
+  const {mutateAsync: issueWidget} = useIssueWidget();
 
-  const handleConfirm = (d: Date) => {
-    issueId(formatYMD(d)).then(id => navigate(Diary.Write, {diaryId: id}));
+  const handleConfirm = async (d: Date) => {
+    const formatted = formatYMD(d);
+    const diaryId = await issueDiary(formatted);
+    await issueWidget(WidgetBuilder.emptyWidget(diaryId, formatted));
+    navigate(Diary.Write, {diaryId});
   };
 
   return (

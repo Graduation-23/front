@@ -1,4 +1,4 @@
-import client from './client';
+import client from '@api/client';
 
 export default function issueDiary(date: string) {
   return new Promise<number>((resolve, reject) => {
