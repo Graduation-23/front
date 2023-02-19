@@ -10,8 +10,8 @@ export default function HomeScreen() {
   // const {data} = useFinance();
   return (
     <SafeAreaView style={styles.Container}>
-      <AppText.Title family="round-a" style={{fontSize: 35}}>
-        {user && user.nickname}님이 키우고 있는 식물들이에용~
+      <AppText.Title family="round-a">
+        {user && user.nickname}님이 키우고 있는 식물
       </AppText.Title>
       <View style={styles.PlantContainer}>
         <GrowingPlant kind="tree" level={9} type="spring_tree" />

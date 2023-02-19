@@ -1,4 +1,4 @@
-import {LevelImageProps} from '../PlantLevel';
+import {LevelImageProps} from './PlantLevel';
 import Tree from './Tree';
 import Flower from './Flower';
 import {StyleSheet, View} from 'react-native';
