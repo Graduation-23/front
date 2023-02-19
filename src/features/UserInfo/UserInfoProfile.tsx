@@ -36,12 +36,6 @@ export default function UserInfoProfile({}: UserInfoProfileProps) {
           <AppText.Subtitle text="Profile" />
         )}
       </ImageUpload>
-      {/* <TouchableOpacity
-        onPress={() => {
-          
-        }}>
-        <AppText text="저장" />
-      </TouchableOpacity> */}
     </>
   );
 }

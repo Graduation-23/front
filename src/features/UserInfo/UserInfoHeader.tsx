@@ -17,7 +17,6 @@ export default function UserInfoHeader({}: UserInfoHeaderProps) {
       </View>
       <View style={styles.Info}>
         <AppText family="round-b" text={`${user?.nickname}님`} />
-        <AppText family="round-b" text={`id : ${user?.id}`} />
       </View>
     </>
   );
@@ -35,8 +34,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderWidth: 2,
     borderColor: 'black',
-    width: '30%',
-    height: '100%',
+    width: 110,
+    height: 110,
   },
   Info: {
     alignItems: 'center',
