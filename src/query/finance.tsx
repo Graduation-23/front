@@ -3,9 +3,17 @@ import fetchFinance from '@api/fetchFinance';
 import fetchFinanceById from '@api/fetchFinanceById';
 import createFinance from '@api/createFinance';
 import deleteFinanceById from '@api/deleteFinanceById';
+import financeAtom from '@/atom/financeAtom';
+import {useSetRecoilState} from 'recoil';
 
 export const useFinance = () => {
-  return useQuery(['finance'], fetchFinance);
+  const setFinance = useSetRecoilState(financeAtom);
+
+  return useQuery(['finance'], fetchFinance, {
+    onSuccess: (data: any) => {
+      setFinance(data);
+    },
+  });
 };
 
 export const useFinanceById = (id: number) => {

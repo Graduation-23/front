@@ -10,9 +10,16 @@ interface Props {
   label: string;
   icolor: string;
   id: number;
+  des: string;
 }
 
-export default function UserInfoCardList({icon, label, icolor, id}: Props) {
+export default function UserInfoCardList({
+  icon,
+  label,
+  icolor,
+  id,
+  des,
+}: Props) {
   const [visible, setVisible] = useState(false);
 
   const toggleDialog = () => {
@@ -30,7 +37,17 @@ export default function UserInfoCardList({icon, label, icolor, id}: Props) {
             </AppText>
           </TouchableOpacity>
         )}>
-        <ListItems icon={icon} label={label} color={icolor} />
+        {icon === 'Card' ? (
+          <ListItems
+            icon="credit-card"
+            label={label}
+            color={icolor}
+            sub={des}
+          />
+        ) : (
+          <ListItems icon="payments" label={label} color={icolor} sub={des} />
+        )}
+        <ListItems icon={icon} label={label} color={icolor} sub={des} />
       </ListItem.Swipeable>
       <UserInfoDeleteCardDialog
         visible={visible}
