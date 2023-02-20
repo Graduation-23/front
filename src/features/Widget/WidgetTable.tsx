@@ -1,78 +1,91 @@
 import {updateByIndex} from '@/utils/array';
-import WidgetBuilder from '@/utils/widget';
-import {Button} from '@rneui/base';
-import {useState} from 'react';
+import WidgetUtils from '@/utils/widget';
+import {useCallback, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import SpendCategoryDialog from '../Category/SpendCategoryDialog';
 import {WidgetTableItem} from './WidgetTableItem';
 
 interface WidgetTableProps {
-  originItems: Widget.ItemType[];
-  setOriginItems(items: Widget.ItemType[]): void;
+  items: Widget.ItemType[];
+  setItems(items: Widget.ItemType[]): void;
 }
 
-const LAST_ITEM_IDX = -1;
+const _debounce = (fn: any, delay: number) => {
+  let watcher: ReturnType<typeof setTimeout>;
+  return (...params: any) => {
+    if (watcher) {
+      clearTimeout(watcher);
+    }
+    watcher = setTimeout(() => fn(...params), delay);
+  };
+};
 
-export default function WidgetTable({
-  originItems,
-  setOriginItems,
-}: WidgetTableProps) {
-  const [inputItem, setInputItem] = useState<Widget.ItemType>(
-    WidgetBuilder.emptyWidgetItem(),
-  );
-  const [items, setItems] = useState<Widget.ItemType[]>(originItems);
+const NEW_ITEM_ID = -1;
 
+export default function WidgetTable({items, setItems}: WidgetTableProps) {
+  const [newItem, setNewItem] = useState(WidgetUtils.emptyWidgetItem());
   const [categoryOpenId, setCategoryOpenId] = useState<null | number>(null);
 
-  const setItem = (i: number) => (newValue: Partial<Widget.ItemType>) => {
-    setItems(prev => updateByIndex(prev, i, {...prev[i], ...newValue}));
-  };
-
+  // #region Handler
   const openCategoryDialog = (i: number) => () => setCategoryOpenId(i);
 
-  const appendInputAndNew = () => {
-    setItems(prev => [...prev, inputItem]);
-    setInputItem(WidgetBuilder.emptyWidgetItem());
-  };
+  const updateItem = useCallback(
+    (itemIndex: number, newValue: Partial<Widget.ItemType>) =>
+      setItems(
+        updateByIndex(items, itemIndex, {...items[itemIndex], ...newValue}),
+      ),
+    [setItems, items],
+  );
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const _updateNewItem = useCallback(
+    _debounce((item: Widget.ItemType) => {
+      // Append NewItem into Array and set NewItem using Empty Item
+      setItems([...items, item]);
+      setNewItem(WidgetUtils.emptyWidgetItem());
+    }, 500),
+    [setNewItem, setItems, items],
+  );
+
+  const handleUpdateNewItem = useCallback(
+    (newValue: Partial<Widget.ItemType>) => {
+      // Check new Value is empty?
+      const updatedItem = {...newItem, ...newValue};
+      if (!WidgetUtils.isItemEmpty(updatedItem)) {
+        setNewItem(updatedItem);
+        _updateNewItem(updatedItem);
+      }
+    },
+    [newItem, setNewItem, _updateNewItem],
+  );
+  // #endregion
 
   return (
     <>
       <View style={styles.tableContainer}>
-        {items &&
+        {Array.isArray(items) &&
           items.map((el, i) => (
             <WidgetTableItem
               openCategoryDialog={openCategoryDialog(i)}
-              setItem={setItem(i)}
-              key={el.id}
+              setItem={updateItem.bind(null, i)}
+              key={i}
               {...el}
             />
           ))}
-        {inputItem && (
+        {newItem && (
           <WidgetTableItem
-            last
-            openCategoryDialog={openCategoryDialog(LAST_ITEM_IDX)}
-            setItem={setInputItem}
-            {...inputItem}
+            key={items.length}
+            openCategoryDialog={openCategoryDialog(NEW_ITEM_ID)}
+            setItem={handleUpdateNewItem}
+            {...newItem}
           />
         )}
-        <View style={styles.buttonContainer}>
-          <View style={styles.button}>
-            <Button onPress={appendInputAndNew}>추가</Button>
-          </View>
-          <View style={styles.button}>
-            <Button style={styles.button} onPress={() => setOriginItems(items)}>
-              저장
-            </Button>
-          </View>
-        </View>
       </View>
       <SpendCategoryDialog
         onConfirm={(i: number, tag: string) => {
-          if (i === LAST_ITEM_IDX) {
-            setInputItem(prev => ({...prev, category: tag}));
-            return;
-          }
-          setItem(i)({category: tag});
+          i === NEW_ITEM_ID
+            ? handleUpdateNewItem({category: tag})
+            : updateItem(i, {category: tag});
         }}
         close={() => setCategoryOpenId(null)}
         openId={categoryOpenId}

@@ -1,6 +1,6 @@
 // import {Widget} from '@type/widget';
 
-export default class WidgetBuilder {
+export default class WidgetUtils {
   static emptyWidget(diaryId: number, date: string): Widget.Type {
     return {
       id: diaryId,
@@ -13,6 +13,7 @@ export default class WidgetBuilder {
 
   static emptyWidgetItem(): Widget.ItemType {
     return {
+      id: 0,
       financeId: 0,
       amount: 0,
       description: '',
@@ -25,5 +26,20 @@ export default class WidgetBuilder {
       return items.reduce((acc, cur) => acc + cur.amount, 0);
     }
     return 0;
+  }
+
+  static isItemEmpty(item: Widget.ItemType | null) {
+    if (!item) {
+      return true;
+    }
+    // check property expect 'id'
+    switch (true) {
+      case item.description.trim().length !== 0:
+      case item.category.trim().length !== 0:
+      case item.amount !== 0:
+        return false;
+    }
+
+    return true;
   }
 }

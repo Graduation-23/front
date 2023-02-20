@@ -4,7 +4,6 @@ import {StyleSheet, View} from 'react-native';
 
 interface WidgetTableItem extends Widget.ItemType {
   setItem(item: Widget.ItemType): void;
-  last?: boolean;
   openCategoryDialog(): void;
 }
 

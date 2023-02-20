@@ -7,7 +7,7 @@ import {Diary} from '@constants/screen';
 import {useIssueDiaryId} from '@query/diary';
 import {formatYMD} from '@utils/date';
 import {useIssueWidget} from '@query/widget';
-import WidgetBuilder from '@utils/widget';
+import WidgetUtils from '@utils/widget';
 
 export default function DiaryWriteButton() {
   const [visible, setVisibleModal] = useState(false);
@@ -18,7 +18,7 @@ export default function DiaryWriteButton() {
   const handleConfirm = async (d: Date) => {
     const formatted = formatYMD(d);
     const diaryId = await issueDiary(formatted);
-    await issueWidget(WidgetBuilder.emptyWidget(diaryId, formatted));
+    await issueWidget(WidgetUtils.emptyWidget(diaryId, formatted));
     navigate(Diary.Write, {diaryId});
   };
 

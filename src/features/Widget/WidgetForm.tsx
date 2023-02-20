@@ -5,11 +5,11 @@ import WidgetTable from './WidgetTable';
 type WidgetFormProps = Widget.Type;
 
 export default function WidgetForm({...data}: WidgetFormProps) {
-  const {widget, set, bind} = useEditWidget(data);
+  const {widget, bind} = useEditWidget(data);
 
   return (
     <View style={styles.container}>
-      <WidgetTable setOriginItems={bind('items')} originItems={widget.items} />
+      <WidgetTable setItems={bind('items')} items={widget.items} />
     </View>
   );
 }
