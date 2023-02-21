@@ -27,7 +27,7 @@ export default function DiaryNavigator() {
         component={DiaryWriteScreen}
         options={{
           headerTitle() {
-            return <AppText.Subtitle family="round-b" text="읽기 편집" />;
+            return <AppText.Subtitle family="round-b" text="일기 편집" />;
           },
         }}
       />
@@ -35,6 +35,9 @@ export default function DiaryNavigator() {
         name={Diary.Read}
         component={DiaryReadScreen}
         options={({route}) => ({
+          headerTitle() {
+            return <AppText.Subtitle family="round-b" text="일기 보기" />;
+          },
           headerRight() {
             return <DiaryUpdateButton id={(route.params as any).diaryId} />;
           },

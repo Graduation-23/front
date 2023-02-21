@@ -1,6 +1,6 @@
 export type ListViewItemProps<T> = {
   data: T;
   index: number;
-  navigate(): void;
-  remove(): void;
+  onPress(): void;
+  onLongPress(): void;
 };

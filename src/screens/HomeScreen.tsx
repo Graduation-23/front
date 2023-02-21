@@ -15,7 +15,7 @@ export default function HomeScreen() {
       </AppText.Title>
       <View style={styles.PlantContainer}>
         <GrowingPlant kind="tree" level={9} type="spring_tree" />
-        <GrowingPlant kind="flower" level={7} type="marigold" />
+        <GrowingPlant kind="flower" level={2} type="marigold" />
       </View>
     </SafeAreaView>
   );

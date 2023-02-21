@@ -6,6 +6,7 @@ import {useRecoilValue} from 'recoil';
 import userAtom from '../../atom/userAtom';
 import {useFinance} from '../../query/finance';
 import UserInfoCardList from './UserInfoCardList';
+import {IFinance} from '@type/api';
 
 export default function UserInfoContentsAccordion() {
   const user = useRecoilValue(userAtom);
@@ -15,6 +16,14 @@ export default function UserInfoContentsAccordion() {
   return (
     <>
       <View style={styles.List}>
+        <ListItem>
+          <ListItem.Title>
+            <AppText family="round-d" text="ID" />
+          </ListItem.Title>
+          <ListItem.Content style={styles.AlignRight}>
+            <AppText family="round-d" text={`${user?.id}`} />
+          </ListItem.Content>
+        </ListItem>
         <ListItem.Accordion
           content={
             <ListItem.Content>
@@ -27,13 +36,14 @@ export default function UserInfoContentsAccordion() {
           onPress={() => {
             setExpanded(!expanded);
           }}>
-          {data?.map(d => (
+          {data?.map((d: IFinance) => (
             <UserInfoCardList
               key={d.id}
-              icon="home"
+              icon={d.type}
               label={d.anothername}
               icolor={d.colorcode}
               id={d.id}
+              des={d.description}
             />
           ))}
         </ListItem.Accordion>

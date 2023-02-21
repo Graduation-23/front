@@ -3,9 +3,9 @@ import {useState} from 'react';
 import CategoryView from './CategoryView';
 
 interface SpendCategoryDialogProps {
-  onConfirm(sourceId: string, tag: string): void;
+  onConfirm(sourceId: string | number, tag: string): void;
   close(): void;
-  openId: string | null;
+  openId: string | number | null;
 }
 
 export default function SpendCategoryDialog({
@@ -16,14 +16,17 @@ export default function SpendCategoryDialog({
   const [tag, setTag] = useState('');
 
   const handleConfirm = () => {
-    if (openId) {
+    if (openId !== null) {
       onConfirm(openId, tag);
     }
     close();
   };
 
   return (
-    <Dialog isVisible={openId !== null} onBackdropPress={close}>
+    <Dialog
+      overlayStyle={{backgroundColor: 'white'}}
+      isVisible={openId !== null}
+      onBackdropPress={close}>
       <Dialog.Title title="소비 카테고리" />
       <CategoryView tag={tag} setTag={setTag} />
       <Dialog.Actions>

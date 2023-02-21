@@ -4,10 +4,10 @@ import Rain from './Rain';
 import Sunny from './Sunny';
 
 interface WeatherIconProps {
-  type: string;
+  type?: string;
 }
 
-export default function WeatherIcon({type}: WeatherIconProps) {
+export default function WeatherIcon({type = 'sunny'}: WeatherIconProps) {
   switch (type) {
     case 'sunny':
       return <Sunny />;

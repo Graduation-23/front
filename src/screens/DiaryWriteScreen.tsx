@@ -1,8 +1,9 @@
 import {useEffect, useState} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {ScrollView, StyleSheet} from 'react-native';
 import DiaryForm from '@features/Diary/DiaryForm';
-import WidgetForm from '@features/WidgetForm';
+import WidgetForm from '@/features/Widget/WidgetForm';
 import {useDiaryById} from '@query/diary';
+import {useWidgetById} from '@/query/widget';
 
 export default function DiaryWriteScreen({route}: any) {
   const diaryId = route.params.diaryId;
@@ -13,19 +14,20 @@ export default function DiaryWriteScreen({route}: any) {
 
   const [isData, setIsData] = useState(false);
 
-  const {data} = useDiaryById(diaryId, !isData);
+  const {data: diary} = useDiaryById(diaryId, !isData);
+  const {data: widget} = useWidgetById(diaryId, !isData);
 
   useEffect(() => {
-    if (data) {
+    if (diary && widget) {
       setIsData(true);
     }
-  }, [data, setIsData]);
+  }, [diary, widget, setIsData]);
 
   return (
-    <View style={styles.container}>
-      {data && <DiaryForm {...data} />}
-      <WidgetForm />
-    </View>
+    <ScrollView style={styles.container}>
+      {diary && <DiaryForm {...diary} />}
+      {widget && <WidgetForm {...widget} />}
+    </ScrollView>
   );
 }
 

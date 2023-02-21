@@ -9,12 +9,11 @@ import {Diary} from '@constants/screen';
 import useEditDiary from '@hooks/useEditDiary';
 import {useUpdateDiary} from '@query/diary';
 import WeatherSelector from '@components/Weather/WeatherSelector';
-import {weatherKorMap} from '@utils/date';
-import ImageUpload from '@components/ImageUpload';
+import {WeatherKor} from '@constants/weather';
 import {DIARY_IMG_COUNT_LIMIT} from '@constants/img';
-import DiaryPreviewGallery from './DiaryPreviewGallery';
 import {useMemo} from 'react';
-import {Photo} from '@utils/photo';
+import DiaryEditGallery from './DiaryEditGallery';
+import Utils from '@utils/index';
 
 type DiaryFormProps = {} & IDiary;
 
@@ -32,8 +31,15 @@ export default function DiaryForm(diary: DiaryFormProps) {
     [data.imageUrls, data.newImages],
   );
 
-  const appendNewImages = (newImages: Photo[]) => {
-    set('newImages', [...data.newImages, ...newImages]);
+  const removeImage = (imageUrl: string) => {
+    let idx = -1;
+    if ((idx = data.imageUrls.indexOf(imageUrl)) > -1) {
+      set('imageUrls', Utils.removeElementByIndex(data.imageUrls, idx));
+    } else if (
+      (idx = data.newImages.findIndex(el => el.uri === imageUrl)) > -1
+    ) {
+      set('newImages', Utils.removeElementByIndex(data.newImages, idx));
+    }
   };
 
   return (
@@ -57,7 +63,7 @@ export default function DiaryForm(diary: DiaryFormProps) {
           mv={10}
           center
           family="round-c"
-          text={`날씨 : ${weatherKorMap[data.weather]}`}
+          text={`날씨 : ${WeatherKor[data.weather]}`}
         />
         <WeatherSelector weather={data.weather} setWeather={bind('weather')} />
         <Input
@@ -76,14 +82,14 @@ export default function DiaryForm(diary: DiaryFormProps) {
         />
       </View>
 
-      <DiaryPreviewGallery imageUrls={previewImages}>
-        <ImageUpload
-          style={{backgroundColor: '#bab9b994'}}
-          selectionLimit={DIARY_IMG_COUNT_LIMIT - data.imageUrls.length}
-          setNewImages={appendNewImages}>
-          <AppText.Subtitle text="+" />
-        </ImageUpload>
-      </DiaryPreviewGallery>
+      <DiaryEditGallery
+        removeImage={removeImage}
+        selectLimit={DIARY_IMG_COUNT_LIMIT - data.imageUrls.length}
+        previewImagesUrls={previewImages}
+        appendNewImages={newImages =>
+          set('newImages', [...data.newImages, ...newImages])
+        }
+      />
 
       <Button buttonStyle={styles.button} onPress={handleFinish}>
         작성 완료
@@ -104,6 +110,7 @@ const styles = StyleSheet.create({
   },
   container: {
     padding: 15,
+
     // display: 'flex',
     // justifyContent: 'center',
   },
