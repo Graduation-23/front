@@ -9,9 +9,10 @@ interface Props {
   color: string;
   onPress?: () => void;
   sub?: string;
+  contents?: string;
 }
 
-const ListItems = ({icon, label, color, onPress, sub}: Props) => {
+const ListItems = ({icon, label, color, onPress, sub, contents}: Props) => {
   return (
     <>
       <TouchableOpacity onPress={onPress} style={styles.Btn}>
@@ -38,6 +39,7 @@ const ListItems = ({icon, label, color, onPress, sub}: Props) => {
             <></>
           )}
         </ListItem.Content>
+        {contents ? <AppText family="round-d" text={contents} /> : <></>}
       </TouchableOpacity>
     </>
   );
