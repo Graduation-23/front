@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 import {ScrollView, StyleSheet} from 'react-native';
 import DiaryForm from '@features/Diary/DiaryForm';
-import WidgetForm from '@/features/Widget/WidgetForm';
+import WidgetForm from '@/features/Widget/Form/WidgetForm';
 import {useDiaryById} from '@query/diary';
 import {useWidgetById} from '@/query/widget';
 
