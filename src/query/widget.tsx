@@ -19,6 +19,6 @@ export const useWidgetById = (id: number, enableRefetching: boolean = true) => {
   });
 };
 
-export const useUpdateWidget = () => {
-  return useMutation([GROUP], updateWidget);
+export const useUpdateWidget = (id: number) => {
+  return useMutation([GROUP, id], updateWidget);
 };

@@ -34,7 +34,7 @@ export const AppTextBase = ({
   return ul ? (
     <View
       children={core}
-      style={[viewStyles.base, viewStyles.underline, viewStyle]}
+      style={[viewStyles.base, ul && viewStyles.underline, viewStyle]}
     />
   ) : (
     core

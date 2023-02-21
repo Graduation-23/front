@@ -17,7 +17,7 @@ export default class WidgetUtils {
       financeId: 0,
       amount: 0,
       description: '',
-      category: '',
+      category: '생활',
     };
   }
 
@@ -35,7 +35,6 @@ export default class WidgetUtils {
     // check property expect 'id'
     switch (true) {
       case item.description.trim().length !== 0:
-      case item.category.trim().length !== 0:
       case item.amount !== 0:
         return false;
     }
