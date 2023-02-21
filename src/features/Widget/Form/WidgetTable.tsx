@@ -1,10 +1,9 @@
 import Utils from '@/utils';
-import WidgetUtils from '@/utils/widget';
 import {useCallback, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
-import SpendCategoryDialog from '../Category/SpendCategoryDialog';
+import SpendCategoryDialog from '../../Category/SpendCategoryDialog';
 import {WidgetTableItem} from './WidgetTableItem';
-import FinanceDialog from '../Finance/FinanceDialog';
+import FinanceDialog from '../../Finance/FinanceDialog';
 
 interface WidgetTableProps {
   items: Widget.ItemType[];
@@ -29,10 +28,6 @@ export default function WidgetTable({items, setItems}: WidgetTableProps) {
       ),
     [setItems, items],
   );
-
-  const appendNewItem = useCallback(() => {
-    setItems([...items, WidgetUtils.emptyWidgetItem()]);
-  }, [items, setItems]);
 
   // #endregion
 

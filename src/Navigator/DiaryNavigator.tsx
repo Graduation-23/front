@@ -6,6 +6,7 @@ import DiaryScreen from '@screens/DiaryScreen';
 import DiaryWriteScreen from '@screens/DiaryWriteScreen';
 import DiaryWriteButton from '@features/Diary/Header/DiaryWriteButton';
 import DiaryUpdateButton from '@features/Diary/Header/DiaryUpdateButton';
+import {Text} from '@rneui/themed';
 
 const Stack = createNativeStackNavigator();
 
@@ -25,11 +26,26 @@ export default function DiaryNavigator() {
       <Stack.Screen
         name={Diary.Write}
         component={DiaryWriteScreen}
-        options={{
+        options={({route, navigation}) => ({
           headerTitle() {
-            return <AppText.Subtitle family="round-b" text="일기 편집" />;
+            return <AppText.Subtitle family="round-b" text="일기 수정" />;
           },
-        }}
+          headerRight() {
+            return (
+              <Text
+                style={{color: '#29b6f6'}}
+                onPress={() => {
+                  if (route && navigation) {
+                    navigation.navigate(Diary.Read, {
+                      diaryId: (route.params as any)?.diaryId,
+                    });
+                  }
+                }}>
+                완료
+              </Text>
+            );
+          },
+        })}
       />
       <Stack.Screen
         name={Diary.Read}

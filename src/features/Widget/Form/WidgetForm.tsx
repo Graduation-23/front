@@ -3,7 +3,7 @@ import {Button} from '@rneui/themed';
 import {StyleSheet, View} from 'react-native';
 import UpdateWidgetButton from './UpdateWidgetButton';
 import WidgetTable from './WidgetTable';
-import WidgetUtils from '../../utils/widget';
+import WidgetUtils from '../../../utils/widget';
 import {useCallback} from 'react';
 
 type WidgetFormProps = Widget.Type;
