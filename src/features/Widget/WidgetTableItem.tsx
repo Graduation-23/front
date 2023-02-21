@@ -1,4 +1,4 @@
-import {bindFirstParameter as bind} from '@/utils/str';
+import Utils from '@/utils';
 import {Button, Input} from '@rneui/base';
 import {StyleSheet, View} from 'react-native';
 
@@ -22,7 +22,7 @@ export function WidgetTableItem({
         <View style={{flexGrow: 1}}>
           <Input
             value={item.description}
-            onChangeText={bind(set, 'description')}
+            onChangeText={Utils.bindFirstParameter(set, 'description')}
             // inputStyle={styles.input}
             placeholder="지출 명 입력..."
           />
@@ -38,7 +38,7 @@ export function WidgetTableItem({
           <Input
             style={styles.item}
             value={item.amount.toString()}
-            onChangeText={bind(set, 'amount')}
+            onChangeText={Utils.bindFirstParameter(set, 'amount')}
             // inputStyle={styles.input}
             placeholder="제목 입력..."
           />

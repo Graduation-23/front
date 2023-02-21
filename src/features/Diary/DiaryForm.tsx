@@ -9,11 +9,11 @@ import {Diary} from '@constants/screen';
 import useEditDiary from '@hooks/useEditDiary';
 import {useUpdateDiary} from '@query/diary';
 import WeatherSelector from '@components/Weather/WeatherSelector';
-import {weatherKorMap} from '@utils/date';
+import {WeatherKor} from '@constants/weather';
 import {DIARY_IMG_COUNT_LIMIT} from '@constants/img';
 import {useMemo} from 'react';
 import DiaryEditGallery from './DiaryEditGallery';
-import {removeElementByIndex} from '@utils/array';
+import Utils from '@utils/index';
 
 type DiaryFormProps = {} & IDiary;
 
@@ -34,11 +34,11 @@ export default function DiaryForm(diary: DiaryFormProps) {
   const removeImage = (imageUrl: string) => {
     let idx = -1;
     if ((idx = data.imageUrls.indexOf(imageUrl)) > -1) {
-      set('imageUrls', removeElementByIndex(data.imageUrls, idx));
+      set('imageUrls', Utils.removeElementByIndex(data.imageUrls, idx));
     } else if (
       (idx = data.newImages.findIndex(el => el.uri === imageUrl)) > -1
     ) {
-      set('newImages', removeElementByIndex(data.newImages, idx));
+      set('newImages', Utils.removeElementByIndex(data.newImages, idx));
     }
   };
 
@@ -63,7 +63,7 @@ export default function DiaryForm(diary: DiaryFormProps) {
           mv={10}
           center
           family="round-c"
-          text={`날씨 : ${weatherKorMap[data.weather]}`}
+          text={`날씨 : ${WeatherKor[data.weather]}`}
         />
         <WeatherSelector weather={data.weather} setWeather={bind('weather')} />
         <Input

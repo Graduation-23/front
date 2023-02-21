@@ -1,26 +1,15 @@
 import {IDiary} from '@type/api';
 import logger from '@utils/logger';
-import {Photo} from '@utils/photo';
 import client from '@api/client';
+import Utils from '@/utils/index';
+import {File} from '@type/file';
 
 export interface updateDiaryEntryVariables extends IDiary {
-  newImages: Photo[];
+  newImages: File[];
 }
 
 export default function updateDiary(entry: updateDiaryEntryVariables) {
-  const form = new FormData();
-
-  for (const key in entry) {
-    const item = (entry as any)[key];
-
-    if (!Array.isArray(item)) {
-      form.append(key, item);
-    } else {
-      item.forEach((el, i) => {
-        form.append(`${key}[${i}]`, el);
-      });
-    }
-  }
+  const form = Utils.transformObjToForm(entry);
 
   return new Promise(resolve => {
     client
@@ -28,6 +17,6 @@ export default function updateDiary(entry: updateDiaryEntryVariables) {
         headers: {'Content-Type': 'multipart/form-data', Accept: '*/*'},
       })
       .then(r => resolve(r.data.data))
-      .catch(logger.log);
+      .catch(logger.error);
   });
 }

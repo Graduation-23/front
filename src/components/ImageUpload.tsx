@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import {launchImageLibrary} from 'react-native-image-picker';
 import logger from '@utils/logger';
-import {transformPhotoForUpload} from '@utils/photo';
+import Utils from '@utils/index';
 
 interface ImageUploadProps {
   style?: StyleProp<ViewStyle>;
@@ -36,7 +36,9 @@ export default function ImageUpload({
         } else if (response.errorCode) {
           logger.log(response.errorCode, response.errorMessage);
         } else {
-          setNewImages(response.assets?.map(transformPhotoForUpload) || []);
+          setNewImages(
+            response.assets?.map(Utils.transformFileToMultipart) || [],
+          );
         }
       },
     );

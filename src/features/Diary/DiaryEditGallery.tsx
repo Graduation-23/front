@@ -1,6 +1,6 @@
 import {AppText} from '@components/AppText';
 import ImageUpload from '@components/ImageUpload';
-import {Photo} from '@utils/photo';
+import {File} from '@type/file';
 import {Dialog} from '@rneui/themed';
 import {useState} from 'react';
 import DiaryPreviewGallery from './DiaryPreviewGallery';
@@ -9,7 +9,7 @@ import {StyleSheet} from 'react-native';
 interface Props {
   selectLimit: number;
   previewImagesUrls: string[];
-  appendNewImages(newImages: Photo[]): void;
+  appendNewImages(newImages: File[]): void;
   removeImage(imageUrl: string): void;
 }
 

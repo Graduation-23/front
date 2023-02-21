@@ -1,13 +1,12 @@
 class Utils {
   //#region Array
-
   static removeElementByIndex<T>(array: T[], index: number) {
     const copy = [...array];
     copy.splice(index, 1);
     return copy;
   }
 
-  updateByIndex<T>(array: T[], index: number, newValue: T): T[] {
+  static updateByIndex<T>(array: T[], index: number, newValue: T): T[] {
     const newArray = [...array];
     newArray.splice(index, 1, newValue);
     return newArray;
@@ -89,6 +88,15 @@ class Utils {
       }
     }
     return form;
+  }
+
+  static transformFileToMultipart(file: any) {
+    return {
+      name: file.fileName,
+      type: 'multipart/form-data',
+      uri: file.uri,
+      data: file.data,
+    };
   }
   //#endregion
 }

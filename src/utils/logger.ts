@@ -3,5 +3,7 @@ export default class {
     console.log(JSON.stringify(value));
   }
 
-  static error(err: any) {}
+  static error(err: any) {
+    console.error(JSON.stringify(err));
+  }
 }

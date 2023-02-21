@@ -3,7 +3,7 @@ import {AppText} from '@components/AppText';
 import {useDiaryById} from '@query/diary';
 import DiaryPreviewGallery from '@features/Diary/DiaryPreviewGallery';
 import WeatherIcon from '@components/Weather/WeatherIcon';
-import {weatherKorMap} from '@utils/date';
+import {WeatherKor} from '@constants/weather';
 
 export default function DiaryReadScreen({route}: any) {
   const diaryId = route.params.diaryId;
@@ -28,7 +28,7 @@ export default function DiaryReadScreen({route}: any) {
         text={`제목 : ${data?.title}`}
       />
       <AppText.Subtitle mv={10} center family="round-c">
-        날씨 : {weatherKorMap[data?.weather || 'sunny']} &nbsp;
+        날씨 : {WeatherKor[data?.weather || 'sunny']} &nbsp;
         <WeatherIcon type={data?.weather} />
       </AppText.Subtitle>
       <AppText.Subtitle mv={15} center family="round-c" text="일기 내용" />

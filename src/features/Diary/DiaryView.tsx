@@ -9,7 +9,7 @@ import {ListView} from '@components/Item';
 import OrderByButton from '@components/OrderByButton';
 import {Diary} from '@constants/screen';
 import {useDeleteDiary, useDiary} from '@query/diary';
-import {groupByYear, orderBy} from '@utils/date';
+import Utils from '@utils/index';
 import DiaryViewItem from './DiaryViewItem';
 import {Dialog} from '@rneui/base';
 
@@ -27,7 +27,7 @@ export default function DiaryView({}: DiaryViewProps) {
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const {mutate: remove} = useDeleteDiary();
 
-  const group = useMemo(() => groupByYear(data || [], getYear), [data]);
+  const group = useMemo(() => Utils.groupByYear(data || [], getYear), [data]);
 
   const handlePress = (id: number) => navigate(Diary.Read, {diaryId: id});
   const handleLongPress = (id: number) => setSelectedId(id);
@@ -45,11 +45,11 @@ export default function DiaryView({}: DiaryViewProps) {
         <View style={styles.toolbar}>
           <OrderByButton ascending={order} setAscending={setOrder} />
         </View>
-        {orderBy(Object.keys(group), order).map(year => (
+        {Utils.orderBy(Object.keys(group), order).map(year => (
           <DiaryListView
             key={year}
             titleEl={<AppText text={year} />}
-            items={orderBy(group[year], order, getMMDD)}
+            items={Utils.orderBy(group[year], order, getMMDD)}
             onPress={handlePress}
             onLongPress={handleLongPress}
             getId={item => item.id}>

@@ -1,4 +1,4 @@
-import {updateByIndex} from '@/utils/array';
+import Utils from '@/utils';
 import WidgetUtils from '@/utils/widget';
 import {useCallback, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
@@ -32,7 +32,10 @@ export default function WidgetTable({items, setItems}: WidgetTableProps) {
   const updateItem = useCallback(
     (itemIndex: number, newValue: Partial<Widget.ItemType>) =>
       setItems(
-        updateByIndex(items, itemIndex, {...items[itemIndex], ...newValue}),
+        Utils.updateByIndex(items, itemIndex, {
+          ...items[itemIndex],
+          ...newValue,
+        }),
       ),
     [setItems, items],
   );
