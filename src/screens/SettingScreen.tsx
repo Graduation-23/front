@@ -10,6 +10,7 @@ import {AppText} from '@components/AppText';
 import Logout from '@features/Logout';
 import {Auth, Setting} from '@constants/screen';
 import {useNavigation} from '@react-navigation/native';
+import UpdateDialog from '@/features/UpdateDialog';
 
 export default function SettingScreen({navigation}: any) {
   // const app = [
@@ -31,20 +32,24 @@ export default function SettingScreen({navigation}: any) {
   //   });
   //   return a;
   // };
-  const [visible, setVisible] = useState(false);
-  const [visible2, setVisible2] = useState(false);
-
+  const [update, setUpdate] = useState(false); //업데이트 내역 모달 visible
+  const [logout, setLogout] = useState(false); //로그아웃 모달 visible
+  const [withdrawal, setWithdrawal] = useState(false); //회원탈퇴 모달 visible
+  const version = 'v1.0.1';
   const from = 'setting';
 
-  //const before2 = route.params.before2;
   const {navigate} = useNavigation<any>();
 
-  const toggleDialog = () => {
-    setVisible(!visible);
+  const toggleUpdateDialog = () => {
+    setUpdate(!update);
   };
 
-  const toggleInputDialog = () => {
-    setVisible2(!visible2);
+  const toggleLogoutDialog = () => {
+    setLogout(!logout);
+  };
+
+  const toggleWithdrawalDialog = () => {
+    setWithdrawal(!withdrawal);
   };
 
   return (
@@ -68,10 +73,22 @@ export default function SettingScreen({navigation}: any) {
           />
         </ListItem>
         <ListItem>
-          <ListItems icon="trending-up" label="업데이트 내역" color="#a878fb" />
+          <ListItems
+            icon="trending-up"
+            label="업데이트 내역"
+            color="#a878fb"
+            onPress={() => {
+              toggleUpdateDialog();
+            }}
+          />
         </ListItem>
         <ListItem>
-          <ListItems icon="bar-chart" label="현재 버전" color="#f9c165" />
+          <ListItems
+            icon="bar-chart"
+            label="현재 버전"
+            color="#f9c165"
+            contents={version}
+          />
         </ListItem>
 
         {/*금융 관련 */}
@@ -122,7 +139,7 @@ export default function SettingScreen({navigation}: any) {
             label="로그아웃"
             color="#e64c4c"
             onPress={() => {
-              toggleDialog();
+              toggleLogoutDialog();
             }}
           />
         </ListItem>
@@ -132,20 +149,26 @@ export default function SettingScreen({navigation}: any) {
             label="회원 탈퇴"
             color="#e64c4c"
             onPress={() => {
-              toggleInputDialog();
+              toggleWithdrawalDialog();
             }}
           />
         </ListItem>
       </ScrollView>
-      {visible && (
+      {update && (
+        <UpdateDialog visible={update} toggleDialog={toggleUpdateDialog} />
+      )}
+      {logout && (
         <Logout
-          visible={visible}
-          toggleDialog={toggleDialog}
+          visible={logout}
+          toggleDialog={toggleLogoutDialog}
           nav={navigation}
         />
       )}
-      {visible2 && (
-        <WithdrawalDialog visible={visible2} toggleDialog={toggleInputDialog} />
+      {withdrawal && (
+        <WithdrawalDialog
+          visible={withdrawal}
+          toggleDialog={toggleWithdrawalDialog}
+        />
       )}
     </SafeAreaView>
   );
