@@ -8,7 +8,7 @@ import WithdrawalDialog from '@features/WithdrawalDialog';
 import {AppText} from '@components/AppText';
 //import {saveRefreshToken} from '@utils/refreshToken';
 import Logout from '@features/Logout';
-import {Auth} from '@constants/screen';
+import {Auth, Setting} from '@constants/screen';
 import {useNavigation} from '@react-navigation/native';
 
 export default function SettingScreen({navigation}: any) {
@@ -58,7 +58,14 @@ export default function SettingScreen({navigation}: any) {
         </ListItem>
         {/* mapping() */}
         <ListItem>
-          <ListItems icon="notifications" label="공지" color="#74828a" />
+          <ListItems
+            icon="notifications"
+            label="공지"
+            color="#74828a"
+            onPress={() => {
+              navigate(Setting.Notice);
+            }}
+          />
         </ListItem>
         <ListItem>
           <ListItems icon="trending-up" label="업데이트 내역" color="#a878fb" />
