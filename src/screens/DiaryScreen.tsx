@@ -1,6 +1,6 @@
-import {StyleProp, View, ViewStyle} from 'react-native';
+import {StyleProp, ViewStyle} from 'react-native';
 import DiaryView from '@features/Diary/DiaryView';
-import DiaryViewHeader from '@features/Diary/DiaryViewHeader';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 const KindOfStyle = ['container'] as const;
 
@@ -14,9 +14,8 @@ const styles: {[Key in (typeof KindOfStyle)[number]]: StyleProp<ViewStyle>} = {
 
 export default function DiaryScreen({}: any) {
   return (
-    <View style={styles.container}>
-      <DiaryViewHeader />
+    <SafeAreaView style={styles.container}>
       <DiaryView />
-    </View>
+    </SafeAreaView>
   );
 }

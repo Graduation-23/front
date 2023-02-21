@@ -3,7 +3,7 @@ import userAtom from '@/atom/userAtom';
 import {AppText} from '@/components/AppText';
 import ImageUpload from '@/components/ImageUpload';
 import {useUpdateProfile} from '@/query/user';
-import {Photo} from '@/utils/photo';
+import {File} from '@type/file';
 import {Image} from 'react-native';
 import {useRecoilState} from 'recoil';
 
@@ -13,7 +13,7 @@ export default function UserInfoProfile({}: UserInfoProfileProps) {
   const {mutateAsync: save} = useUpdateProfile();
   const [user, setUser] = useRecoilState(userAtom);
 
-  const setImages = (Profile: Photo[]) => {
+  const setImages = (Profile: File[]) => {
     if (Array.isArray(Profile) && Profile.length === 1) {
       if (Profile[0]) {
         save(Profile[0]).then(() => {

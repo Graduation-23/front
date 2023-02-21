@@ -1,19 +1,19 @@
 import {Dialog} from '@rneui/base';
 import {useState} from 'react';
-import CategoryView from './CategoryView';
+import FinanceView from './FinanceView';
 
-interface SpendCategoryDialogProps {
-  onConfirm(sourceId: string | number, tag: string): void;
+interface FinanceDialogProps {
+  onConfirm(sourceId: string | number, fid: number): void;
   close(): void;
   openId: string | number | null;
 }
 
-export default function SpendCategoryDialog({
+export default function FinanceDialog({
   onConfirm,
   close,
   openId,
-}: SpendCategoryDialogProps) {
-  const [tag, setTag] = useState('');
+}: FinanceDialogProps) {
+  const [tag, setTag] = useState(0);
 
   const handleConfirm = () => {
     if (openId !== null) {
@@ -28,7 +28,7 @@ export default function SpendCategoryDialog({
       isVisible={openId !== null}
       onBackdropPress={close}>
       <Dialog.Title title="소비 카테고리" />
-      <CategoryView tag={tag} setTag={setTag} />
+      <FinanceView fid={tag} setFid={setTag} />
       <Dialog.Actions>
         <Dialog.Button title="선택" onPress={handleConfirm} />
         <Dialog.Button title="닫기" onPress={close} />

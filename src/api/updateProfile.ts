@@ -1,8 +1,8 @@
 import client from './client';
 import logger from '@/utils/logger';
-import {Photo} from '@/utils/photo';
+import {File} from '@type/file';
 
-export default function updateProfile(profile: Photo) {
+export default function updateProfile(profile: File) {
   const form = new FormData();
 
   form.append('profilePic', profile);
@@ -13,6 +13,6 @@ export default function updateProfile(profile: Photo) {
         headers: {'Content-Type': 'multipart/form-data', Accept: '*/*'},
       })
       .then(res => resolve(res.data.data))
-      .catch(logger.log);
+      .catch(logger.error);
   });
 }

@@ -2,7 +2,7 @@
 import {Dialog} from '@rneui/themed';
 import {Text, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {Entry} from '../../constants/screen';
+import {Entry} from '@constants/screen';
 
 interface Props {
   visible: boolean;

@@ -1,5 +1,5 @@
 import {IDiary} from '@type/api';
-import client from './client';
+import client from '@api/client';
 
 export default function fetchDiary() {
   return new Promise<IDiary[]>((resolve, reject) => {
