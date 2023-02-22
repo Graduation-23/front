@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import {Image} from 'react-native';
 import {ITree, MAX_TREE_LEVEL, TreeImage, TreeType} from '../../../utils/plant';
-import {LevelImageProps} from '../PlantLevel';
+import {LevelImageProps} from './PlantLevel';
 
 export default function Tree({
   width = 250,

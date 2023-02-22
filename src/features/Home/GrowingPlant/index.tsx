@@ -1,4 +1,4 @@
-import {LevelImageProps} from '../PlantLevel';
+import {LevelImageProps} from './PlantLevel';
 import Tree from './Tree';
 import Flower from './Flower';
 import {StyleSheet, View} from 'react-native';
@@ -25,11 +25,9 @@ export default function GrowingPlant({kind, ...props}: Props) {
 
 const styles = StyleSheet.create({
   TreeContainer: {
-    backgroundColor: 'white',
     marginRight: 5,
   },
   FlowerContainer: {
-    backgroundColor: 'white',
     marginLeft: 5,
   },
 });

@@ -1,4 +1,4 @@
-import {IFlower, ITree} from '../../utils/plant';
+import {IFlower, ITree} from '../../../utils/plant';
 
 export type LevelImageProps = {
   type: IFlower | ITree;

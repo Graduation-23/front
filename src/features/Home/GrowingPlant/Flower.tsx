@@ -6,7 +6,7 @@ import {
   IFlower,
   MAX_FLOWER_LEVEL,
 } from '../../../utils/plant';
-import {LevelImageProps} from '../PlantLevel';
+import {LevelImageProps} from './PlantLevel';
 
 export default function Flower({
   width = 120,
