@@ -25,11 +25,9 @@ export default function GrowingPlant({kind, ...props}: Props) {
 
 const styles = StyleSheet.create({
   TreeContainer: {
-    backgroundColor: 'white',
     marginRight: 5,
   },
   FlowerContainer: {
-    backgroundColor: 'white',
     marginLeft: 5,
   },
 });

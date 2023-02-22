@@ -1,51 +1,64 @@
 import {useRef} from 'react';
-import {PermissionsAndroid, Platform, StyleSheet, View} from 'react-native';
+import {Platform, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useRecoilValue} from 'recoil';
 import userAtom from '../atom/userAtom';
 import {AppText} from '../components/AppText';
 import GrowingPlant from '../features/Home/GrowingPlant';
 import ViewShot from 'react-native-view-shot';
-import {Button} from '@rneui/themed';
-import CameraRoll from '@react-native-community/cameraroll';
 import Share from 'react-native-share';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export default function HomeScreen() {
   const user = useRecoilValue(userAtom);
   const captureRef = useRef<any>(null);
 
   const onCapture = () => {
-    if (captureRef.current !== undefined) {
-      captureRef.current?.capture().then((uri: any) => {
-        console.log('캡쳐하고싶다.', uri);
-        onShare(uri);
-      });
+    try {
+      if (captureRef.current !== undefined) {
+        captureRef.current
+          ?.capture()
+          .then((uri: any) => {
+            console.log('캡쳐하고싶다.', uri);
+            onShare(uri);
+          })
+          .catch((err: any) => console.log('Error : ', err));
+      }
+    } catch {
+      (err: any) => console.log(err);
     }
   };
 
   const onShare = async (uri: any) => {
-    const res = Share.open({
-      url: Platform.OS === 'ios' ? `file://${uri}` : uri,
-    });
-    console.log('저장 성공!,', res);
+    try {
+      Share.open({
+        url: Platform.OS === 'ios' ? `file://${uri}` : uri,
+      });
+      console.log('저장 성공!');
+    } catch {
+      console.log('저장 실패!');
+    }
   };
 
   return (
-    <ViewShot
-      ref={captureRef}
-      options={{fileName: 'Capture-File', format: 'jpg', quality: 0.9}}>
-      <SafeAreaView style={styles.Container}>
-        <AppText.Title family="round-a">
-          {user && user.nickname}님이 키우고 있는 식물
-        </AppText.Title>
-        <View style={styles.PlantContainer}>
-          <GrowingPlant kind="tree" level={9} type="spring_tree" />
-          <GrowingPlant kind="flower" level={2} type="marigold" />
+    <SafeAreaView style={styles.Container}>
+      <TouchableOpacity onPress={onCapture}>
+        <Icon name="share" size={30} color="black" />
+      </TouchableOpacity>
+      <ViewShot
+        ref={captureRef}
+        options={{fileName: 'Capture-File', format: 'jpg', quality: 0.9}}>
+        <View style={styles.Capture}>
+          <AppText.Title family="round-a">
+            {user && user.nickname}님이 키우고 있는 식물
+          </AppText.Title>
+          <View style={styles.PlantContainer}>
+            <GrowingPlant kind="tree" level={9} type="spring_tree" />
+            <GrowingPlant kind="flower" level={2} type="marigold" />
+          </View>
         </View>
-        <Button title="캡쳐" onPress={onCapture} />
-        {/* <Button title="공유" onPress={onSave} /> */}
-      </SafeAreaView>
-    </ViewShot>
+      </ViewShot>
+    </SafeAreaView>
   );
 }
 
@@ -54,6 +67,9 @@ const styles = StyleSheet.create({
     height: '100%',
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#f2f2f2',
+  },
+  Capture: {
     backgroundColor: '#f2f2f2',
   },
   PlantContainer: {
