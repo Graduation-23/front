@@ -15,3 +15,10 @@ export type ItemType = {
   description: string;
   category: string;
 };
+
+export type SearchOption =
+  | 'last-week'
+  | 'last-month'
+  | 'all'
+  | 'year'
+  | 'month';

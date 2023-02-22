@@ -12,12 +12,15 @@ import SettingNavigator from './SettingNavigator';
 const Tab = createBottomTabNavigator();
 
 export default function ContentNavigator({route}: any) {
-  const tab = route.params?.tab;
-
+  const getParamsTab = () => {
+    const tab = route.params?.tab;
+    route.params = null;
+    return tab;
+  };
   return (
     <Tab.Navigator
       screenOptions={{headerShown: false, tabBarActiveTintColor: '#3182F7'}}
-      initialRouteName={tab ? tab : Content.HomeTab}>
+      initialRouteName={getParamsTab() || Content.HomeTab}>
       <Tab.Screen
         name={Content.HomeTab}
         options={{

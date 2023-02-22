@@ -2,6 +2,8 @@ import {useMemo} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {AppText} from '@components/AppText';
 import {Button} from '@rneui/base';
+import {useNavigation} from '@react-navigation/native';
+import {Account} from '@/constants/screen';
 
 interface AnalysisCostProps {
   items: Widget.Type[];
@@ -9,11 +11,15 @@ interface AnalysisCostProps {
 }
 
 export default function AnalysisCost({items, at}: AnalysisCostProps) {
+  const {navigate} = useNavigation<any>();
+
   const totalCost = useMemo(() => {
     return items.reduce((acc, item) => acc + item.totalCost, 0);
   }, [items]);
 
-  const handleNavigateAnalysis = () => {};
+  const handleNavigateAnalysis = () => {
+    navigate(Account.Chart, {timestamp: at.valueOf()});
+  };
 
   const count = useMemo(() => {
     return items.reduce((acc, item) => acc + item.items.length, 0);
