@@ -1,6 +1,17 @@
+import Utils from '@/utils';
 import {useCallback} from 'react';
-import {Calendar, DateData} from 'react-native-calendars';
-import {CalendarDay} from './CalendarDay';
+import {Calendar, DateData, LocaleConfig} from 'react-native-calendars';
+import CalendarDay from './CalendarDay';
+
+LocaleConfig.locales[''].dayNamesShort = [
+  '일',
+  '월',
+  '화',
+  '수',
+  '목',
+  '금',
+  '토',
+];
 
 type CalendarItemPayload = {
   id: number;
@@ -10,9 +21,17 @@ type CalendarItemPayload = {
 
 interface BookCalendarProps {
   items: CalendarItemPayload[];
+  setAt(date: Date): void;
+  onClickDay(widgetId: number): void;
+  at: Date;
 }
 
-export default function BookCalendar({items}: BookCalendarProps) {
+export default function BookCalendar({
+  items,
+  at,
+  setAt,
+  onClickDay,
+}: BookCalendarProps) {
   // Date 값을 이용해서 items에서 적절한 date를 가져온다.
 
   const getMetadataByDate = useCallback(
@@ -26,9 +45,29 @@ export default function BookCalendar({items}: BookCalendarProps) {
     [items],
   );
 
+  const handleDayPress = useCallback(
+    (id: number | string) => {
+      if (typeof id === 'number') {
+        onClickDay(id);
+      }
+    },
+    [onClickDay],
+  );
+
   return (
     <Calendar
       hideExtraDays
+      date={Utils.formatYMD(at)}
+      onMonthChange={date => {
+        setAt(new Date(date.timestamp));
+      }}
+      monthFormat="yyyy년 MM월"
+      onDayPress={date => {
+        console.log(
+          '🚀 ~ file: BookCalendar.tsx:57 ~ BookCalendar ~ date:',
+          date,
+        );
+      }}
       dayComponent={({date}) => {
         const metadata = getMetadataByDate(date as any);
         return (
@@ -36,6 +75,7 @@ export default function BookCalendar({items}: BookCalendarProps) {
             id={metadata.id}
             cost={metadata.cost}
             date={metadata.date}
+            onPress={() => handleDayPress(metadata.id)}
           />
         );
       }}

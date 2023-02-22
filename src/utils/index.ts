@@ -36,11 +36,16 @@ class Utils {
 
   //#region Date
   static formatYMD(date: Date) {
-    const year = date.getFullYear();
-    const month = this.leftPad(date.getMonth() + 1);
-    const day = this.leftPad(date.getDate());
-    return [year, month, day].join('-');
+    return this.destructDate(date).join('-');
   }
+
+  static destructDate(date: Date): [string, string, string] {
+    const year = date.getFullYear().toString();
+    const month = this.leftPad(date.getMonth() + 1).toString();
+    const day = this.leftPad(date.getDate()).toString();
+    return [year, month, day];
+  }
+
   static orderBy<T>(
     entry: T[],
     ascending: boolean,

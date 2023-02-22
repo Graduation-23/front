@@ -1,22 +1,41 @@
 import BookCalendar from '@/features/Book/BookCalendar';
-import {useMemo} from 'react';
+import {useMemo, useState, useEffect} from 'react';
 import {ScrollView} from 'react-native';
-import {useWidget} from '../query/widget';
+import {useWidgetWithDate} from '../query/widget';
+import AnalysisCost from '../features/Book/AnalysisCost';
+import BookWidget from '@/features/Book/BookWidget';
+
+const currentDate = new Date();
 
 export default function AccountBookScreen() {
-  const {data: widgets} = useWidget('all');
+  const [at, setAt] = useState(currentDate);
+  const {data: widgets, refetch} = useWidgetWithDate(at);
+  const [focusedWidgetId, setFocusedWidgetId] = useState(0);
+
+  useEffect(() => {
+    refetch();
+  }, [at, refetch]);
 
   const metadata = useMemo(() => {
-    if (widgets) {
-      return widgets.map(el => ({
+    return (
+      widgets?.map(el => ({
         id: el.id,
         cost: el.totalCost,
         date: el.date,
-      }));
-    }
+      })) || []
+    );
   }, [widgets]);
 
   return (
-    <ScrollView>{metadata && <BookCalendar items={metadata} />}</ScrollView>
+    <ScrollView>
+      <AnalysisCost items={widgets || []} at={at} />
+      <BookCalendar
+        items={metadata}
+        at={at}
+        setAt={setAt}
+        onClickDay={setFocusedWidgetId}
+      />
+      {focusedWidgetId !== 0 && <BookWidget id={focusedWidgetId} />}
+    </ScrollView>
   );
 }
