@@ -1,4 +1,5 @@
 import {FetchSearchOptions} from '@/api/widget/fetchWidgetByRange';
+import {CategoryTagColors} from '@/constants/category';
 import {useMemo} from 'react';
 import {Dimensions, View} from 'react-native';
 import {PieChart} from 'react-native-chart-kit';
@@ -9,7 +10,7 @@ function transformGroupToChartData(group: any, getter: (data: any) => any) {
     acc.push({
       name: cur[0],
       value: getter(cur[1]),
-      color: '#ffffff',
+      color: CategoryTagColors[cur[0]] as string,
       legendFontColor: '#7F7F7F',
       legendFontSize: 15,
     });
