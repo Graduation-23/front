@@ -14,6 +14,7 @@ export const Setting = Object.freeze({
   LinkUpPayment: 'LinkUpPayment',
   UserInfo: 'UserInfo',
   Notice: 'Notice',
+  Card: 'SettingCard',
 });
 
 export const Account = Object.freeze({

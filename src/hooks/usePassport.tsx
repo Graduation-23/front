@@ -12,7 +12,7 @@ export default function usePassport() {
       if (user) {
         navigate(user.fresh ? Auth.Birth : Entry.Content);
       } else {
-        navigate(Entry.Auth);
+        navigate(Auth.Login);
       }
     }, 100);
   }, [user, navigate]);
