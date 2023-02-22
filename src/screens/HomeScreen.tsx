@@ -1,39 +1,72 @@
 import {useRef} from 'react';
-import {CameraRoll, Platform, Share, StyleSheet, View} from 'react-native';
+import {PermissionsAndroid, Platform, StyleSheet, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useRecoilValue} from 'recoil';
 import userAtom from '../atom/userAtom';
 import {AppText} from '../components/AppText';
 import GrowingPlant from '../features/Home/GrowingPlant';
-import ViewShot from 'react-native-view-shot';
+import ViewShot, {captureRef} from 'react-native-view-shot';
 import {Button} from '@rneui/themed';
+import CameraRoll from '@react-native-community/cameraroll';
 
 export default function HomeScreen() {
   const user = useRecoilValue(userAtom);
   const ref = useRef<any>(null);
 
-  const onShare = async (uri: any) => {
-    const result = await Share.share({
-      url: Platform.OS === 'ios' ? `file://${uri}` : uri,
-    });
-  };
+  // const onShare = async (uri: any) => {
+  //   const result = await Share.share({
+  //     url: Platform.OS === 'ios' ? `file://${uri}` : uri,
+  //   });
+  // };
 
   const onCapture = () => {
-    if (ref.current) {
+    if (ref.current !== undefined) {
       ref.current.capture().then((uri: any) => {
         console.log('do something with', uri);
+        getPhotoUri();
       });
     }
+    captureRef(ref, {format: 'jpg', quality: 0.8, result: 'base64'}).then(
+      () => console.log('저장됐다'),
+      error => console.error(error),
+    );
+  };
+
+  const getPhotoUri = async (): Promise<any> => {
+    const uri = await ref.current.capture();
+    console.log('Image saved to : ', uri);
+
+    try {
+      if (uri) {
+        const result = CameraRoll.save(uri, {type: 'photo'}).then(() =>
+          console.log('dd'),
+        );
+      }
+    } catch (error) {
+      console.log('ERROR!!', error);
+    }
+  };
+
+  const hasAndroidPermission = async () => {
+    const permission = PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE;
+
+    const hasPermission = await PermissionsAndroid.check(permission);
+    if (hasPermission) {
+      return true;
+    }
+
+    const status = await PermissionsAndroid.request(permission);
+    return status === 'granted';
   };
 
   const onSave = async () => {
     if (Platform.OS === 'android' && !(await hasAndroidPermission())) {
-      toast('갤러리 접근 권한 없음');
+      console.log('갤러리 접근 권한 없음');
       return;
     }
 
     const uri = await getPhotoUri();
-    const result = await CameraRoll.save(uri);
+    const result = CameraRoll.save(uri, {type: 'photo'});
     console.log('result : ', result);
   };
 
