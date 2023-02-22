@@ -1,4 +1,7 @@
 import fetchWidgetById from '@/api/widget/fetchWidgetById';
+import fetchWidgetByRange, {
+  FetchSearchOptions,
+} from '@/api/widget/fetchWidgetByRange';
 import issueWidget from '@/api/widget/issueWidget';
 import updateWidget from '@/api/widget/updateWidget';
 import Utils from '@/utils';
@@ -24,6 +27,15 @@ export const useWidgetById = (id: number, enableRefetching: boolean = true) => {
 export const useWidgetWithDate = (date: Date) => {
   const [year, month] = Utils.destructDate(date);
   return useQuery([GROUP, year, month], () => fetchWidgetWithDate(year, month));
+};
+
+export const useWidgetByRange = (options: FetchSearchOptions | null) => {
+  return useQuery([GROUP, options], () => {
+    if (options) {
+      return fetchWidgetByRange(options);
+    }
+    return [];
+  });
 };
 
 export const useUpdateWidget = (id: number) => {

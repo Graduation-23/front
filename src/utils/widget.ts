@@ -41,4 +41,18 @@ export default class WidgetUtils {
 
     return true;
   }
+
+  static groupByCategory<T = Widget.ItemType>(
+    items: Widget.ItemType[],
+    getter: (item: Widget.ItemType) => T,
+  ) {
+    return items.reduce((acc, cur) => {
+      if (cur.category in acc) {
+        acc[cur.category].push(getter(cur));
+      } else {
+        acc[cur.category] = [getter(cur)];
+      }
+      return acc;
+    }, {} as {[key: string]: T[]});
+  }
 }

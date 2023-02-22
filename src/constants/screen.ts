@@ -18,6 +18,7 @@ export const Setting = Object.freeze({
 
 export const Account = Object.freeze({
   Main: 'Book',
+  Chart: 'Chart',
 });
 
 export const Content = Object.freeze({
