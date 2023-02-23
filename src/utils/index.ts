@@ -104,6 +104,15 @@ class Utils {
     };
   }
   //#endregion
+
+  //#region Calculation
+
+  static transformPercent(numbers: number[]) {
+    const total = numbers.reduce((acc, cur) => acc + cur, 0);
+    return numbers.map(el => ((el / total) * 100).toFixed(1));
+  }
+
+  //#endregion
 }
 
 export default Utils;

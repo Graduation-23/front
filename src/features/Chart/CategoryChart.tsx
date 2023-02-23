@@ -1,7 +1,7 @@
-import {FetchSearchOptions} from '@/api/widget/fetchWidgetByRange';
+import {AppText} from '@/components/AppText';
 import {CategoryTagColors} from '@/constants/category';
 import {useMemo} from 'react';
-import {Dimensions, View} from 'react-native';
+import {Dimensions, StyleSheet, View} from 'react-native';
 import {PieChart} from 'react-native-chart-kit';
 import WidgetUtils from '../../utils/widget';
 
@@ -31,12 +31,9 @@ const chartConfig = {
 
 interface CategoryChartProps {
   items: Widget.ItemType[];
-  options: FetchSearchOptions | null;
 }
 
-export default function CategoryChart({options, items}: CategoryChartProps) {
-  console.log(items);
-
+export default function CategoryChart({items}: CategoryChartProps) {
   const group = useMemo(() => {
     const result: {[key: string]: number} = {};
     const raw = WidgetUtils.groupByCategory(items, el => el.amount);
@@ -51,7 +48,10 @@ export default function CategoryChart({options, items}: CategoryChartProps) {
   }, [group]);
 
   return (
-    <View>
+    <View style={styles.container}>
+      <AppText.Subtitle style={styles.chartTitle}>
+        지출 카테고리 별 통계
+      </AppText.Subtitle>
       <PieChart
         data={chartDate}
         chartConfig={chartConfig}
@@ -64,3 +64,17 @@ export default function CategoryChart({options, items}: CategoryChartProps) {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: 'white',
+    marginTop: 30,
+  },
+  chartTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#7F7F7F',
+    padding: 20,
+    paddingBottom: 0,
+  },
+});
