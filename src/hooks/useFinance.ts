@@ -1,4 +1,4 @@
-import fetchFinance from '@/api/fetchFinance';
+import fetchFinance from '@/api/finance/fetchFinance';
 import financeAtom from '@/atom/financeAtom';
 import {useCallback, useEffect} from 'react';
 import {useRecoilState} from 'recoil';

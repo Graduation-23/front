@@ -1,5 +1,5 @@
 import {IFinance} from '@type/api';
-import client from './client';
+import client from '../client';
 
 export default function fetchFinance() {
   return new Promise<IFinance[]>((res, rej) => {
