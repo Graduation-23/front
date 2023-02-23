@@ -8,6 +8,7 @@ import GrowingPlant from '../features/Home/GrowingPlant';
 import ViewShot from 'react-native-view-shot';
 import Share from 'react-native-share';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import GoalGrid from '@/features/Home/Goal/GoalGrid';
 
 export default function HomeScreen() {
   const user = useRecoilValue(userAtom);
@@ -58,6 +59,7 @@ export default function HomeScreen() {
           </View>
         </View>
       </ViewShot>
+      <GoalGrid />
     </SafeAreaView>
   );
 }
