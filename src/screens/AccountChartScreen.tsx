@@ -1,7 +1,10 @@
-import {ScrollView} from 'react-native';
+import {ScrollView, StyleSheet, View} from 'react-native';
 import CategoryChart from '../features/Chart/CategoryChart';
 import useWidgetSearch from '@/hooks/useWidgetSearch';
 import {useMemo} from 'react';
+import ChartHeader from '../features/Chart/ChartHeader';
+import ChartAmountTable from '@/features/Chart/ChartAmountTable';
+import ChartCountTable from '../features/Chart/ChartCountTable';
 
 export default function AccountChartScreen({route: {params}}: any) {
   if (!params) {
@@ -21,7 +24,11 @@ export default function AccountChartScreen({route: {params}}: any) {
 
   return (
     <ScrollView>
-      <CategoryChart options={options} items={items} />
+      <ChartHeader setOptions={setOptions} options={options} />
+      <CategoryChart items={items} />
+      <ChartAmountTable items={items} />
+      <ChartCountTable items={items} />
+      <View style={{paddingBottom: 30}} />
     </ScrollView>
   );
 }

@@ -40,3 +40,16 @@ export default Object.freeze([
     description: '생일 선물',
   },
 ]);
+
+export const CategoryTagColors = Object.freeze({
+  식비: '#fb6152',
+  쇼핑: '#6eff5e',
+  '문화/여가': '#5bffad',
+  생활: '#e2837e',
+  교통: '#e0cfff',
+  학습: '#93b0ff',
+  '의료/건강': '#ff77b0',
+  금융: '#513cff',
+  반려동물: '#d5f288',
+  '경조/선물': '#ce5aff',
+}) as {[key: string]: string};
