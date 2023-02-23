@@ -26,6 +26,11 @@ export default function HomeScreen() {
     setWVisible(!wVisible);
   };
 
+  // const onCapture = useCallback((uri: any) => {
+  //   console.log('캡처 할거야');
+  //   onShare(uri);
+  // }, []);
+
   const onCapture = () => {
     try {
       if (captureRef.current !== undefined) {
@@ -55,9 +60,13 @@ export default function HomeScreen() {
 
   return (
     <SafeAreaView style={styles.Container}>
-      <TouchableOpacity onPress={onCapture}>
-        <Icon name="share" size={30} color="black" />
-      </TouchableOpacity>
+      <View style={{flexDirection: 'row'}}>
+        <TouchableOpacity onPress={onCapture}>
+          <Icon name="share" size={30} color="black" />
+        </TouchableOpacity>
+        <Button title="월간" onPress={handleMonth} />
+        <Button title="주간" onPress={handleWeek} />
+      </View>
       <ViewShot
         ref={captureRef}
         options={{fileName: 'Capture-File', format: 'jpg', quality: 0.9}}>
@@ -71,8 +80,7 @@ export default function HomeScreen() {
           </View>
         </View>
       </ViewShot>
-      <Button title="월간" onPress={handleMonth} />
-      <Button title="주간" onPress={handleWeek} />
+
       {mVisible && (
         <GoalRegDialog
           visible={mVisible}
@@ -94,10 +102,8 @@ export default function HomeScreen() {
 
 const styles = StyleSheet.create({
   Container: {
-    height: '100%',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#f2f2f2',
   },
   Capture: {
     backgroundColor: '#f2f2f2',
@@ -109,19 +115,3 @@ const styles = StyleSheet.create({
     padding: 10,
   },
 });
-
-//<Calendar
-//   dayComponent={({date, state}) => {
-//     return (
-//       <View>
-//         <Text
-//           style={{
-//             textAlign: 'center',
-//             color: state === 'disabled' ? 'gray' : 'black',
-//           }}>
-//           {date && date.day}
-//         </Text>
-//         <Text style={{fontSize: 10, color: 'red'}}>1원</Text>
-//       </View>
-//     );
-//   }}></Calendar>
