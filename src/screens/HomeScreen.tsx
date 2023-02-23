@@ -1,4 +1,4 @@
-import {useRef} from 'react';
+import {useRef, useState} from 'react';
 import {Platform, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useRecoilValue} from 'recoil';
@@ -9,10 +9,22 @@ import ViewShot from 'react-native-view-shot';
 import Share from 'react-native-share';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import GoalGrid from '@/features/Home/Goal/GoalGrid';
+import GoalRegDialog from '@/features/Home/Goal/GoalRegDialog';
+import {Button} from '@rneui/themed';
 
 export default function HomeScreen() {
   const user = useRecoilValue(userAtom);
   const captureRef = useRef<any>(null);
+  const [wVisible, setWVisible] = useState(false);
+  const [mVisible, setMVisible] = useState(false);
+
+  const handleMonth = () => {
+    setMVisible(!mVisible);
+  };
+
+  const handleWeek = () => {
+    setWVisible(!wVisible);
+  };
 
   const onCapture = () => {
     try {
@@ -59,6 +71,22 @@ export default function HomeScreen() {
           </View>
         </View>
       </ViewShot>
+      <Button title="월간" onPress={handleMonth} />
+      <Button title="주간" onPress={handleWeek} />
+      {mVisible && (
+        <GoalRegDialog
+          visible={mVisible}
+          toggleDialog={handleMonth}
+          select="월간"
+        />
+      )}
+      {wVisible && (
+        <GoalRegDialog
+          visible={wVisible}
+          toggleDialog={handleWeek}
+          select="주간"
+        />
+      )}
       <GoalGrid />
     </SafeAreaView>
   );

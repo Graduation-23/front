@@ -1,6 +1,6 @@
 import {useMutation, useQuery, useQueryClient} from 'react-query';
 import fetchFinance from '@/api/finance/fetchFinance';
-import fetchFinanceById from '@api/fetchFinanceById';
+import fetchFinanceById from '@/api/finance/fetchFinanceById';
 import createFinance from '@/api/finance/createFinance';
 import deleteFinanceById from '@/api/finance/deleteFinanceById';
 import financeAtom from '@/atom/financeAtom';
