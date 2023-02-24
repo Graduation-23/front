@@ -16,7 +16,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import GoalGrid from '@/features/Home/Goal/GoalGrid';
 import GoalRegDialog from '@/features/Home/Goal/GoalRegDialog';
 import {Button} from '@rneui/themed';
-import backgroundImage from '../assets/background.jpg';
+import backgroundImage from '../assets/backgroundImage.jpg';
 
 export default function HomeScreen() {
   const captureRef = useRef<any>(null);
@@ -68,15 +68,15 @@ export default function HomeScreen() {
     // <SafeAreaView style={styles.Container}>
     <>
       <ScrollView>
-        <View style={styles.Container}>
-          <View style={styles.Tmp}>
-            <Button title="월간" onPress={handleMonth} />
-            <Button title="주간" onPress={handleWeek} />
-          </View>
-          <ViewShot
-            ref={captureRef}
-            options={{fileName: 'Capture-File', format: 'jpg', quality: 0.9}}>
-            <ImageBackground source={backgroundImage}>
+        <ImageBackground source={backgroundImage}>
+          <View style={styles.Container}>
+            <View style={styles.Tmp}>
+              <Button title="월간" onPress={handleMonth} />
+              <Button title="주간" onPress={handleWeek} />
+            </View>
+            <ViewShot
+              ref={captureRef}
+              options={{fileName: 'Capture-File', format: 'jpg', quality: 0.9}}>
               <View style={styles.Capture}>
                 <View style={styles.Header}>
                   <AppText.Title family="round-a">
@@ -91,25 +91,25 @@ export default function HomeScreen() {
                   <GrowingPlant kind="flower" level={2} type="marigold" />
                 </View>
               </View>
-            </ImageBackground>
-          </ViewShot>
+            </ViewShot>
+            <GoalGrid />
 
-          {mVisible && (
-            <GoalRegDialog
-              visible={mVisible}
-              toggleDialog={handleMonth}
-              select="월간"
-            />
-          )}
-          {wVisible && (
-            <GoalRegDialog
-              visible={wVisible}
-              toggleDialog={handleWeek}
-              select="주간"
-            />
-          )}
-          <GoalGrid />
-        </View>
+            {mVisible && (
+              <GoalRegDialog
+                visible={mVisible}
+                toggleDialog={handleMonth}
+                select="월간"
+              />
+            )}
+            {wVisible && (
+              <GoalRegDialog
+                visible={wVisible}
+                toggleDialog={handleWeek}
+                select="주간"
+              />
+            )}
+          </View>
+        </ImageBackground>
       </ScrollView>
     </>
     // </SafeAreaView>
@@ -118,6 +118,8 @@ export default function HomeScreen() {
 
 const styles = StyleSheet.create({
   Container: {
+    display: 'flex',
+    alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 10,
   },

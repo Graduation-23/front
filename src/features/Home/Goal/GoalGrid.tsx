@@ -7,11 +7,16 @@ type GoalGridProps = {};
 export default function GoalGrid({}: GoalGridProps) {
   return (
     <>
+      {/* <ImageBackground source={backgroundBottom}> */}
       <View style={styles.GridContainer}>
         <View style={styles.GridHeaders}>
           {heads.map((head, index) => (
             <View key={index}>
-              <AppText.Subtitle family="round-b" text={head} />
+              <AppText.Subtitle
+                family="round-b"
+                text={head}
+                style={{color: '#004d40'}}
+              />
             </View>
           ))}
         </View>
@@ -20,25 +25,30 @@ export default function GoalGrid({}: GoalGridProps) {
             <View key={index} style={styles.GridContents}>
               {datas.map((week, index2) => (
                 <View key={index2} style={styles.GridDatas}>
-                  <AppText family="round-b" text={week} />
+                  <AppText
+                    family="round-b"
+                    text={week}
+                    style={{color: '#004d40'}}
+                  />
                 </View>
               ))}
             </View>
           ))}
         </View>
       </View>
+      {/* </ImageBackground> */}
     </>
   );
 }
 
 const styles = StyleSheet.create({
   GridContainer: {
-    width: '100%',
+    width: '95%',
+    borderColor: '',
   },
   GridHeaders: {
     flexGrow: 1,
     flexDirection: 'row',
-    backgroundColor: 'white',
     display: 'flex',
     justifyContent: 'space-around',
     borderBottomWidth: 2,
