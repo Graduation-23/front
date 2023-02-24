@@ -63,6 +63,7 @@ export default function ChartRangeSearchModal({
             } else {
               onSearchMonth(parseInt(searchYear), parseInt(searchMonth));
             }
+            close();
           }}
         />
         <Dialog.Button title="취소" onPress={close} />

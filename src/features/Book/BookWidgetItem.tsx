@@ -25,7 +25,9 @@ export default function BookWidgetItem({item}: BookWidgetItemProps) {
             style={[styles.financeText, {backgroundColor: fin.colorcode}]}>
             {fin.anothername}
           </AppText>
-          <AppText style={styles.categoryText}>{item.category}</AppText>
+          <AppText style={styles.categoryText}>
+            {item.category} - {item.description}
+          </AppText>
         </View>
         <AppText.Subtitle>-{item.amount.toLocaleString()} 원</AppText.Subtitle>
       </View>

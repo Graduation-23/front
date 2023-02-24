@@ -55,4 +55,18 @@ export default class WidgetUtils {
       return acc;
     }, {} as {[key: string]: T[]});
   }
+
+  static groupByYear(widgets: Widget.Type[]) {
+    return widgets.reduce((acc, cur) => {
+      const year = cur.date.split('-')[0];
+
+      if (year in acc) {
+        acc[year].push(cur);
+      } else {
+        acc[year] = [cur];
+      }
+
+      return acc;
+    }, {} as {[key: string]: Widget.Type[]});
+  }
 }
