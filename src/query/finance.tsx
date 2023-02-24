@@ -1,8 +1,8 @@
 import {useMutation, useQuery, useQueryClient} from 'react-query';
-import fetchFinance from '@api/fetchFinance';
-import fetchFinanceById from '@api/fetchFinanceById';
-import createFinance from '@api/createFinance';
-import deleteFinanceById from '@api/deleteFinanceById';
+import fetchFinance from '@/api/finance/fetchFinance';
+import fetchFinanceById from '@/api/finance/fetchFinanceById';
+import createFinance from '@/api/finance/createFinance';
+import deleteFinanceById from '@/api/finance/deleteFinanceById';
 import financeAtom from '@/atom/financeAtom';
 import {useSetRecoilState} from 'recoil';
 

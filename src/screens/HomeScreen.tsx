@@ -1,17 +1,41 @@
-import {useRef} from 'react';
-import {Platform, StyleSheet, TouchableOpacity, View} from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
-import {useRecoilValue} from 'recoil';
-import userAtom from '../atom/userAtom';
+import {useRef, useState} from 'react';
+import {
+  Platform,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  ScrollView,
+  ImageBackground,
+} from 'react-native';
+//import {SafeAreaView} from 'react-native-safe-area-context';
 import {AppText} from '../components/AppText';
 import GrowingPlant from '../features/Home/GrowingPlant';
 import ViewShot from 'react-native-view-shot';
 import Share from 'react-native-share';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import GoalGrid from '@/features/Home/Goal/GoalGrid';
+import GoalRegDialog from '@/features/Home/Goal/GoalRegDialog';
+import {Button} from '@rneui/themed';
+import backgroundImage from '../assets/backgroundImage.jpg';
 
 export default function HomeScreen() {
-  const user = useRecoilValue(userAtom);
   const captureRef = useRef<any>(null);
+  const [wVisible, setWVisible] = useState(false);
+  const [mVisible, setMVisible] = useState(false);
+  const date = new Date();
+
+  const handleMonth = () => {
+    setMVisible(!mVisible);
+  };
+
+  const handleWeek = () => {
+    setWVisible(!wVisible);
+  };
+
+  // const onCapture = useCallback((uri: any) => {
+  //   console.log('캡처 할거야');
+  //   onShare(uri);
+  // }, []);
 
   const onCapture = () => {
     try {
@@ -41,36 +65,77 @@ export default function HomeScreen() {
   };
 
   return (
-    <SafeAreaView style={styles.Container}>
-      <TouchableOpacity onPress={onCapture}>
-        <Icon name="share" size={30} color="black" />
-      </TouchableOpacity>
-      <ViewShot
-        ref={captureRef}
-        options={{fileName: 'Capture-File', format: 'jpg', quality: 0.9}}>
-        <View style={styles.Capture}>
-          <AppText.Title family="round-a">
-            {user && user.nickname}님이 키우고 있는 식물
-          </AppText.Title>
-          <View style={styles.PlantContainer}>
-            <GrowingPlant kind="tree" level={9} type="spring_tree" />
-            <GrowingPlant kind="flower" level={2} type="marigold" />
+    // <SafeAreaView style={styles.Container}>
+    <>
+      <ScrollView>
+        <ImageBackground source={backgroundImage}>
+          <View style={styles.Container}>
+            <View style={styles.Tmp}>
+              <Button title="월간" onPress={handleMonth} />
+              <Button title="주간" onPress={handleWeek} />
+            </View>
+            <ViewShot
+              ref={captureRef}
+              options={{fileName: 'Capture-File', format: 'jpg', quality: 0.9}}>
+              <View style={styles.Capture}>
+                <View style={styles.Header}>
+                  <AppText.Title family="round-a">
+                    오늘은 {date.getMonth() + 1}월 {date.getDate()}일 입니다
+                  </AppText.Title>
+                  <TouchableOpacity onPress={onCapture}>
+                    <Icon name="share" size={30} color="black" />
+                  </TouchableOpacity>
+                </View>
+                <View style={styles.PlantContainer}>
+                  <GrowingPlant kind="tree" level={9} type="spring_tree" />
+                  <GrowingPlant kind="flower" level={2} type="marigold" />
+                </View>
+              </View>
+            </ViewShot>
+            <GoalGrid />
+
+            {mVisible && (
+              <GoalRegDialog
+                visible={mVisible}
+                toggleDialog={handleMonth}
+                select="월간"
+              />
+            )}
+            {wVisible && (
+              <GoalRegDialog
+                visible={wVisible}
+                toggleDialog={handleWeek}
+                select="주간"
+              />
+            )}
           </View>
-        </View>
-      </ViewShot>
-    </SafeAreaView>
+        </ImageBackground>
+      </ScrollView>
+    </>
+    // </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   Container: {
-    height: '100%',
+    display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#f2f2f2',
+    marginBottom: 10,
+  },
+  Tmp: {
+    flexDirection: 'row',
+  },
+  Header: {
+    width: '100%',
+    flexDirection: 'row',
+    display: 'flex',
+    alignItems: 'stretch',
+    justifyContent: 'space-around',
   },
   Capture: {
-    backgroundColor: '#f2f2f2',
+    alignItems: 'center',
+    marginVertical: 20,
   },
   PlantContainer: {
     flexDirection: 'row',
@@ -79,19 +144,3 @@ const styles = StyleSheet.create({
     padding: 10,
   },
 });
-
-//<Calendar
-//   dayComponent={({date, state}) => {
-//     return (
-//       <View>
-//         <Text
-//           style={{
-//             textAlign: 'center',
-//             color: state === 'disabled' ? 'gray' : 'black',
-//           }}>
-//           {date && date.day}
-//         </Text>
-//         <Text style={{fontSize: 10, color: 'red'}}>1원</Text>
-//       </View>
-//     );
-//   }}></Calendar>

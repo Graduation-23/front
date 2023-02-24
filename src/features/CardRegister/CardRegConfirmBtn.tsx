@@ -1,7 +1,7 @@
 import {AppText} from '@components/AppText';
 import {View, StyleSheet} from 'react-native';
 import PlainButton from '@components/PlainButton';
-import createFinance from '@api/createFinance';
+import createFinance from '@/api/finance/createFinance';
 import {Setting} from '@constants/screen';
 
 type CardRegConfirmBtnProps = {

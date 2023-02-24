@@ -3,7 +3,7 @@ import {View, StyleSheet} from 'react-native';
 import PlainButton from '@components/PlainButton';
 import {useState} from 'react';
 import RegCompleteDialog from './RegCompleteDialog';
-import createFinance from '@api/createFinance';
+import createFinance from '@/api/finance/createFinance';
 import {useNavigation} from '@react-navigation/native';
 import {Entry, Content} from '@constants/screen';
 import CardRegAlert from './CardRegAlert';
