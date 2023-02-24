@@ -1,14 +1,18 @@
 import WidgetUtils from '@/utils/widget';
 import {Text} from '@rneui/base';
 import {useMemo} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, TouchableOpacity} from 'react-native';
 import {AppText} from '@/components/AppText';
+import {useNavigation} from '@react-navigation/native';
+import {Account} from '@/constants/screen';
 
 interface HistoryViewProps {
   widgets: Widget.Type[];
 }
 
 export default function HistoryView({widgets}: HistoryViewProps) {
+  const {navigate} = useNavigation<any>();
+
   const costByYear = useMemo(() => {
     const group = WidgetUtils.groupByYear(widgets);
 
@@ -25,10 +29,18 @@ export default function HistoryView({widgets}: HistoryViewProps) {
   return (
     <View style={styles.container}>
       {costByYear.map(({year, cost}) => (
-        <View key={year} style={styles.row}>
+        <TouchableOpacity
+          key={year}
+          style={styles.row}
+          onPress={() => {
+            navigate(Account.Chart, {
+              type: 'year',
+              timestamp: new Date(year).valueOf(),
+            });
+          }}>
           <AppText style={styles.item}>{year}년</AppText>
           <AppText style={styles.item}>{cost.toLocaleString()}원</AppText>
-        </View>
+        </TouchableOpacity>
       ))}
     </View>
   );

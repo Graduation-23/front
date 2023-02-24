@@ -11,7 +11,10 @@ export default function AccountChartScreen({route: {params}}: any) {
     throw new Error('params.timestamp is required');
   }
 
-  const {options, setOptions, data} = useWidgetSearch(params.timestamp);
+  const {options, setOptions, data} = useWidgetSearch(
+    params.timestamp,
+    params.type,
+  );
 
   const items = useMemo(() => {
     if (!data) {
