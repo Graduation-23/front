@@ -1,3 +1,4 @@
+import fetchWidget from '@/api/widget/fetchWidget';
 import fetchWidgetById from '@/api/widget/fetchWidgetById';
 import fetchWidgetByRange, {
   FetchSearchOptions,
@@ -27,6 +28,10 @@ export const useWidgetById = (id: number, enableRefetching: boolean = true) => {
 export const useWidgetWithDate = (date: Date) => {
   const [year, month] = Utils.destructDate(date);
   return useQuery([GROUP, year, month], () => fetchWidgetWithDate(year, month));
+};
+
+export const useWidgets = () => {
+  return useQuery([GROUP], fetchWidget);
 };
 
 export const useWidgetByRange = (options: FetchSearchOptions | null) => {
