@@ -3,7 +3,6 @@ import {
   SafeAreaView,
   StyleSheet,
   View,
-  TextInput,
   TouchableOpacity,
   Image,
 } from 'react-native';
@@ -20,6 +19,7 @@ import useSignIn from '@hooks/useSingIn';
 import {AuthorizationStackParamList} from '../Navigator/AuthorizationNavigator';
 import {Divider} from '@rneui/themed';
 import google from '../assets/google.png';
+import PlainInput from '@/components/PlainInput';
 
 const LoginScreen = ({
   navigation,
@@ -41,16 +41,10 @@ const LoginScreen = ({
       </View>
 
       <View style={styles.fullWidth}>
-        <TextInput
-          value={auth.id}
-          onChangeText={hlr.setId}
-          style={styles.input}
-          placeholder="ID"
-        />
-        <TextInput
+        <PlainInput value={auth.id} onChangeText={hlr.setId} placeholder="ID" />
+        <PlainInput
           value={auth.password}
           onChangeText={hlr.setPassword}
-          style={styles.input}
           secureTextEntry={true}
           placeholder="PASSWORD"
         />
@@ -96,16 +90,6 @@ const styles = StyleSheet.create({
   socialView: {
     margin: 10,
     width: '70%',
-  },
-  input: {
-    backgroundColor: 'white',
-    paddingLeft: 15,
-    borderRadius: 10,
-    borderWidth: 2,
-    marginBottom: 20,
-    height: 50,
-    fontSize: 16,
-    borderColor: '#8AACC8',
   },
   btn: {
     backgroundColor: '#bbdefb',
