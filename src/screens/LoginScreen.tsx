@@ -115,7 +115,6 @@ const styles = StyleSheet.create({
   },
   titleStyle: {
     marginBottom: 40,
-    marginTop: -75,
   },
 });
 
