@@ -20,6 +20,7 @@ export const Setting = Object.freeze({
 export const Account = Object.freeze({
   Main: 'Book',
   Chart: 'Chart',
+  History: 'History',
 });
 
 export const Content = Object.freeze({
