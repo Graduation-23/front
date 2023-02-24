@@ -1,7 +1,12 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {Button, Input} from '@rneui/base';
-
-import {SafeAreaView, StyleSheet, View} from 'react-native';
+import {
+  SafeAreaView,
+  StyleSheet,
+  View,
+  TextInput,
+  TouchableOpacity,
+  Image,
+} from 'react-native';
 import {useSetRecoilState} from 'recoil';
 import {setAuthHeader} from '@api/client';
 import fetchUserInfo from '@api/fetchUserInfo';
@@ -10,9 +15,11 @@ import userAtom from '@atom/userAtom';
 import {AppText} from '@components/AppText';
 import ExternalLinkButton from '@components/ExternalLinkButton';
 import PlainButton from '@components/PlainButton';
-import {Auth, Entry} from '@constants/screen';
+import {Auth} from '@constants/screen';
 import useSignIn from '@hooks/useSingIn';
 import {AuthorizationStackParamList} from '../Navigator/AuthorizationNavigator';
+import {Divider} from '@rneui/themed';
+import google from '../assets/google.png';
 
 const LoginScreen = ({
   navigation,
@@ -30,43 +37,45 @@ const LoginScreen = ({
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.titleStyle}>
-        <AppText.Title text="Login Screen" family="round-d" />
+        <AppText.Title text="Login" family="round-d" />
       </View>
 
       <View style={styles.fullWidth}>
-        <Input
+        <TextInput
           value={auth.id}
           onChangeText={hlr.setId}
-          inputStyle={styles.input}
-          label={<AppText text="아이디" />}
-          placeholder="아이디 입력..."
+          style={styles.input}
+          placeholder="ID"
         />
-        <Input
+        <TextInput
           value={auth.password}
           onChangeText={hlr.setPassword}
-          inputStyle={styles.input}
-          label={<AppText text="비밀번호" />}
+          style={styles.input}
           secureTextEntry={true}
-          placeholder="비밀번호 입력..."
+          placeholder="PASSWORD"
         />
-        <Button onPress={handleSignIn}>로그인</Button>
+        <TouchableOpacity onPress={handleSignIn} style={styles.btn}>
+          <AppText.Subtitle family="round-d" text="Sign In" />
+        </TouchableOpacity>
+        <Divider width={2} style={styles.horizontalLine} color="black" />
       </View>
 
       <View style={styles.socialView}>
         <ExternalLinkButton url="http://account-diary.kro.kr:8080/api/auth/google/uri">
-          <AppText center text="Sign in using Google" />
+          <Image source={google} style={styles.img} />
+          <AppText text="Google 계정으로 계속하기" family="round-b" />
         </ExternalLinkButton>
       </View>
 
       <View style={styles.additionalLinkView}>
         <PlainButton
-          title={<AppText center ul text="회원가입" />}
+          title={<AppText center ul text="회원가입" family="round-b" />}
           onPress={() => navigation.navigate(Auth.SignUp)}
         />
-        <PlainButton
-          title={<AppText center ul text="넘어가기" />}
+        {/* <PlainButton
+          title={<AppText center ul text="넘어가기" family="round-b" />}
           onPress={() => navigation.getParent()?.navigate(Entry.Content)}
-        />
+        /> */}
       </View>
     </SafeAreaView>
   );
@@ -86,14 +95,39 @@ const styles = StyleSheet.create({
   },
   socialView: {
     margin: 10,
+    width: '70%',
   },
   input: {
     backgroundColor: 'white',
+    paddingLeft: 15,
+    borderRadius: 10,
+    borderWidth: 2,
+    marginBottom: 20,
+    height: 50,
+    fontSize: 16,
+    borderColor: '#8AACC8',
+  },
+  btn: {
+    backgroundColor: '#bbdefb',
     padding: 6,
+    borderRadius: 10,
+    borderWidth: 0,
+    marginBottom: 20,
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  img: {
+    height: 25,
+    width: 25,
+  },
+  horizontalLine: {
+    marginTop: 10,
+    marginBottom: 20,
   },
   fullWidth: {
     overflow: 'hidden',
-    width: 350,
+    width: '70%',
   },
   titleStyle: {
     marginBottom: 40,
