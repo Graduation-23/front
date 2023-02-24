@@ -66,52 +66,56 @@ export default function HomeScreen() {
 
   return (
     // <SafeAreaView style={styles.Container}>
-    <>
+    // <ScrollView style={{minHeight: '100%', backgroundColor: 'red'}}>
+    <ImageBackground
+      imageStyle={{minHeight: '100%'}}
+      style={{minHeight: '100%'}}
+      source={backgroundImage}
+      resizeMode="cover">
       <ScrollView>
-        <ImageBackground source={backgroundImage}>
-          <View style={styles.Container}>
-            <View style={styles.Tmp}>
-              <Button title="월간" onPress={handleMonth} />
-              <Button title="주간" onPress={handleWeek} />
-            </View>
-            <ViewShot
-              ref={captureRef}
-              options={{fileName: 'Capture-File', format: 'jpg', quality: 0.9}}>
-              <View style={styles.Capture}>
-                <View style={styles.Header}>
-                  <AppText.Title family="round-a">
-                    오늘은 {date.getMonth() + 1}월 {date.getDate()}일 입니다
-                  </AppText.Title>
-                  <TouchableOpacity onPress={onCapture}>
-                    <Icon name="share" size={30} color="black" />
-                  </TouchableOpacity>
-                </View>
-                <View style={styles.PlantContainer}>
-                  <GrowingPlant kind="tree" level={9} type="spring_tree" />
-                  <GrowingPlant kind="flower" level={2} type="marigold" />
-                </View>
-              </View>
-            </ViewShot>
-            <GoalGrid />
-
-            {mVisible && (
-              <GoalRegDialog
-                visible={mVisible}
-                toggleDialog={handleMonth}
-                select="월간"
-              />
-            )}
-            {wVisible && (
-              <GoalRegDialog
-                visible={wVisible}
-                toggleDialog={handleWeek}
-                select="주간"
-              />
-            )}
+        <View style={styles.Container}>
+          <View style={styles.Tmp}>
+            <Button title="월간" onPress={handleMonth} />
+            <Button title="주간" onPress={handleWeek} />
           </View>
-        </ImageBackground>
+          <ViewShot
+            ref={captureRef}
+            options={{fileName: 'Capture-File', format: 'jpg', quality: 0.9}}>
+            <View style={styles.Capture}>
+              <View style={styles.Header}>
+                <AppText.Title family="round-a">
+                  오늘은 {date.getMonth() + 1}월 {date.getDate()}일 입니다
+                </AppText.Title>
+                <TouchableOpacity onPress={onCapture}>
+                  <Icon name="share" size={30} color="black" />
+                </TouchableOpacity>
+              </View>
+              <View style={styles.PlantContainer}>
+                <GrowingPlant kind="tree" level={9} type="spring_tree" />
+                <GrowingPlant kind="flower" level={2} type="marigold" />
+              </View>
+            </View>
+          </ViewShot>
+          <GoalGrid />
+
+          {mVisible && (
+            <GoalRegDialog
+              visible={mVisible}
+              toggleDialog={handleMonth}
+              select="월간"
+            />
+          )}
+          {wVisible && (
+            <GoalRegDialog
+              visible={wVisible}
+              toggleDialog={handleWeek}
+              select="주간"
+            />
+          )}
+        </View>
       </ScrollView>
-    </>
+    </ImageBackground>
+    // </ScrollView>
     // </SafeAreaView>
   );
 }
@@ -122,6 +126,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 10,
+    minHeight: '100%',
   },
   Tmp: {
     flexDirection: 'row',

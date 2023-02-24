@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
   GridContainer: {
     width: '95%',
     borderColor: '',
+    marginBottom: 30,
   },
   GridHeaders: {
     flexGrow: 1,
