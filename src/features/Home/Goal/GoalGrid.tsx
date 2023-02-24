@@ -53,10 +53,9 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
   },
   GridDatas: {
-    width: 80,
+    width: 100,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    borderWidth: 2,
   },
 });
