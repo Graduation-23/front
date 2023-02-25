@@ -5,6 +5,8 @@ import {AppText} from '@components/AppText';
 import {saveRefreshToken} from '@utils/refreshToken';
 import userAtom from '@atom/userAtom';
 import {useCallback} from 'react';
+import {useNavigation} from '@react-navigation/native';
+import {Entry} from '@/constants/screen';
 //import DialogActions from '@components/DialogActions';
 
 interface Props {
