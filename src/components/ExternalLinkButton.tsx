@@ -1,5 +1,6 @@
 import {ButtonProps, Button} from '@rneui/base';
-import InAppBrowser from 'react-native-inappbrowser-reborn';
+import {Linking} from 'react-native';
+// import InAppBrowser from 'react-native-inappbrowser-reborn';
 
 interface ExternalLinkButtonProps extends ButtonProps {
   url: string;
@@ -10,7 +11,8 @@ const ExternalLinkButton = ({url, ...props}: ExternalLinkButtonProps) => {
     <Button
       {...props}
       onPress={() => {
-        InAppBrowser.open(url).catch(err => console.log(err));
+        Linking.openURL(url);
+        // InAppBrowser.open(url).catch(err => console.log(err));
       }}
     />
   );
