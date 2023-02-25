@@ -1,7 +1,10 @@
 import fetchMonthGoal from '@/api/goal/fetchMonthGoal';
 import fetchMonthGoalById from '@/api/goal/fetchMonthGoalById';
 import fetchMonthGoalState from '@/api/goal/fetchMonthGoalState';
+import fetchWeekGoal from '@/api/goal/fetchWeekGoal';
+import fetchWeekGoalState from '@/api/goal/fetchWeekGoalState';
 import requestMonthGoal from '@/api/goal/requestMonthGoal';
+import requestWeekGoal from '@/api/goal/requestWeekGoal';
 import {useMutation, useQuery, useQueryClient} from 'react-query';
 
 export const useMonthGoal = () => {
@@ -31,17 +34,27 @@ export const useMonthGoalState = () => {
   return useQuery(['goal'], () => fetchMonthGoalState);
 };
 
-// export const useCreateGoalWeekly = () => {
-//   const queryClient = useQueryClient();
+export const useWeekGoal = (id: number, enableRefetching: boolean = true) => {
+  return useQuery(['goal', id], () => fetchWeekGoal(id), {
+    enabled: enableRefetching,
+  });
+};
 
-//   const mutation = useMutation(createGoalWeekly, {
-//     onSuccess: () => {
-//       queryClient.invalidateQueries('goal');
-//       console.log('주간 목표 추가 성공');
-//     },
-//     onError: () => {
-//       console.log('주간 목표 추가 실패');
-//     },
-//   });
-//   return mutation;
-// };
+export const useRequestWeekGoal = () => {
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation(requestWeekGoal, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('goal');
+      console.log('주간 목표 추가 성공');
+    },
+    onError: () => {
+      console.log('주간 목표 추가 실패');
+    },
+  });
+  return mutation;
+};
+
+export const useWeekGoalState = () => {
+  return useQuery(['goal'], () => fetchWeekGoalState);
+};

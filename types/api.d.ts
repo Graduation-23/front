@@ -34,6 +34,7 @@ export interface IFinance {
 }
 
 export interface IGoal {
+  id: number;
   user: string;
   name: string;
   amount: number;
