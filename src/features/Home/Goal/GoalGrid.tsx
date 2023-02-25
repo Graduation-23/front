@@ -1,10 +1,15 @@
 import {AppText} from '@/components/AppText';
+import {useMonthGoal} from '@/query/goal';
+import {IGoal} from '@type/api';
 import {View, StyleSheet} from 'react-native';
 import {bodyDatas, heads} from './constants';
 
 type GoalGridProps = {};
 
 export default function GoalGrid({}: GoalGridProps) {
+  const {data} = useMonthGoal();
+  console.log(data);
+
   return (
     <>
       {/* <ImageBackground source={backgroundBottom}> */}
@@ -20,6 +25,17 @@ export default function GoalGrid({}: GoalGridProps) {
             </View>
           ))}
         </View>
+        <View>
+          {data?.map((month: IGoal) => (
+            <View>
+              <AppText family="round-b" text="월간" />
+              <AppText family="round-b" text={month.month.toString()} />
+              <AppText family="round-b" text={month.amount.toString()} />
+              <AppText family="round-b" text={month.state} />
+            </View>
+          ))}
+        </View>
+
         <View>
           {bodyDatas.map((datas, index) => (
             <View key={index} style={styles.GridContents}>
