@@ -26,7 +26,13 @@ export default function SettingNavigator() {
         }}
       />
       {/* 회원 정보 */}
-      <Stack.Screen name={Setting.UserInfo} component={UserInfoScreen} />
+      <Stack.Screen
+        name={Setting.UserInfo}
+        component={UserInfoScreen}
+        options={{
+          title: '회원정보',
+        }}
+      />
     </Stack.Navigator>
   );
 }
