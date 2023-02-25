@@ -8,8 +8,6 @@ type GoalGridProps = {};
 
 export default function GoalGrid({}: GoalGridProps) {
   const {data} = useMonthGoal();
-  console.log(data);
-
   return (
     <>
       {/* <ImageBackground source={backgroundBottom}> */}
@@ -17,11 +15,7 @@ export default function GoalGrid({}: GoalGridProps) {
         <View style={styles.GridHeaders}>
           {heads.map((head, index) => (
             <View key={index}>
-              <AppText.Subtitle
-                family="round-b"
-                text={head}
-                style={{color: '#004d40'}}
-              />
+              <AppText.Subtitle family="round-b" text={head} />
             </View>
           ))}
         </View>
@@ -41,11 +35,7 @@ export default function GoalGrid({}: GoalGridProps) {
             <View key={index} style={styles.GridContents}>
               {datas.map((week, index2) => (
                 <View key={index2} style={styles.GridDatas}>
-                  <AppText
-                    family="round-b"
-                    text={week}
-                    style={{color: '#004d40'}}
-                  />
+                  <AppText family="round-b" text={week} />
                 </View>
               ))}
             </View>
