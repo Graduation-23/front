@@ -10,7 +10,7 @@ interface WeekGoal {
 export default function requestWeekGoal({id, name, amount}: WeekGoal) {
   return new Promise((resolve, reject) => {
     client
-      .post('/goal/week?goalMonthId=' + id, {amount: amount, name: name})
+      .post('/goal/week?goalMonthId=' + id, {name, amount})
       .then(response => {
         resolve(response.data);
         console.log('requestWeekGoal 성공', response.data);

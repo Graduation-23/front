@@ -5,10 +5,18 @@ import fetchWeekGoal from '@/api/goal/fetchWeekGoal';
 import fetchWeekGoalState from '@/api/goal/fetchWeekGoalState';
 import requestMonthGoal from '@/api/goal/requestMonthGoal';
 import requestWeekGoal from '@/api/goal/requestWeekGoal';
+import monthGoalAtom from '@/atom/monthGoalAtom';
 import {useMutation, useQuery, useQueryClient} from 'react-query';
+import {useSetRecoilState} from 'recoil';
 
 export const useMonthGoal = () => {
-  return useQuery(['goal'], fetchMonthGoal);
+  const setMonthGoal = useSetRecoilState(monthGoalAtom);
+
+  return useQuery(['goal'], fetchMonthGoal, {
+    onSuccess: (data: any) => {
+      setMonthGoal(data);
+    },
+  });
 };
 
 export const useMonthGoalById = (id: number) => {

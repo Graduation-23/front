@@ -7,7 +7,6 @@ export default function fetchMonthGoal() {
       .get('/goal/month')
       .then(response => {
         resolve(response.data.data);
-        console.log('fetchMonthGoal 성공', response.data.data);
       })
       .catch(reject);
   });
