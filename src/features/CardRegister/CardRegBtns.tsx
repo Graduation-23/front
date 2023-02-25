@@ -53,11 +53,7 @@ export default function CardRegBtns({
         <View style={styles.Btns}>
           <PlainButton
             title={
-              <AppText
-                family="round-b"
-                text="Register"
-                style={styles.FontSize24}
-              />
+              <AppText family="round-b" text="완료" style={styles.FontSize24} />
             }
             onPress={() => {
               handleRegister();
