@@ -17,7 +17,7 @@ export default function createFinance({
     client
       .post('/finance/add', {type, description, anothername, colorcode})
       .then(v => {
-        console.log(v.data);
+        res(v);
       })
       .catch(rej);
   });

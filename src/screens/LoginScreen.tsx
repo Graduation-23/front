@@ -55,7 +55,16 @@ const LoginScreen = ({
       </View>
 
       <View style={styles.socialView}>
-        <ExternalLinkButton url="http://account-diary.kro.kr:8080/api/auth/google/uri">
+        <ExternalLinkButton
+          buttonStyle={{
+            backgroundColor: '#bbdefb',
+            height: 50,
+            borderRadius: 10,
+            borderColor: 'black',
+            justifyContent: 'space-around',
+            alignItems: 'center',
+          }}
+          url="http://account-diary.kro.kr:8080/api/auth/google/uri">
           <Image source={google} style={styles.img} />
           <AppText text="Google 계정으로 계속하기" family="round-b" />
         </ExternalLinkButton>

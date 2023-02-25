@@ -3,17 +3,9 @@ import fetchFinance from '@/api/finance/fetchFinance';
 import fetchFinanceById from '@/api/finance/fetchFinanceById';
 import createFinance from '@/api/finance/createFinance';
 import deleteFinanceById from '@/api/finance/deleteFinanceById';
-import financeAtom from '@/atom/financeAtom';
-import {useSetRecoilState} from 'recoil';
 
-export const useFinance = () => {
-  const setFinance = useSetRecoilState(financeAtom);
-
-  return useQuery(['finance'], fetchFinance, {
-    onSuccess: (data: any) => {
-      setFinance(data);
-    },
-  });
+export const useQueryFinance = () => {
+  return useQuery(['finance'], fetchFinance);
 };
 
 export const useFinanceById = (id: number) => {
@@ -21,15 +13,10 @@ export const useFinanceById = (id: number) => {
 };
 
 export const useCreateFinance = () => {
-  const mutation = useMutation(createFinance, {
-    onSuccess: () => {
-      console.log('카드 추가 성공');
-    },
-    onError: () => {
-      console.log('카드 추가 실패');
-    },
+  const queryClient = useQueryClient();
+  return useMutation(['finance'], createFinance, {
+    onSuccess: () => queryClient.invalidateQueries('finance'),
   });
-  return mutation;
 };
 
 export const useDeleteFinance = () => {
@@ -38,10 +25,6 @@ export const useDeleteFinance = () => {
   const mutation = useMutation(['finance'], deleteFinanceById, {
     onSuccess: () => {
       queryClient.invalidateQueries('finance');
-      console.log('카드 삭제 성공');
-    },
-    onError: () => {
-      console.log('카드 삭제 실패');
     },
   });
   return mutation;

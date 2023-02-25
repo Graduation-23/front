@@ -19,28 +19,33 @@ interface HistoryChartProps {
 
 export default function HistoryChart({costByYear}: HistoryChartProps) {
   const data = useMemo(
-    () => ({
-      labels: costByYear.map(item => item.year),
-      datasets: [
-        {
-          data: costByYear.map(item => (item.cost / 10000).toFixed(0)),
-          color: (opacity = 1) => `rgba(134, 65, 244, ${opacity})`, // optional
-          strokeWidth: 2, // optional
-        },
-      ],
-    }),
+    () =>
+      Array.isArray(costByYear) && costByYear.length > 0
+        ? {
+            labels: costByYear.map(item => item.year),
+            datasets: [
+              {
+                data: costByYear.map(item => item.cost / 10000),
+                color: (opacity = 1) => `rgba(134, 65, 244, ${opacity})`, // optional
+                strokeWidth: 2, // optional
+              },
+            ],
+          }
+        : null,
     [costByYear],
   );
 
   return (
     <View style={styles.container}>
-      <LineChart
-        data={data as any}
-        width={Dimensions.get('window').width - 30}
-        height={220}
-        chartConfig={chartConfig}
-        yAxisSuffix="만원"
-      />
+      {data && (
+        <LineChart
+          data={data}
+          width={Dimensions.get('window').width - 30}
+          height={220}
+          chartConfig={chartConfig}
+          yAxisSuffix="만원"
+        />
+      )}
     </View>
   );
 }

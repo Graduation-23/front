@@ -22,7 +22,6 @@ export default function UserInfoProfile({}: UserInfoProfileProps) {
       }
     }
   };
-  console.log(user?.profilePicUrl);
 
   return (
     <>

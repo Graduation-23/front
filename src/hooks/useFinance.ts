@@ -1,20 +1,17 @@
-import fetchFinance from '@/api/finance/fetchFinance';
 import financeAtom from '@/atom/financeAtom';
-import {useCallback, useEffect} from 'react';
+import {useEffect} from 'react';
 import {useRecoilState} from 'recoil';
+import {useQueryFinance} from '../query/finance';
 
 export default function useFinance() {
   const [finances, setFinances] = useRecoilState(financeAtom);
-
-  const refetch = useCallback(() => {
-    fetchFinance().then(setFinances);
-  }, [setFinances]);
+  const {data, refetch} = useQueryFinance();
 
   useEffect(() => {
-    if (!finances) {
-      refetch();
+    if (data) {
+      setFinances(data);
     }
-  }, [finances, refetch]);
+  }, [data, setFinances]);
 
   return {
     finances: finances || [],
