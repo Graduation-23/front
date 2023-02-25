@@ -11,3 +11,24 @@ export interface ResponseEntity<T = {}> {
   data: T;
   token: IToken;
 }
+
+export interface IDiary {
+  id: number;
+  title: string;
+  weather: string;
+  content: string;
+  user: string;
+  date: string;
+  imageUrls: string[];
+  thumbnailIdx: number;
+}
+
+export interface IFinance {
+  user: string;
+  id: number;
+  type: string;
+  anothername: string;
+  description: string;
+  colorcode: string;
+  version: number;
+}

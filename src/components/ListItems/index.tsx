@@ -8,26 +8,38 @@ interface Props {
   label: string;
   color: string;
   onPress?: () => void;
+  sub?: string;
+  contents?: string;
 }
 
-const ListItems = ({icon, label, color, onPress}: Props) => {
+const ListItems = ({icon, label, color, onPress, sub, contents}: Props) => {
   return (
     <>
-      <View
-        style={
-          (styles.IFrame,
-          {backgroundColor: color, borderRadius: 8, marginRight: 10})
-        }>
-        <Icon name={icon} size={20} color="white" style={styles.Icons} />
-      </View>
       <TouchableOpacity onPress={onPress} style={styles.Btn}>
+        <View
+          style={{
+            backgroundColor: color,
+            borderRadius: 8,
+            marginRight: 10,
+            width: 30,
+          }}>
+          <Icon name={icon} size={20} color="white" style={styles.Icons} />
+        </View>
         <ListItem.Content>
           <ListItem.Title style={styles.Title}>
             <AppText family="round-c" style={styles.Text}>
               {label}
             </AppText>
           </ListItem.Title>
+          {sub ? (
+            <ListItem.Subtitle style={styles.SubTitle}>
+              <AppText family="round-c" text={sub} />
+            </ListItem.Subtitle>
+          ) : (
+            <></>
+          )}
         </ListItem.Content>
+        {contents ? <AppText family="round-d" text={contents} /> : <></>}
       </TouchableOpacity>
     </>
   );
@@ -40,15 +52,19 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginRight: 10,
   },
+
   Icons: {
     padding: 5,
   },
   Btn: {
     width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   Title: {
-    width: '85%',
+    width: '100%',
   },
+  SubTitle: {},
   Text: {
     fontSize: 25,
   },

@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {errorHandler} from './error';
+import Logger from './logger';
 
 export const isEmpty = function (value: any) {
   if (!value || (typeof value === 'string' && value.length === 0)) {
@@ -15,7 +15,7 @@ export async function setItemAsync<T>(key: string, value: T) {
   }
 
   return await AsyncStorage.setItem(key, JSON.stringify(value)).catch(
-    errorHandler,
+    Logger.error,
   );
 }
 
@@ -24,7 +24,7 @@ export async function getItemAsync<T>(key: string) {
     throw Error('Async Storage Helper Error: Empty key');
   }
 
-  const value = await AsyncStorage.getItem(key).catch(errorHandler);
+  const value = await AsyncStorage.getItem(key).catch(Logger.error);
 
   if (!value) {
     throw Error('Async Storage Helper Error: Storage Value is Null');

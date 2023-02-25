@@ -1,7 +1,8 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import {Content} from '@constants/screen';
 
-import HomeScreen from '../screens/HomeScreen';
+import HomeScreen from '@screens/HomeScreen';
 import AccountBookNavigator from './AccountBookNavigator';
 import DiaryNavigator from './DiaryNavigator';
 import SettingNavigator from './SettingNavigator';
@@ -10,13 +11,18 @@ import SettingNavigator from './SettingNavigator';
 
 const Tab = createBottomTabNavigator();
 
-export default function ContentNavigator() {
+export default function ContentNavigator({route}: any) {
+  const getParamsTab = () => {
+    const tab = route.params?.tab;
+    route.params = null;
+    return tab;
+  };
   return (
     <Tab.Navigator
       screenOptions={{headerShown: false, tabBarActiveTintColor: '#3182F7'}}
-      initialRouteName="HomeNavigator">
+      initialRouteName={getParamsTab() || Content.HomeTab}>
       <Tab.Screen
-        name="HomeNavigator"
+        name={Content.HomeTab}
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: ({color, size}) => (
@@ -26,7 +32,7 @@ export default function ContentNavigator() {
         component={HomeScreen}
       />
       <Tab.Screen
-        name="DiaryNavigator"
+        name={Content.DiaryTab}
         options={{
           tabBarLabel: 'Diary',
           tabBarIcon: ({color, size}) => (
@@ -36,7 +42,7 @@ export default function ContentNavigator() {
         component={DiaryNavigator}
       />
       <Tab.Screen
-        name="BookNavigator"
+        name={Content.BookTab}
         options={{
           tabBarLabel: 'Pay',
           tabBarIcon: ({color, size}) => (
@@ -46,7 +52,7 @@ export default function ContentNavigator() {
         component={AccountBookNavigator}
       />
       <Tab.Screen
-        name="SettingNavigator"
+        name={Content.SettingTab}
         options={{
           tabBarLabel: 'Setting',
           tabBarIcon: ({color, size}) => (

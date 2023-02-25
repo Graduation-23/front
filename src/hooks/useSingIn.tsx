@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {AuthenticationType} from '../api/signIn';
+import {AuthenticationType} from '@api/signIn';
 
 export default function useSignIn() {
   const [auth, setAuth] = useState<AuthenticationType>({

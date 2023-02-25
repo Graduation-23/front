@@ -10,6 +10,9 @@ export const AppTextBase = ({
   children,
   viewStyle,
   center,
+  bold,
+  mh,
+  mv,
   ...props
 }: AppTextProps) => {
   const core = (
@@ -20,6 +23,9 @@ export const AppTextBase = ({
         textStyles.text,
         family && familyStyles[family],
         center && textStyles.center,
+        bold && textStyles.bold,
+        mh && textBlackBoxStyles.mh(mh),
+        mv && textBlackBoxStyles.mv(mv),
         style,
       ]}
     />
@@ -28,7 +34,7 @@ export const AppTextBase = ({
   return ul ? (
     <View
       children={core}
-      style={[viewStyles.base, viewStyles.underline, viewStyle]}
+      style={[viewStyles.base, ul && viewStyles.underline, viewStyle]}
     />
   ) : (
     core
@@ -37,12 +43,24 @@ export const AppTextBase = ({
 
 const textStyles = StyleSheet.create({
   text: {
-    fontSize: 14,
+    fontSize: 20,
   },
   center: {
     textAlign: 'center',
   },
+  bold: {
+    fontWeight: 'bold',
+  },
 });
+
+const textBlackBoxStyles = {
+  mh: (level: number) => ({
+    marginHorizontal: level,
+  }),
+  mv: (level: number) => ({
+    marginVertical: level,
+  }),
+};
 
 const viewStyles = StyleSheet.create({
   base: {

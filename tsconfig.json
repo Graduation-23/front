@@ -7,6 +7,45 @@
       "./node_modules/@types",
       "./types"
     ],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "src/*"
+      ],
+      "@components/*": [
+        "src/components/*"
+      ],
+      "@assets/*": [
+        "src/assets/*"
+      ],
+      "@api/*": [
+        "src/api/*"
+      ],
+      "@constants/*": [
+        "src/constants/*"
+      ],
+      "@query/*": [
+        "src/query/*"
+      ],
+      "@screens/*": [
+        "src/screens/*"
+      ],
+      "@hooks/*": [
+        "src/hooks/*"
+      ],
+      "@features/*": [
+        "src/features/*"
+      ],
+      "@atom/*": [
+        "src/atom/*"
+      ],
+      "@utils/*": [
+        "src/utils/*"
+      ],
+      "@type/*": [
+        "types/*"
+      ],
+    },
     /* Completeness */
     "skipLibCheck": true /* Skip type checking all .d.ts files. */
   }

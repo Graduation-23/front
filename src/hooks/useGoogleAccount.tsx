@@ -1,8 +1,8 @@
 import {useEffect} from 'react';
 import {useSetRecoilState} from 'recoil';
-import {setAuthHeader} from '../api/client';
-import fetchUserInfo from '../api/fetchUserInfo';
-import userAtom from '../atom/userAtom';
+import {setAuthHeader} from '@api/client';
+import fetchUserInfo from '@api/fetchUserInfo';
+import userAtom from '@atom/userAtom';
 
 export default function useGoogleAccount(params: {
   error: 'true' | 'false';

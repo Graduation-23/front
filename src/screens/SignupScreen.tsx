@@ -1,27 +1,24 @@
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
-
-import {AuthorizationStackParamList} from '../Navigator/AuthorizationNavigator';
-import {Button, Input} from '@rneui/base';
-
-import {SafeAreaView, StyleSheet, View} from 'react-native';
-import {AppText} from '../components/AppText';
-import PlainButton from '../components/PlainButton';
-import useSignUp, {SignUpDataType} from '../hooks/useSignUp';
-import signUp from '../api/signUp';
-import {setAuthHeader} from '../api/client';
-import fetchUserInfo from '../api/fetchUserInfo';
+import {SafeAreaView, StyleSheet, View, TouchableOpacity} from 'react-native';
+import {AppText} from '@components/AppText';
+import PlainButton from '@components/PlainButton';
+import useSignUp, {SignUpDataType} from '@hooks/useSignUp';
+import signUp from '@api/signUp';
+import {setAuthHeader} from '@api/client';
+import fetchUserInfo from '@api/fetchUserInfo';
 import {useSetRecoilState} from 'recoil';
-import userAtom from '../atom/userAtom';
+import userAtom from '@atom/userAtom';
+import {Auth} from '@constants/screen';
+import {useNavigation} from '@react-navigation/native';
+import PlainInput from '@/components/PlainInput';
 
 const isValid = (user: SignUpDataType) => {
   return user.correct && user.password.length > 5;
 };
 
-const SignupScreen = ({
-  navigation,
-}: NativeStackScreenProps<AuthorizationStackParamList, 'Signup'>) => {
+const SignUpScreen = ({}: any) => {
   const setUser = useSetRecoilState(userAtom);
   const {user, hlr, getUser} = useSignUp();
+  const {navigate} = useNavigation<any>();
 
   const handleSignUp = () => {
     if (isValid(user)) {
@@ -35,51 +32,49 @@ const SignupScreen = ({
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.titleStyle}>
-        <AppText.Title text="Sign Up Screen" family="round-d" />
+        <AppText.Title text="Sign Up" family="round-d" />
       </View>
 
       <View style={styles.fullWidth}>
-        <Input
+        <AppText family="round-b" text="UserID" />
+        <PlainInput
           value={user.id}
           onChangeText={hlr.setId}
-          inputStyle={styles.input}
-          label={<AppText text="아이디" />}
-          placeholder="아이디 입력..."
+          placeholder="3자 이상"
         />
-        <Input
+        <AppText family="round-b" text="Password" />
+        <PlainInput
           value={user.password}
           onChangeText={hlr.setPassword}
-          inputStyle={styles.input}
-          label={<AppText text="비밀번호" />}
           secureTextEntry={true}
-          placeholder="비밀번호 입력..."
+          placeholder="8자 이상, 특수문자 포함"
         />
-        <Input
+        <AppText family="round-b" text="Confirm Password " />
+        <PlainInput
           value={user.pwForCheck}
           onChangeText={hlr.setPwForCheck}
-          inputStyle={styles.input}
-          label={<AppText text="비밀번호 확인" />}
           secureTextEntry={true}
-          placeholder="비밀번호 재입력..."
+          placeholder="8자 이상, 특수문자 포함"
         />
-        <Input
+        <AppText family="round-b" text="Nickname" />
+        <PlainInput
           value={user.nickname}
           onChangeText={hlr.setNickname}
-          inputStyle={styles.input}
-          label={<AppText text="닉네임" />}
-          placeholder="닉네임 입력..."
+          placeholder="3자 이상"
         />
-        <Button onPress={handleSignUp}>회원가입</Button>
+        <TouchableOpacity onPress={handleSignUp} style={styles.btn}>
+          <AppText.Subtitle family="round-d" text="Sign Up" />
+        </TouchableOpacity>
       </View>
 
       <View style={styles.additionalLinkView}>
         <PlainButton
-          title={<AppText center ul text="로그인" />}
-          onPress={() => navigation.navigate('Login')}
+          title={<AppText center ul text="로그인" family="round-b" />}
+          onPress={() => navigate(Auth.Login)}
         />
         <PlainButton
-          title={<AppText center ul text="넘어가기" />}
-          onPress={() => navigation.navigate('Birth')}
+          title={<AppText center ul text="넘어가기" family="round-b" />}
+          onPress={() => navigate(Auth.Birth)}
           // onPress={() => navigation.getParent()?.navigate('ContentNavigator')}
         />
       </View>
@@ -99,18 +94,23 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  input: {
-    backgroundColor: 'white',
-    padding: 6,
-  },
   fullWidth: {
     overflow: 'hidden',
-    width: 350,
+    width: '70%',
+  },
+  btn: {
+    backgroundColor: '#bbdefb',
+    padding: 6,
+    borderRadius: 10,
+    borderWidth: 0,
+    marginBottom: 20,
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   titleStyle: {
     marginBottom: 40,
-    marginTop: -75,
   },
 });
 
-export default SignupScreen;
+export default SignUpScreen;

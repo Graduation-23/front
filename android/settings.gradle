@@ -10,4 +10,6 @@ if (settings.hasProperty("newArchEnabled") && settings.newArchEnabled == "true")
     project(":ReactAndroid:hermes-engine").projectDir = file('../node_modules/react-native/ReactAndroid/hermes-engine')
     include ':react-native-android-sms-listener'
     project(':react-native-android-sms-listener').projectDir = new File(rootProject.projectDir,'../node_modules/react-native-android-sms-listener/android')
+    include ':react-native-share'
+    project(':react-native-share').projectDir = new File(rootProject.projectDir,    '../node_modules/react-native-share/android')
 }

@@ -12,6 +12,7 @@ import {NavigationContainer} from '@react-navigation/native';
 
 import {ThemeProvider} from '@rneui/themed';
 import {ActivityIndicator} from 'react-native';
+import {QueryClient, QueryClientProvider} from 'react-query';
 //import React from 'react';
 import {RecoilRoot} from 'recoil';
 import AuthenticationSecretary from './src/features/AuthenticationSecretary';
@@ -20,18 +21,22 @@ import AppNavigator from './src/Navigator/AppNavigator';
 import {theme} from './src/theme';
 import {linking} from './src/utils/linking';
 
+const queryClient = new QueryClient();
+
 const App = () => {
   return (
     <RecoilRoot>
-      <SMSWatcher />
-      <AuthenticationSecretary />
-      <ThemeProvider theme={theme}>
-        <NavigationContainer
-          linking={linking}
-          fallback={<ActivityIndicator color="blue" size="large" />}>
-          <AppNavigator />
-        </NavigationContainer>
-      </ThemeProvider>
+      <QueryClientProvider client={queryClient}>
+        <SMSWatcher />
+        <ThemeProvider theme={theme}>
+          <NavigationContainer
+            linking={linking}
+            fallback={<ActivityIndicator color="blue" size="large" />}>
+            <AuthenticationSecretary />
+            <AppNavigator />
+          </NavigationContainer>
+        </ThemeProvider>
+      </QueryClientProvider>
     </RecoilRoot>
   );
 };

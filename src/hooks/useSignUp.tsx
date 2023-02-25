@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {NewAuthenticationType} from '../api/signUp';
+import {NewAuthenticationType} from '@api/signUp';
 
 export interface SignUpDataType extends NewAuthenticationType {
   pwForCheck: string;

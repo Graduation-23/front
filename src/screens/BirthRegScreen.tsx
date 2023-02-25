@@ -1,35 +1,38 @@
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {View, StyleSheet} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {AppText} from '../components/AppText';
-import PlainButton from '../components/PlainButton';
-import {AuthorizationStackParamList} from '../Navigator/AuthorizationNavigator';
+import {AppText} from '@components/AppText';
+import PlainButton from '@components/PlainButton';
 import {useState} from 'react';
-// import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import {format} from 'date-fns';
 import ko from 'date-fns/esm/locale/ko/index.js';
 import {Input} from '@rneui/themed';
 import DatePicker from 'react-native-date-picker';
+import {Auth} from '@constants/screen';
+import {useNavigation} from '@react-navigation/native';
+import {useUpdateBirth} from '@/query/user';
+import Utils from '@/utils';
+import {useSetRecoilState} from 'recoil';
+import userAtom from '@/atom/userAtom';
+import fetchUserInfo from '@/api/fetchUserInfo';
 
-const BirthRegScreen = ({
-  navigation,
-}: NativeStackScreenProps<AuthorizationStackParamList, 'Birth'>) => {
+const BirthRegScreen = ({}: any) => {
   const [date, setDate] = useState(new Date());
   const [visible, setVisible] = useState(false);
+  const {mutateAsync: update} = useUpdateBirth();
+  const setUser = useSetRecoilState(userAtom);
+
+  const {navigate} = useNavigation<any>();
 
   const onPressDate = () => {
     setVisible(true);
   };
 
-  // const onConfirm = (selectedDate: any) => {
-  //   setDate(selectedDate);
-  //   console.log(selectedDate);
-  //   setVisible(false);
-  // };
+  const handleBirth = () => {
+    update(Utils.formatYMD(date)).then(() => {
+      fetchUserInfo().then(setUser);
+    });
+  };
 
-  // const onCancel = () => {
-  //   setVisible(false);
-  // };
   return (
     <SafeAreaView style={styles.Container}>
       <View style={styles.Title}>
@@ -65,7 +68,7 @@ const BirthRegScreen = ({
             <AppText family="round-b" text="SKIP" style={styles.FontSize24} />
           }
           onPress={() => {
-            navigation.navigate('Card');
+            navigate(Auth.Card);
           }}
         />
         <PlainButton
@@ -73,16 +76,19 @@ const BirthRegScreen = ({
             <AppText family="round-b" text="NEXT" style={styles.FontSize24} />
           }
           onPress={() => {
-            navigation.navigate('Card');
+            handleBirth();
+            navigate(Auth.Card);
           }}
         />
       </View>
       <DatePicker // 날짜 선택 모달 라이브러리 (react-native-datepicker)
+        title="생일 선택"
         modal
         mode="date"
         open={visible}
         date={date}
-        //locale="kr"
+        confirmText="선택"
+        cancelText="취소"
         onConfirm={(d): any => {
           setVisible(false);
           setDate(d);
@@ -90,17 +96,10 @@ const BirthRegScreen = ({
         onCancel={() => {
           setVisible(false);
         }}
-      />
-      {/* <DateTimePickerModal
-        isVisible={visible}
-        onConfirm={onConfirm}
-        onChange={d => {
+        onDateChange={d => {
           console.log(d);
-          setDate(d);
         }}
-        onCancel={onCancel}
-        date={date}
-      /> */}
+      />
     </SafeAreaView>
   );
 };

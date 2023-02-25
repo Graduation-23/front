@@ -1,5 +1,6 @@
 import {TextProps} from '@rneui/base';
 import {AppTextBase} from './AppTextBase';
+import {AppTextSubtitle} from './AppTextSubtitle';
 import {AppTextTitle} from './AppTextTitle';
 
 export interface AppTextProps extends TextProps {
@@ -14,8 +15,12 @@ export interface AppTextProps extends TextProps {
   ul?: boolean;
   center?: boolean;
   viewStyle?: object;
+  bold?: boolean;
+  mh?: number;
+  mv?: number;
 }
 
 export const AppText = Object.assign(AppTextBase, {
   Title: AppTextTitle,
+  Subtitle: AppTextSubtitle,
 });
