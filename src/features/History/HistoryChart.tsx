@@ -26,8 +26,8 @@ export default function HistoryChart({costByYear}: HistoryChartProps) {
             datasets: [
               {
                 data: costByYear.map(item => item.cost / 10000),
-                // color: (opacity = 1) => `rgba(134, 65, 244, ${opacity})`, // optional
-                // strokeWidth: 2, // optional
+                color: (opacity = 1) => `rgba(134, 65, 244, ${opacity})`, // optional
+                strokeWidth: 2, // optional
               },
             ],
           }
