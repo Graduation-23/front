@@ -28,20 +28,12 @@ const WithdrawalDialog = ({visible, toggleDialog}: Props) => {
             title="취소"
             onPress={() => {
               toggleDialog();
-              console.log('취소');
             }}
           />
           <Dialog.Button
             title="탈퇴"
             onPress={() => {
               deleteUser({password: userPw});
-              // if (userPw === 'id') {
-              //   deleteUser(userPw);
-              //   toggleDialog();
-              //   console.log(userPw, '탈퇴!');
-              // } else {
-              //   console.log(userPw, '안대');
-              // }
             }}
           />
         </Dialog.Actions>

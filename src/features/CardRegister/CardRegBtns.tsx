@@ -1,12 +1,12 @@
 import {AppText} from '@components/AppText';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, ToastAndroid} from 'react-native';
 import PlainButton from '@components/PlainButton';
-import {useState} from 'react';
+import {useCallback, useState} from 'react';
 import RegCompleteDialog from './RegCompleteDialog';
-import createFinance from '@/api/finance/createFinance';
 import {useNavigation} from '@react-navigation/native';
 import {Entry, Content} from '@constants/screen';
 import CardRegAlert from './CardRegAlert';
+import {useCreateFinance} from '../../query/finance';
 
 type CardRegBtnProps = {
   from: string;
@@ -27,22 +27,27 @@ export default function CardRegBtns({
   const [alert, setAlert] = useState(false);
 
   const routeFrom = from;
+  const {mutateAsync: create} = useCreateFinance();
   const {navigate} = useNavigation<any>();
 
-  const handleRegister = () => {
-    createFinance({
+  const toggleErrModal = useCallback(() => {
+    setAlert(prev => !prev);
+  }, [setAlert]);
+
+  const handleRegister = useCallback(() => {
+    create({
       type: type,
       description: cardDes,
       anothername: cardNick,
       colorcode: colorcode,
-    }).catch(() => {
-      toggleErrModal();
-    });
-    console.log('카드 등록');
-  };
-  const toggleErrModal = () => {
-    setAlert(!alert);
-  };
+    })
+      .then(() => {
+        ToastAndroid.show('추가 완료', ToastAndroid.SHORT);
+      })
+      .catch(() => {
+        toggleErrModal();
+      });
+  }, [type, cardDes, cardNick, colorcode, toggleErrModal, create]);
 
   const toggleCompModal = () => {
     setVisible(!visible);
@@ -53,10 +58,15 @@ export default function CardRegBtns({
         <View style={styles.Btns}>
           <PlainButton
             title={
+              <AppText family="round-b" text="추가" style={styles.FontSize24} />
+            }
+            onPress={handleRegister}
+          />
+          <PlainButton
+            title={
               <AppText family="round-b" text="완료" style={styles.FontSize24} />
             }
             onPress={() => {
-              handleRegister();
               navigate(Entry.Content, {tab: Content.SettingTab});
             }}
           />

@@ -32,18 +32,12 @@ export default function HomeScreen() {
     setWVisible(!wVisible);
   };
 
-  // const onCapture = useCallback((uri: any) => {
-  //   console.log('캡처 할거야');
-  //   onShare(uri);
-  // }, []);
-
   const onCapture = () => {
     try {
       if (captureRef.current !== undefined) {
         captureRef.current
           ?.capture()
           .then((uri: any) => {
-            console.log('캡쳐하고싶다.', uri);
             onShare(uri);
           })
           .catch((err: any) => console.log('Error : ', err));
@@ -58,10 +52,7 @@ export default function HomeScreen() {
       Share.open({
         url: Platform.OS === 'ios' ? `file://${uri}` : uri,
       });
-      console.log('저장 성공!');
-    } catch {
-      console.log('저장 실패!');
-    }
+    } catch {}
   };
 
   return (

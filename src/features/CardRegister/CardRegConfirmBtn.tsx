@@ -26,7 +26,6 @@ export default function CardRegConfirmBtn({
       anothername: cardNick,
       colorcode: colorcode,
     });
-    console.log('카드 등록');
   };
 
   return (

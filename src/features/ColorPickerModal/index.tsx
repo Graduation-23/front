@@ -19,8 +19,6 @@ const ColorPickerModal = ({
   selectColor,
 }: PickerProps) => {
   const onClick = () => {
-    console.log('누름');
-    console.log('color : ', {icolor});
     toggle();
     selectColor(icolor);
   };
