@@ -14,7 +14,7 @@ export const linking: LinkingOptions<AppRootParamList> = {
         path: 'authenticate',
       },
       ContentNavigator: {
-        path: 'content',
+        path: 'home',
       },
     },
   },

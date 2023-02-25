@@ -1,14 +1,24 @@
 import {AppText} from '@/components/AppText';
 import ExternalLinkButton from '@/components/ExternalLinkButton';
 import {Button, Divider} from '@rneui/base';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, ToastAndroid, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useRecoilValue} from 'recoil';
 import userAtom from '@atom/userAtom';
+import {useCallback} from 'react';
+import cutOpenbank from '../api/cutOpenbank';
+import {useCheckOpenbank} from '@/query/openbank';
 
 const LinkPaymentScreen = () => {
   const user = useRecoilValue(userAtom);
 
+  const {data: isLink} = useCheckOpenbank();
+
+  const handlePressCut = useCallback(() => {
+    cutOpenbank().then(() => {
+      ToastAndroid.show('연동 취소 완료', ToastAndroid.SHORT);
+    });
+  }, []);
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
@@ -22,7 +32,12 @@ const LinkPaymentScreen = () => {
         </ExternalLinkButton>
         {/* <Button buttonStyle={styles.linkButton}>연동하기</Button> */}
         <Divider />
-        <Button buttonStyle={styles.cancelButton}>취소하기</Button>
+        <Button
+          disabled={!isLink}
+          onPress={handlePressCut}
+          buttonStyle={styles.cancelButton}>
+          취소하기
+        </Button>
       </View>
     </SafeAreaView>
   );
