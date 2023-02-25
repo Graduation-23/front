@@ -3,11 +3,33 @@ import {useMonthGoal} from '@/query/goal';
 import {IGoal} from '@type/api';
 import {View, StyleSheet} from 'react-native';
 import {bodyDatas, heads} from './constants';
+import {useState, useEffect} from 'react';
 
 type GoalGridProps = {};
 
 export default function GoalGrid({}: GoalGridProps) {
-  const {data} = useMonthGoal();
+  const {data: month} = useMonthGoal();
+  //const {data: week} = useWeekGoal();
+  const [mState, setMState] = useState('');
+
+  useEffect(() => {
+    if (month !== undefined) {
+      switch (month[0].state) {
+        case 'proceeding':
+          return setMState('진행중');
+        case 'success':
+          return setMState('성공');
+        case 'failed':
+          return setMState('실패');
+        default:
+          return setMState('오류');
+      }
+    }
+    // if(week !== undefined) {
+
+    // }
+  }, [month]);
+
   return (
     <>
       {/* <ImageBackground source={backgroundBottom}> */}
@@ -20,12 +42,12 @@ export default function GoalGrid({}: GoalGridProps) {
           ))}
         </View>
         <View>
-          {data?.map((month: IGoal) => (
-            <View>
+          {month?.map((mon: IGoal) => (
+            <View key={mon.id} style={styles.GridContents}>
               <AppText family="round-b" text="월간" />
-              <AppText family="round-b" text={month.month.toString()} />
-              <AppText family="round-b" text={month.amount.toString()} />
-              <AppText family="round-b" text={month.state} />
+              <AppText family="round-b" text={mon.month.toString() + '월'} />
+              <AppText family="round-b" text={mon.amount.toString() + '원'} />
+              <AppText family="round-b">{mState}</AppText>
             </View>
           ))}
         </View>
@@ -68,6 +90,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'space-around',
     paddingVertical: 5,
+    alignItems: 'center',
   },
   GridDatas: {
     width: 100,

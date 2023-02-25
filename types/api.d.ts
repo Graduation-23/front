@@ -43,4 +43,5 @@ export interface IGoal {
   end: Date;
   month: number;
   year: number;
+  weekIds: number;
 }
