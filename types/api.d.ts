@@ -32,3 +32,14 @@ export interface IFinance {
   colorcode: string;
   version: number;
 }
+
+export interface IGoal {
+  user: string;
+  name: string;
+  amount: number;
+  state: string;
+  start: Date;
+  end: Date;
+  month: number;
+  year: number;
+}

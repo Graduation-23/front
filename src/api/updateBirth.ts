@@ -8,7 +8,6 @@ export default function updateBirth(date: string) {
       .put(`/user/birth?date=` + date)
       .then(response => {
         resolve(response.data);
-        console.log('성공date : ', date);
       })
       .catch(logger.error);
   });
