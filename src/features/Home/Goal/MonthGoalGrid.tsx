@@ -2,7 +2,7 @@ import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import {AppText} from '@/components/AppText';
 import {useMonthGoal} from '@/query/goal';
 import {IGoal} from '@type/api';
-import {useState, useEffect} from 'react';
+import {useState, useEffect, Fragment} from 'react';
 import GoalRegDialog from './GoalRegDialog';
 import WeekGoalGrid from './WeekGoalGrid';
 
@@ -11,6 +11,7 @@ export default function MonthGoalGrid() {
 
   const [mState, setMState] = useState('');
   const [mVisible, setMVisible] = useState(false);
+  console.log(month);
 
   const handleMonth = () => {
     setMVisible(!mVisible);
@@ -38,15 +39,15 @@ export default function MonthGoalGrid() {
   return (
     <>
       {month?.map((mon: IGoal, index: any) => (
-        <>
-          <View key={index} style={styles.GridContents}>
+        <Fragment key={index}>
+          <View style={styles.GridContents}>
             <AppText family="round-b" text="월간" />
             <AppText family="round-b" text={mon.month.toString() + '월'} />
             <AppText family="round-b" text={mon.amount.toString() + '원'} />
             <AppText family="round-b">{mState}</AppText>
           </View>
           <WeekGoalGrid monthId={mon.id} />
-        </>
+        </Fragment>
       ))}
       <View style={styles.Btn}>
         {month !== undefined && month[0] === undefined && (
@@ -76,5 +77,7 @@ const styles = StyleSheet.create({
   },
   Btn: {
     marginLeft: 10,
+    marginTop: 10,
+    height: 100,
   },
 });

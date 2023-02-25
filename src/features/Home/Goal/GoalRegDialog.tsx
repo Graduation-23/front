@@ -2,9 +2,9 @@ import {AppText} from '@/components/AppText';
 import {Dialog, Input} from '@rneui/themed';
 import {View} from 'react-native';
 import {useState} from 'react';
-import {useRequestMonthGoal} from '@/query/goal';
+import {useRequestMonthGoal, useRequestWeekGoal} from '@/query/goal';
 import fetchMonthGoal from '@/api/goal/fetchMonthGoal';
-import requestWeekGoal from '@/api/goal/requestWeekGoal';
+//import requestWeekGoal from '@/api/goal/requestWeekGoal';
 
 export type GoalRegDialogProps = {
   visible: boolean;
@@ -20,13 +20,13 @@ export default function GoalRegDialog({
   const [name, setName] = useState('');
   const [amount, setAmount] = useState('');
   const {mutateAsync: requestMonthGoal} = useRequestMonthGoal();
-  //const {mutateAsync: requestWeekGoal} = useRequestWeekGoal();
+  const {mutateAsync: requestGoal} = useRequestWeekGoal();
 
   const handleGoal = () => {
     select === '월간'
       ? requestMonthGoal({name: name, amount: parseInt(amount), weekIds: []})
       : fetchMonthGoal().then(res =>
-          requestWeekGoal({
+          requestGoal({
             id: res[0].id,
             name: name,
             amount: parseInt(amount),
