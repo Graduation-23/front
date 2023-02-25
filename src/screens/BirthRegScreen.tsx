@@ -113,9 +113,6 @@ const BirthRegScreen = ({route}: any) => {
         onCancel={() => {
           setVisible(false);
         }}
-        onDateChange={d => {
-          console.log(d);
-        }}
       />
     </SafeAreaView>
   );

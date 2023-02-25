@@ -4,22 +4,20 @@ import {AppText} from '../../components/AppText';
 import {useState, useCallback} from 'react';
 import {useRecoilState} from 'recoil';
 import userAtom from '../../atom/userAtom';
-import {useFinance} from '../../query/finance';
 import UserInfoCardList from './UserInfoCardList';
 import {IFinance} from '@type/api';
 import DatePicker from 'react-native-date-picker';
 import Utils from '@/utils';
 import {useUpdateBirth} from '@/query/user';
 import fetchUserInfo from '@/api/fetchUserInfo';
+import useFinance from '@/hooks/useFinance';
 
 export default function UserInfoContentsAccordion() {
   const [user, setUser] = useRecoilState(userAtom);
   const [expanded, setExpanded] = useState(false);
-  const {data} = useFinance();
+  const {finances: data} = useFinance();
   const [visible, setVisible] = useState(false);
   const {mutateAsync} = useUpdateBirth();
-
-  console.log(user);
 
   const handleChangeBirth = useCallback(
     (date: Date) => {

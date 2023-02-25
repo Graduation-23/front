@@ -47,7 +47,7 @@ export default function UserInfoCardList({
         ) : (
           <ListItems icon="payments" label={label} color={icolor} sub={des} />
         )}
-        <ListItems icon={icon} label={label} color={icolor} sub={des} />
+        {/* <ListItems icon={icon} label={label} color={icolor} sub={des} /> */}
       </ListItem.Swipeable>
       <UserInfoDeleteCardDialog
         visible={visible}
