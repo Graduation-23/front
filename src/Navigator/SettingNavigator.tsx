@@ -21,6 +21,9 @@ export default function SettingNavigator() {
       <Stack.Screen
         name={Setting.LinkUpPayment}
         component={LinkPaymentScreen}
+        options={{
+          title: '결제내역 연동',
+        }}
       />
       {/* 회원 정보 */}
       <Stack.Screen name={Setting.UserInfo} component={UserInfoScreen} />
