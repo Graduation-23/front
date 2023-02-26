@@ -45,3 +45,10 @@ export interface IGoal {
   year: number;
   weekIds: number;
 }
+
+export interface ITransaction {
+  amount: number;
+  bankName: string;
+  content: string;
+  transactionType: string;
+}
