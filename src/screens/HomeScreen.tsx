@@ -67,7 +67,7 @@ export default function HomeScreen() {
               </View>
               <View style={styles.PlantContainer}>
                 <GrowingPlant kind="tree" level={9} type="spring_tree" />
-                <GrowingPlant kind="flower" level={2} type="marigold" />
+                <GrowingPlant kind="flower" level={9} type="marigold" />
               </View>
             </View>
           </ViewShot>

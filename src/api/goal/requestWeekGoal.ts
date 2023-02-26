@@ -2,15 +2,14 @@ import client from '../client';
 
 interface WeekGoal {
   id: number;
-  name: string;
   amount: number;
 }
 
 //body
-export default function requestWeekGoal({id, name, amount}: WeekGoal) {
+export default function requestWeekGoal({id, amount}: WeekGoal) {
   return new Promise((resolve, reject) => {
     client
-      .post('/goal/week?goalMonthId=' + id, {name, amount})
+      .post('/goal/week?goalMonthId=' + id, {amount})
       .then(response => {
         resolve(response.data);
         console.log('requestWeekGoal 성공', response.data);

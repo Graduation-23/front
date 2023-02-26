@@ -159,7 +159,7 @@ export const TreeType: {[key in ITree]: ImageSourcePropType} = {
   winter_tree,
 };
 
-export const FlowerImage = [
+export const FlowerGrowImage = [
   flower_growings0,
   flower_growings1,
   flower_growings2,
@@ -169,7 +169,7 @@ export const FlowerImage = [
   flower_growings6,
 ];
 
-export const TreeImage = [
+export const TreeGrowImage = [
   tree_growings0,
   tree_growings1,
   tree_growings2,
@@ -179,4 +179,53 @@ export const TreeImage = [
   tree_growings6,
   tree_growings7,
   tree_growings8,
+];
+
+export const FlowerImage = [
+  acacia,
+  apricot,
+  azalea,
+  bellflower,
+  black_lily,
+  blue_bonnet,
+  canola_flowers,
+  cattleya,
+  cosmos,
+  cotton_flower,
+  dandelion_fluff,
+  gardenia_flower,
+  hyacinth,
+  lavender,
+  lily,
+  marigold,
+  morning_glory,
+  pansy,
+  plum_blossom,
+  poppy,
+  red_rose,
+  tulip,
+  veronica_persica,
+  white_clover,
+  white_hibiscus,
+  white_hydrangea,
+];
+
+export const TreeImage = [
+  autumn_tree,
+  bamboo,
+  banana_tree,
+  baobab_tree,
+  birch,
+  cedar,
+  cherry_blossom,
+  chestnut_tree,
+  christmas_tree,
+  loquat_tree,
+  maple_tree,
+  sequoia,
+  spring_tree,
+  summer_tree,
+  wedding_cake_tree,
+  willow,
+  winter_tree,
 ];

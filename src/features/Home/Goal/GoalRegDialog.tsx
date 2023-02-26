@@ -17,27 +17,21 @@ export default function GoalRegDialog({
   toggleDialog,
   select,
 }: GoalRegDialogProps) {
-  const [name, setName] = useState('');
   const [amount, setAmount] = useState('');
   const {mutateAsync: requestMonthGoal} = useRequestMonthGoal();
   const {mutateAsync: requestGoal} = useRequestWeekGoal();
 
   const handleGoal = () => {
     select === '월간'
-      ? requestMonthGoal({name: name, amount: parseInt(amount), weekIds: []})
+      ? requestMonthGoal({amount: parseInt(amount), weekIds: []})
       : fetchMonthGoal().then(res =>
           requestGoal({
             id: res[0].id,
-            name: name,
             amount: parseInt(amount),
           })
             .then(() => console.log('성공'))
             .catch(error => console.log(error)),
         );
-  };
-
-  const onChangeName = (text: string) => {
-    setName(text);
   };
 
   const onChangeAmount = (text: string) => {
@@ -49,11 +43,6 @@ export default function GoalRegDialog({
       <Dialog isVisible={visible}>
         <Dialog.Title title={select + ' 목표 설정'} />
         <AppText family="round-d" text="목표 설정 이후 수정은 불가능합니다!" />
-        <Input
-          placeholder="목표 이름"
-          value={name}
-          onChangeText={onChangeName}
-        />
         <Input
           placeholder="---원"
           value={amount}
