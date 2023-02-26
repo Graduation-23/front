@@ -1,11 +1,10 @@
 import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import {AppText} from '@/components/AppText';
-import {useWeekGoal, useWeekGoalState} from '@/query/goal';
+import {useWeekGoal} from '@/query/goal';
 import {IGoal} from '@type/api';
 import {useState} from 'react';
 import GoalRegDialog from './GoalRegDialog';
 import {FlowerImage} from '@/utils/plant';
-//import {Image, ImageSourcePropType} from 'react-native';
 import {useSetRecoilState} from 'recoil';
 import flowerAtom from '@/atom/flowerAtom';
 
@@ -14,24 +13,21 @@ type WeekGoalGridProps = {
   weekId: number;
 };
 
-export default function WeekGoalGrid({monthId, weekId}: WeekGoalGridProps) {
+export default function WeekGoalGrid({monthId}: WeekGoalGridProps) {
   const {data: week} = useWeekGoal(monthId);
-  const {data: weekState} = useWeekGoalState(weekId);
-  console.log('week :', week);
-
-  //const [flower, setFlower] = useState<ImageSourcePropType>();
-  const setF = useSetRecoilState(flowerAtom);
+  //const {data: weekState} = useWeekGoalState(weekId);
+  //console.log('week :', week);
   const [wVisible, setWVisible] = useState(false);
+
+  const setFlower = useSetRecoilState(flowerAtom);
 
   const randomFlower = () => {
     const random = Math.floor(Math.random() * FlowerImage.length);
-    //setFlower(FlowerImage[random]);
-    //console.log('flowerrandom:', FlowerImage[random]);
-    setF(FlowerImage[random]);
+    setFlower(FlowerImage[random]);
   };
 
   const handleWeek = () => {
-    //TODO:꽃 랜덤 지정
+    randomFlower();
     setWVisible(!wVisible);
   };
 
@@ -45,11 +41,7 @@ export default function WeekGoalGrid({monthId, weekId}: WeekGoalGridProps) {
           <AppText family="round-b" text={we.state} />
         </View>
       ))}
-      <AppText family="round-b" text={weekState?.msg} />
       <View style={styles.Btn}>
-        <TouchableOpacity onPress={randomFlower}>
-          <AppText>꽃 랜덤</AppText>
-        </TouchableOpacity>
         {week !== undefined && week[0] === undefined && (
           <TouchableOpacity onPress={handleWeek}>
             <AppText family="round-b" text="주간목표 등록하기" />

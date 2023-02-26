@@ -6,14 +6,15 @@ import {useState, Fragment} from 'react';
 import GoalRegDialog from './GoalRegDialog';
 import WeekGoalGrid from './WeekGoalGrid';
 import {TreeImage} from '@/utils/plant';
-import {Image, ImageSourcePropType} from 'react-native';
+import {useSetRecoilState} from 'recoil';
+import treeAtom from '@/atom/treeAtom';
 
 export default function MonthGoalGrid() {
   const {data: month} = useMonthGoal();
-  const [tree, setTree] = useState<ImageSourcePropType>();
-
   const [mVisible, setMVisible] = useState(false);
-  console.log('month : ', month);
+  //console.log('month : ', month);
+
+  const setTree = useSetRecoilState(treeAtom);
 
   const randomTree = () => {
     const random = Math.floor(Math.random() * TreeImage.length);
@@ -21,7 +22,7 @@ export default function MonthGoalGrid() {
   };
 
   const handleMonth = () => {
-    // TODO:나무 랜덤 지정
+    randomTree();
     setMVisible(!mVisible);
   };
 
@@ -39,16 +40,12 @@ export default function MonthGoalGrid() {
         </Fragment>
       ))}
       <View style={styles.Btn}>
-        <TouchableOpacity onPress={randomTree}>
-          <AppText>나무 랜덤</AppText>
-        </TouchableOpacity>
         {month !== undefined && month[0] === undefined && (
           <TouchableOpacity onPress={handleMonth}>
             <AppText family="round-b" text="월간목표 등록하기" />
           </TouchableOpacity>
         )}
       </View>
-      <Image source={tree} />
 
       <GoalRegDialog
         visible={mVisible}

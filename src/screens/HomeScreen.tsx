@@ -17,11 +17,14 @@ import GoalGrid from '@/features/Home/Goal/GoalGrid';
 import backgroundImage from '../assets/backgroundImage.jpg';
 import {useRecoilValue} from 'recoil';
 import flowerAtom from '@/atom/flowerAtom';
+import treeAtom from '@/atom/treeAtom';
 
 export default function HomeScreen() {
   const captureRef = useRef<any>(null);
   const flower = useRecoilValue(flowerAtom);
+  const tree = useRecoilValue(treeAtom);
   console.log('flower:', flower);
+  //console.log('tree:', tree);
 
   const date = new Date();
 
@@ -71,7 +74,7 @@ export default function HomeScreen() {
                 </TouchableOpacity>
               </View>
               <View style={styles.PlantContainer}>
-                {/* <GrowingPlant kind="tree" level={9} type="spring_tree" /> */}
+                <GrowingPlant kind="tree" level={9} type={tree} />
                 <GrowingPlant kind="flower" level={9} type={flower} />
               </View>
             </View>

@@ -1,9 +1,9 @@
 import {atom} from 'recoil';
-import {ITree} from '@/utils/plant';
+import {TreeImage} from '@/utils/plant';
 
-const treeAtom = atom<ITree[] | null>({
+const treeAtom = atom<string>({
   key: 'treeAtom',
-  default: null,
+  default: TreeImage[0],
 });
 
 export default treeAtom;

@@ -1,5 +1,5 @@
 export type LevelImageProps = {
-  type: number;
+  type: string;
   level: number;
   width?: number;
   height?: number;

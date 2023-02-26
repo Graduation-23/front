@@ -1,7 +1,7 @@
 import {atom} from 'recoil';
-import {FlowerImage, IFlower, ITree} from '@/utils/plant';
+import {FlowerImage} from '@/utils/plant';
 
-const flowerAtom = atom<IFlower | ITree>({
+const flowerAtom = atom<string>({
   key: 'flowerAtom',
   default: FlowerImage[0],
 });
