@@ -23,8 +23,6 @@ export default function HomeScreen() {
   const captureRef = useRef<any>(null);
   const flower = useRecoilValue(flowerAtom);
   const tree = useRecoilValue(treeAtom);
-  console.log('flower:', flower);
-  //console.log('tree:', tree);
 
   const date = new Date();
 
@@ -93,6 +91,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: 20,
     marginBottom: 10,
     minHeight: '100%',
   },

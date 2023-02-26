@@ -10,14 +10,12 @@ export default function GoalGrid() {
       <View style={styles.GridContainer}>
         <View style={styles.GridHeaders}>
           {heads.map((head, index) => (
-            <View key={index}>
+            <View key={index} style={styles.Items}>
               <AppText.Subtitle family="round-b" text={head} />
             </View>
           ))}
         </View>
-        <View>
-          <MonthGoalGrid />
-        </View>
+        <MonthGoalGrid />
       </View>
     </>
   );
@@ -38,5 +36,9 @@ const styles = StyleSheet.create({
     borderBottomColor: 'black',
     paddingVertical: 5,
     height: 35,
+  },
+  Items: {
+    width: '25%',
+    alignItems: 'center',
   },
 });
