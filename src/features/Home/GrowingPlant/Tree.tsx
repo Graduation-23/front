@@ -1,11 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import {Image} from 'react-native';
-import {
-  ITree,
-  MAX_TREE_LEVEL,
-  TreeGrowImage,
-  TreeType,
-} from '../../../utils/plant';
+import {MAX_TREE_LEVEL, TreeGrowImage, TreeImage} from '../../../utils/plant';
 import {LevelImageProps} from './PlantLevel';
 
 export default function Tree({
@@ -18,7 +13,7 @@ export default function Tree({
     return (
       <Image
         style={{width, height}}
-        source={TreeType[type as ITree]}
+        source={TreeImage[type]}
         resizeMode="contain"
       />
     );

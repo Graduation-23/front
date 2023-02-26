@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import {useRef} from 'react';
 import {
   Platform,
@@ -14,9 +15,13 @@ import Share from 'react-native-share';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import GoalGrid from '@/features/Home/Goal/GoalGrid';
 import backgroundImage from '../assets/backgroundImage.jpg';
+import {useRecoilValue} from 'recoil';
+import flowerAtom from '@/atom/flowerAtom';
 
 export default function HomeScreen() {
   const captureRef = useRef<any>(null);
+  const flower = useRecoilValue(flowerAtom);
+  console.log('flower:', flower);
 
   const date = new Date();
 
@@ -66,8 +71,8 @@ export default function HomeScreen() {
                 </TouchableOpacity>
               </View>
               <View style={styles.PlantContainer}>
-                <GrowingPlant kind="tree" level={9} type="spring_tree" />
-                <GrowingPlant kind="flower" level={9} type="marigold" />
+                {/* <GrowingPlant kind="tree" level={9} type="spring_tree" /> */}
+                <GrowingPlant kind="flower" level={9} type={flower} />
               </View>
             </View>
           </ViewShot>

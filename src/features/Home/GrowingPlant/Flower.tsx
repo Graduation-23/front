@@ -2,8 +2,7 @@
 import {Image} from 'react-native';
 import {
   FlowerGrowImage,
-  FlowerType,
-  IFlower,
+  FlowerImage,
   MAX_FLOWER_LEVEL,
 } from '../../../utils/plant';
 import {LevelImageProps} from './PlantLevel';
@@ -18,7 +17,7 @@ export default function Flower({
     return (
       <Image
         style={{width, height}}
-        source={FlowerType[type as IFlower]}
+        source={FlowerImage[type]}
         resizeMode="contain"
       />
     );

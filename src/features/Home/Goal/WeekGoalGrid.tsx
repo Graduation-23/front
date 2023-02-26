@@ -5,7 +5,9 @@ import {IGoal} from '@type/api';
 import {useState} from 'react';
 import GoalRegDialog from './GoalRegDialog';
 import {FlowerImage} from '@/utils/plant';
-import {Image, ImageSourcePropType} from 'react-native';
+//import {Image, ImageSourcePropType} from 'react-native';
+import {useSetRecoilState} from 'recoil';
+import flowerAtom from '@/atom/flowerAtom';
 
 type WeekGoalGridProps = {
   monthId: number;
@@ -17,13 +19,15 @@ export default function WeekGoalGrid({monthId, weekId}: WeekGoalGridProps) {
   const {data: weekState} = useWeekGoalState(weekId);
   console.log('week :', week);
 
-  const [flower, setFlower] = useState<ImageSourcePropType>();
-
+  //const [flower, setFlower] = useState<ImageSourcePropType>();
+  const setF = useSetRecoilState(flowerAtom);
   const [wVisible, setWVisible] = useState(false);
 
   const randomFlower = () => {
     const random = Math.floor(Math.random() * FlowerImage.length);
-    setFlower(FlowerImage[random]);
+    //setFlower(FlowerImage[random]);
+    //console.log('flowerrandom:', FlowerImage[random]);
+    setF(FlowerImage[random]);
   };
 
   const handleWeek = () => {
@@ -52,7 +56,7 @@ export default function WeekGoalGrid({monthId, weekId}: WeekGoalGridProps) {
           </TouchableOpacity>
         )}
       </View>
-      <Image source={flower} />
+      {/* <Image source={flower} /> */}
 
       <GoalRegDialog
         visible={wVisible}
