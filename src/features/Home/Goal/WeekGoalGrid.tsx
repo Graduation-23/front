@@ -35,10 +35,18 @@ export default function WeekGoalGrid({monthId}: WeekGoalGridProps) {
     <>
       {week?.map((we: IGoal, index) => (
         <View key={index} style={styles.GridContents}>
-          <AppText family="round-b" text="주간" />
-          <AppText family="round-b" text={we.week.toString() + '주차'} />
-          <AppText family="round-b" text={we.amount.toString() + '원'} />
-          <AppText family="round-b" text={we.state} />
+          <View style={styles.Items}>
+            <AppText family="round-b" text="주간" />
+          </View>
+          <View style={styles.Items}>
+            <AppText family="round-b" text={we.week.toString() + '주차'} />
+          </View>
+          <View style={styles.Items}>
+            <AppText family="round-b" text={we.amount.toString() + '원'} />
+          </View>
+          <View style={styles.Items}>
+            <AppText family="round-b" text={we.state} />
+          </View>
         </View>
       ))}
       <View style={styles.Btn}>
@@ -64,11 +72,16 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     flexDirection: 'row',
     display: 'flex',
-    justifyContent: 'space-around',
-    paddingVertical: 5,
+    justifyContent: 'space-evenly',
     alignItems: 'center',
+    width: '100%',
+    paddingVertical: 5,
   },
   Btn: {
     marginLeft: 10,
+  },
+  Items: {
+    width: '25%',
+    alignItems: 'center',
   },
 });
