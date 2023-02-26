@@ -34,9 +34,9 @@ export default function WeekGoalGrid({monthId}: WeekGoalGridProps) {
   return (
     <>
       {week?.map((we: IGoal, index) => (
-        <View key={we.id} style={styles.GridContents}>
+        <View key={index} style={styles.GridContents}>
           <AppText family="round-b" text="주간" />
-          <AppText family="round-b" text={index + 1 + '주차'} />
+          <AppText family="round-b" text={we.week.toString() + '주차'} />
           <AppText family="round-b" text={we.amount.toString() + '원'} />
           <AppText family="round-b" text={we.state} />
         </View>
