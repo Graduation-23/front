@@ -33,16 +33,22 @@ export interface IFinance {
   version: number;
 }
 
-export interface IGoal {
-  id: number;
-  user: string;
-  name: string;
+export interface IMonthGoal {
   amount: number;
-  state: string;
-  start: Date;
-  end: Date;
+  id: number;
   month: number;
+  name: string;
+  state: string;
+  user: string;
+  weekIds: [];
   year: number;
-  weekIds: number;
+}
+
+export interface IWeekGoal {
+  amount: number;
+  goalMonth: number;
+  id: number;
+  name: string;
+  state: string;
   week: number;
 }

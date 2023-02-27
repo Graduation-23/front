@@ -16,7 +16,7 @@ type WeekGoalGridProps = {
 export default function WeekGoalGrid({monthId}: WeekGoalGridProps) {
   const {data: week} = useWeekGoal(monthId);
   //const {data: weekState} = useWeekGoalState(weekId);
-  //console.log('week :', week);
+  console.log('week :', week);
   const [wVisible, setWVisible] = useState(false);
 
   const setFlower = useSetRecoilState(flowerAtom);

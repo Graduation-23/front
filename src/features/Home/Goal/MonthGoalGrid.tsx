@@ -12,7 +12,7 @@ import treeAtom from '@/atom/treeAtom';
 export default function MonthGoalGrid() {
   const {data: month} = useMonthGoal();
   const [mVisible, setMVisible] = useState(false);
-  //console.log('month : ', month);
+  console.log('month : ', month);
 
   const setTree = useSetRecoilState(treeAtom);
 

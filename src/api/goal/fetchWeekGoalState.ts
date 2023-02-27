@@ -2,7 +2,7 @@ import client from '../client';
 import {GoalState} from './fetchMonthGoalState';
 
 export default function fetchWeekGoalState(weekId: number) {
-  return new Promise<GoalState>((resolve, reject) => {
+  return new Promise<GoalState>(resolve => {
     client
       .get('/goal/week/state?weekId=' + weekId)
       .then(response => {
@@ -10,7 +10,7 @@ export default function fetchWeekGoalState(weekId: number) {
         console.log('goalWeekState 성공 ', response.data.data);
       })
       .catch(err => {
-        console.log('안돼', err);
+        console.log('안돼', err, 'id:', weekId);
       });
   });
 }

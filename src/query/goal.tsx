@@ -34,15 +34,26 @@ export const useRequestMonthGoal = () => {
   return mutation;
 };
 
-export const useMonthGoalState = () => {
-  return useQuery(['goal'], () => fetchMonthGoalState);
+export const useMonthGoalState = (id: number) => {
+  return useQuery(['goal', id], () => fetchMonthGoalState(id));
 };
 
-export const useWeekGoal = (id: number, enableRefetching: boolean = true) => {
+export const useWeekGoal = (
+  id: number,
+  enableRefetching: boolean = true,
+  weekId: number,
+) => {
   return useQuery(['goal', id], () => fetchWeekGoal(id), {
     enabled: enableRefetching,
     onSuccess: () => {
-      fetchWeekGoalState(id);
+      fetchWeekGoalState(weekId)
+        .then(() => {
+          console.log('성공');
+        })
+        .catch(() => console.log('실패'));
+    },
+    onError: () => {
+      console.log('useWeekGoal 실패');
     },
   });
 };
@@ -63,5 +74,12 @@ export const useRequestWeekGoal = () => {
 };
 
 export const useWeekGoalState = (id: number) => {
-  return useQuery(['goal', id], () => fetchWeekGoalState(id));
+  return useQuery(['goal', id], () => fetchWeekGoalState(id), {
+    onSuccess: () => {
+      console.log('weekGoalState 조회 성공');
+    },
+    onError: () => {
+      console.log('weekGoalState 조회 실패');
+    },
+  });
 };
