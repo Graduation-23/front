@@ -46,3 +46,10 @@ export interface IGoal {
   weekIds: number;
   week: number;
 }
+
+export interface ITransaction {
+  amount: number;
+  bankName: string;
+  content: string;
+  transactionType: string;
+}

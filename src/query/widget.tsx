@@ -1,3 +1,4 @@
+import deleteWidget from '@/api/widget/deleteWidget';
 import fetchWidget from '@/api/widget/fetchWidget';
 import fetchWidgetById from '@/api/widget/fetchWidgetById';
 import fetchWidgetByRange, {
@@ -47,6 +48,14 @@ export const useUpdateWidget = (id: number) => {
   const queryClient = useQueryClient();
 
   return useMutation([GROUP, id], updateWidget, {
+    onSuccess: () => queryClient.invalidateQueries(GROUP),
+  });
+};
+
+export const useDeleteWidget = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation<unknown, unknown, number>([GROUP], deleteWidget, {
     onSuccess: () => queryClient.invalidateQueries(GROUP),
   });
 };
