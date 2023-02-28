@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import {useSetRecoilState} from 'recoil';
 import {setAuthHeader} from '@api/client';
-import fetchUserInfo from '@api/fetchUserInfo';
+import fetchUserInfo from '@/api/fetchUserInfo';
 import signIn from '@api/signIn';
 import userAtom from '@atom/userAtom';
 import {AppText} from '@components/AppText';

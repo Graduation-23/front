@@ -33,6 +33,8 @@ export interface IFinance {
   version: number;
 }
 
+export interface IGoal {}
+
 export interface IMonthGoal {
   amount: number;
   id: number;

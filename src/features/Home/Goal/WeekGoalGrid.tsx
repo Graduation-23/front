@@ -1,68 +1,32 @@
-import {View, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import {AppText} from '@/components/AppText';
 import {useWeekGoal} from '@/query/goal';
-import {IGoal} from '@type/api';
-import {useState} from 'react';
-import GoalRegDialog from './GoalRegDialog';
-import {FlowerImage} from '@/utils/plant';
-import {useSetRecoilState} from 'recoil';
-import flowerAtom from '@/atom/flowerAtom';
 
 type WeekGoalGridProps = {
-  monthId: number;
   weekId: number;
 };
 
-export default function WeekGoalGrid({monthId}: WeekGoalGridProps) {
-  const {data: week} = useWeekGoal(monthId);
-  //const {data: weekState} = useWeekGoalState(weekId);
-  console.log('week :', week);
-  const [wVisible, setWVisible] = useState(false);
-
-  const setFlower = useSetRecoilState(flowerAtom);
-
-  const randomFlower = () => {
-    const random = Math.floor(Math.random() * FlowerImage.length);
-    setFlower(FlowerImage[random]);
-  };
-
-  const handleWeek = () => {
-    randomFlower();
-    setWVisible(!wVisible);
-  };
+export default function WeekGoalGrid({weekId}: WeekGoalGridProps) {
+  const {data: weeks} = useWeekGoal(weekId);
 
   return (
     <>
-      {week?.map((we: IGoal, index) => (
-        <View key={index} style={styles.GridContents}>
+      {weeks && (
+        <View style={styles.GridContents}>
           <View style={styles.Items}>
             <AppText family="round-b" text="주간" />
           </View>
           <View style={styles.Items}>
-            <AppText family="round-b" text={we.week.toString() + '주차'} />
+            <AppText family="round-b" text={weeks.toString() + '주차'} />
           </View>
           <View style={styles.Items}>
-            <AppText family="round-b" text={we.amount.toString() + '원'} />
+            <AppText family="round-b" text={weeks.amount.toString() + '원'} />
           </View>
           <View style={styles.Items}>
-            <AppText family="round-b" text={we.state} />
+            <AppText family="round-b" text={weeks.state} />
           </View>
         </View>
-      ))}
-      <View style={styles.Btn}>
-        {week !== undefined && week[0] === undefined && (
-          <TouchableOpacity onPress={handleWeek}>
-            <AppText family="round-b" text="주간목표 등록하기" />
-          </TouchableOpacity>
-        )}
-      </View>
-      {/* <Image source={flower} /> */}
-
-      <GoalRegDialog
-        visible={wVisible}
-        toggleDialog={handleWeek}
-        select="주간"
-      />
+      )}
     </>
   );
 }
@@ -83,5 +47,9 @@ const styles = StyleSheet.create({
   Items: {
     width: '25%',
     alignItems: 'center',
+  },
+  Refresh: {
+    alignItems: 'flex-end',
+    marginRight: 18,
   },
 });

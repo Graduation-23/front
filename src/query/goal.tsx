@@ -6,15 +6,19 @@ import fetchWeekGoalState from '@/api/goal/fetchWeekGoalState';
 import requestMonthGoal from '@/api/goal/requestMonthGoal';
 import requestWeekGoal from '@/api/goal/requestWeekGoal';
 import {useMutation, useQuery, useQueryClient} from 'react-query';
+import Utils from '@/utils';
 
+// 이번달 거 받아오기
 export const useMonthGoal = () => {
-  return useQuery(['goal'], fetchMonthGoal);
+  const [year, month] = Utils.destructDate(new Date());
+
+  return useQuery(['goal'], () => fetchMonthGoal({year, month}));
 };
 
 export const useMonthGoalById = (id: number) => {
   return useQuery(['goal', id], () => fetchMonthGoalById(id), {
     onSuccess: () => {
-      fetchMonthGoalState(id);
+      console.log('성공');
     },
   });
 };
@@ -35,22 +39,24 @@ export const useRequestMonthGoal = () => {
 };
 
 export const useMonthGoalState = (id: number) => {
-  return useQuery(['goal', id], () => fetchMonthGoalState(id));
+  const queryClient = useQueryClient();
+
+  return useQuery(['goal', id], () => fetchMonthGoalState(id), {
+    onSuccess: () => {
+      queryClient.invalidateQueries('goal');
+      console.log('월간 진행도 리셋 성공');
+    },
+    onError: () => {
+      console.log('monthState 조회 실패');
+    },
+  });
 };
 
-export const useWeekGoal = (
-  id: number,
-  enableRefetching: boolean = true,
-  weekId: number,
-) => {
+export const useWeekGoal = (id: number, enableRefetching: boolean = true) => {
   return useQuery(['goal', id], () => fetchWeekGoal(id), {
     enabled: enableRefetching,
     onSuccess: () => {
-      fetchWeekGoalState(weekId)
-        .then(() => {
-          console.log('성공');
-        })
-        .catch(() => console.log('실패'));
+      console.log('useWeekGoal 성공');
     },
     onError: () => {
       console.log('useWeekGoal 실패');
@@ -74,8 +80,11 @@ export const useRequestWeekGoal = () => {
 };
 
 export const useWeekGoalState = (id: number) => {
+  const queryClient = useQueryClient();
+
   return useQuery(['goal', id], () => fetchWeekGoalState(id), {
     onSuccess: () => {
+      queryClient.invalidateQueries('goal');
       console.log('weekGoalState 조회 성공');
     },
     onError: () => {
