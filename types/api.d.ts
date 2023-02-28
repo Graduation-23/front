@@ -44,6 +44,7 @@ export interface IGoal {
   month: number;
   year: number;
   weekIds: number;
+  week: number;
 }
 
 export interface ITransaction {

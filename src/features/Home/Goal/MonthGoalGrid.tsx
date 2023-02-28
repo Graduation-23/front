@@ -31,14 +31,23 @@ export default function MonthGoalGrid() {
       {month?.map((mon: IGoal, index: any) => (
         <Fragment key={index}>
           <View style={styles.GridContents}>
-            <AppText family="round-b" text="월간" />
-            <AppText family="round-b" text={mon.month.toString() + '월'} />
-            <AppText family="round-b" text={mon.amount.toString() + '원'} />
-            <AppText family="round-b" text={mon.state} />
+            <View style={styles.Items}>
+              <AppText family="round-b" text="월간" />
+            </View>
+            <View style={styles.Items}>
+              <AppText family="round-b" text={mon.month.toString() + '월'} />
+            </View>
+            <View style={styles.Items}>
+              <AppText family="round-b" text={mon.amount.toString() + '원'} />
+            </View>
+            <View style={styles.Items}>
+              <AppText family="round-b" text={mon.state} />
+            </View>
           </View>
           <WeekGoalGrid monthId={mon.id} weekId={mon.weekIds} />
         </Fragment>
       ))}
+
       <View style={styles.Btn}>
         {month !== undefined && month[0] === undefined && (
           <TouchableOpacity onPress={handleMonth}>
@@ -58,6 +67,7 @@ export default function MonthGoalGrid() {
 
 const styles = StyleSheet.create({
   GridContents: {
+    marginTop: 5,
     flexGrow: 1,
     flexDirection: 'row',
     display: 'flex',
@@ -69,5 +79,9 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginTop: 10,
     height: 100,
+  },
+  Items: {
+    width: '25%',
+    alignItems: 'center',
   },
 });
