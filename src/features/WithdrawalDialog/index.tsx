@@ -34,6 +34,7 @@ const WithdrawalDialog = ({visible, toggleDialog}: Props) => {
             title="탈퇴"
             onPress={() => {
               deleteUser({password: userPw});
+              toggleDialog();
             }}
           />
         </Dialog.Actions>

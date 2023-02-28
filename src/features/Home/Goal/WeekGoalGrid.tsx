@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
   Items: {
     width: '25%',
     alignItems: 'center',
-    height: 60,
+    height: 30,
   },
   Refresh: {
     alignItems: 'flex-end',

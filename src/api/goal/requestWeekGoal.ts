@@ -9,7 +9,11 @@ interface WeekGoal {
 export default function requestWeekGoal({id, amount}: WeekGoal) {
   return new Promise((resolve, reject) => {
     client
-      .put('/goal/week?id=' + id, {amount})
+      .put(`/goal/week?id=${id}&amount=${amount}`, {
+        Headers: {
+          'Content-type': 'application/json',
+        },
+      })
       .then(response => {
         resolve(response.data);
         console.log('requestWeekGoal 성공', response.data);
