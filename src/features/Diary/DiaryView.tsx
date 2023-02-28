@@ -27,7 +27,7 @@ export default function DiaryView({}: DiaryViewProps) {
   const [order, setOrder] = useState(true);
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const {mutate: removeDiary} = useDeleteDiary();
-  // const {mutate: removeWidget} = useDeleteWidget();
+  const {mutate: removeWidget} = useDeleteWidget();
 
   const group = useMemo(() => Utils.groupByYear(data || [], getYear), [data]);
 
@@ -37,6 +37,7 @@ export default function DiaryView({}: DiaryViewProps) {
   const handleConfirmDelete = () => {
     if (selectedId) {
       removeDiary(selectedId);
+      removeWidget(selectedId);
     }
     closeDialog();
   };
