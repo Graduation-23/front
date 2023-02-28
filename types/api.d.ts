@@ -44,6 +44,7 @@ export interface IMonthGoal {
   user: string;
   weekIds: [];
   year: number;
+  week: number;
 }
 
 export interface IWeekGoal {

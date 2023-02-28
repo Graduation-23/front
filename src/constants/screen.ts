@@ -15,6 +15,7 @@ export const Setting = Object.freeze({
   UserInfo: 'UserInfo',
   Notice: 'Notice',
   Card: 'SettingCard',
+  Achieve: 'Achieve',
 });
 
 export const Account = Object.freeze({

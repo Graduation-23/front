@@ -1,13 +1,14 @@
 import {View, StyleSheet} from 'react-native';
 import {AppText} from '@/components/AppText';
-import {useWeekGoal} from '@/query/goal';
+import {useWeekGoalById} from '@/query/goal';
 
 type WeekGoalGridProps = {
   weekId: number;
 };
 
 export default function WeekGoalGrid({weekId}: WeekGoalGridProps) {
-  const {data: weeks} = useWeekGoal(weekId);
+  const {data: weeks} = useWeekGoalById(weekId);
+  console.log(weeks);
 
   return (
     <>
@@ -17,10 +18,10 @@ export default function WeekGoalGrid({weekId}: WeekGoalGridProps) {
             <AppText family="round-b" text="주간" />
           </View>
           <View style={styles.Items}>
-            <AppText family="round-b" text={weeks.toString() + '주차'} />
+            <AppText family="round-b" text={weeks.week + '주차'} />
           </View>
           <View style={styles.Items}>
-            <AppText family="round-b" text={weeks.amount.toString() + '원'} />
+            <AppText family="round-b" text={weeks.amount + '원'} />
           </View>
           <View style={styles.Items}>
             <AppText family="round-b" text={weeks.state} />
@@ -47,6 +48,7 @@ const styles = StyleSheet.create({
   Items: {
     width: '25%',
     alignItems: 'center',
+    height: 60,
   },
   Refresh: {
     alignItems: 'flex-end',

@@ -2,6 +2,7 @@ import fetchMonthGoal from '@/api/goal/fetchMonthGoal';
 import fetchMonthGoalById from '@/api/goal/fetchMonthGoalById';
 import fetchMonthGoalState from '@/api/goal/fetchMonthGoalState';
 import fetchWeekGoal from '@/api/goal/fetchWeekGoal';
+import fetchWeekGoalById from '@/api/goal/fetchWeekGoalById';
 import fetchWeekGoalState from '@/api/goal/fetchWeekGoalState';
 import requestMonthGoal from '@/api/goal/requestMonthGoal';
 import requestWeekGoal from '@/api/goal/requestWeekGoal';
@@ -60,6 +61,14 @@ export const useWeekGoal = (id: number, enableRefetching: boolean = true) => {
     },
     onError: () => {
       console.log('useWeekGoal 실패');
+    },
+  });
+};
+
+export const useWeekGoalById = (goalId: number) => {
+  return useQuery(['goal', goalId], () => fetchWeekGoalById(goalId), {
+    onSuccess: () => {
+      console.log('성공');
     },
   });
 };

@@ -5,6 +5,7 @@ import UserInfoScreen from '@screens/UserInfoScreen';
 //import CardRegScreen from '@screens/CardRegScreen';
 import LinkPaymentScreen from '@screens/LinkPaymentScreen';
 import {Setting} from '@constants/screen';
+import AchieveScreen from '@/screens/AchieveScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -44,6 +45,11 @@ export default function SettingNavigator() {
         options={{
           title: '회원정보',
         }}
+      />
+      <Stack.Screen
+        name={Setting.Achieve}
+        component={AchieveScreen}
+        options={{title: '업적'}}
       />
     </Stack.Navigator>
   );

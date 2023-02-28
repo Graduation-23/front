@@ -113,7 +113,7 @@ export default function SettingScreen({navigation}: any) {
             label="결제 내역 연동"
             color="#5ed2b1"
             onPress={() => {
-              navigation.navigate('LinkUpPayment');
+              navigate(Setting.LinkUpPayment);
             }}
           />
         </ListItem>
@@ -129,7 +129,17 @@ export default function SettingScreen({navigation}: any) {
             label="회원 정보"
             color="#fce085"
             onPress={() => {
-              navigation.navigate('UserInfo');
+              navigate(Setting.UserInfo);
+            }}
+          />
+        </ListItem>
+        <ListItem>
+          <ListItems
+            icon="favorite"
+            label="업적"
+            color="#ff98d1"
+            onPress={() => {
+              navigate(Setting.Achieve);
             }}
           />
         </ListItem>
