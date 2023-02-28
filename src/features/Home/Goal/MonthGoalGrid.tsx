@@ -2,6 +2,7 @@ import {View, StyleSheet} from 'react-native';
 import {AppText} from '@/components/AppText';
 import {IMonthGoal} from '@type/api';
 import WeekGoalGrid from './WeekGoalGrid';
+import {Fragment} from 'react';
 
 export default function MonthGoalGrid({...month}: IMonthGoal) {
   console.log('month? : ', month.month, 'weekIds? : ', month.weekIds);
@@ -22,8 +23,11 @@ export default function MonthGoalGrid({...month}: IMonthGoal) {
           <AppText family="round-b" text={month.state} />
         </View>
       </View>
+
       {month.weekIds.map((id: number) => (
-        <WeekGoalGrid weekId={id} key={id} />
+        <Fragment key={id}>
+          <WeekGoalGrid weekId={id} key={id} />
+        </Fragment>
       ))}
     </>
   );

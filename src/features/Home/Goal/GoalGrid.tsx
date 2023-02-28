@@ -2,38 +2,33 @@ import {AppText} from '@/components/AppText';
 import {useMonthGoal} from '@/query/goal';
 import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import {heads} from './constants';
-
+import {useState} from 'react';
+import {useSetRecoilState} from 'recoil';
+import treeAtom from '@/atom/treeAtom';
+import {TreeImage} from '@/utils/plant';
+import GoalRegDialog from './GoalRegDialog';
 import MonthGoalGrid from './MonthGoalGrid';
 
 export default function GoalGrid() {
   const {data: monthGoal} = useMonthGoal();
   console.log(monthGoal);
 
-  // const [mVisible, setMVisible] = useState(false);
-  // const [wVisible, setWVisible] = useState(false);
+  const [mVisible, setMVisible] = useState(false);
 
-  // const setFlower = useSetRecoilState(flowerAtom);
-  // const setTree = useSetRecoilState(treeAtom);
+  const [isMonth, setIsMonth] = useState(false);
 
-  // const randomFlower = () => {
-  //   const random = Math.floor(Math.random() * FlowerImage.length);
-  //   setFlower(FlowerImage[random]);
-  // };
+  const setTree = useSetRecoilState(treeAtom);
 
-  // const randomTree = () => {
-  //   const random = Math.floor(Math.random() * TreeImage.length);
-  //   setTree(TreeImage[random]);
-  // };
+  const randomTree = () => {
+    const random = Math.floor(Math.random() * TreeImage.length);
+    setTree(TreeImage[random]);
+  };
 
-  // const handleMonth = () => {
-  //   randomTree();
-  //   setMVisible(!mVisible);
-  // };
-
-  // const handleWeek = () => {
-  //   randomFlower();
-  //   setWVisible(!wVisible);
-  // };
+  const handleMonth = () => {
+    randomTree();
+    setIsMonth(!isMonth);
+    setMVisible(!mVisible);
+  };
 
   return (
     <>
@@ -46,33 +41,19 @@ export default function GoalGrid() {
           ))}
         </View>
         {monthGoal && <MonthGoalGrid {...monthGoal} />}
-        {/* {!month && (
-          <>
-            <View style={styles.Btn}>
-              <TouchableOpacity onPress={handleMonth}>
-                <AppText family="round-b" text="월간목표 등록하기" />
-              </TouchableOpacity>
-            </View>
-
-            <View style={styles.Btn}>
-              <TouchableOpacity onPress={handleWeek}>
-                <AppText family="round-b" text="주간목표 등록하기" />
-              </TouchableOpacity>
-            </View>
-          </>
-        )} */}
+        {!monthGoal && (
+          <View style={styles.Btn}>
+            <TouchableOpacity onPress={handleMonth}>
+              <AppText family="round-b" text="월간목표 등록하기" />
+            </TouchableOpacity>
+          </View>
+        )}
       </View>
-
-      {/* <GoalRegDialog
+      <GoalRegDialog
         visible={mVisible}
         toggleDialog={handleMonth}
         select="월간"
       />
-      <GoalRegDialog
-        visible={wVisible}
-        toggleDialog={handleWeek}
-        select="주간"
-      /> */}
     </>
   );
 }
