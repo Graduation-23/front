@@ -12,6 +12,7 @@ import {useDeleteDiary, useDiary} from '@query/diary';
 import Utils from '@utils/index';
 import DiaryViewItem from './DiaryViewItem';
 import {Dialog} from '@rneui/base';
+import {useDeleteWidget} from '@/query/widget';
 
 const DiaryListView = ListView<IDiary>;
 
@@ -25,7 +26,8 @@ export default function DiaryView({}: DiaryViewProps) {
   const {navigate} = useNavigation<any>();
   const [order, setOrder] = useState(true);
   const [selectedId, setSelectedId] = useState<number | null>(null);
-  const {mutate: remove} = useDeleteDiary();
+  const {mutate: removeDiary} = useDeleteDiary();
+  const {mutate: removeWidget} = useDeleteWidget();
 
   const group = useMemo(() => Utils.groupByYear(data || [], getYear), [data]);
 
@@ -34,7 +36,8 @@ export default function DiaryView({}: DiaryViewProps) {
   const closeDialog = () => setSelectedId(null);
   const handleConfirmDelete = () => {
     if (selectedId) {
-      remove(selectedId);
+      removeDiary(selectedId);
+      removeWidget(selectedId);
     }
     closeDialog();
   };

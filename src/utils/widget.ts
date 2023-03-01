@@ -1,4 +1,6 @@
 // import {Widget} from '@type/widget';
+import category from '@/constants/category';
+import {ITransaction} from '@type/api';
 
 export default class WidgetUtils {
   static emptyWidget(diaryId: number, date: string): Widget.Type {
@@ -68,5 +70,18 @@ export default class WidgetUtils {
 
       return acc;
     }, {} as {[key: string]: Widget.Type[]});
+  }
+
+  static transactionToWidgetItems(transactions: ITransaction[]) {
+    return transactions.map(transaction => {
+      return {
+        financeId: 0,
+        amount: transaction.amount,
+        description: transaction.content,
+        category:
+          category.find(({tag}) => tag === transaction.transactionType)?.tag ||
+          '생활',
+      };
+    });
   }
 }

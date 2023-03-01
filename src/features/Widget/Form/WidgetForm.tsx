@@ -4,12 +4,14 @@ import {StyleSheet, View} from 'react-native';
 import UpdateWidgetButton from './UpdateWidgetButton';
 import WidgetTable from './WidgetTable';
 import WidgetUtils from '../../../utils/widget';
-import {useCallback} from 'react';
+import {useCallback, useState, useEffect} from 'react';
+import fetchTransactions from '../../../api/fetchTransaction';
 
 type WidgetFormProps = Widget.Type;
 
 export default function WidgetForm({...data}: WidgetFormProps) {
   const {widget, set, bind} = useEditWidget(data);
+  const [isFetchTransaction, setIsFetchTransaction] = useState(false);
 
   const addEmptyItemAndFilterEmpty = useCallback(() => {
     set('items', [
@@ -17,6 +19,15 @@ export default function WidgetForm({...data}: WidgetFormProps) {
       WidgetUtils.emptyWidgetItem(),
     ]);
   }, [widget.items, set]);
+
+  useEffect(() => {
+    if (!isFetchTransaction && widget.items.length === 0) {
+      fetchTransactions(widget.date).then(d => {
+        set('items', WidgetUtils.transactionToWidgetItems(d) as any);
+        setIsFetchTransaction(true);
+      });
+    }
+  }, [isFetchTransaction, setIsFetchTransaction, set, widget]);
 
   return (
     <View style={styles.container}>

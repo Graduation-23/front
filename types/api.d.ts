@@ -46,7 +46,6 @@ export interface IMonthGoal {
   year: number;
   week: number;
 }
-
 export interface IWeekGoal {
   amount: number;
   goalMonth: number;
@@ -62,4 +61,9 @@ export interface IAchieve {
   achieve_title: string;
   monthAchieve: number;
   weekAchieve: number;
+export interface ITransaction {
+  amount: number;
+  bankName: string;
+  content: string;
+  transactionType: string;
 }
