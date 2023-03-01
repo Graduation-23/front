@@ -8,67 +8,88 @@ import flower_growings8 from '../assets/growings/flower_growings8.png';
 import tree_growings9 from '../assets/growings/tree_growings9.png';
 import * as Progress from 'react-native-progress';
 import {useAchieve, useMonthAchieve, useWeekAchieve} from '@/query/achieve';
+import {FlowerImage, TreeImage} from '@/utils/plant';
 
 type AchieveScreenProps = {};
 
 export default function AchieveScreen({}: AchieveScreenProps) {
   const user = useRecoilValue(userAtom);
-  const {data: wholeAchieve} = useAchieve();
+
+  const {data: achieve} = useAchieve();
   const {data: monthAchieve} = useMonthAchieve();
   const {data: weekAchieve} = useWeekAchieve();
 
   return (
-    <>
-      <SafeAreaView style={styles.Container}>
-        <View style={styles.Title}>
-          <AppText.Title family="round-b" text={user?.nickname + ' 님이'} />
-          <AppText.Title family="round-b" text="달성하신 업적은 " />
-          <AppText.Title
-            family="round-b"
-            text={'총' + wholeAchieve + '개 입니다.'}
-          />
-          <View style={styles.SubTitle}>
-            <AppText family="round-b" text={'월간 : ' + monthAchieve + '개'} />
-            <AppText family="round-b" text={'주간 : ' + weekAchieve + '개'} />
-          </View>
-        </View>
-        <View style={styles.Contents}>
-          <View>
-            <AppText.Title family="round-d" text={'ACHIEVE'} />
-          </View>
-          <View style={styles.AchieveContainer}>
-            <Image
-              source={flower_growings8}
-              resizeMode="contain"
-              style={styles.Image}
+    <SafeAreaView style={styles.Container}>
+      {achieve && (
+        <>
+          <View style={styles.Title}>
+            <AppText.Title family="round-b" text={user?.nickname + ' 님이'} />
+            <AppText.Title family="round-b" text="달성하신 업적은 " />
+            <AppText.Title
+              family="round-b"
+              text={
+                '총' +
+                achieve[0].monthAchieve +
+                achieve[0].weekAchieve +
+                '개 입니다.'
+              }
             />
-            <View style={styles.Bar}>
-              <Progress.Bar
-                progress={40 / 100}
-                width={200}
-                height={10}
-                color={'#FF0044'}
+            <View style={styles.SubTitle}>
+              <AppText
+                family="round-b"
+                text={'월간 : ' + monthAchieve + '개'}
               />
+              <AppText family="round-b" text={'주간 : ' + weekAchieve + '개'} />
             </View>
           </View>
-          <View style={styles.AchieveContainer}>
-            <Image
-              source={tree_growings9}
-              resizeMode="contain"
-              style={styles.Image}
-            />
-            <View style={styles.Bar}>
-              <Progress.Bar
-                progress={60 / 100}
-                width={200}
-                height={10}
-                color={'#FF0044'}
+          <View style={styles.Contents}>
+            <View>
+              <AppText.Title family="round-d" text={'ACHIEVE'} />
+            </View>
+            <View style={styles.AchieveContainer}>
+              <Image
+                source={flower_growings8}
+                resizeMode="contain"
+                style={styles.Image}
               />
+              <View style={styles.Bar}>
+                <Progress.Bar
+                  progress={5 / FlowerImage.length}
+                  width={200}
+                  height={10}
+                  color={'#FF0044'}
+                />
+                <View style={styles.AlignRight}>
+                  <AppText
+                    family="round-b"
+                    text={'5 / ' + FlowerImage.length}
+                  />
+                </View>
+              </View>
+            </View>
+            <View style={styles.AchieveContainer}>
+              <Image
+                source={tree_growings9}
+                resizeMode="contain"
+                style={styles.Image}
+              />
+              <View style={styles.Bar}>
+                <Progress.Bar
+                  progress={6 / TreeImage.length}
+                  width={200}
+                  height={10}
+                  color={'#FF0044'}
+                />
+                <View style={styles.AlignRight}>
+                  <AppText family="round-b" text={'6 / ' + TreeImage.length} />
+                </View>
+              </View>
             </View>
           </View>
-        </View>
-      </SafeAreaView>
-    </>
+        </>
+      )}
+    </SafeAreaView>
   );
 }
 
@@ -111,5 +132,8 @@ const styles = StyleSheet.create({
   },
   Bar: {
     marginLeft: 20,
+  },
+  AlignRight: {
+    alignItems: 'flex-end',
   },
 });

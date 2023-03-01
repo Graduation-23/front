@@ -60,6 +60,6 @@ export interface IAchieve {
   id: number;
   user_id: string;
   achieve_title: string;
-  month_achieve: number;
-  week_achieve: number;
+  monthAchieve: number;
+  weekAchieve: number;
 }
