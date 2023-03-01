@@ -55,3 +55,11 @@ export interface IWeekGoal {
   state: string;
   week: number;
 }
+
+export interface IAchieve {
+  id: number;
+  user_id: string;
+  achieve_title: string;
+  month_achieve: number;
+  week_achieve: number;
+}
