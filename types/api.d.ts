@@ -33,20 +33,34 @@ export interface IFinance {
   version: number;
 }
 
-export interface IGoal {
-  id: number;
-  user: string;
-  name: string;
+export interface IGoal {}
+
+export interface IMonthGoal {
   amount: number;
-  state: string;
-  start: Date;
-  end: Date;
+  id: number;
   month: number;
+  name: string;
+  state: string;
+  user: string;
+  weekIds: [];
   year: number;
-  weekIds: number;
+  week: number;
+}
+export interface IWeekGoal {
+  amount: number;
+  goalMonth: number;
+  id: number;
+  name: string;
+  state: string;
   week: number;
 }
 
+export interface IAchieve {
+  id: number;
+  user_id: string;
+  achieve_title: string;
+  monthAchieve: number;
+  weekAchieve: number;
 export interface ITransaction {
   amount: number;
   bankName: string;

@@ -1,7 +1,7 @@
 import {Dialog, Input} from '@rneui/themed';
 import {View, Text} from 'react-native';
 import {useState} from 'react';
-import deleteUser from '@api/deleteUser';
+import deleteUser from '@/api/deleteUser';
 
 interface Props {
   visible: boolean;
@@ -34,6 +34,7 @@ const WithdrawalDialog = ({visible, toggleDialog}: Props) => {
             title="탈퇴"
             onPress={() => {
               deleteUser({password: userPw});
+              toggleDialog();
             }}
           />
         </Dialog.Actions>

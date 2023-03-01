@@ -1,7 +1,7 @@
 import client from '../client';
 
 interface WeekGoal {
-  id: number;
+  id: number | undefined;
   amount: number;
 }
 
@@ -9,7 +9,11 @@ interface WeekGoal {
 export default function requestWeekGoal({id, amount}: WeekGoal) {
   return new Promise((resolve, reject) => {
     client
-      .post('/goal/week?goalMonthId=' + id, {amount})
+      .put(`/goal/week?id=${id}&amount=${amount}`, {
+        Headers: {
+          'Content-type': 'application/json',
+        },
+      })
       .then(response => {
         resolve(response.data);
         console.log('requestWeekGoal 성공', response.data);

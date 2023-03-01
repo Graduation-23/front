@@ -1,10 +1,15 @@
-import {IGoal} from '@type/api';
+import {IMonthGoal} from '@type/api';
 import client from '../client';
 
-export default function fetchMonthGoal() {
-  return new Promise<IGoal[]>((resolve, reject) => {
+type Props = {
+  year: string;
+  month: string;
+};
+
+export default function fetchMonthGoal({year, month}: Props) {
+  return new Promise<IMonthGoal>((resolve, reject) => {
     client
-      .get('/goal/month')
+      .get(`/goal/month/${year}/${month}`)
       .then(response => {
         resolve(response.data.data);
       })
