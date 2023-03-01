@@ -6,6 +6,7 @@ import {useRecoilValue} from 'recoil';
 import {Image} from 'react-native';
 import flower_growings8 from '../assets/growings/flower_growings8.png';
 import tree_growings9 from '../assets/growings/tree_growings9.png';
+import * as Progress from 'react-native-progress';
 
 type AchieveScreenProps = {};
 
@@ -28,19 +29,35 @@ export default function AchieveScreen({}: AchieveScreenProps) {
           <View>
             <AppText.Title family="round-d" text={'ACHIEVE'} />
           </View>
-          <View style={styles.Image}>
+          <View style={styles.AchieveContainer}>
             <Image
               source={flower_growings8}
               resizeMode="contain"
-              style={{width: 80, height: 80}}
+              style={styles.Image}
             />
+            <View style={styles.Bar}>
+              <Progress.Bar
+                progress={40 / 100}
+                width={200}
+                height={10}
+                color={'#FF0044'}
+              />
+            </View>
           </View>
-          <View style={styles.Image}>
+          <View style={styles.AchieveContainer}>
             <Image
               source={tree_growings9}
               resizeMode="contain"
-              style={{width: 75, height: 100}}
+              style={styles.Image}
             />
+            <View style={styles.Bar}>
+              <Progress.Bar
+                progress={40 / 100}
+                width={200}
+                height={10}
+                color={'#FF0044'}
+              />
+            </View>
           </View>
         </View>
       </SafeAreaView>
@@ -74,12 +91,18 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     borderRadius: 10,
     backgroundColor: '#b2dcff',
+    flexDirection: 'column',
+  },
+  AchieveContainer: {
+    marginTop: 5,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   Image: {
-    width: 100,
-    height: 100,
-    marginTop: 5,
-    marginBottom: -10,
-    flexDirection: 'row',
+    width: 80,
+    height: 90,
+  },
+  Bar: {
+    marginLeft: 20,
   },
 });
