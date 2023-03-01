@@ -7,11 +7,15 @@ import {Image} from 'react-native';
 import flower_growings8 from '../assets/growings/flower_growings8.png';
 import tree_growings9 from '../assets/growings/tree_growings9.png';
 import * as Progress from 'react-native-progress';
+import {useAchieve, useMonthAchieve, useWeekAchieve} from '@/query/achieve';
 
 type AchieveScreenProps = {};
 
 export default function AchieveScreen({}: AchieveScreenProps) {
   const user = useRecoilValue(userAtom);
+  const {data: wholeAchieve} = useAchieve();
+  const {data: monthAchieve} = useMonthAchieve();
+  const {data: weekAchieve} = useWeekAchieve();
 
   return (
     <>
@@ -19,10 +23,13 @@ export default function AchieveScreen({}: AchieveScreenProps) {
         <View style={styles.Title}>
           <AppText.Title family="round-b" text={user?.nickname + ' 님이'} />
           <AppText.Title family="round-b" text="달성하신 업적은 " />
-          <AppText.Title family="round-b" text="총 _개 입니다." />
+          <AppText.Title
+            family="round-b"
+            text={'총' + wholeAchieve + '개 입니다.'}
+          />
           <View style={styles.SubTitle}>
-            <AppText family="round-b" text="월간 : n개" />
-            <AppText family="round-b" text="주간 : n개" />
+            <AppText family="round-b" text={'월간 : ' + monthAchieve + '개'} />
+            <AppText family="round-b" text={'주간 : ' + weekAchieve + '개'} />
           </View>
         </View>
         <View style={styles.Contents}>
@@ -52,7 +59,7 @@ export default function AchieveScreen({}: AchieveScreenProps) {
             />
             <View style={styles.Bar}>
               <Progress.Bar
-                progress={40 / 100}
+                progress={60 / 100}
                 width={200}
                 height={10}
                 color={'#FF0044'}
