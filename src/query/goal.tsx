@@ -8,6 +8,8 @@ import requestMonthGoal from '@/api/goal/requestMonthGoal';
 import requestWeekGoal from '@/api/goal/requestWeekGoal';
 import {useMutation, useQuery, useQueryClient} from 'react-query';
 import Utils from '@/utils';
+import fetchMonthAchieve from '@/api/goal/fetchMonthAchieve';
+import fetchWeekAchieve from '@/api/goal/fetchWeekAchieve';
 
 // 이번달 거 받아오기
 export const useMonthGoal = () => {
@@ -51,6 +53,10 @@ export const useMonthGoalState = (id: number) => {
       console.log('monthState 조회 실패');
     },
   });
+};
+
+export const useMonthAchieve = () => {
+  return useQuery([], () => fetchMonthAchieve());
 };
 
 export const useWeekGoal = (id: number, enableRefetching: boolean = true) => {
@@ -100,4 +106,8 @@ export const useWeekGoalState = (id: number) => {
       console.log('weekGoalState 조회 실패');
     },
   });
+};
+
+export const useWeekAchieve = () => {
+  return useQuery([], () => fetchWeekAchieve());
 };

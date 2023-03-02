@@ -9,11 +9,11 @@ import {
 } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useRecoilValue} from 'recoil';
-import {useRef} from 'react';
+import {useRef, useState} from 'react';
 import flower_growings8 from '../assets/growings/flower_growings8.png';
 import tree_growings9 from '../assets/growings/tree_growings9.png';
 import * as Progress from 'react-native-progress';
-import {useAchieve, useMonthAchieve, useWeekAchieve} from '@/query/achieve';
+import {useMonthAchieve, useWeekAchieve} from '@/query/goal';
 import {FlowerImage, TreeImage} from '@/utils/plant';
 import ViewShot from 'react-native-view-shot';
 import Share from 'react-native-share';
@@ -25,9 +25,14 @@ export default function AchieveScreen({}: AchieveScreenProps) {
   const user = useRecoilValue(userAtom);
   const captureRef = useRef<any>(null);
 
-  const {data: achieve} = useAchieve();
   const {data: monthAchieve} = useMonthAchieve();
   const {data: weekAchieve} = useWeekAchieve();
+
+  const [all, setAll] = useState(0);
+
+  if (monthAchieve && weekAchieve) {
+    setAll(monthAchieve + weekAchieve);
+  }
 
   const onCapture = () => {
     try {
@@ -57,87 +62,71 @@ export default function AchieveScreen({}: AchieveScreenProps) {
       <ViewShot
         ref={captureRef}
         options={{fileName: 'Capture-File', format: 'jpg', quality: 0.9}}>
-        {achieve && (
-          <>
-            <View style={styles.Title}>
-              <AppText.Title family="round-b" text={user?.nickname + ' 님이'} />
-              <AppText.Title
+        <>
+          <View style={styles.Title}>
+            <AppText.Title family="round-b" text={user?.nickname + ' 님이'} />
+            <AppText.Title
+              family="round-b"
+              text="달성하신 업적은            "
+            />
+            <AppText.Title family="round-b" text={'총' + all + '개 입니다.'} />
+            <View style={styles.SubTitle}>
+              <AppText
                 family="round-b"
-                text="달성하신 업적은            "
+                text={'월간 : ' + monthAchieve + '개'}
               />
-              <AppText.Title
-                family="round-b"
-                text={
-                  '총' +
-                  achieve[0].monthAchieve +
-                  achieve[0].weekAchieve +
-                  '개 입니다.'
-                }
-              />
-              <View style={styles.SubTitle}>
-                <AppText
-                  family="round-b"
-                  text={'월간 : ' + monthAchieve + '개'}
-                />
-                <AppText
-                  family="round-b"
-                  text={'주간 : ' + weekAchieve + '개'}
-                />
-              </View>
+              <AppText family="round-b" text={'주간 : ' + weekAchieve + '개'} />
             </View>
+          </View>
 
-            <View style={styles.Contents}>
-              <View style={styles.Camera}>
-                <AppText.Title family="round-d" text={'ACHIEVE'} />
-                <TouchableOpacity onPress={onCapture}>
-                  <Icon name="photo-camera" size={30} />
-                </TouchableOpacity>
-              </View>
-              <View style={styles.AchieveContainer}>
-                <Image
-                  source={flower_growings8}
-                  resizeMode="contain"
-                  style={styles.Image}
+          <View style={styles.Contents}>
+            <View style={styles.Camera}>
+              <AppText.Title family="round-d" text={'ACHIEVE'} />
+              <TouchableOpacity onPress={onCapture}>
+                <Icon name="photo-camera" size={30} />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.AchieveContainer}>
+              <Image
+                source={flower_growings8}
+                resizeMode="contain"
+                style={styles.Image}
+              />
+              <View style={styles.Bar}>
+                <Progress.Bar
+                  progress={5 / FlowerImage.length}
+                  width={200}
+                  height={10}
+                  color={'#FF0044'}
                 />
-                <View style={styles.Bar}>
-                  <Progress.Bar
-                    progress={5 / FlowerImage.length}
-                    width={200}
-                    height={10}
-                    color={'#FF0044'}
+                <View style={styles.AlignRight}>
+                  <AppText
+                    family="round-b"
+                    text={'5 / ' + FlowerImage.length}
                   />
-                  <View style={styles.AlignRight}>
-                    <AppText
-                      family="round-b"
-                      text={'5 / ' + FlowerImage.length}
-                    />
-                  </View>
-                </View>
-              </View>
-              <View style={styles.AchieveContainer}>
-                <Image
-                  source={tree_growings9}
-                  resizeMode="contain"
-                  style={styles.Image}
-                />
-                <View style={styles.Bar}>
-                  <Progress.Bar
-                    progress={6 / TreeImage.length}
-                    width={200}
-                    height={10}
-                    color={'#FF0044'}
-                  />
-                  <View style={styles.AlignRight}>
-                    <AppText
-                      family="round-b"
-                      text={'6 / ' + TreeImage.length}
-                    />
-                  </View>
                 </View>
               </View>
             </View>
-          </>
-        )}
+            <View style={styles.AchieveContainer}>
+              <Image
+                source={tree_growings9}
+                resizeMode="contain"
+                style={styles.Image}
+              />
+              <View style={styles.Bar}>
+                <Progress.Bar
+                  progress={6 / TreeImage.length}
+                  width={200}
+                  height={10}
+                  color={'#FF0044'}
+                />
+                <View style={styles.AlignRight}>
+                  <AppText family="round-b" text={'6 / ' + TreeImage.length} />
+                </View>
+              </View>
+            </View>
+          </View>
+        </>
       </ViewShot>
     </SafeAreaView>
   );
