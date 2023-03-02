@@ -11,7 +11,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {useRecoilValue} from 'recoil';
 import {useRef, useState} from 'react';
 import flower_growings8 from '../assets/growings/flower_growings8.png';
-import tree_growings9 from '../assets/growings/tree_growings9.png';
+import tree_growings7 from '../assets/growings/tree_growings7.png';
 import * as Progress from 'react-native-progress';
 import {useMonthAchieve, useWeekAchieve} from '@/query/goal';
 import {FlowerImage, TreeImage} from '@/utils/plant';
@@ -69,7 +69,7 @@ export default function AchieveScreen({}: AchieveScreenProps) {
               family="round-b"
               text="달성하신 업적은            "
             />
-            <AppText.Title family="round-b" text={'총' + all + '개 입니다.'} />
+            <AppText.Title family="round-b" text={'총 ' + all + '개 입니다.'} />
             <View style={styles.SubTitle}>
               <AppText
                 family="round-b"
@@ -109,7 +109,7 @@ export default function AchieveScreen({}: AchieveScreenProps) {
             </View>
             <View style={styles.AchieveContainer}>
               <Image
-                source={tree_growings9}
+                source={tree_growings7}
                 resizeMode="contain"
                 style={styles.Image}
               />
@@ -145,12 +145,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     paddingVertical: 10,
     backgroundColor: '#b2dcff',
-    borderRadius: 10,
+    borderRadius: 20,
     marginBottom: 30,
     justifyContent: 'center',
     ...Platform.select({
       android: {
-        elevation: 30,
+        elevation: 40,
       },
     }),
   },
@@ -162,12 +162,12 @@ const styles = StyleSheet.create({
     height: '50%',
     paddingHorizontal: 20,
     paddingVertical: 20,
-    borderRadius: 10,
+    borderRadius: 20,
     backgroundColor: '#b2dcff',
     flexDirection: 'column',
     ...Platform.select({
       android: {
-        elevation: 30,
+        elevation: 40,
       },
     }),
   },

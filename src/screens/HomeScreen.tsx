@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import {useRef} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import {
   Platform,
   StyleSheet,
@@ -18,13 +18,29 @@ import backgroundImage from '../assets/backgroundImage.jpg';
 import {useRecoilValue} from 'recoil';
 import flowerAtom from '@/atom/flowerAtom';
 import treeAtom from '@/atom/treeAtom';
+import Utils from '@/utils';
 
 export default function HomeScreen() {
   const captureRef = useRef<any>(null);
   const flower = useRecoilValue(flowerAtom);
   const tree = useRecoilValue(treeAtom);
 
+  const [day, setDay] = useState(0);
+  const [Tlevel, setTLevel] = useState(0);
+
   const date = new Date();
+
+  useEffect(() => {
+    const d = new Date();
+    const lastDay = Utils.lastDay(d);
+    setTLevel(Math.floor(lastDay / 6));
+
+    if (d.getDay() === 0) {
+      setDay(7);
+    } else {
+      setDay(d.getDay());
+    }
+  }, []);
 
   const onCapture = () => {
     try {
@@ -50,8 +66,6 @@ export default function HomeScreen() {
   };
 
   return (
-    // <SafeAreaView style={styles.Container}>
-    // <ScrollView style={{minHeight: '100%', backgroundColor: 'red'}}>
     <ImageBackground
       imageStyle={{minHeight: '100%'}}
       style={{minHeight: '100%'}}
@@ -72,8 +86,8 @@ export default function HomeScreen() {
                 </TouchableOpacity>
               </View>
               <View style={styles.PlantContainer}>
-                <GrowingPlant kind="tree" level={9} type={tree} />
-                <GrowingPlant kind="flower" level={9} type={flower} />
+                <GrowingPlant kind="tree" level={Tlevel} type={tree} />
+                <GrowingPlant kind="flower" level={day} type={flower} />
               </View>
             </View>
           </ViewShot>
@@ -81,8 +95,6 @@ export default function HomeScreen() {
         </View>
       </ScrollView>
     </ImageBackground>
-    // </ScrollView>
-    // </SafeAreaView>
   );
 }
 

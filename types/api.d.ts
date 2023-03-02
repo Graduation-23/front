@@ -55,12 +55,6 @@ export interface IWeekGoal {
   week: number;
 }
 
-export interface IAchieve {
-  id: number;
-  user_id: string;
-  achieve_title: string;
-  monthAchieve: number;
-  weekAchieve: number;
 export interface ITransaction {
   amount: number;
   bankName: string;

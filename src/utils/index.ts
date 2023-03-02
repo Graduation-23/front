@@ -46,6 +46,13 @@ class Utils {
     return [year, month, day];
   }
 
+  static lastDay(date: Date) {
+    const y = date.getFullYear();
+    const m = date.getMonth();
+    const last = new Date(y, m + 1, 0);
+    return last.getDate();
+  }
+
   static orderBy<T>(
     entry: T[],
     ascending: boolean,
