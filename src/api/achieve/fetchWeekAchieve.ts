@@ -6,7 +6,6 @@ export default function fetchWeekAchieve() {
       .get('/achieve/week')
       .then(response => {
         resolve(response.data.data);
-        console.log('mon: ', response.data.data);
       })
       .catch(reject);
   });

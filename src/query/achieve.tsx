@@ -9,11 +9,11 @@ export const useAchieve = () => {
 };
 
 export const useMonthAchieve = () => {
-  return useQuery(['achieves'], () => fetchMonthAchieve());
+  return useQuery(['month'], () => fetchMonthAchieve());
 };
 
 export const useWeekAchieve = () => {
-  return useQuery(['achieves'], () => fetchWeekAchieve());
+  return useQuery(['week'], () => fetchWeekAchieve());
 };
 
 export const useRequestAchieve = () => {

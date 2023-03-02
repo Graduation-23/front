@@ -6,7 +6,6 @@ export default function fetchMonthAchieve() {
       .get('/achieve/month')
       .then(response => {
         resolve(response.data.data);
-        console.log('mon: ', response.data.data);
       })
       .catch(reject);
   });

@@ -24,6 +24,7 @@ export default function WeekGoalGrid({weekId}: WeekGoalGridProps) {
   };
 
   const handleWeek = () => {
+    // 날짜
     randomFlower();
     setWVisible(!wVisible);
   };
