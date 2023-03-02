@@ -26,7 +26,6 @@ export default function Tree({
     switch (level) {
       case 1:
       case 2:
-      case 3:
         return (
           <Image
             style={{width: 100, height: 100}}
@@ -34,7 +33,7 @@ export default function Tree({
             resizeMode="contain"
           />
         );
-      case 4:
+      case 3:
         return (
           <Image
             style={{width: 150, height: 150}}
@@ -42,9 +41,8 @@ export default function Tree({
             resizeMode="contain"
           />
         );
+      case 4:
       case 5:
-      case 6:
-      case 7:
         return (
           <Image
             style={{width: 170, height: 250}}
@@ -52,7 +50,7 @@ export default function Tree({
             resizeMode="contain"
           />
         );
-      case 8:
+      case 6:
         return (
           <Image
             style={{width: 180, height: 250}}
@@ -60,6 +58,7 @@ export default function Tree({
             resizeMode="contain"
           />
         );
+
       default:
         return (
           <Image
