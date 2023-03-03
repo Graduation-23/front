@@ -3,8 +3,10 @@ import {Dialog, Input} from '@rneui/themed';
 import {View} from 'react-native';
 import {useState} from 'react';
 import {useRequestMonthGoal, useRequestWeekGoal} from '@/query/goal';
-//import fetchMonthGoal from '@/api/goal/fetchMonthGoal';
-//import requestWeekGoal from '@/api/goal/requestWeekGoal';
+import {useSetRecoilState} from 'recoil';
+import flowerAtom from '@/atom/flowerAtom';
+import treeAtom from '@/atom/treeAtom';
+import {FlowerImage, TreeImage} from '@/utils/plant';
 
 export type GoalRegDialogProps = {
   visible: boolean;
@@ -23,10 +25,28 @@ export default function GoalRegDialog({
   const {mutateAsync: requestMonthGoal} = useRequestMonthGoal();
   const {mutateAsync: requestWeekGoal} = useRequestWeekGoal();
 
+  const setTree = useSetRecoilState(treeAtom);
+  const setFlower = useSetRecoilState(flowerAtom);
+
+  const randomTree = () => {
+    const random = Math.floor(Math.random() * TreeImage.length);
+    setTree(TreeImage[random]);
+  };
+
+  const randomFlower = () => {
+    const random = Math.floor(Math.random() * FlowerImage.length);
+    setFlower(FlowerImage[random]);
+  };
+
   const handleGoal = () => {
     select === '월간'
-      ? requestMonthGoal({amount: parseInt(amount), weekIds: []})
-      : requestWeekGoal({id: weekId, amount: parseInt(amount)});
+      ? requestMonthGoal({amount: parseInt(amount), weekIds: []}).then(() => {
+          randomTree();
+        })
+      : requestWeekGoal({id: weekId, amount: parseInt(amount)}).then(() => {
+          randomFlower();
+        });
+    // random 가져오기
   };
 
   const onChangeAmount = (text: string) => {

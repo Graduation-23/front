@@ -8,9 +8,6 @@ import {
 import {AppText} from '@/components/AppText';
 import {useWeekGoalById} from '@/query/goal';
 import {useState} from 'react';
-import {useSetRecoilState} from 'recoil';
-import flowerAtom from '@/atom/flowerAtom';
-import {FlowerImage} from '@/utils/plant';
 import GoalRegDialog from './GoalRegDialog';
 import Utils from '@/utils';
 
@@ -22,13 +19,6 @@ export default function WeekGoalGrid({weekId}: WeekGoalGridProps) {
   const {data: weeks} = useWeekGoalById(weekId);
   const [wVisible, setWVisible] = useState(false);
 
-  const setFlower = useSetRecoilState(flowerAtom);
-
-  const randomFlower = () => {
-    const random = Math.floor(Math.random() * FlowerImage.length);
-    setFlower(FlowerImage[random]);
-  };
-
   const today = new Date();
 
   const handleWeek = () => {
@@ -36,7 +26,6 @@ export default function WeekGoalGrid({weekId}: WeekGoalGridProps) {
       const [sDay] = Utils.stringToDate(weeks.start);
       const [eDay] = Utils.stringToDate(weeks.end);
       if (sDay <= today.getDate() && eDay >= today.getDate()) {
-        randomFlower();
         setWVisible(!wVisible);
       } else {
         if (Platform.OS === 'android') {
