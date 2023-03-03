@@ -6,7 +6,6 @@ export default function fetchWeekAchieve() {
       .get('/goal/week/achieve')
       .then(response => {
         res(response.data.data);
-        console.log(response.data);
       })
       .catch(rej);
   });

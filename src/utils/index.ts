@@ -46,11 +46,12 @@ class Utils {
     return [year, month, day];
   }
 
-  static lastDay(date: Date) {
-    const y = date.getFullYear();
-    const m = date.getMonth();
-    const last = new Date(y, m + 1, 0);
-    return last.getDate();
+  static stringToDate(date: string): [number, number, number] {
+    const yyyymmdd = String(date);
+    const year = parseInt(yyyymmdd.substring(0, 4), 10);
+    const month = parseInt(yyyymmdd.substring(5, 7), 10);
+    const day = parseInt(yyyymmdd.substring(8, 10), 10);
+    return [day, month, year];
   }
 
   static orderBy<T>(
@@ -117,6 +118,14 @@ class Utils {
   static transformPercent(numbers: number[]) {
     const total = numbers.reduce((acc, cur) => acc + cur, 0);
     return numbers.map(el => ((el / total) * 100).toFixed(1));
+  }
+
+  static trnasformTreeLevel(d: number) {
+    if (d >= 30) {
+      return 7;
+    } else {
+      return Math.ceil(d / 5);
+    }
   }
 
   //#endregion

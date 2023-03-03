@@ -25,20 +25,20 @@ export default function HomeScreen() {
   const flower = useRecoilValue(flowerAtom);
   const tree = useRecoilValue(treeAtom);
 
-  const [day, setDay] = useState(0);
-  const [Tlevel, setTLevel] = useState(0);
+  const [fLevel, setFLevel] = useState(0);
+  const [tLevel, setTLevel] = useState(0);
 
   const date = new Date();
 
   useEffect(() => {
     const d = new Date();
-    const lastDay = Utils.lastDay(d);
-    setTLevel(Math.floor(lastDay / 6));
+
+    setTLevel(Utils.trnasformTreeLevel(d.getDate()));
 
     if (d.getDay() === 0) {
-      setDay(7);
+      setFLevel(7);
     } else {
-      setDay(d.getDay());
+      setFLevel(d.getDay());
     }
   }, []);
 
@@ -86,8 +86,8 @@ export default function HomeScreen() {
                 </TouchableOpacity>
               </View>
               <View style={styles.PlantContainer}>
-                <GrowingPlant kind="tree" level={Tlevel} type={tree} />
-                <GrowingPlant kind="flower" level={day} type={flower} />
+                <GrowingPlant kind="tree" level={tLevel} type={tree} />
+                <GrowingPlant kind="flower" level={fLevel} type={flower} />
               </View>
             </View>
           </ViewShot>
@@ -123,5 +123,6 @@ const styles = StyleSheet.create({
     alignItems: 'baseline',
     justifyContent: 'center',
     padding: 10,
+    marginTop: 70,
   },
 });

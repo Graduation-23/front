@@ -1,4 +1,10 @@
-import {View, StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  ToastAndroid,
+  Platform,
+} from 'react-native';
 import {AppText} from '@/components/AppText';
 import {useWeekGoalById} from '@/query/goal';
 import {useState} from 'react';
@@ -6,6 +12,7 @@ import {useSetRecoilState} from 'recoil';
 import flowerAtom from '@/atom/flowerAtom';
 import {FlowerImage} from '@/utils/plant';
 import GoalRegDialog from './GoalRegDialog';
+import Utils from '@/utils';
 
 type WeekGoalGridProps = {
   weekId: number;
@@ -13,7 +20,6 @@ type WeekGoalGridProps = {
 
 export default function WeekGoalGrid({weekId}: WeekGoalGridProps) {
   const {data: weeks} = useWeekGoalById(weekId);
-
   const [wVisible, setWVisible] = useState(false);
 
   const setFlower = useSetRecoilState(flowerAtom);
@@ -23,13 +29,22 @@ export default function WeekGoalGrid({weekId}: WeekGoalGridProps) {
     setFlower(FlowerImage[random]);
   };
 
-  const handleWeek = () => {
-    // 날짜
-    randomFlower();
-    setWVisible(!wVisible);
-  };
+  const today = new Date();
 
-  console.log(weeks);
+  const handleWeek = () => {
+    if (weeks) {
+      const [sDay] = Utils.stringToDate(weeks.start);
+      const [eDay] = Utils.stringToDate(weeks.end);
+      if (sDay <= today.getDate() && eDay >= today.getDate()) {
+        randomFlower();
+        setWVisible(!wVisible);
+      } else {
+        if (Platform.OS === 'android') {
+          ToastAndroid.show('아직 목표 주간이 아닙니다!', ToastAndroid.SHORT);
+        }
+      }
+    }
+  };
 
   return (
     <>
@@ -79,7 +94,7 @@ const styles = StyleSheet.create({
   Items: {
     width: '25%',
     alignItems: 'center',
-    height: 30,
+    height: 40,
   },
   Refresh: {
     alignItems: 'flex-end',

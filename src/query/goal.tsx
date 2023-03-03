@@ -21,7 +21,7 @@ export const useMonthGoal = () => {
 export const useMonthGoalById = (id: number) => {
   return useQuery(['goal', id], () => fetchMonthGoalById(id), {
     onSuccess: () => {
-      console.log('성공');
+      //console.log('성공');
     },
   });
 };
@@ -74,7 +74,7 @@ export const useWeekGoal = (id: number, enableRefetching: boolean = true) => {
 export const useWeekGoalById = (goalId: number) => {
   return useQuery(['goal', goalId], () => fetchWeekGoalById(goalId), {
     onSuccess: () => {
-      console.log('성공');
+      //console.log('성공');
     },
   });
 };

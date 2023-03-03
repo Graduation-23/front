@@ -5,8 +5,6 @@ import WeekGoalGrid from './WeekGoalGrid';
 import {Fragment} from 'react';
 
 export default function MonthGoalGrid({...month}: IMonthGoal) {
-  console.log('month? : ', month.month, 'weekIds? : ', month.weekIds);
-
   return (
     <>
       <View style={styles.GridContents}>
@@ -51,5 +49,6 @@ const styles = StyleSheet.create({
   Items: {
     width: '25%',
     alignItems: 'center',
+    height: 40,
   },
 });

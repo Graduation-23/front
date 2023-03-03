@@ -12,7 +12,6 @@ export default function requestMonthGoal({amount, weekIds}: MonthGoal) {
       .post('/goal/month', {amount: amount, weekIds: weekIds})
       .then(response => {
         resolve(response.data);
-        console.log('requestMonthGoal 성공', response.data);
       })
       .catch(reject);
   });

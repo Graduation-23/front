@@ -11,10 +11,8 @@ import MonthGoalGrid from './MonthGoalGrid';
 
 export default function GoalGrid() {
   const {data: monthGoal} = useMonthGoal();
-  console.log(monthGoal);
 
   const [mVisible, setMVisible] = useState(false);
-
   const [isMonth, setIsMonth] = useState(false);
 
   const setTree = useSetRecoilState(treeAtom);

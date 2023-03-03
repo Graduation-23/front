@@ -16,7 +16,6 @@ export default function requestWeekGoal({id, amount}: WeekGoal) {
       })
       .then(response => {
         resolve(response.data);
-        console.log('requestWeekGoal 성공', response.data);
       })
       .catch(reject);
   });

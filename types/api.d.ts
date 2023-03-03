@@ -53,6 +53,8 @@ export interface IWeekGoal {
   name: string;
   state: string;
   week: number;
+  start: string;
+  end: string;
 }
 
 export interface ITransaction {

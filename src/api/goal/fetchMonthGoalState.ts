@@ -11,10 +11,7 @@ export default function fetchMonthGoalState(monthId: number) {
       .get('/goal/month/state?monthId=' + monthId)
       .then(response => {
         resolve(response.data);
-        console.log('goalMonthState 성공 ', response.data);
       })
-      .catch(err => {
-        console.log('안돼!!', err);
-      });
+      .catch();
   });
 }

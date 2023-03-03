@@ -32,7 +32,6 @@ export default function GoalRegDialog({
   const onChangeAmount = (text: string) => {
     setAmount(text);
   };
-  console.log(weekId);
 
   return (
     <View>
