@@ -1,11 +1,15 @@
-import {View, StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  ToastAndroid,
+  Platform,
+} from 'react-native';
 import {AppText} from '@/components/AppText';
 import {useWeekGoalById} from '@/query/goal';
-import {useState} from 'react';
-import {useSetRecoilState} from 'recoil';
-import flowerAtom from '@/atom/flowerAtom';
-import {FlowerImage} from '@/utils/plant';
+import {useEffect, useState} from 'react';
 import GoalRegDialog from './GoalRegDialog';
+import Utils from '@/utils';
 
 type WeekGoalGridProps = {
   weekId: number;
@@ -13,23 +17,40 @@ type WeekGoalGridProps = {
 
 export default function WeekGoalGrid({weekId}: WeekGoalGridProps) {
   const {data: weeks} = useWeekGoalById(weekId);
-
   const [wVisible, setWVisible] = useState(false);
+  const [visible, setVisible] = useState(true);
 
-  const setFlower = useSetRecoilState(flowerAtom);
+  const today = new Date();
 
-  const randomFlower = () => {
-    const random = Math.floor(Math.random() * FlowerImage.length);
-    setFlower(FlowerImage[random]);
-  };
+  useEffect(() => {
+    if (weeks) {
+      if (weeks.state === '진행중' && weeks.amount === 0) {
+        setVisible(false);
+      }
+    }
+  }, [weeks]);
 
   const handleWeek = () => {
-    // 날짜
-    randomFlower();
-    setWVisible(!wVisible);
+    if (weeks) {
+      const [sDay] = Utils.stringToDate(weeks.start);
+      const [eDay] = Utils.stringToDate(weeks.end);
+      if (
+        sDay <= today.getDate() &&
+        eDay >= today.getDate() &&
+        weeks.amount === 0
+      ) {
+        setWVisible(!wVisible);
+      } else if (sDay <= today.getDate() && eDay >= today.getDate()) {
+        if (Platform.OS === 'android') {
+          ToastAndroid.show('이미 등록한 목표입니다!', ToastAndroid.SHORT);
+        }
+      } else {
+        if (Platform.OS === 'android') {
+          ToastAndroid.show('목표 주간이 아닙니다!', ToastAndroid.SHORT);
+        }
+      }
+    }
   };
-
-  console.log(weeks);
 
   return (
     <>
@@ -47,7 +68,11 @@ export default function WeekGoalGrid({weekId}: WeekGoalGridProps) {
                 <AppText family="round-b" text={weeks.amount + '원'} />
               </View>
               <View style={styles.Items}>
-                <AppText family="round-b" text={weeks.state} />
+                {visible ? (
+                  <AppText family="round-b" text={weeks.state} />
+                ) : (
+                  <AppText family="round-b" text="" />
+                )}
               </View>
             </View>
           </TouchableOpacity>
@@ -79,7 +104,7 @@ const styles = StyleSheet.create({
   Items: {
     width: '25%',
     alignItems: 'center',
-    height: 30,
+    height: 40,
   },
   Refresh: {
     alignItems: 'flex-end',

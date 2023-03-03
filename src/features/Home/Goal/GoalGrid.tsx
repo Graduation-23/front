@@ -3,29 +3,16 @@ import {useMonthGoal} from '@/query/goal';
 import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import {heads} from './constants';
 import {useState} from 'react';
-import {useSetRecoilState} from 'recoil';
-import treeAtom from '@/atom/treeAtom';
-import {TreeImage} from '@/utils/plant';
 import GoalRegDialog from './GoalRegDialog';
 import MonthGoalGrid from './MonthGoalGrid';
 
 export default function GoalGrid() {
   const {data: monthGoal} = useMonthGoal();
-  console.log(monthGoal);
 
   const [mVisible, setMVisible] = useState(false);
-
   const [isMonth, setIsMonth] = useState(false);
 
-  const setTree = useSetRecoilState(treeAtom);
-
-  const randomTree = () => {
-    const random = Math.floor(Math.random() * TreeImage.length);
-    setTree(TreeImage[random]);
-  };
-
   const handleMonth = () => {
-    randomTree();
     setIsMonth(!isMonth);
     setMVisible(!mVisible);
   };

@@ -7,7 +7,6 @@ export default function fetchMonthGoalById(id: number) {
       .get('/goal/month/' + id)
       .then(response => {
         resolve(response.data);
-        console.log('fetchMonthGoalById 성공', response.data);
       })
       .catch(reject);
   });

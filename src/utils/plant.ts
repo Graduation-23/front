@@ -63,7 +63,7 @@ import winter_tree from '../assets/trees/winter_tree.png';
 import {ImageSourcePropType} from 'react-native';
 
 export const MAX_FLOWER_LEVEL = 7;
-export const MAX_TREE_LEVEL = 9;
+export const MAX_TREE_LEVEL = 7;
 
 export type IFlower =
   | 'acacia'

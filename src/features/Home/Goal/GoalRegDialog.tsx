@@ -3,8 +3,11 @@ import {Dialog, Input} from '@rneui/themed';
 import {View} from 'react-native';
 import {useState} from 'react';
 import {useRequestMonthGoal, useRequestWeekGoal} from '@/query/goal';
-//import fetchMonthGoal from '@/api/goal/fetchMonthGoal';
-//import requestWeekGoal from '@/api/goal/requestWeekGoal';
+import {useRecoilState, useSetRecoilState} from 'recoil';
+import flowerAtom from '@/atom/flowerAtom';
+import treeAtom from '@/atom/treeAtom';
+import {FlowerImage, TreeImage} from '@/utils/plant';
+import amountAtom from '@/atom/AccountAtom';
 
 export type GoalRegDialogProps = {
   visible: boolean;
@@ -23,16 +26,41 @@ export default function GoalRegDialog({
   const {mutateAsync: requestMonthGoal} = useRequestMonthGoal();
   const {mutateAsync: requestWeekGoal} = useRequestWeekGoal();
 
+  const setTree = useSetRecoilState(treeAtom);
+  const setFlower = useSetRecoilState(flowerAtom);
+  const [AmountAtom, setAmountAtom] = useRecoilState(amountAtom);
+
+  const randomTree = () => {
+    const random = Math.floor(Math.random() * TreeImage.length);
+    setTree(TreeImage[random]);
+  };
+
+  const randomFlower = () => {
+    const random = Math.floor(Math.random() * FlowerImage.length);
+    setFlower(FlowerImage[random]);
+  };
+
   const handleGoal = () => {
-    select === '월간'
-      ? requestMonthGoal({amount: parseInt(amount), weekIds: []})
-      : requestWeekGoal({id: weekId, amount: parseInt(amount)});
+    if (select === '월간') {
+      requestMonthGoal({amount: parseInt(amount), weekIds: []}).then(() => {
+        setAmountAtom(parseInt(amount));
+        randomTree();
+      });
+    } else {
+      if (AmountAtom && AmountAtom - parseInt(amount) >= 0) {
+        requestWeekGoal({id: weekId, amount: parseInt(amount)}).then(() => {
+          if (AmountAtom) {
+            setAmountAtom(AmountAtom - parseInt(amount));
+          }
+          randomFlower();
+        });
+      }
+    }
   };
 
   const onChangeAmount = (text: string) => {
     setAmount(text);
   };
-  console.log(weekId);
 
   return (
     <View>
