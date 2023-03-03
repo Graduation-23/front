@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import {AppText} from '@/components/AppText';
 import {useWeekGoalById} from '@/query/goal';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import GoalRegDialog from './GoalRegDialog';
 import Utils from '@/utils';
 
@@ -18,18 +18,35 @@ type WeekGoalGridProps = {
 export default function WeekGoalGrid({weekId}: WeekGoalGridProps) {
   const {data: weeks} = useWeekGoalById(weekId);
   const [wVisible, setWVisible] = useState(false);
+  const [visible, setVisible] = useState(true);
 
   const today = new Date();
+
+  useEffect(() => {
+    if (weeks) {
+      if (weeks.state === '진행중' && weeks.amount === 0) {
+        setVisible(false);
+      }
+    }
+  }, [weeks]);
 
   const handleWeek = () => {
     if (weeks) {
       const [sDay] = Utils.stringToDate(weeks.start);
       const [eDay] = Utils.stringToDate(weeks.end);
-      if (sDay <= today.getDate() && eDay >= today.getDate()) {
+      if (
+        sDay <= today.getDate() &&
+        eDay >= today.getDate() &&
+        weeks.amount === 0
+      ) {
         setWVisible(!wVisible);
+      } else if (sDay <= today.getDate() && eDay >= today.getDate()) {
+        if (Platform.OS === 'android') {
+          ToastAndroid.show('이미 등록한 목표입니다!', ToastAndroid.SHORT);
+        }
       } else {
         if (Platform.OS === 'android') {
-          ToastAndroid.show('아직 목표 주간이 아닙니다!', ToastAndroid.SHORT);
+          ToastAndroid.show('목표 주간이 아닙니다!', ToastAndroid.SHORT);
         }
       }
     }
@@ -51,7 +68,11 @@ export default function WeekGoalGrid({weekId}: WeekGoalGridProps) {
                 <AppText family="round-b" text={weeks.amount + '원'} />
               </View>
               <View style={styles.Items}>
-                <AppText family="round-b" text={weeks.state} />
+                {visible ? (
+                  <AppText family="round-b" text={weeks.state} />
+                ) : (
+                  <AppText family="round-b" text="" />
+                )}
               </View>
             </View>
           </TouchableOpacity>
