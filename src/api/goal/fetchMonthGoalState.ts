@@ -6,12 +6,12 @@ export type GoalState = {
 };
 
 export default function fetchMonthGoalState(monthId: number) {
-  return new Promise<GoalState>(resolve => {
+  return new Promise<GoalState>((resolve, reject) => {
     client
       .get('/goal/month/state?monthId=' + monthId)
       .then(response => {
-        resolve(response.data);
+        resolve(response.data.data);
       })
-      .catch();
+      .catch(reject);
   });
 }

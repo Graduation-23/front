@@ -7,7 +7,7 @@ import {useRecoilState, useSetRecoilState} from 'recoil';
 import flowerAtom from '@/atom/flowerAtom';
 import treeAtom from '@/atom/treeAtom';
 import {FlowerImage, TreeImage} from '@/utils/plant';
-import amountAtom from '@/atom/AccountAtom';
+import amountAtom from '@/atom/amountAtom';
 
 export type GoalRegDialogProps = {
   visible: boolean;
@@ -23,12 +23,13 @@ export default function GoalRegDialog({
   weekId,
 }: GoalRegDialogProps) {
   const [amount, setAmount] = useState('');
+  const [AmountAtom, setAmountAtom] = useRecoilState(amountAtom);
+
   const {mutateAsync: requestMonthGoal} = useRequestMonthGoal();
   const {mutateAsync: requestWeekGoal} = useRequestWeekGoal();
 
   const setTree = useSetRecoilState(treeAtom);
   const setFlower = useSetRecoilState(flowerAtom);
-  const [AmountAtom, setAmountAtom] = useRecoilState(amountAtom);
 
   const randomTree = () => {
     const random = Math.floor(Math.random() * TreeImage.length);
@@ -42,17 +43,23 @@ export default function GoalRegDialog({
 
   const handleGoal = () => {
     if (select === '월간') {
-      requestMonthGoal({amount: parseInt(amount), weekIds: []}).then(() => {
-        setAmountAtom(parseInt(amount));
-        randomTree();
-      });
+      if (parseInt(amount) > 0) {
+        requestMonthGoal({amount: parseInt(amount), weekIds: []}).then(() => {
+          setAmountAtom(parseInt(amount));
+          randomTree();
+        });
+      }
     } else {
-      if (AmountAtom && AmountAtom - parseInt(amount) >= 0) {
+      if (
+        AmountAtom &&
+        AmountAtom - parseInt(amount) >= 0 &&
+        parseInt(amount) > 0
+      ) {
         requestWeekGoal({id: weekId, amount: parseInt(amount)}).then(() => {
           if (AmountAtom) {
             setAmountAtom(AmountAtom - parseInt(amount));
+            randomFlower();
           }
-          randomFlower();
         });
       }
     }

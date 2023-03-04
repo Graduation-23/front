@@ -6,17 +6,24 @@ import {
   Platform,
 } from 'react-native';
 import {AppText} from '@/components/AppText';
-import {useWeekGoalById} from '@/query/goal';
+import {useWeekGoalById, useWeekGoalState} from '@/query/goal';
 import {useEffect, useState} from 'react';
 import GoalRegDialog from './GoalRegDialog';
 import Utils from '@/utils';
+import {useSetRecoilState} from 'recoil';
+import flowerLevelAtom from '@/atom/flowerLevelAtom';
 
 type WeekGoalGridProps = {
   weekId: number;
 };
 
 export default function WeekGoalGrid({weekId}: WeekGoalGridProps) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const {data: weekState} = useWeekGoalState(weekId);
   const {data: weeks} = useWeekGoalById(weekId);
+
+  const setFlowerLevel = useSetRecoilState(flowerLevelAtom);
+
   const [wVisible, setWVisible] = useState(false);
   const [visible, setVisible] = useState(true);
 
@@ -26,9 +33,13 @@ export default function WeekGoalGrid({weekId}: WeekGoalGridProps) {
     if (weeks) {
       if (weeks.state === '진행중' && weeks.amount === 0) {
         setVisible(false);
+      } else if (weeks.state === '실패') {
+        setFlowerLevel(0);
+      } else {
+        setVisible(true);
       }
     }
-  }, [weeks]);
+  }, [setFlowerLevel, weeks]);
 
   const handleWeek = () => {
     if (weeks) {

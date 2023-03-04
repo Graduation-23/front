@@ -2,9 +2,23 @@ import {View, StyleSheet} from 'react-native';
 import {AppText} from '@/components/AppText';
 import {IMonthGoal} from '@type/api';
 import WeekGoalGrid from './WeekGoalGrid';
-import {Fragment} from 'react';
+import {Fragment, useEffect} from 'react';
+import {useMonthGoalState} from '@/query/goal';
+import {useSetRecoilState} from 'recoil';
+import treeLevelAtom from '@/atom/treeLevelAtom';
 
 export default function MonthGoalGrid({...month}: IMonthGoal) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const {data: monthState} = useMonthGoalState(month.id);
+
+  const setTreeLevel = useSetRecoilState(treeLevelAtom);
+
+  useEffect(() => {
+    if (month.state === '실패') {
+      setTreeLevel(0);
+    }
+  }, [month.state, setTreeLevel]);
+
   return (
     <>
       <View style={styles.GridContents}>

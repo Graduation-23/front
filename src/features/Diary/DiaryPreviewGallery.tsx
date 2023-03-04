@@ -19,6 +19,7 @@ const GalleryItem = ({children}: {children: ReactNode}) => {
         marginRight: 10,
         borderRadius: 7,
         overflow: 'hidden',
+        marginTop: 5,
       }}>
       {children}
     </View>

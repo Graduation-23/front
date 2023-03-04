@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import {useEffect, useRef, useState} from 'react';
+import {useEffect, useRef} from 'react';
 import {
   Platform,
   StyleSheet,
@@ -15,32 +15,33 @@ import Share from 'react-native-share';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import GoalGrid from '@/features/Home/Goal/GoalGrid';
 import backgroundImage from '../assets/backgroundImage.jpg';
-import {useRecoilValue} from 'recoil';
+import {useRecoilState, useRecoilValue} from 'recoil';
 import flowerAtom from '@/atom/flowerAtom';
 import treeAtom from '@/atom/treeAtom';
 import Utils from '@/utils';
+import flowerLevelAtom from '@/atom/flowerLevelAtom';
+import treeLevelAtom from '@/atom/treeLevelAtom';
 
 export default function HomeScreen() {
   const captureRef = useRef<any>(null);
   const flower = useRecoilValue(flowerAtom);
   const tree = useRecoilValue(treeAtom);
-
-  const [fLevel, setFLevel] = useState(0);
-  const [tLevel, setTLevel] = useState(0);
+  const [flowerLevel, setFlowerLevel] = useRecoilState(flowerLevelAtom);
+  const [treeLevel, setTreeLevel] = useRecoilState(treeLevelAtom);
 
   const date = new Date();
 
   useEffect(() => {
     const d = new Date();
 
-    setTLevel(Utils.trnasformTreeLevel(d.getDate()));
+    setTreeLevel(Utils.trnasformTreeLevel(d.getDate()));
 
     if (d.getDay() === 0) {
-      setFLevel(7);
+      setFlowerLevel(7);
     } else {
-      setFLevel(d.getDay());
+      setFlowerLevel(d.getDay());
     }
-  }, []);
+  }, [setFlowerLevel, setTreeLevel]);
 
   const onCapture = () => {
     try {
@@ -86,8 +87,8 @@ export default function HomeScreen() {
                 </TouchableOpacity>
               </View>
               <View style={styles.PlantContainer}>
-                <GrowingPlant kind="tree" level={tLevel} type={tree} />
-                <GrowingPlant kind="flower" level={fLevel} type={flower} />
+                <GrowingPlant kind="tree" level={treeLevel} type={tree} />
+                <GrowingPlant kind="flower" level={flowerLevel} type={flower} />
               </View>
             </View>
           </ViewShot>

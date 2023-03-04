@@ -1,5 +1,5 @@
 import {Fragment, ReactNode} from 'react';
-import {View, ViewProps} from 'react-native';
+import {StyleSheet, View, ViewProps} from 'react-native';
 import {ListViewItemProps} from './ListViewItem';
 
 export type ListViewProps<T> = {
@@ -22,7 +22,7 @@ export default function ListView<T = unknown>({
 }: ListViewProps<T>) {
   return (
     <View {...props}>
-      {titleEl}
+      <View style={styles.Year}>{titleEl}</View>
       {items.map((el, i) => (
         <Fragment key={getId(el)}>
           {children({
@@ -36,3 +36,10 @@ export default function ListView<T = unknown>({
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  Year: {
+    paddingHorizontal: 15,
+    paddingBottom: 10,
+  },
+});
