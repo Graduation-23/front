@@ -1,5 +1,5 @@
-import {Text} from '@rneui/base';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import {AppText} from './AppText';
 
 interface OrderByButtonProps {
   ascending: boolean;
@@ -11,8 +11,11 @@ export default function OrderByButton({
   setAscending,
 }: OrderByButtonProps) {
   return (
-    <Text onPress={() => setAscending(!ascending)}>
-      <Icon size={30} name="sort" />
-    </Text>
+    <>
+      <AppText onPress={() => setAscending(!ascending)} family="round-b">
+        {ascending === true ? '오름차순 ' : '내림차순 '}
+      </AppText>
+      <Icon size={30} name="sort" color="black" />
+    </>
   );
 }

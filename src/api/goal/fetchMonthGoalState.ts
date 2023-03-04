@@ -10,8 +10,7 @@ export default function fetchMonthGoalState(monthId: number) {
     client
       .get('/goal/month/state?monthId=' + monthId)
       .then(response => {
-        resolve(response.data);
-        console.log(response.data.data);
+        resolve(response.data.data);
       })
       .catch(reject);
   });

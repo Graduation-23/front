@@ -24,8 +24,6 @@ export default function WeekGoalGrid({weekId}: WeekGoalGridProps) {
 
   const setFlowerLevel = useSetRecoilState(flowerLevelAtom);
 
-  console.log(weeks);
-
   const [wVisible, setWVisible] = useState(false);
   const [visible, setVisible] = useState(true);
 

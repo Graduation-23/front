@@ -48,24 +48,26 @@ export default function DiaryView({}: DiaryViewProps) {
         <View style={styles.toolbar}>
           <OrderByButton ascending={order} setAscending={setOrder} />
         </View>
-        {Utils.orderBy(Object.keys(group), order).map(year => (
-          <DiaryListView
-            key={year}
-            titleEl={<AppText text={year} />}
-            items={Utils.orderBy(group[year], order, getMMDD)}
-            onPress={handlePress}
-            onLongPress={handleLongPress}
-            getId={item => item.id}>
-            {DiaryViewItem}
-          </DiaryListView>
-        ))}
+        <View style={styles.contents}>
+          {Utils.orderBy(Object.keys(group), order).map(year => (
+            <DiaryListView
+              key={year}
+              titleEl={<AppText.Subtitle family="round-d" text={year} />}
+              items={Utils.orderBy(group[year], order, getMMDD)}
+              onPress={handlePress}
+              onLongPress={handleLongPress}
+              getId={item => item.id}>
+              {DiaryViewItem}
+            </DiaryListView>
+          ))}
+        </View>
       </ScrollView>
       <Dialog
         overlayStyle={styles.dialog}
         isVisible={selectedId !== null}
         onBackdropPress={closeDialog}>
         <Dialog.Title title="다이어리 삭제" />
-        <AppText text="해당 다이어리를 삭제하시겠습니까?" />
+        <AppText family="round-b" text="해당 다이어리를 삭제하시겠습니까?" />
         <Dialog.Actions>
           <Dialog.Button title="예" onPress={handleConfirmDelete} />
           <Dialog.Button title="아니오" onPress={closeDialog} />
@@ -80,8 +82,14 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'flex-end',
+    alignItems: 'center',
     paddingHorizontal: 10,
     paddingVertical: 5,
+  },
+  contents: {
+    width: '100%',
+    paddingHorizontal: 25,
+    backgroundColor: 'white',
   },
   dialog: {
     backgroundColor: 'white',

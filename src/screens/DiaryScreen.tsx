@@ -9,6 +9,7 @@ const styles: {[Key in (typeof KindOfStyle)[number]]: StyleProp<ViewStyle>} = {
     backgroundColor: 'white',
     width: '100%',
     minHeight: '100%',
+    paddingVertical: 10,
   },
 };
 

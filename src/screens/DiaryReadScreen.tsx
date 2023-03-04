@@ -19,23 +19,38 @@ export default function DiaryReadScreen({route}: any) {
 
   return (
     <View style={styles.container}>
-      <AppText.Title
-        center
-        family="round-c"
-        text={`${diary?.date.slice(5)} 일기`}
-      />
+      <View
+        style={{
+          justifyContent: 'space-between',
+          flexDirection: 'row',
+          marginBottom: 20,
+          paddingTop: 10,
+        }}>
+        <AppText.Title
+          mh={10}
+          family="round-d"
+          text={`${diary?.date.substring(5, 7)}/${diary?.date.substring(
+            8,
+          )} Diary`}
+        />
+        <AppText.Subtitle mh={10} family="round-b">
+          날씨 : {WeatherKor[diary?.weather || 'sunny']} &nbsp;
+          <WeatherIcon type={diary?.weather} />
+        </AppText.Subtitle>
+      </View>
       <AppText.Subtitle
         mv={15}
-        center
-        family="round-c"
+        mh={10}
+        family="round-b"
         text={`제목 : ${diary?.title}`}
       />
-      <AppText.Subtitle mv={10} center family="round-c">
-        날씨 : {WeatherKor[diary?.weather || 'sunny']} &nbsp;
-        <WeatherIcon type={diary?.weather} />
-      </AppText.Subtitle>
-      <AppText.Subtitle mv={15} center family="round-c" text="일기 내용" />
-      <AppText mv={15} center family="round-c" text={diary?.content} />
+
+      <AppText.Subtitle
+        mv={15}
+        mh={10}
+        family="round-b"
+        text={diary?.content}
+      />
       <DiaryPreviewGallery imageUrls={diary?.imageUrls || []} />
       {widget && (
         <WidgetView items={widget.items} totalCost={widget.totalCost} />
@@ -55,6 +70,8 @@ const styles = StyleSheet.create({
   },
   container: {
     padding: 15,
+    backgroundColor: 'white',
+    height: '100%',
   },
   button: {
     borderRadius: 15,
