@@ -18,8 +18,8 @@ export const useMonthGoal = () => {
   return useQuery(['goal'], () => fetchMonthGoal({year, month}));
 };
 
-export const useMonthGoalById = (id: number) => {
-  return useQuery(['goal', id], () => fetchMonthGoalById(id), {
+export const useMonthGoalById = (monthId: number) => {
+  return useQuery(['goal', monthId], () => fetchMonthGoalById(monthId), {
     onSuccess: () => {
       //console.log('성공');
     },
@@ -41,10 +41,10 @@ export const useRequestMonthGoal = () => {
   return mutation;
 };
 
-export const useMonthGoalState = (id: number) => {
+export const useMonthGoalState = (monthId: number) => {
   const queryClient = useQueryClient();
 
-  return useQuery(['goal', id], () => fetchMonthGoalState(id), {
+  return useQuery(['goal', monthId], () => fetchMonthGoalState(monthId), {
     onSuccess: () => {
       queryClient.invalidateQueries('goal');
       console.log('월간 진행도 리셋 성공');
@@ -71,9 +71,15 @@ export const useWeekGoal = (id: number, enableRefetching: boolean = true) => {
   });
 };
 
-export const useWeekGoalById = (goalId: number) => {
-  return useQuery(['goal', goalId], () => fetchWeekGoalById(goalId), {
+export const useWeekGoalById = (weekId: number) => {
+  //const queryClient = useQueryClient();
+
+  return useQuery(['goal', weekId], () => fetchWeekGoalById(weekId), {
     onSuccess: () => {
+      //queryClient.invalidateQueries('goal');
+      // fetchWeekGoalById(weekId).then(() => {
+      //   console.log('댓냐');
+      // });
       //console.log('성공');
     },
   });
@@ -94,12 +100,11 @@ export const useRequestWeekGoal = () => {
   return mutation;
 };
 
-export const useWeekGoalState = (id: number) => {
+export const useWeekGoalState = (weekId: number) => {
   const queryClient = useQueryClient();
-
-  return useQuery(['goal', id], () => fetchWeekGoalState(id), {
+  return useQuery(['goals', weekId], () => fetchWeekGoalState(weekId), {
     onSuccess: () => {
-      queryClient.invalidateQueries('goal');
+      queryClient.invalidateQueries(['goal', weekId]);
       console.log('weekGoalState 조회 성공');
     },
     onError: () => {

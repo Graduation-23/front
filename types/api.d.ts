@@ -33,8 +33,6 @@ export interface IFinance {
   version: number;
 }
 
-export interface IGoal {}
-
 export interface IMonthGoal {
   amount: number;
   id: number;
@@ -42,7 +40,7 @@ export interface IMonthGoal {
   name: string;
   state: string;
   user: string;
-  weekIds: [];
+  weekIds: number[];
   year: number;
   week: number;
 }

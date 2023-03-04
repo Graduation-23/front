@@ -6,6 +6,7 @@ import {
   Platform,
   Image,
   TouchableOpacity,
+  Dimensions,
 } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useRecoilValue} from 'recoil';
@@ -62,13 +63,10 @@ export default function AchieveScreen({}: AchieveScreenProps) {
       <ViewShot
         ref={captureRef}
         options={{fileName: 'Capture-File', format: 'jpg', quality: 0.9}}>
-        <>
+        <View style={{backgroundColor: '#f2f2f2', paddingTop: 20}}>
           <View style={styles.Title}>
             <AppText.Title family="round-b" text={user?.nickname + ' 님이'} />
-            <AppText.Title
-              family="round-b"
-              text="달성하신 업적은            "
-            />
+            <AppText.Title family="round-b" text="달성하신 업적은" />
             <AppText.Title family="round-b" text={'총 ' + all + '개 입니다.'} />
             <View style={styles.SubTitle}>
               <AppText
@@ -126,7 +124,7 @@ export default function AchieveScreen({}: AchieveScreenProps) {
               </View>
             </View>
           </View>
-        </>
+        </View>
       </ViewShot>
     </SafeAreaView>
   );
@@ -137,10 +135,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 35,
     height: '100%',
-    backgroundColor: 'transparent',
+    backgroundColor: '#f2f2f2',
   },
   Title: {
-    width: '100%',
+    width: Dimensions.get('window').width - 60,
     height: '35%',
     paddingHorizontal: 30,
     paddingVertical: 10,
@@ -158,7 +156,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
   },
   Contents: {
-    width: '85%',
+    width: Dimensions.get('window').width - 60,
     height: '50%',
     paddingHorizontal: 20,
     paddingVertical: 20,

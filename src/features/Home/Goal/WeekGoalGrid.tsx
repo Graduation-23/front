@@ -6,7 +6,7 @@ import {
   Platform,
 } from 'react-native';
 import {AppText} from '@/components/AppText';
-import {useWeekGoalById} from '@/query/goal';
+import {useWeekGoalById, useWeekGoalState} from '@/query/goal';
 import {useEffect, useState} from 'react';
 import GoalRegDialog from './GoalRegDialog';
 import Utils from '@/utils';
@@ -16,7 +16,13 @@ type WeekGoalGridProps = {
 };
 
 export default function WeekGoalGrid({weekId}: WeekGoalGridProps) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const {data: weekState} = useWeekGoalState(weekId); //무한
+
   const {data: weeks} = useWeekGoalById(weekId);
+
+  //console.log(weekState);
+
   const [wVisible, setWVisible] = useState(false);
   const [visible, setVisible] = useState(true);
 
@@ -26,6 +32,8 @@ export default function WeekGoalGrid({weekId}: WeekGoalGridProps) {
     if (weeks) {
       if (weeks.state === '진행중' && weeks.amount === 0) {
         setVisible(false);
+      } else {
+        setVisible(true);
       }
     }
   }, [weeks]);
