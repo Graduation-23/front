@@ -21,8 +21,6 @@ export default function WeekGoalGrid({weekId}: WeekGoalGridProps) {
 
   const {data: weeks} = useWeekGoalById(weekId);
 
-  //console.log(weekState);
-
   const [wVisible, setWVisible] = useState(false);
   const [visible, setVisible] = useState(true);
 

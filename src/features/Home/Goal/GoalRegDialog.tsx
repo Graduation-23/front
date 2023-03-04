@@ -43,12 +43,18 @@ export default function GoalRegDialog({
 
   const handleGoal = () => {
     if (select === '월간') {
-      requestMonthGoal({amount: parseInt(amount), weekIds: []}).then(() => {
-        setAmountAtom(parseInt(amount));
-        randomTree();
-      });
+      if (parseInt(amount) > 0) {
+        requestMonthGoal({amount: parseInt(amount), weekIds: []}).then(() => {
+          setAmountAtom(parseInt(amount));
+          randomTree();
+        });
+      }
     } else {
-      if (AmountAtom && AmountAtom - parseInt(amount) >= 0) {
+      if (
+        AmountAtom &&
+        AmountAtom - parseInt(amount) >= 0 &&
+        parseInt(amount) > 0
+      ) {
         requestWeekGoal({id: weekId, amount: parseInt(amount)}).then(() => {
           if (AmountAtom) {
             setAmountAtom(AmountAtom - parseInt(amount));

@@ -44,7 +44,7 @@ export const useRequestMonthGoal = () => {
 export const useMonthGoalState = (monthId: number) => {
   const queryClient = useQueryClient();
 
-  return useQuery(['goal', monthId], () => fetchMonthGoalState(monthId), {
+  return useQuery(['monthGoal', monthId], () => fetchMonthGoalState(monthId), {
     onSuccess: () => {
       queryClient.invalidateQueries('goal');
       console.log('월간 진행도 리셋 성공');
@@ -72,15 +72,12 @@ export const useWeekGoal = (id: number, enableRefetching: boolean = true) => {
 };
 
 export const useWeekGoalById = (weekId: number) => {
-  //const queryClient = useQueryClient();
-
   return useQuery(['goal', weekId], () => fetchWeekGoalById(weekId), {
     onSuccess: () => {
-      //queryClient.invalidateQueries('goal');
-      // fetchWeekGoalById(weekId).then(() => {
-      //   console.log('댓냐');
-      // });
-      //console.log('성공');
+      console.log('성공');
+    },
+    onError: () => {
+      console.log('??');
     },
   });
 };
@@ -102,10 +99,9 @@ export const useRequestWeekGoal = () => {
 
 export const useWeekGoalState = (weekId: number) => {
   const queryClient = useQueryClient();
-  return useQuery(['goals', weekId], () => fetchWeekGoalState(weekId), {
+  return useQuery(['weekGoal', weekId], () => fetchWeekGoalState(weekId), {
     onSuccess: () => {
       queryClient.invalidateQueries(['goal', weekId]);
-      console.log('weekGoalState 조회 성공');
     },
     onError: () => {
       console.log('weekGoalState 조회 실패');

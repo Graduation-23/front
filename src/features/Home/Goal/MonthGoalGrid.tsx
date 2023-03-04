@@ -3,8 +3,12 @@ import {AppText} from '@/components/AppText';
 import {IMonthGoal} from '@type/api';
 import WeekGoalGrid from './WeekGoalGrid';
 import {Fragment} from 'react';
+import {useMonthGoalState} from '@/query/goal';
 
 export default function MonthGoalGrid({...month}: IMonthGoal) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const {data: monthState} = useMonthGoalState(month.id);
+
   return (
     <>
       <View style={styles.GridContents}>

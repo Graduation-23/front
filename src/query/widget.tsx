@@ -50,7 +50,8 @@ export const useUpdateWidget = (id: number) => {
   return useMutation([GROUP, id], updateWidget, {
     onSuccess: () => {
       queryClient.invalidateQueries(GROUP);
-      queryClient.invalidateQueries('goals');
+      queryClient.invalidateQueries('weekGoal');
+      queryClient.invalidateQueries('monthGoal');
     },
   });
 };
@@ -61,7 +62,8 @@ export const useDeleteWidget = () => {
   return useMutation<unknown, unknown, number>([GROUP], deleteWidget, {
     onSuccess: () => {
       queryClient.invalidateQueries(GROUP);
-      queryClient.invalidateQueries('goals');
+      queryClient.invalidateQueries('weekGoal');
+      queryClient.invalidateQueries('monthGoal');
     },
   });
 };

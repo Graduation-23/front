@@ -7,7 +7,6 @@ export default function fetchWeekGoalState(weekId: number) {
       .get('/goal/week/state?weekId=' + weekId)
       .then(response => {
         resolve(response.data.data);
-        console.log('goalWeekState 성공 ', response.data.data);
       })
       .catch(err => {
         console.log('안돼', err, 'id:', weekId);
