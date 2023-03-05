@@ -3,6 +3,7 @@ import {IDiary} from '@type/api';
 import {AppText} from '@components/AppText';
 import {ListViewItemProps} from '@components/Item/ListViewItem';
 import DiaryPreviewGallery from './DiaryPreviewGallery';
+import WeatherIcon from '@/components/Weather/WeatherIcon';
 // import CDNImage from '@components/CDNImage';
 
 export default function DiaryViewItem({
@@ -17,7 +18,9 @@ export default function DiaryViewItem({
           <AppText.Subtitle family="round-d">
             {data.date.substring(5, 7) + '/' + data.date.substring(8) + ' '}
           </AppText.Subtitle>
-          <AppText family="round-b" text={'날씨 : ' + data.weather} />
+          <AppText family="round-b">
+            날씨 : <WeatherIcon type={data.weather} />
+          </AppText>
         </View>
         <View style={styles.contents}>
           <AppText.Subtitle family="round-b">

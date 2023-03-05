@@ -1,4 +1,5 @@
-import {Dialog} from '@rneui/base';
+import {AppText} from '@/components/AppText';
+import {Dialog} from '@rneui/themed';
 import {useState} from 'react';
 import FinanceView from './FinanceView';
 
@@ -23,15 +24,11 @@ export default function FinanceDialog({
   };
 
   return (
-    <Dialog
-      overlayStyle={{backgroundColor: 'white'}}
-      isVisible={openId !== null}
-      onBackdropPress={close}>
-      <Dialog.Title title="소비 카테고리" />
+    <Dialog isVisible={openId !== null} onBackdropPress={close}>
+      <AppText.Subtitle family="round-b" text="카드/계좌 선택" />
       <FinanceView fid={tag} setFid={setTag} />
       <Dialog.Actions>
         <Dialog.Button title="선택" onPress={handleConfirm} />
-        <Dialog.Button title="닫기" onPress={close} />
       </Dialog.Actions>
     </Dialog>
   );

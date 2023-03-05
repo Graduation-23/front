@@ -1,4 +1,10 @@
-import {StyleSheet, View} from 'react-native';
+import {
+  Dimensions,
+  ImageBackground,
+  ScrollView,
+  StyleSheet,
+  View,
+} from 'react-native';
 import {AppText} from '@components/AppText';
 import {useDiaryById} from '@query/diary';
 import DiaryPreviewGallery from '@features/Diary/DiaryPreviewGallery';
@@ -6,6 +12,7 @@ import WeatherIcon from '@components/Weather/WeatherIcon';
 import {WeatherKor} from '@constants/weather';
 import {useWidgetById} from '@/query/widget';
 import WidgetView from '../features/Widget/View/WidgetView';
+import diaryBackground from '../assets/diaryBackground.png';
 
 export default function DiaryReadScreen({route}: any) {
   const diaryId = route.params.diaryId;
@@ -17,45 +24,50 @@ export default function DiaryReadScreen({route}: any) {
   const {data: diary} = useDiaryById(diaryId);
   const {data: widget} = useWidgetById(diaryId);
 
-  return (
-    <View style={styles.container}>
-      <View
-        style={{
-          justifyContent: 'space-between',
-          flexDirection: 'row',
-          marginBottom: 20,
-          paddingTop: 10,
-        }}>
-        <AppText.Title
-          mh={10}
-          family="round-d"
-          text={`${diary?.date.substring(5, 7)}/${diary?.date.substring(
-            8,
-          )} Diary`}
-        />
-        <AppText.Subtitle mh={10} family="round-b">
-          날씨 : {WeatherKor[diary?.weather || 'sunny']} &nbsp;
-          <WeatherIcon type={diary?.weather} />
-        </AppText.Subtitle>
-      </View>
-      <AppText.Subtitle
-        mv={15}
-        mh={10}
-        family="round-b"
-        text={`제목 : ${diary?.title}`}
-      />
+  // if (diary) {
+  //   console.log('서버 : ', diary?.imageUrls);
+  // }
 
-      <AppText.Subtitle
-        mv={15}
-        mh={10}
-        family="round-b"
-        text={diary?.content}
-      />
-      <DiaryPreviewGallery imageUrls={diary?.imageUrls || []} />
-      {widget && (
-        <WidgetView items={widget.items} totalCost={widget.totalCost} />
-      )}
-    </View>
+  return (
+    <ScrollView>
+      <ImageBackground
+        source={diaryBackground}
+        resizeMode="stretch"
+        style={{minHeight: Dimensions.get('window').height - 300}}>
+        <View style={styles.container}>
+          <View style={styles.Title}>
+            <AppText.Title
+              mh={10}
+              family="round-d"
+              text={`${diary?.date.substring(5, 7)}/${diary?.date.substring(
+                8,
+              )} Diary`}
+            />
+            <AppText.Subtitle mh={10} family="round-b">
+              날씨 : {WeatherKor[diary?.weather || 'sunny']} &nbsp;
+              <WeatherIcon type={diary?.weather} />
+            </AppText.Subtitle>
+          </View>
+          <AppText.Subtitle
+            mv={10}
+            mh={10}
+            family="round-b"
+            text={`제목 : ${diary?.title}`}
+          />
+          <DiaryPreviewGallery imageUrls={diary?.imageUrls || []} />
+          <AppText.Subtitle
+            mv={15}
+            mh={10}
+            family="round-b"
+            text={diary?.content}
+            style={styles.TopMargin}
+          />
+          {widget && (
+            <WidgetView items={widget.items} totalCost={widget.totalCost} />
+          )}
+        </View>
+      </ImageBackground>
+    </ScrollView>
   );
 }
 
@@ -64,14 +76,20 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     padding: 6,
   },
+  Title: {
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    marginBottom: 10,
+    paddingTop: 10,
+  },
   fullWidth: {
     overflow: 'hidden',
     width: 350,
   },
   container: {
     padding: 15,
-    backgroundColor: 'white',
-    height: '100%',
+    backgroundColor: '#ffffff99',
+    minHeight: Dimensions.get('window').height,
   },
   button: {
     borderRadius: 15,
@@ -79,5 +97,8 @@ const styles = StyleSheet.create({
   },
   weatherIcon: {
     fontSize: 30,
+  },
+  TopMargin: {
+    marginTop: 40,
   },
 });

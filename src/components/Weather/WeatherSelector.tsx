@@ -36,10 +36,9 @@ const styles = StyleSheet.create({
   base: {
     padding: 5,
     borderRadius: 7,
-    marginHorizontal: 10,
-    fontSize: 28,
+    fontSize: 20,
   },
   focus: {
-    backgroundColor: 'rgba(177, 231, 230, 0.66)',
+    backgroundColor: 'rgba(148, 198, 227, 0.66)',
   },
 });

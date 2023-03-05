@@ -7,6 +7,7 @@ import {
   View,
   ScrollView,
   ImageBackground,
+  Dimensions,
 } from 'react-native';
 import {AppText} from '../components/AppText';
 import GrowingPlant from '../features/Home/GrowingPlant';
@@ -67,12 +68,11 @@ export default function HomeScreen() {
   };
 
   return (
-    <ImageBackground
-      imageStyle={{minHeight: '100%'}}
-      style={{minHeight: '100%'}}
-      source={backgroundImage}
-      resizeMode="cover">
-      <ScrollView>
+    <ScrollView>
+      <ImageBackground
+        style={{minHeight: Dimensions.get('window').height - 300}}
+        source={backgroundImage}
+        resizeMode="stretch">
         <View style={styles.Container}>
           <ViewShot
             ref={captureRef}
@@ -94,8 +94,8 @@ export default function HomeScreen() {
           </ViewShot>
           <GoalGrid />
         </View>
-      </ScrollView>
-    </ImageBackground>
+      </ImageBackground>
+    </ScrollView>
   );
 }
 

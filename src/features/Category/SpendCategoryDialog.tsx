@@ -1,4 +1,5 @@
-import {Dialog} from '@rneui/base';
+import {AppText} from '@/components/AppText';
+import {Dialog} from '@rneui/themed';
 import {useState} from 'react';
 import CategoryView from './CategoryView';
 
@@ -23,15 +24,11 @@ export default function SpendCategoryDialog({
   };
 
   return (
-    <Dialog
-      overlayStyle={{backgroundColor: 'white'}}
-      isVisible={openId !== null}
-      onBackdropPress={close}>
-      <Dialog.Title title="소비 카테고리" />
+    <Dialog isVisible={openId !== null} onBackdropPress={close}>
+      <AppText.Subtitle text="Category" family="round-b" />
       <CategoryView tag={tag} setTag={setTag} />
       <Dialog.Actions>
         <Dialog.Button title="선택" onPress={handleConfirm} />
-        <Dialog.Button title="닫기" onPress={close} />
       </Dialog.Actions>
     </Dialog>
   );

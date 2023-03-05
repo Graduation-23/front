@@ -45,9 +45,8 @@ export default function DiaryView({}: DiaryViewProps) {
   return (
     <>
       <ScrollView>
-        <View style={styles.toolbar}>
-          <OrderByButton ascending={order} setAscending={setOrder} />
-        </View>
+        <OrderByButton ascending={order} setAscending={setOrder} />
+
         <View style={styles.contents}>
           {Utils.orderBy(Object.keys(group), order).map(year => (
             <DiaryListView

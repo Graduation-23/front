@@ -1,5 +1,4 @@
 import {useNavigation} from '@react-navigation/native';
-import {Text} from '@rneui/base';
 import {useState} from 'react';
 import {View} from 'react-native';
 import DatePicker from 'react-native-date-picker';
@@ -8,6 +7,7 @@ import {useIssueDiaryId} from '@query/diary';
 import Utils from '@utils/index';
 import {useIssueWidget} from '@query/widget';
 import WidgetUtils from '@utils/widget';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export default function DiaryWriteButton() {
   const [visible, setVisibleModal] = useState(false);
@@ -24,9 +24,12 @@ export default function DiaryWriteButton() {
 
   return (
     <View>
-      <Text style={{color: '#29b6f6'}} onPress={() => setVisibleModal(true)}>
-        작성
-      </Text>
+      <Icon
+        name="create"
+        size={25}
+        onPress={() => setVisibleModal(true)}
+        style={{color: '#1393cf'}}
+      />
 
       <DatePicker
         title="일기 날짜"
