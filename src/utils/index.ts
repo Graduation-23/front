@@ -122,11 +122,21 @@ class Utils {
     return numbers.map(el => ((el / total) * 100).toFixed(1));
   }
 
-  static trnasformTreeLevel(d: number) {
-    if (d >= 30) {
+  static transformTreeLevel() {
+    const date = new Date();
+    if (date.getDate() >= 30) {
       return 7;
     } else {
-      return Math.ceil(d / 5);
+      return Math.ceil(date.getDate() / 5);
+    }
+  }
+
+  static transformFlowerLevel() {
+    const date = new Date();
+    if (date.getDay() === 0) {
+      return 7;
+    } else {
+      return date.getDay();
     }
   }
 

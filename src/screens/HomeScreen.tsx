@@ -33,15 +33,8 @@ export default function HomeScreen() {
   const date = new Date();
 
   useEffect(() => {
-    const d = new Date();
-
-    setTreeLevel(Utils.trnasformTreeLevel(d.getDate()));
-
-    if (d.getDay() === 0) {
-      setFlowerLevel(7);
-    } else {
-      setFlowerLevel(d.getDay());
-    }
+    setTreeLevel(Utils.transformTreeLevel());
+    setFlowerLevel(Utils.transformFlowerLevel());
   }, [setFlowerLevel, setTreeLevel]);
 
   const onCapture = () => {

@@ -6,6 +6,7 @@ import {
   View,
 } from 'react-native';
 import {AppText} from '@components/AppText';
+import CategoryIcons from './CategoryIcons';
 //import {Divider} from '@rneui/themed';
 
 type CategoryItemProps = {
@@ -31,6 +32,9 @@ export default function CategoryItem({
           }
         }}
         style={[styles.base, selected && styles.selected]}>
+        <View style={styles.Icons}>
+          <CategoryIcons tag={tag} />
+        </View>
         <AppText center style={styles.FontSize16} family="round-b">
           {tag}
         </AppText>
@@ -46,11 +50,16 @@ const styles = StyleSheet.create({
   base: {
     paddingHorizontal: 10,
     paddingVertical: 5,
+    alignItems: 'center',
   },
   selected: {
     backgroundColor: 'lightgray',
   },
+  Icons: {
+    marginTop: 10,
+  },
   FontSize16: {
-    fontSize: 17,
+    fontSize: 22,
+    marginTop: 15,
   },
 });

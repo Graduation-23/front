@@ -61,6 +61,7 @@ export function WidgetTableItem({
           value={item.amount.toString()}
           onChangeText={Utils.bindFirstParameter(set, 'amount')}
           placeholder="지출 금액을 작성해주세요."
+          keyboardType="numeric"
         />
       </View>
     </LinearGradient>
@@ -81,13 +82,14 @@ const styles = StyleSheet.create({
   box: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
   },
   input: {
     paddingHorizontal: 5,
     ...Platform.select({
       android: {
         fontFamily: 'Ownglyph_yoxaiov-Rg',
-        fontSize: 20,
+        fontSize: 22,
       },
     }),
   },

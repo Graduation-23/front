@@ -14,6 +14,7 @@ export default function CategoryView({setTag, tag}: CategoryViewProps) {
         style={{
           marginTop: 15,
           flex: 1,
+          height: '80%',
         }}>
         <View
           style={{

@@ -17,7 +17,7 @@ export default function DiaryNavigator() {
         component={DiaryScreen}
         options={{
           headerTitle() {
-            return <AppText.Subtitle family="round-d" text="Diary" />;
+            return <AppText.Title family="round-d" text="Diary" />;
           },
           headerRight() {
             return <DiaryWriteButton />;
@@ -30,7 +30,7 @@ export default function DiaryNavigator() {
         options={({route, navigation}) => ({
           headerBackVisible: false,
           headerTitle() {
-            return <AppText.Subtitle family="round-d" text="Write" />;
+            return <AppText.Title family="round-d" text="Write" />;
           },
           headerRight() {
             return (
@@ -55,7 +55,7 @@ export default function DiaryNavigator() {
         component={DiaryReadScreen}
         options={({route}) => ({
           headerTitle() {
-            return <AppText.Subtitle family="round-d" text="Today's" />;
+            return <AppText.Title family="round-d" text="Today's" />;
           },
           headerRight() {
             return <DiaryUpdateButton id={(route.params as any).diaryId} />;

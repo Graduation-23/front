@@ -7,6 +7,6 @@ export const AppTextSubtitle: typeof AppTextBase = ({style, ...props}) => {
 
 const styles = StyleSheet.create({
   title: {
-    fontSize: 22,
+    fontSize: 24,
   },
 });
