@@ -89,13 +89,18 @@ class Utils {
       return form;
     }
 
+    console.log(pureObject);
+
     for (const key in pureObject) {
       const item = pureObject[key];
+
+      console.log('item', item);
 
       if (!Array.isArray(item)) {
         form.append(key, item);
       } else {
         item.forEach((el, i) => {
+          console.log('el', el);
           form.append(`${key}[${i}]`, el);
         });
       }
