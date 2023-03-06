@@ -8,13 +8,6 @@ export default function LoadingScreen() {
     <View style={styles.container}>
       <View style={styles.content}>
         <Image style={styles.image} source={Logo} />
-        <AppText
-          style={{
-            color: '#bdbdbd',
-          }}
-          center
-          text="로그인 확인중..."
-        />
       </View>
     </View>
   );
