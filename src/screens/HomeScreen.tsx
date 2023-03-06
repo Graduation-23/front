@@ -70,7 +70,7 @@ export default function HomeScreen() {
   return (
     <ScrollView>
       <ImageBackground
-        style={{minHeight: Dimensions.get('window').height - 300}}
+        style={{minHeight: Dimensions.get('window').height}}
         source={backgroundImage}
         resizeMode="stretch">
         <View style={styles.Container}>

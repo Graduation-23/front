@@ -38,7 +38,7 @@ export default function DiaryWriteScreen({route}: any) {
         source={diaryBackground}
         resizeMode="stretch"
         style={{
-          minHeight: Dimensions.get('window').height - 300,
+          minHeight: Dimensions.get('window').height,
           minWidth: Dimensions.get('window').width,
         }}>
         <KeyboardAvoidingView

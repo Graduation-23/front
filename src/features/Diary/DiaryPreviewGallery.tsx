@@ -14,12 +14,12 @@ const GalleryItem = ({children}: {children: ReactNode}) => {
   return (
     <View
       style={{
-        width: 100,
-        height: 100,
+        width: 120,
+        height: 120,
         marginRight: 10,
         borderRadius: 7,
         overflow: 'hidden',
-        marginTop: 5,
+        marginTop: 10,
       }}>
       {children}
     </View>

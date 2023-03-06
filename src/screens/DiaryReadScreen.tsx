@@ -33,7 +33,7 @@ export default function DiaryReadScreen({route}: any) {
       <ImageBackground
         source={diaryBackground}
         resizeMode="stretch"
-        style={{minHeight: Dimensions.get('window').height - 300}}>
+        style={{minHeight: Dimensions.get('window').height}}>
         <View style={styles.container}>
           <View style={styles.Title}>
             <AppText.Title
