@@ -1,5 +1,5 @@
 import {useMemo} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, Platform} from 'react-native';
 import {AppText} from '@components/AppText';
 import {Button} from '@rneui/base';
 import {useNavigation} from '@react-navigation/native';
@@ -26,53 +26,78 @@ export default function AnalysisCost({items, at}: AnalysisCostProps) {
   }, [items]);
 
   return (
-    <View style={styles.container}>
-      <AppText
-        style={styles.subtitle}
-        text={`${at.getMonth() + 1}월 총 지출 금액`}
-      />
-      <View style={styles.content}>
-        <AppText.Title text={`${totalCost.toLocaleString()}원`} />
-        <Button
-          buttonStyle={styles.analysisButton}
-          onPress={handleNavigateAnalysis}>
-          <AppText style={styles.analysisText} text="지출 분석" />
-        </Button>
+    <View style={styles.Container}>
+      <View style={styles.container}>
+        <AppText.Title
+          style={styles.subtitle}
+          family="round-b"
+          text={`${at.getMonth() + 1}월 총 지출 금액`}
+        />
+        <View style={styles.content}>
+          <AppText.Subtitle
+            style={styles.leftPadding}
+            family="round-b"
+            text={`${totalCost.toLocaleString()}원`}
+          />
+        </View>
+        <View style={styles.Bottom}>
+          <AppText
+            family="round-b"
+            style={styles.informationText}
+            text={`총 ${count} 건 결제`}
+          />
+          <Button
+            buttonStyle={styles.analysisButton}
+            onPress={handleNavigateAnalysis}>
+            <AppText family="round-b" text="지출 분석" />
+          </Button>
+        </View>
       </View>
-      <AppText style={styles.informationText} text={`총 ${count} 결제`} />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  Container: {
+    width: '100%',
+    alignItems: 'center',
+    marginTop: 20,
+  },
   container: {
+    width: '90%',
     backgroundColor: 'white',
-    paddingTop: 50,
-    marginBottom: 20,
+    paddingVertical: 20,
     paddingHorizontal: 15,
-    paddingBottom: 25,
+    marginBottom: 20,
+    borderRadius: 20,
+    ...Platform.select({
+      android: {
+        elevation: 10,
+      },
+    }),
+  },
+  Bottom: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'baseline',
   },
   subtitle: {
-    color: 'gray',
-    fontWeight: 'bold',
-    fontSize: 17,
     paddingBottom: 10,
   },
   content: {
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-  analysisText: {
-    color: 'white',
-    fontSize: 16,
-  },
   analysisButton: {
-    backgroundColor: '#3083ff',
+    backgroundColor: '#c8e6fe',
     borderRadius: 10,
   },
   informationText: {
     color: 'gray',
     fontSize: 15,
+    paddingLeft: 5,
+  },
+  leftPadding: {
     paddingLeft: 5,
   },
 });

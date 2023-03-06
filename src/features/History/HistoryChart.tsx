@@ -1,5 +1,6 @@
+import {AppText} from '@/components/AppText';
 import {useMemo} from 'react';
-import {Dimensions, StyleSheet, View} from 'react-native';
+import {Dimensions, Platform, StyleSheet, View} from 'react-native';
 import {LineChart} from 'react-native-chart-kit';
 
 const chartConfig = {
@@ -37,22 +38,56 @@ export default function HistoryChart({costByYear}: HistoryChartProps) {
 
   return (
     <View style={styles.container}>
-      {data && (
-        <LineChart
-          data={data}
-          width={Dimensions.get('window').width - 30}
-          height={220}
-          chartConfig={chartConfig}
-          yAxisSuffix="만원"
-        />
-      )}
+      <View style={styles.Center}>
+        <View style={styles.Title}>
+          <AppText.Title family="round-b">연혁</AppText.Title>
+        </View>
+        <View style={styles.Chart}>
+          {data && (
+            <LineChart
+              data={data}
+              width={Dimensions.get('window').width - 100}
+              height={220}
+              chartConfig={chartConfig}
+              yAxisSuffix="만원"
+              style={{borderRadius: 20}}
+            />
+          )}
+        </View>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#fff',
-    padding: 15,
+    marginTop: 20,
+    padding: 10,
+    alignItems: 'center',
+  },
+  Center: {
+    width: '95%',
+    backgroundColor: 'white',
+    ...Platform.select({
+      android: {
+        elevation: 10,
+      },
+    }),
+    borderRadius: 20,
+    paddingVertical: 15,
+    paddingHorizontal: 10,
+  },
+  Title: {
+    width: '95%',
+    backgroundColor: 'white',
+    padding: 10,
+    paddingTop: 5,
+    borderRadius: 20,
+  },
+  Chart: {
+    width: '100%',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    borderRadius: 20,
   },
 });
