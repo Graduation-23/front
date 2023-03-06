@@ -12,7 +12,10 @@ export default function DiaryViewItem({
   onLongPress,
 }: ListViewItemProps<IDiary>) {
   return (
-    <TouchableOpacity onPress={onPress} onLongPress={onLongPress}>
+    <TouchableOpacity
+      onPress={onPress}
+      onLongPress={onLongPress}
+      activeOpacity={1}>
       <View style={styles.view}>
         <View style={styles.title}>
           <AppText.Subtitle family="round-d">

@@ -1,3 +1,5 @@
+import {SignUpDataType} from '@/hooks/useSignUp';
+
 class Utils {
   //#region Array
   static removeElementByIndex<T>(array: T[], index: number) {
@@ -126,6 +128,41 @@ class Utils {
     } else {
       return Math.ceil(d / 5);
     }
+  }
+
+  //#endregion
+
+  //#region Regex
+
+  static userRegex(user: SignUpDataType): [boolean, boolean, boolean, boolean] {
+    const eRegex = this.emailRegex(user.id);
+    const pRegex = this.passwordRegex(user.password);
+    const nRegex = this.nicknameRegex(user.nickname);
+    const confirm = this.confirmPassword(user.password, user.pwForCheck);
+    return [eRegex, pRegex, nRegex, confirm];
+  }
+
+  static emailRegex(email: string) {
+    const regex = /\s/g;
+    const removeWhiteSpace = email.replace(regex, '');
+    const eRegex =
+      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/g;
+
+    console.log('remove : ', eRegex.test(removeWhiteSpace));
+    return eRegex.test(removeWhiteSpace);
+  }
+
+  static passwordRegex(password: string) {
+    const pRegex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^&*()-_+=])(?=.*[0-9]).{5,15}$/;
+    return pRegex.test(password);
+  }
+
+  static nicknameRegex(nickname: string) {
+    return nickname.length > 2 && nickname.length < 8;
+  }
+
+  static confirmPassword(password: string, passwordCheck: string) {
+    return password === passwordCheck;
   }
 
   //#endregion
