@@ -34,7 +34,12 @@ export default function WeekGoalGrid({weekId}: WeekGoalGridProps) {
       if (weeks.state === '진행중' && weeks.amount === 0) {
         setVisible(false);
       } else if (weeks.state === '실패') {
-        setFlowerLevel(0);
+        if (!Utils.transformThisWeek(weeks)) {
+          setVisible(false);
+        } else {
+          setFlowerLevel(0);
+          setVisible(true);
+        }
       } else {
         setVisible(true);
       }
@@ -45,11 +50,7 @@ export default function WeekGoalGrid({weekId}: WeekGoalGridProps) {
     if (weeks) {
       const [sDay] = Utils.stringToDate(weeks.start);
       const [eDay] = Utils.stringToDate(weeks.end);
-      if (
-        sDay <= today.getDate() &&
-        eDay >= today.getDate() &&
-        weeks.amount === 0
-      ) {
+      if (Utils.transformThisWeek(weeks)) {
         setWVisible(!wVisible);
       } else if (sDay <= today.getDate() && eDay >= today.getDate()) {
         if (Platform.OS === 'android') {

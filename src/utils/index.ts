@@ -1,4 +1,5 @@
 import {SignUpDataType} from '@/hooks/useSignUp';
+import {IWeekGoal} from '@type/api';
 
 class Utils {
   //#region Array
@@ -138,6 +139,17 @@ class Utils {
     } else {
       return date.getDay();
     }
+  }
+
+  static transformThisWeek(weeks: IWeekGoal) {
+    const [sDay] = this.stringToDate(weeks.start);
+    const [eDay] = this.stringToDate(weeks.end);
+
+    const today = new Date();
+
+    return (
+      sDay <= today.getDate() && eDay >= today.getDate() && weeks.amount === 0
+    );
   }
 
   //#endregion

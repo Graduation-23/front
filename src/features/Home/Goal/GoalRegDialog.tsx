@@ -1,6 +1,12 @@
 import {AppText} from '@/components/AppText';
 import {Dialog} from '@rneui/themed';
-import {StyleSheet, View, TextInput} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  TextInput,
+  Platform,
+  ToastAndroid,
+} from 'react-native';
 import {useState} from 'react';
 import {useRequestMonthGoal, useRequestWeekGoal} from '@/query/goal';
 import {useRecoilState, useSetRecoilState} from 'recoil';
@@ -51,8 +57,8 @@ export default function GoalRegDialog({
       if (parseInt(amount) > 0) {
         requestMonthGoal({amount: parseInt(amount), weekIds: []}).then(() => {
           setAmountAtom(parseInt(amount));
-          setTreeLevel(Utils.transformTreeLevel());
           randomTree();
+          setTreeLevel(Utils.transformTreeLevel());
         });
       }
     } else {
@@ -64,10 +70,17 @@ export default function GoalRegDialog({
         requestWeekGoal({id: weekId, amount: parseInt(amount)}).then(() => {
           if (AmountAtom) {
             setAmountAtom(AmountAtom - parseInt(amount));
-            setFlowerLevel(Utils.transformFlowerLevel());
             randomFlower();
+            setFlowerLevel(Utils.transformFlowerLevel());
           }
         });
+      } else {
+        if (Platform.OS === 'android') {
+          ToastAndroid.show(
+            '주간 목표 합이 월간 목표를 초과',
+            ToastAndroid.SHORT,
+          );
+        }
       }
     }
   };
