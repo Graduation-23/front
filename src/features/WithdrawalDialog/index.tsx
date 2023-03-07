@@ -1,5 +1,5 @@
-import {Dialog, Input} from '@rneui/themed';
-import {View, Text, StyleSheet, TextInput} from 'react-native';
+import {Dialog} from '@rneui/themed';
+import {View, StyleSheet, TextInput} from 'react-native';
 import {useState} from 'react';
 import deleteUser from '@/api/deleteUser';
 import {AppText} from '@/components/AppText';

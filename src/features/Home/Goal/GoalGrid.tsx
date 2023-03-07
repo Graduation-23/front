@@ -59,7 +59,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
     borderBottomColor: 'black',
     paddingVertical: 5,
-    height: 35,
   },
   Items: {
     width: '25%',

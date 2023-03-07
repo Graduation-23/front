@@ -35,7 +35,11 @@ export default function WeekGoalGrid({weekId}: WeekGoalGridProps) {
         setVisible(false);
       } else if (weeks.state === '실패') {
         if (!Utils.transformThisWeek(weeks)) {
-          setVisible(false);
+          if (weeks.amount > 0) {
+            setVisible(true);
+          } else {
+            setVisible(false);
+          }
         } else {
           setFlowerLevel(0);
           setVisible(true);
