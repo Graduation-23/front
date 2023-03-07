@@ -37,14 +37,14 @@ export default function UserInfoContentsAccordion() {
             <AppText family="round-d" text="ID" />
           </ListItem.Title>
           <ListItem.Content style={styles.AlignRight}>
-            <AppText family="round-d" text={`${user?.id}`} />
+            <AppText family="round-b" text={`${user?.id}`} />
           </ListItem.Content>
         </ListItem>
         <ListItem.Accordion
           content={
             <ListItem.Content>
               <ListItem.Title>
-                <AppText family="round-d" text="등록된 카드" />
+                <AppText family="round-b" text="등록된 카드" />
               </ListItem.Title>
             </ListItem.Content>
           }
@@ -65,7 +65,7 @@ export default function UserInfoContentsAccordion() {
         </ListItem.Accordion>
         <ListItem>
           <ListItem.Title>
-            <AppText family="round-d" text="생년월일" />
+            <AppText family="round-b" text="생년월일" />
           </ListItem.Title>
           <ListItem.Content style={styles.AlignRight}>
             <AppText
@@ -77,7 +77,7 @@ export default function UserInfoContentsAccordion() {
         </ListItem>
         <ListItem>
           <ListItem.Title>
-            <AppText family="round-d" text="가입일자" />
+            <AppText family="round-b" text="가입일자" />
           </ListItem.Title>
           <ListItem.Content style={styles.AlignRight}>
             <AppText family="round-d" text={`${user?.created}`} />
@@ -107,6 +107,7 @@ export default function UserInfoContentsAccordion() {
 const styles = StyleSheet.create({
   List: {
     width: '100%',
+    marginTop: 10,
   },
   Text: {
     color: 'gray',

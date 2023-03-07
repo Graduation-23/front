@@ -86,13 +86,18 @@ export default function AchieveScreen({}: AchieveScreenProps) {
             </View>
             <View style={styles.AchieveContainer}>
               <Image
-                source={flower_growings8}
+                source={tree_growings7}
                 resizeMode="contain"
                 style={styles.Image}
               />
+
               <View style={styles.Bar}>
                 <Progress.Bar
-                  progress={5 / FlowerImage.length}
+                  progress={
+                    monthAchieve
+                      ? monthAchieve / TreeImage.length
+                      : 0 / TreeImage.length
+                  }
                   width={200}
                   height={10}
                   color={'#FF0044'}
@@ -100,26 +105,34 @@ export default function AchieveScreen({}: AchieveScreenProps) {
                 <View style={styles.AlignRight}>
                   <AppText
                     family="round-b"
-                    text={'5 / ' + FlowerImage.length}
+                    text={monthAchieve + ' / ' + TreeImage.length}
                   />
                 </View>
               </View>
             </View>
             <View style={styles.AchieveContainer}>
               <Image
-                source={tree_growings7}
+                source={flower_growings8}
                 resizeMode="contain"
                 style={styles.Image}
               />
+
               <View style={styles.Bar}>
                 <Progress.Bar
-                  progress={6 / TreeImage.length}
+                  progress={
+                    weekAchieve
+                      ? weekAchieve / FlowerImage.length
+                      : 0 / FlowerImage.length
+                  }
                   width={200}
                   height={10}
                   color={'#FF0044'}
                 />
                 <View style={styles.AlignRight}>
-                  <AppText family="round-b" text={'6 / ' + TreeImage.length} />
+                  <AppText
+                    family="round-b"
+                    text={weekAchieve + ' / ' + FlowerImage.length}
+                  />
                 </View>
               </View>
             </View>
@@ -139,7 +152,6 @@ const styles = StyleSheet.create({
   },
   Title: {
     width: Dimensions.get('window').width - 60,
-    height: '35%',
     paddingHorizontal: 30,
     paddingVertical: 10,
     backgroundColor: '#b2dcff',
@@ -157,7 +169,6 @@ const styles = StyleSheet.create({
   },
   Contents: {
     width: Dimensions.get('window').width - 60,
-    height: '50%',
     paddingHorizontal: 20,
     paddingVertical: 20,
     borderRadius: 20,
