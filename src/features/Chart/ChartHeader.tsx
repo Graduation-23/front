@@ -1,7 +1,9 @@
+/* eslint-disable react-native/no-inline-styles */
 import {FetchSearchOptions} from '@/api/widget/fetchWidgetByRange';
+import {AppText} from '@/components/AppText';
 import {ButtonGroup} from '@rneui/base';
 import {useLayoutEffect, useState} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {Platform, StyleSheet, View} from 'react-native';
 import ChartRangeSearchModal from './ChartRangeSearchModal';
 
 interface ChartHeaderProps {
@@ -49,18 +51,28 @@ export default function ChartHeader({setOptions}: ChartHeaderProps) {
 
   return (
     <>
-      <View style={styles.container}>
-        <ButtonGroup
-          buttons={['특정 년/월', '이번 주', '이번 한달']}
-          selectedIndex={selectedIndex}
-          onPress={index => {
-            if (index === 0) {
-              setVisible(true);
-            }
-            setSelectedIndex(index);
-          }}
-          containerStyle={{marginBottom: 20}}
-        />
+      <View style={styles.Container}>
+        <View style={styles.container}>
+          <ButtonGroup
+            buttons={[
+              <AppText family="round-b" text="특정 년/월" />,
+              <AppText family="round-b" text="이번 주" />,
+              <AppText family="round-b" text="이번 달" />,
+            ]}
+            //buttons={['특정 년/월', '이번 주', '이번 한달']}
+            selectedIndex={selectedIndex}
+            onPress={index => {
+              if (index === 0) {
+                setVisible(true);
+              }
+              setSelectedIndex(index);
+            }}
+            containerStyle={{borderRadius: 10, borderColor: 'white'}}
+            selectedButtonStyle={{backgroundColor: '#b4dcff'}}
+            buttonStyle={{borderRadius: 10}}
+            buttonContainerStyle={{borderColor: 'white', borderRadius: 10}}
+          />
+        </View>
       </View>
       <ChartRangeSearchModal
         visible={visible}
@@ -73,9 +85,19 @@ export default function ChartHeader({setOptions}: ChartHeaderProps) {
 }
 
 const styles = StyleSheet.create({
+  Container: {
+    alignItems: 'center',
+  },
   container: {
     backgroundColor: 'white',
     padding: 10,
-    paddingTop: 30,
+    width: '90%',
+    borderRadius: 15,
+    marginVertical: 20,
+    ...Platform.select({
+      android: {
+        elevation: 10,
+      },
+    }),
   },
 });

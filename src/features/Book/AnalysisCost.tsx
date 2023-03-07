@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   analysisButton: {
-    backgroundColor: '#c8e6fe',
+    backgroundColor: '#b4dcff',
     borderRadius: 10,
   },
   informationText: {

@@ -92,6 +92,8 @@ export default function BookCalendar({
 const styles = StyleSheet.create({
   Container: {
     alignItems: 'center',
+    paddingBottom: 10,
+    marginBottom: 20,
   },
   CalContainer: {
     width: '90%',

@@ -1,6 +1,6 @@
 import BookCalendar from '@/features/Book/BookCalendar';
 import {useMemo, useState, useEffect} from 'react';
-import {ScrollView} from 'react-native';
+import {ScrollView, View} from 'react-native';
 import {useWidgetWithDate} from '../query/widget';
 import AnalysisCost from '../features/Book/AnalysisCost';
 import BookWidget from '@/features/Book/BookWidget';
@@ -27,15 +27,17 @@ export default function AccountBookScreen() {
   }, [widgets]);
 
   return (
-    <ScrollView>
-      <AnalysisCost items={widgets || []} at={at} />
-      <BookCalendar
-        items={metadata}
-        at={at}
-        setAt={setAt}
-        onClickDay={setFocusedWidgetId}
-      />
-      {focusedWidgetId !== 0 && <BookWidget id={focusedWidgetId} />}
-    </ScrollView>
+    <View style={{height: '100%'}}>
+      <ScrollView>
+        <AnalysisCost items={widgets || []} at={at} />
+        <BookCalendar
+          items={metadata}
+          at={at}
+          setAt={setAt}
+          onClickDay={setFocusedWidgetId}
+        />
+        {focusedWidgetId !== 0 && <BookWidget id={focusedWidgetId} />}
+      </ScrollView>
+    </View>
   );
 }

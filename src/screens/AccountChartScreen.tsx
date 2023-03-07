@@ -1,4 +1,4 @@
-import {ScrollView, StyleSheet, View} from 'react-native';
+import {ScrollView} from 'react-native';
 import CategoryChart from '../features/Chart/CategoryChart';
 import useWidgetSearch from '@/hooks/useWidgetSearch';
 import {useMemo} from 'react';
@@ -31,7 +31,6 @@ export default function AccountChartScreen({route: {params}}: any) {
       <CategoryChart items={items} />
       <ChartAmountTable items={items} />
       <ChartCountTable items={items} />
-      <View style={{paddingBottom: 30}} />
     </ScrollView>
   );
 }

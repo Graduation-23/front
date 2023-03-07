@@ -37,7 +37,7 @@ export default function HistoryView({costByYear}: HistoryViewProps) {
                     timestamp: new Date(year).valueOf(),
                   });
                 }}>
-                <AppText family="round-b" text="통계" />
+                <AppText family="round-b" text="지출 분석" />
               </Button>
             </View>
             <Divider />
@@ -82,9 +82,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   Btn: {
-    backgroundColor: '#c8e6fe',
+    backgroundColor: '#b4dcff',
     borderRadius: 10,
-    width: 80,
+    width: 100,
   },
   row: {
     flexDirection: 'row',

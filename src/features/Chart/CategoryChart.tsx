@@ -1,7 +1,7 @@
 import {AppText} from '@/components/AppText';
 import {CategoryTagColors} from '@/constants/category';
 import {useMemo} from 'react';
-import {Dimensions, StyleSheet, View} from 'react-native';
+import {Dimensions, Platform, StyleSheet, View} from 'react-native';
 import {PieChart} from 'react-native-chart-kit';
 import WidgetUtils from '../../utils/widget';
 
@@ -48,32 +48,47 @@ export default function CategoryChart({items}: CategoryChartProps) {
   }, [group]);
 
   return (
-    <View style={styles.container}>
-      <AppText.Subtitle style={styles.chartTitle}>
-        지출 카테고리 별 통계
-      </AppText.Subtitle>
-      <PieChart
-        data={chartDate}
-        chartConfig={chartConfig}
-        accessor="value"
-        width={Dimensions.get('window').width}
-        height={220}
-        backgroundColor={'transparent'}
-        paddingLeft={'15'}
-      />
+    <View style={styles.Container}>
+      <View style={styles.container}>
+        <AppText.Subtitle family="round-b" style={styles.chartTitle}>
+          지출 카테고리 별 통계
+        </AppText.Subtitle>
+        <PieChart
+          data={chartDate}
+          chartConfig={{
+            ...chartConfig,
+            propsForLabels: {
+              fontSize: 30,
+              fontFamily: 'Ownglyph_yoxaiov-Rg',
+            },
+          }}
+          accessor="value"
+          width={Dimensions.get('window').width}
+          height={220}
+          backgroundColor={'transparent'}
+          paddingLeft={'15'}
+        />
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  Container: {
+    alignItems: 'center',
+  },
   container: {
+    width: '90%',
     backgroundColor: 'white',
-    marginTop: 30,
+    marginTop: 5,
+    borderRadius: 20,
+    ...Platform.select({
+      android: {
+        elevation: 10,
+      },
+    }),
   },
   chartTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#7F7F7F',
     padding: 20,
     paddingBottom: 0,
   },
