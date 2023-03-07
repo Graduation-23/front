@@ -1,15 +1,17 @@
-import {useNavigation} from '@react-navigation/native';
-import {Button} from '@rneui/base';
-import {Input} from '@rneui/themed';
-import {StyleSheet, View} from 'react-native';
+import {
+  Platform,
+  StyleSheet,
+  TextInput,
+  ToastAndroid,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {IDiary} from '@type/api';
 
 import {AppText} from '@components/AppText';
-import {Diary} from '@constants/screen';
 import useEditDiary from '@hooks/useEditDiary';
 import {useUpdateDiary} from '@query/diary';
 import WeatherSelector from '@components/Weather/WeatherSelector';
-import {WeatherKor} from '@constants/weather';
 import {DIARY_IMG_COUNT_LIMIT} from '@constants/img';
 import {useMemo} from 'react';
 import DiaryEditGallery from './DiaryEditGallery';
@@ -19,11 +21,16 @@ type DiaryFormProps = {} & IDiary;
 
 export default function DiaryForm(diary: DiaryFormProps) {
   const {mutateAsync: save} = useUpdateDiary();
-  const {navigate} = useNavigation<any>();
+
   const {diary: data, set, bind} = useEditDiary(diary);
 
   const handleFinish = () => {
-    save(data).then(() => navigate(Diary.Read, {diaryId: data.id}));
+    save(data).then(() => {
+      if (Platform.OS === 'android') {
+        ToastAndroid.show('내용이 저장되었습니다!', ToastAndroid.SHORT);
+      }
+      //console.log(data.imageUrls);
+    });
   };
 
   const previewImages = useMemo(
@@ -44,78 +51,93 @@ export default function DiaryForm(diary: DiaryFormProps) {
 
   return (
     <View style={styles.container}>
-      <AppText.Title
-        center
-        family="round-c"
-        text={`${diary.date.slice(5)} 일기`}
-      />
-      <View style={styles.fullWidth}>
-        <Input
-          value={data.title}
-          onChangeText={bind('title')}
-          inputStyle={styles.input}
-          label={
-            <AppText.Subtitle mv={15} center family="round-c" text="제목" />
-          }
-          placeholder="제목 입력..."
-        />
-        <AppText.Subtitle
-          mv={10}
-          center
-          family="round-c"
-          text={`날씨 : ${WeatherKor[data.weather]}`}
+      <View style={styles.Top}>
+        <AppText.Title
+          family="round-d"
+          text={`${diary.date.substring(5, 7)}/${diary.date.substring(
+            8,
+          )} Diary`}
         />
         <WeatherSelector weather={data.weather} setWeather={bind('weather')} />
-        <Input
-          value={data.content}
-          onChangeText={bind('content')}
-          inputStyle={styles.input}
-          label={
-            <AppText.Subtitle
-              mv={15}
-              center
-              family="round-c"
-              text="일기 내용"
-            />
-          }
-          placeholder="내용 입력..."
-        />
       </View>
+      <View style={styles.fullWidth}>
+        <View style={styles.Title}>
+          <AppText.Subtitle mv={10} family="round-b" text="제목 : " />
+          <TextInput
+            value={data.title}
+            onChangeText={bind('title')}
+            style={styles.input}
+            placeholder="제목을 입력해주세요!"
+          />
+        </View>
 
-      <DiaryEditGallery
-        removeImage={removeImage}
-        selectLimit={DIARY_IMG_COUNT_LIMIT - data.imageUrls.length}
-        previewImagesUrls={previewImages}
-        appendNewImages={newImages =>
-          set('newImages', [...data.newImages, ...newImages])
-        }
-      />
+        <DiaryEditGallery
+          removeImage={removeImage}
+          selectLimit={DIARY_IMG_COUNT_LIMIT - data.imageUrls.length}
+          previewImagesUrls={previewImages}
+          appendNewImages={newImages =>
+            set('newImages', [...data.newImages, ...newImages])
+          }
+        />
 
-      <Button buttonStyle={styles.button} onPress={handleFinish}>
-        작성 완료
-      </Button>
+        <View style={styles.Contents}>
+          <TextInput
+            value={data.content}
+            onChangeText={bind('content')}
+            style={styles.input}
+            placeholder="내용을 입력해주세요!"
+            multiline
+          />
+        </View>
+      </View>
+      <View style={styles.ButtonContainer}>
+        <TouchableOpacity style={styles.button} onPress={handleFinish}>
+          <AppText family="round-b" text="내용 저장" />
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  Top: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
   input: {
-    // margin: 10,
-    backgroundColor: 'white',
-    padding: 6,
+    backgroundColor: 'transparent',
+    ...Platform.select({
+      android: {
+        fontFamily: 'Ownglyph_yoxaiov-Rg',
+        fontSize: 20,
+      },
+    }),
+  },
+  Title: {
+    flexDirection: 'row',
+  },
+  Contents: {
+    flexDirection: 'row',
+    marginVertical: 20,
   },
   fullWidth: {
     overflow: 'hidden',
-    width: 350,
+    width: '100%',
   },
   container: {
-    padding: 15,
-
-    // display: 'flex',
-    // justifyContent: 'center',
+    padding: 10,
+  },
+  ButtonContainer: {
+    alignItems: 'flex-end',
+    marginHorizontal: 5,
   },
   button: {
+    height: 35,
+    width: 120,
     borderRadius: 15,
     backgroundColor: '#f4e284',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

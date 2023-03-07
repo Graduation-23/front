@@ -1,6 +1,7 @@
 import Utils from '@/utils';
 import {useCallback} from 'react';
 import {Calendar, DateData, LocaleConfig} from 'react-native-calendars';
+import {Platform, StyleSheet, View} from 'react-native';
 import CalendarDay from './CalendarDay';
 
 LocaleConfig.locales[''].dayNamesShort = [
@@ -55,30 +56,54 @@ export default function BookCalendar({
   );
 
   return (
-    <Calendar
-      hideExtraDays
-      date={Utils.formatYMD(at)}
-      onMonthChange={date => {
-        setAt(new Date(date.timestamp));
-      }}
-      monthFormat="yyyy년 MM월"
-      onDayPress={date => {
-        console.log(
-          '🚀 ~ file: BookCalendar.tsx:57 ~ BookCalendar ~ date:',
-          date,
-        );
-      }}
-      dayComponent={({date}) => {
-        const metadata = getMetadataByDate(date as any);
-        return (
-          <CalendarDay
-            id={metadata.id}
-            cost={metadata.cost}
-            date={metadata.date}
-            onPress={() => handleDayPress(metadata.id)}
-          />
-        );
-      }}
-    />
+    <View style={styles.Container}>
+      <View style={styles.CalContainer}>
+        <Calendar
+          style={styles.Cal}
+          hideExtraDays
+          date={Utils.formatYMD(at)}
+          onMonthChange={date => {
+            setAt(new Date(date.timestamp));
+          }}
+          monthFormat="yyyy년 MM월"
+          onDayPress={date => {
+            console.log(
+              '🚀 ~ file: BookCalendar.tsx:57 ~ BookCalendar ~ date:',
+              date,
+            );
+          }}
+          dayComponent={({date}) => {
+            const metadata = getMetadataByDate(date as any);
+            return (
+              <CalendarDay
+                id={metadata.id}
+                cost={metadata.cost}
+                date={metadata.date}
+                onPress={() => handleDayPress(metadata.id)}
+              />
+            );
+          }}
+        />
+      </View>
+    </View>
   );
 }
+
+const styles = StyleSheet.create({
+  Container: {
+    alignItems: 'center',
+    paddingBottom: 10,
+    marginBottom: 20,
+  },
+  CalContainer: {
+    width: '90%',
+  },
+  Cal: {
+    borderRadius: 10,
+    ...Platform.select({
+      android: {
+        elevation: 20,
+      },
+    }),
+  },
+});

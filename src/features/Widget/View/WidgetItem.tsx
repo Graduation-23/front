@@ -21,23 +21,26 @@ export default function WidgetItem({item}: WidgetItem) {
       start={{x: 0, y: 0}}
       end={{x: 1, y: 1}}
       style={styles.itemContainer}
-      colors={['#454545', '#000', '#000', '#676767']}>
+      colors={['#89bad7cc', '#74b3d8cc']}>
       <View style={styles.box}>
-        <AppText.Title
+        <AppText.Subtitle
           viewStyle={styles.item}
-          style={{color: '#fff'}}
+          family="round-b"
           text={item.description}
         />
-        <AppText
-          style={{color: fItem.colorcode}}
-          text={`#${fItem.anothername}`}
-        />
-        <AppText style={{color: '#fff'}} text={` #${item.category}`} />
+        <View style={{flexDirection: 'row'}}>
+          <AppText
+            style={{color: fItem.colorcode}}
+            family="round-b"
+            text={`#${fItem.anothername}`}
+          />
+          <AppText text={` #${item.category}`} family="round-b" />
+        </View>
       </View>
-      <AppText.Subtitle
+      <AppText
         viewStyle={styles.box}
-        style={{color: '#fff'}}
-        text={`- ${item.amount.toString()} ₩`}
+        text={` ${item.amount.toString()} 원`}
+        family="round-b"
       />
     </LinearGradient>
   );
@@ -45,16 +48,16 @@ export default function WidgetItem({item}: WidgetItem) {
 
 const styles = StyleSheet.create({
   itemContainer: {
-    borderWidth: 1,
-    marginBottom: 20,
+    marginBottom: 10,
     borderRadius: 10,
-    backgroundColor: 'gray',
     padding: 10,
     width: '100%',
   },
   box: {
     display: 'flex',
     flexDirection: 'row',
+    marginBottom: 5,
+    justifyContent: 'space-between',
   },
   item: {
     flexGrow: 1,

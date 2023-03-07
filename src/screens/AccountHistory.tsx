@@ -3,8 +3,8 @@ import HistoryView from '@/features/History/HistoryView';
 import {useWidgets} from '@/query/widget';
 import WidgetUtils from '@/utils/widget';
 import {useMemo} from 'react';
-import {ScrollView, StyleSheet} from 'react-native';
-import BookHistoryHeader from '../features/History/BookHistoryHeader';
+import {ScrollView, StyleSheet, View} from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 interface AccountHistoryProps {}
 
@@ -28,17 +28,24 @@ export default function AccountHistoryScreen({}: AccountHistoryProps) {
   }, [data]);
 
   return (
-    <ScrollView style={styles.container}>
-      <BookHistoryHeader />
-      <HistoryChart costByYear={costByYear} />
-      <HistoryView costByYear={costByYear} />
-    </ScrollView>
+    <SafeAreaView style={styles.height}>
+      <ScrollView>
+        <View style={styles.container}>
+          <HistoryChart costByYear={costByYear} />
+          <HistoryView costByYear={costByYear} />
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  height: {
+    height: '100%',
+  },
   container: {
     // minHeight: '100%',
     // backgroundColor: '#fff',
+    width: '100%',
   },
 });

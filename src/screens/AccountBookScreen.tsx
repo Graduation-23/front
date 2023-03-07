@@ -27,16 +27,17 @@ export default function AccountBookScreen() {
   }, [widgets]);
 
   return (
-    <ScrollView>
-      <AnalysisCost items={widgets || []} at={at} />
-      <BookCalendar
-        items={metadata}
-        at={at}
-        setAt={setAt}
-        onClickDay={setFocusedWidgetId}
-      />
-      {focusedWidgetId !== 0 && <BookWidget id={focusedWidgetId} />}
-      <View style={{paddingBottom: 20}} />
-    </ScrollView>
+    <View style={{height: '100%'}}>
+      <ScrollView>
+        <AnalysisCost items={widgets || []} at={at} />
+        <BookCalendar
+          items={metadata}
+          at={at}
+          setAt={setAt}
+          onClickDay={setFocusedWidgetId}
+        />
+        {focusedWidgetId !== 0 && <BookWidget id={focusedWidgetId} />}
+      </ScrollView>
+    </View>
   );
 }

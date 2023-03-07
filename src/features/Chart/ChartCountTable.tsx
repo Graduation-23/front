@@ -1,7 +1,8 @@
+/* eslint-disable react-native/no-inline-styles */
 import Utils from '@/utils';
 import WidgetUtils from '@/utils/widget';
 import {useMemo, Fragment} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Platform, StyleSheet, View} from 'react-native';
 import {CategoryTagColors} from '@/constants/category';
 import {AppText} from '@components/AppText';
 import {Divider} from '@rneui/base';
@@ -28,58 +29,85 @@ export default function ChartCountTable({items}: ChartCountTableProps) {
   }, [items]);
 
   return (
-    <View style={styles.container}>
-      <AppText style={styles.title}>지출 횟수 통계</AppText>
-      {analysis.map(el => (
-        <Fragment key={el.name}>
-          <View key={el.name} style={styles.row}>
-            <View style={styles.cell}>
-              <Text
-                style={[
-                  styles.text,
-                  {backgroundColor: CategoryTagColors[el.name], color: 'white'},
-                ]}>
-                {el.ratio}%
-              </Text>
-              <Text style={[styles.text]}>{el.name}</Text>
+    <View style={styles.Container}>
+      <View style={styles.container}>
+        <AppText.Subtitle family="round-b" style={styles.title}>
+          지출 횟수 통계
+        </AppText.Subtitle>
+
+        {analysis.map(el => (
+          <Fragment key={el.name}>
+            <View key={el.name} style={styles.row}>
+              <View style={styles.cell}>
+                <AppText
+                  family="round-b"
+                  style={[
+                    styles.text,
+                    {
+                      backgroundColor: CategoryTagColors[el.name],
+                      color: 'white',
+                    },
+                  ]}>
+                  {el.ratio}%
+                </AppText>
+                <AppText family="round-b" style={[styles.text]}>
+                  {el.name}
+                </AppText>
+              </View>
+
+              <AppText family="round-b" style={styles.text}>
+                {el.value.toLocaleString()}회
+              </AppText>
             </View>
-            <View style={styles.cell}>
-              <Text style={styles.text}>{el.value.toLocaleString()}회</Text>
-            </View>
-          </View>
-          <Divider />
-        </Fragment>
-      ))}
-      <View style={[styles.row, {marginTop: 5}]}>
-        <AppText>총 지출 횟수</AppText>
-        <AppText>
-          {analysis.reduce((acc, item) => acc + item.value, 0).toLocaleString()}
-          회
-        </AppText>
+            <Divider />
+          </Fragment>
+        ))}
+        <View style={[styles.row, {marginTop: 5, paddingHorizontal: 15}]}>
+          <AppText family="round-b">총 지출 횟수</AppText>
+          <AppText family="round-b">
+            {analysis
+              .reduce((acc, item) => acc + item.value, 0)
+              .toLocaleString()}
+            회
+          </AppText>
+        </View>
       </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  Container: {
+    alignItems: 'center',
+    marginBottom: 20,
+  },
   container: {
+    width: '90%',
     backgroundColor: 'white',
-    marginTop: 30,
+    borderRadius: 20,
+    ...Platform.select({
+      android: {
+        elevation: 10,
+      },
+    }),
+    marginTop: 15,
+    padding: 10,
   },
   row: {
     flexDirection: 'row',
     padding: 10,
-
     justifyContent: 'space-between',
   },
   cell: {
     flexDirection: 'row',
   },
   text: {
-    fontSize: 18,
     padding: 8,
     borderRadius: 7,
     color: 'black',
   },
-  title: {padding: 15, color: 'gray'},
+  title: {
+    color: 'black',
+    padding: 10,
+  },
 });

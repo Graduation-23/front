@@ -1,3 +1,6 @@
+import {SignUpDataType} from '@/hooks/useSignUp';
+import {IWeekGoal} from '@type/api';
+
 class Utils {
   //#region Array
   static removeElementByIndex<T>(array: T[], index: number) {
@@ -125,12 +128,68 @@ class Utils {
     return numbers.map(el => ((el / total) * 100).toFixed(1));
   }
 
-  static trnasformTreeLevel(d: number) {
-    if (d >= 30) {
+  static transformTreeLevel() {
+    const date = new Date();
+    if (date.getDate() >= 30) {
       return 7;
     } else {
-      return Math.ceil(d / 5);
+      return Math.ceil(date.getDate() / 5);
     }
+  }
+
+  static transformFlowerLevel() {
+    const date = new Date();
+    if (date.getDay() === 0) {
+      return 7;
+    } else {
+      return date.getDay();
+    }
+  }
+
+  static transformThisWeek(weeks: IWeekGoal) {
+    const [sDay] = this.stringToDate(weeks.start);
+    const [eDay] = this.stringToDate(weeks.end);
+
+    const today = new Date();
+
+    return (
+      sDay <= today.getDate() && eDay >= today.getDate() && weeks.amount === 0
+    );
+  }
+
+  //#endregion
+
+  //#region Regex
+
+  static userRegex(user: SignUpDataType): [boolean, boolean, boolean, boolean] {
+    const eRegex = this.emailRegex(user.id);
+    const pRegex = this.passwordRegex(user.password);
+    const nRegex = this.nicknameRegex(user.nickname);
+    const confirm = this.confirmPassword(user.password, user.pwForCheck);
+    return [eRegex, pRegex, nRegex, confirm];
+  }
+
+  static emailRegex(email: string) {
+    const regex = /\s/g;
+    const removeWhiteSpace = email.replace(regex, '');
+    const eRegex =
+      /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+
+    console.log('remove : ', eRegex.test(removeWhiteSpace));
+    return eRegex.test(removeWhiteSpace);
+  }
+
+  static passwordRegex(password: string) {
+    const pRegex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^&*()-_+=])(?=.*[0-9]).{5,15}$/;
+    return pRegex.test(password);
+  }
+
+  static nicknameRegex(nickname: string) {
+    return nickname.length > 2 && nickname.length < 8;
+  }
+
+  static confirmPassword(password: string, passwordCheck: string) {
+    return password === passwordCheck;
   }
 
   //#endregion

@@ -19,7 +19,7 @@ export default function CardRegRadioBox({
     <View>
       <CheckBox
         title={
-          <AppText family="round-d" text={text} style={styles.FontSize20} />
+          <AppText family="round-b" text={text} style={styles.FontSize20} />
         }
         checked={type === selected}
         onPress={() => setType(selected)}

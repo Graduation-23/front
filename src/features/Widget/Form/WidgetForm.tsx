@@ -1,11 +1,11 @@
 import useEditWidget from '@/hooks/useEditWidget';
-import {Button} from '@rneui/themed';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, TouchableOpacity} from 'react-native';
 import UpdateWidgetButton from './UpdateWidgetButton';
 import WidgetTable from './WidgetTable';
 import WidgetUtils from '../../../utils/widget';
 import {useCallback, useState, useEffect} from 'react';
 import fetchTransactions from '../../../api/fetchTransaction';
+import {AppText} from '@/components/AppText';
 
 type WidgetFormProps = Widget.Type;
 
@@ -32,11 +32,13 @@ export default function WidgetForm({...data}: WidgetFormProps) {
   return (
     <View style={styles.container}>
       <WidgetTable setItems={bind('items')} items={widget.items} />
-      <View style={{display: 'flex', flexDirection: 'row'}}>
-        <View style={{flexGrow: 1, marginRight: 5}}>
-          <Button onPress={addEmptyItemAndFilterEmpty}>추가</Button>
+      <View style={styles.ButtonContainer}>
+        <View style={styles.Button}>
+          <TouchableOpacity onPress={addEmptyItemAndFilterEmpty}>
+            <AppText text="소비기록 추가" family="round-b" />
+          </TouchableOpacity>
         </View>
-        <View style={{flexGrow: 1, marginLeft: 5}}>
+        <View style={styles.Button}>
           <UpdateWidgetButton widget={widget} />
         </View>
       </View>
@@ -45,19 +47,21 @@ export default function WidgetForm({...data}: WidgetFormProps) {
 }
 
 const styles = StyleSheet.create({
-  input: {
-    // margin: 10,
-    backgroundColor: 'white',
-    padding: 6,
-  },
-  fullWidth: {
-    overflow: 'hidden',
-    width: 350,
-  },
   container: {
     padding: 15,
-
-    // display: 'flex',
-    // justifyContent: 'center',
+  },
+  ButtonContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  Button: {
+    backgroundColor: '#f4e284',
+    flexGrow: 1,
+    height: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 15,
+    marginHorizontal: 15,
   },
 });

@@ -56,7 +56,7 @@ export const useMonthGoalState = (monthId: number) => {
 };
 
 export const useMonthAchieve = () => {
-  return useQuery([], () => fetchMonthAchieve());
+  return useQuery(['monthAchieve'], () => fetchMonthAchieve());
 };
 
 export const useWeekGoal = (id: number, enableRefetching: boolean = true) => {
@@ -110,5 +110,5 @@ export const useWeekGoalState = (weekId: number) => {
 };
 
 export const useWeekAchieve = () => {
-  return useQuery([], () => fetchWeekAchieve());
+  return useQuery(['weekAchieve'], () => fetchWeekAchieve());
 };

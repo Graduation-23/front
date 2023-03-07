@@ -62,13 +62,5 @@ export default function WidgetTable({items, setItems}: WidgetTableProps) {
 const styles = StyleSheet.create({
   tableContainer: {
     width: '100%',
-    // backgroundColor: 'black',
-  },
-  buttonContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-  },
-  button: {
-    flexGrow: 1,
   },
 });

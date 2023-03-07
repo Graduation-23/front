@@ -1,5 +1,6 @@
+import {AppText} from '@/components/AppText';
 import {Dialog} from '@rneui/themed';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 //import {AppTextTitle} from '@components/AppText/AppTextTitle';
 import ColorPicker from 'react-native-wheel-color-picker';
 //import {AppText} from '@components/AppText';
@@ -25,6 +26,11 @@ const ColorPickerModal = ({
   return (
     <View>
       <Dialog isVisible={visible} style={{}}>
+        <AppText.Title
+          family="round-b"
+          text="Custom Color"
+          style={styles.Title}
+        />
         <View style={styles.PickerContainer}>
           <ColorPicker
             sliderSize={30}
@@ -47,7 +53,6 @@ const ColorPickerModal = ({
           />
         </View>
         <View style={styles.BtnStyle}>
-          <Text>선택한 색상 : {icolor}</Text>
           <Dialog.Button onPress={onClick}>확인</Dialog.Button>
         </View>
       </Dialog>
@@ -56,10 +61,14 @@ const ColorPickerModal = ({
 };
 
 const styles = StyleSheet.create({
+  Title: {
+    paddingLeft: 10,
+  },
   PickerContainer: {
     marginHorizontal: 10,
+    marginTop: 20,
     borderWidth: 2,
-    height: '70%',
+    height: '60%',
     padding: 10,
   },
   BtnStyle: {

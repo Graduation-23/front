@@ -45,14 +45,13 @@ export default function DiaryView({}: DiaryViewProps) {
   return (
     <>
       <ScrollView>
-        <View style={styles.toolbar}>
-          <OrderByButton ascending={order} setAscending={setOrder} />
-        </View>
+        <OrderByButton ascending={order} setAscending={setOrder} />
+
         <View style={styles.contents}>
           {Utils.orderBy(Object.keys(group), order).map(year => (
             <DiaryListView
               key={year}
-              titleEl={<AppText.Subtitle family="round-d" text={year} />}
+              titleEl={<AppText.Title family="round-d" text={year} />}
               items={Utils.orderBy(group[year], order, getMMDD)}
               onPress={handlePress}
               onLongPress={handleLongPress}
@@ -66,7 +65,11 @@ export default function DiaryView({}: DiaryViewProps) {
         overlayStyle={styles.dialog}
         isVisible={selectedId !== null}
         onBackdropPress={closeDialog}>
-        <Dialog.Title title="다이어리 삭제" />
+        <AppText.Subtitle
+          family="round-b"
+          text="다이어리 삭제"
+          style={styles.DialogTitle}
+        />
         <AppText family="round-b" text="해당 다이어리를 삭제하시겠습니까?" />
         <Dialog.Actions>
           <Dialog.Button title="예" onPress={handleConfirmDelete} />
@@ -93,5 +96,10 @@ const styles = StyleSheet.create({
   },
   dialog: {
     backgroundColor: 'white',
+    borderRadius: 20,
+  },
+  DialogTitle: {
+    marginBottom: 15,
+    fontSize: 26,
   },
 });
