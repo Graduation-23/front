@@ -31,14 +31,20 @@ export default function WeekGoalGrid({weekId}: WeekGoalGridProps) {
 
   useEffect(() => {
     if (weeks) {
-      if (weeks.state === '진행중' && weeks.amount === 0) {
-        setVisible(false);
-      } else if (weeks.state === '실패') {
-        if (!Utils.transformThisWeek(weeks)) {
+      if (weeks.state === '진행중') {
+        if (weeks.amount === 0) {
           setVisible(false);
         } else {
-          setFlowerLevel(0);
+          setFlowerLevel(Utils.transformFlowerLevel());
+        }
+      } else if (weeks.state === '실패') {
+        // 실패일 때
+        if (weeks.amount === 0) {
+          setVisible(false);
+          setFlowerLevel(Utils.transformFlowerLevel());
+        } else if (weeks.amount > 0) {
           setVisible(true);
+          setFlowerLevel(0);
         }
       } else {
         setVisible(true);
@@ -50,7 +56,7 @@ export default function WeekGoalGrid({weekId}: WeekGoalGridProps) {
     if (weeks) {
       const [sDay] = Utils.stringToDate(weeks.start);
       const [eDay] = Utils.stringToDate(weeks.end);
-      if (Utils.transformThisWeek(weeks)) {
+      if (Utils.transformThisWeek(weeks) && weeks.amount === 0) {
         setWVisible(!wVisible);
       } else if (sDay <= today.getDate() && eDay >= today.getDate()) {
         if (Platform.OS === 'android') {
@@ -77,7 +83,10 @@ export default function WeekGoalGrid({weekId}: WeekGoalGridProps) {
                 <AppText family="round-b" text={weeks.week + '주차'} />
               </View>
               <View style={styles.Items}>
-                <AppText family="round-b" text={weeks.amount + '원'} />
+                <AppText
+                  family="round-b"
+                  text={weeks.amount.toLocaleString() + '원'}
+                />
               </View>
               <View style={styles.Items}>
                 {visible ? (

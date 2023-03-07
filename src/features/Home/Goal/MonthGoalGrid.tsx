@@ -6,6 +6,7 @@ import {Fragment, useEffect} from 'react';
 import {useMonthGoalState} from '@/query/goal';
 import {useSetRecoilState} from 'recoil';
 import treeLevelAtom from '@/atom/treeLevelAtom';
+import Utils from '@/utils';
 
 export default function MonthGoalGrid({...month}: IMonthGoal) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -16,6 +17,8 @@ export default function MonthGoalGrid({...month}: IMonthGoal) {
   useEffect(() => {
     if (month.state === '실패') {
       setTreeLevel(0);
+    } else {
+      setTreeLevel(Utils.transformTreeLevel());
     }
   }, [month.state, setTreeLevel]);
 
@@ -29,7 +32,10 @@ export default function MonthGoalGrid({...month}: IMonthGoal) {
           <AppText family="round-b" text={month.month + '월'} />
         </View>
         <View style={styles.Items}>
-          <AppText family="round-b" text={month.amount + '원'} />
+          <AppText
+            family="round-b"
+            text={month.amount.toLocaleString() + '원'}
+          />
         </View>
         <View style={styles.Items}>
           <AppText family="round-b" text={month.state} />

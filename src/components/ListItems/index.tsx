@@ -27,13 +27,11 @@ const ListItems = ({icon, label, color, onPress, sub, contents}: Props) => {
         </View>
         <ListItem.Content>
           <ListItem.Title style={styles.Title}>
-            <AppText family="round-c" style={styles.Text}>
-              {label}
-            </AppText>
+            <AppText family="round-b">{label}</AppText>
           </ListItem.Title>
           {sub ? (
             <ListItem.Subtitle style={styles.SubTitle}>
-              <AppText family="round-c" text={sub} />
+              <AppText family="round-b" text={sub} style={styles.Text} />
             </ListItem.Subtitle>
           ) : (
             <></>
@@ -66,6 +64,6 @@ const styles = StyleSheet.create({
   },
   SubTitle: {},
   Text: {
-    fontSize: 25,
+    fontSize: 16,
   },
 });

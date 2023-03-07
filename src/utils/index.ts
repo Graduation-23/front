@@ -152,9 +152,7 @@ class Utils {
 
     const today = new Date();
 
-    return (
-      sDay <= today.getDate() && eDay >= today.getDate() && weeks.amount === 0
-    );
+    return sDay <= today.getDate() && eDay >= today.getDate();
   }
 
   //#endregion
