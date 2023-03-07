@@ -6,6 +6,7 @@ import UserInfoScreen from '@screens/UserInfoScreen';
 import LinkPaymentScreen from '@screens/LinkPaymentScreen';
 import {Setting} from '@constants/screen';
 import AchieveScreen from '@/screens/AchieveScreen';
+import {AppText} from '@/components/AppText';
 
 const Stack = createNativeStackNavigator();
 
@@ -17,14 +18,18 @@ export default function SettingNavigator() {
         name={Setting.Main}
         component={SettingScreen}
         options={{
-          title: '설정',
+          headerTitle() {
+            return <AppText.Title family="round-d" text="Settings" />;
+          },
         }}
       />
       <Stack.Screen
         name={Setting.Notice}
         component={NoticeScreen}
         options={{
-          title: '공지',
+          headerTitle() {
+            return <AppText.Title family="round-d" text="Notice" />;
+          },
         }}
       />
       {/* 카드 등록, 결제내역 연동, 회원정보 */}
@@ -35,7 +40,9 @@ export default function SettingNavigator() {
         name={Setting.LinkUpPayment}
         component={LinkPaymentScreen}
         options={{
-          title: '결제내역 연동',
+          headerTitle() {
+            return <AppText.Title family="round-b" text="결제 내역 연동" />;
+          },
         }}
       />
       {/* 회원 정보 */}
@@ -43,13 +50,19 @@ export default function SettingNavigator() {
         name={Setting.UserInfo}
         component={UserInfoScreen}
         options={{
-          title: '회원정보',
+          headerTitle() {
+            return <AppText.Title family="round-b" text="Profile" />;
+          },
         }}
       />
       <Stack.Screen
         name={Setting.Achieve}
         component={AchieveScreen}
-        options={{title: '업적'}}
+        options={{
+          headerTitle() {
+            return <AppText.Title family="round-b" text="Achievement" />;
+          },
+        }}
       />
     </Stack.Navigator>
   );
