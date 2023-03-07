@@ -6,13 +6,25 @@ import BirthRegScreen from '@screens/BirthRegScreen';
 import CardRegScreen from '@screens/CardRegScreen';
 import useGoogleAccount from '@hooks/useGoogleAccount';
 import {Auth} from '@constants/screen';
+import {useLayoutEffect} from 'react';
 
 export type AuthorizationStackParamList = Record<keyof typeof Auth, undefined>;
 
 const Stack = createNativeStackNavigator<AuthorizationStackParamList>();
 
-export default function AuthorizationNavigator({route}: any) {
+export default function AuthorizationNavigator({route, navigation}: any) {
   useGoogleAccount(route.params);
+
+  const value = route.params?.to || 'hello world';
+
+  useLayoutEffect(() => {
+    if (value === Auth.Birth) {
+      route.params = null;
+      setTimeout(() => {
+        navigation.navigate(Auth.Birth);
+      }, 100);
+    }
+  }, [value, navigation, route]);
 
   return (
     <Stack.Navigator

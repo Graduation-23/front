@@ -16,11 +16,12 @@ export default function usePassport() {
     setTimeout(() => {
       if (user) {
         setIsJustChange(true);
-        navigate(user.fresh ? Auth.Birth : Entry.Content);
+        console.log(user);
+        navigate(user.fresh ? Entry.Auth : Entry.Content, {to: Auth.Birth});
       } else {
         setIsJustChange(false);
-        navigate(Auth.Login);
+        navigate(Entry.Auth);
       }
-    }, 100);
+    }, 500);
   }, [user, navigate, isJustChange]);
 }

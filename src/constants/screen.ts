@@ -1,6 +1,7 @@
 export const Entry = {
   Auth: 'AuthorizationNavigator',
   Content: 'ContentNavigator',
+  Loading: 'Loading',
 };
 
 export const Diary = Object.freeze({

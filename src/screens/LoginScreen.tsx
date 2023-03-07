@@ -5,6 +5,7 @@ import {
   View,
   TouchableOpacity,
   Image,
+  BackHandler,
 } from 'react-native';
 import {useSetRecoilState} from 'recoil';
 import {setAuthHeader} from '@api/client';
@@ -20,8 +21,11 @@ import {AuthorizationStackParamList} from '../Navigator/AuthorizationNavigator';
 import {Divider} from '@rneui/themed';
 import google from '../assets/google.png';
 import PlainInput from '@/components/PlainInput';
+import {useFocusEffect} from '@react-navigation/native';
+import {useCallback} from 'react';
 
 const LoginScreen = ({
+  route,
   navigation,
 }: NativeStackScreenProps<AuthorizationStackParamList, 'Login'>) => {
   const setUser = useSetRecoilState(userAtom);
@@ -33,6 +37,23 @@ const LoginScreen = ({
       fetchUserInfo().then(setUser);
     });
   };
+
+  useFocusEffect(
+    useCallback(() => {
+      const onBackPress = () => {
+        if (route.name === Auth.Login) {
+          return true;
+        } else {
+          return false;
+        }
+      };
+
+      BackHandler.addEventListener('hardwareBackPress', onBackPress);
+
+      return () =>
+        BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+    }, [route]),
+  );
 
   return (
     <SafeAreaView style={styles.container}>
