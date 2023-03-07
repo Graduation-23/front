@@ -36,7 +36,7 @@ const BirthRegScreen = ({route}: any) => {
   useFocusEffect(
     useCallback(() => {
       const onBackPress = () => {
-        if (route.name === Auth.Card) {
+        if (route.name === Auth.Birth) {
           return true;
         } else {
           return false;

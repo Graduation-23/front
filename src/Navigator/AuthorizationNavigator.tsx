@@ -21,10 +21,11 @@ export default function AuthorizationNavigator({route, navigation}: any) {
     if (value === Auth.Birth) {
       route.params = null;
       setTimeout(() => {
+        console.log('Auth');
         navigation.navigate(Auth.Birth);
       }, 100);
     }
-  }, [value, navigation, route]);
+  }, [value]);
 
   return (
     <Stack.Navigator
