@@ -22,6 +22,9 @@ const WithdrawalDialog = ({visible, toggleDialog}: Props) => {
         overlayStyle={styles.DialogContainer}>
         <AppText.Title family="round-b" text="회원 탈퇴" style={styles.Title} />
         <AppText family="round-b">정말 탈퇴 하시겠습니까?</AppText>
+        <AppText style={{fontSize: 11}}>
+          (구글 유저의 경우 구글 앱에서 연동을 해제 해주세요)
+        </AppText>
         <TextInput
           placeholder="본인 비밀번호를 입력해주세요."
           value={userPw}
