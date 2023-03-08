@@ -1,8 +1,9 @@
+import Utils from '@/utils';
 import {atom} from 'recoil';
 
 const flowerLevelAtom = atom<number>({
   key: 'flowerLevelAtom',
-  default: 1,
+  default: Utils.transformFlowerLevel(),
 });
 
 export default flowerLevelAtom;

@@ -82,6 +82,11 @@ class Utils {
     }, {} as {[key: string]: T[]});
   }
 
+  static inPeriod(target: Date, start: Date, end: Date) {
+    const targetAt = target.valueOf();
+    return start.valueOf() <= targetAt && targetAt <= end.valueOf();
+  }
+
   //#endregion
 
   //#region Form

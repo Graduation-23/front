@@ -30,24 +30,27 @@ export default function WeekGoalGrid({weekId}: WeekGoalGridProps) {
   const today = new Date();
 
   useEffect(() => {
+    console.log(weeks);
     if (weeks) {
       if (weeks.state === '진행중') {
         if (weeks.amount === 0) {
           setVisible(false);
-        } else {
-          setFlowerLevel(Utils.transformFlowerLevel());
         }
       } else if (weeks.state === '실패') {
         // 실패일 때
         if (weeks.amount === 0) {
           setVisible(false);
-          setFlowerLevel(Utils.transformFlowerLevel());
-        } else if (weeks.amount > 0) {
-          setVisible(true);
-          setFlowerLevel(0);
+          // setFlowerLevel(Utils.transformFlowerLevel());
         }
       } else {
         setVisible(true);
+      }
+      if (
+        Utils.inPeriod(new Date(), new Date(weeks.start), new Date(weeks.end))
+      ) {
+        setFlowerLevel(
+          weeks.state === '실패' ? 0 : Utils.transformFlowerLevel(),
+        );
       }
     }
   }, [setFlowerLevel, weeks]);
