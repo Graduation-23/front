@@ -1,5 +1,6 @@
 import client from '../client';
 import {GoalState} from './fetchMonthGoalState';
+import logger from '@/utils/logger';
 
 export default function fetchWeekGoalState(weekId: number) {
   return new Promise<GoalState>(resolve => {
@@ -8,8 +9,6 @@ export default function fetchWeekGoalState(weekId: number) {
       .then(response => {
         resolve(response.data.data);
       })
-      .catch(err => {
-        console.log('안돼', err, 'id:', weekId);
-      });
+      .catch(logger.error);
   });
 }

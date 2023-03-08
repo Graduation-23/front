@@ -1,4 +1,5 @@
 import client from '../client';
+import logger from '@/utils/logger';
 
 interface MonthGoal {
   amount: number;
@@ -7,12 +8,12 @@ interface MonthGoal {
 
 //body
 export default function requestMonthGoal({amount, weekIds}: MonthGoal) {
-  return new Promise((resolve, reject) => {
+  return new Promise(resolve => {
     client
       .post('/goal/month', {amount: amount, weekIds: weekIds})
       .then(response => {
         resolve(response.data);
       })
-      .catch(reject);
+      .catch(logger.error);
   });
 }

@@ -1,3 +1,4 @@
+import logger from '@/utils/logger';
 import client from '../client';
 
 type CFinance = {
@@ -13,12 +14,12 @@ export default function createFinance({
   anothername,
   colorcode,
 }: CFinance) {
-  return new Promise((res, rej) => {
+  return new Promise(res => {
     client
       .post('/finance/add', {type, description, anothername, colorcode})
       .then(v => {
         res(v);
       })
-      .catch(rej);
+      .catch(logger.error);
   });
 }
