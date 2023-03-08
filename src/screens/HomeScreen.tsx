@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import {useEffect, useRef} from 'react';
+import {useRef} from 'react';
 import {
   Platform,
   StyleSheet,
@@ -16,10 +16,9 @@ import Share from 'react-native-share';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import GoalGrid from '@/features/Home/Goal/GoalGrid';
 import backgroundImage from '../assets/backgroundImage.jpg';
-import {useRecoilState, useRecoilValue} from 'recoil';
+import {useRecoilValue} from 'recoil';
 import flowerAtom from '@/atom/flowerAtom';
 import treeAtom from '@/atom/treeAtom';
-import Utils from '@/utils';
 import flowerLevelAtom from '@/atom/flowerLevelAtom';
 import treeLevelAtom from '@/atom/treeLevelAtom';
 
@@ -27,15 +26,15 @@ export default function HomeScreen() {
   const captureRef = useRef<any>(null);
   const flower = useRecoilValue(flowerAtom);
   const tree = useRecoilValue(treeAtom);
-  const [flowerLevel, setFlowerLevel] = useRecoilState(flowerLevelAtom);
-  const [treeLevel, setTreeLevel] = useRecoilState(treeLevelAtom);
+  const flowerLevel = useRecoilValue(flowerLevelAtom);
+  const treeLevel = useRecoilValue(treeLevelAtom);
 
   const date = new Date();
 
-  useEffect(() => {
-    setTreeLevel(Utils.transformTreeLevel());
-    setFlowerLevel(Utils.transformFlowerLevel());
-  }, [setFlowerLevel, setTreeLevel]);
+  // useEffect(() => {
+  //   setTreeLevel(Utils.transformTreeLevel());
+  //   setFlowerLevel(Utils.transformFlowerLevel());
+  // }, [setFlowerLevel, setTreeLevel]);
 
   const onCapture = () => {
     try {

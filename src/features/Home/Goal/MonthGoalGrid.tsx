@@ -14,6 +14,7 @@ export default function MonthGoalGrid({...month}: IMonthGoal) {
 
   const setTreeLevel = useSetRecoilState(treeLevelAtom);
 
+  console.log(month);
   useEffect(() => {
     if (month.state === '실패') {
       setTreeLevel(0);
