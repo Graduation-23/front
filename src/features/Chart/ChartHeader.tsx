@@ -56,8 +56,8 @@ export default function ChartHeader({setOptions}: ChartHeaderProps) {
           <ButtonGroup
             buttons={[
               <AppText family="round-b" text="특정 년/월" />,
-              <AppText family="round-b" text="이번 주" />,
-              <AppText family="round-b" text="이번 달" />,
+              <AppText family="round-b" text="최근 7일" />,
+              <AppText family="round-b" text="최근 30일" />,
             ]}
             //buttons={['특정 년/월', '이번 주', '이번 한달']}
             selectedIndex={selectedIndex}

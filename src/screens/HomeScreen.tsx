@@ -68,7 +68,11 @@ export default function HomeScreen() {
         <View style={styles.Container}>
           <ViewShot
             ref={captureRef}
-            options={{fileName: 'Capture-File', format: 'jpg', quality: 0.9}}>
+            options={{
+              fileName: 'Capture-File',
+              format: 'jpg',
+              quality: 0.9,
+            }}>
             <View style={styles.Capture}>
               <View style={styles.Header}>
                 <AppText.Title family="round-a">

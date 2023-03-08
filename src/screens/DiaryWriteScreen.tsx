@@ -62,5 +62,7 @@ const styles = StyleSheet.create({
   },
   FormContainer: {
     padding: 15,
+    backgroundColor: '#ffffff99',
+    minHeight: Dimensions.get('window').height,
   },
 });

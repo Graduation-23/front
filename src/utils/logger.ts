@@ -4,6 +4,6 @@ export default class {
   }
 
   static error(err: any) {
-    console.error(JSON.stringify(err));
+    // console.error(JSON.stringify(err));
   }
 }
