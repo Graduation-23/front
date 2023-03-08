@@ -3,6 +3,8 @@ import {View, StyleSheet, TextInput} from 'react-native';
 import {useState} from 'react';
 import deleteUser from '@/api/deleteUser';
 import {AppText} from '@/components/AppText';
+import {useSetRecoilState} from 'recoil';
+import userAtom from '@/atom/userAtom';
 
 interface Props {
   visible: boolean;
@@ -11,6 +13,8 @@ interface Props {
 
 const WithdrawalDialog = ({visible, toggleDialog}: Props) => {
   const [userPw, setUserPw] = useState('');
+  const setUser = useSetRecoilState(userAtom);
+
   const onChangeInput = (text: string) => {
     setUserPw(text);
   };
@@ -26,9 +30,10 @@ const WithdrawalDialog = ({visible, toggleDialog}: Props) => {
           (구글 유저의 경우 구글 앱에서 연동을 해제 해주세요)
         </AppText>
         <TextInput
-          placeholder="본인 비밀번호를 입력해주세요."
+          placeholder="비밀번호를 입력"
           value={userPw}
           onChangeText={onChangeInput}
+          secureTextEntry={true}
           style={styles.Input}
         />
         <Dialog.Actions>
@@ -41,7 +46,10 @@ const WithdrawalDialog = ({visible, toggleDialog}: Props) => {
           <Dialog.Button
             title="탈퇴"
             onPress={() => {
-              deleteUser({password: userPw});
+              deleteUser({password: userPw}).then(() => {
+                console.log('??');
+                setUser(null);
+              });
               toggleDialog();
             }}
           />

@@ -30,11 +30,12 @@ export default function WeekGoalGrid({weekId}: WeekGoalGridProps) {
   const today = new Date();
 
   useEffect(() => {
-    console.log(weeks);
     if (weeks) {
       if (weeks.state === '진행중') {
         if (weeks.amount === 0) {
           setVisible(false);
+        } else {
+          setVisible(true);
         }
       } else if (weeks.state === '실패') {
         // 실패일 때

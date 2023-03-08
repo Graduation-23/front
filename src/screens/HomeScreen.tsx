@@ -99,7 +99,6 @@ const styles = StyleSheet.create({
   Container: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center',
     marginTop: 20,
     marginBottom: 10,
     minHeight: '100%',
@@ -110,6 +109,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'stretch',
     justifyContent: 'space-around',
+    marginBottom: 50,
   },
   Capture: {
     alignItems: 'center',
@@ -120,6 +120,6 @@ const styles = StyleSheet.create({
     alignItems: 'baseline',
     justifyContent: 'center',
     padding: 10,
-    marginTop: 70,
+    marginTop: 120,
   },
 });

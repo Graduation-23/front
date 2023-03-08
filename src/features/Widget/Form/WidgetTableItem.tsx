@@ -78,6 +78,23 @@ export function WidgetTableItem({
   );
 }
 
+/*
+
+ </View>
+      <View style={styles.box}>
+        <TextInput
+          style={styles.input}
+          value={item.amount.toString()}
+          onChangeText={Utils.bindFirstParameter(set, 'amount')}
+          placeholder="지출 금액을 작성해주세요."
+          keyboardType="numeric"
+        />
+        <AppText family="round-b" text=" 원" style={styles.won} />
+      </View>
+    </LinearGradient>
+
+*/
+
 const styles = StyleSheet.create({
   itemContainer: {
     marginBottom: 15,
@@ -102,5 +119,8 @@ const styles = StyleSheet.create({
         fontSize: 22,
       },
     }),
+  },
+  won: {
+    marginRight: 30,
   },
 });
