@@ -1,4 +1,5 @@
 import client from '../client';
+import logger from '@/utils/logger';
 
 interface WeekGoal {
   id: number | undefined;
@@ -7,7 +8,7 @@ interface WeekGoal {
 
 //body
 export default function requestWeekGoal({id, amount}: WeekGoal) {
-  return new Promise((resolve, reject) => {
+  return new Promise(resolve => {
     client
       .put(`/goal/week?id=${id}&amount=${amount}`, {
         Headers: {
@@ -17,6 +18,6 @@ export default function requestWeekGoal({id, amount}: WeekGoal) {
       .then(response => {
         resolve(response.data);
       })
-      .catch(reject);
+      .catch(logger.error);
   });
 }

@@ -1,7 +1,8 @@
+import logger from '@/utils/logger';
 import client from '@api/client';
 
 export default function issueDiary(date: string) {
-  return new Promise<number>((resolve, reject) => {
+  return new Promise<number>(resolve => {
     client
       .post(`/diary?date=${date}`, {
         Headers: {
@@ -9,6 +10,6 @@ export default function issueDiary(date: string) {
         },
       })
       .then(r => resolve(r.data.data))
-      .catch(reject);
+      .catch(logger.error);
   });
 }
