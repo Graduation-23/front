@@ -2,7 +2,7 @@ import {useNavigation} from '@react-navigation/native';
 import {useEffect, useState} from 'react';
 import {useRecoilValue} from 'recoil';
 import userAtom from '@atom/userAtom';
-import {Auth, Entry} from '@constants/screen';
+import {Auth, Content, Entry} from '@constants/screen';
 
 export default function usePassport() {
   const [isJustChange, setIsJustChange] = useState(false);
@@ -16,11 +16,15 @@ export default function usePassport() {
     setTimeout(() => {
       if (user) {
         setIsJustChange(true);
-        console.log(user);
-        navigate(user.fresh ? Entry.Auth : Entry.Content, {to: Auth.Birth});
+        if (user.fresh) {
+          navigate(Entry.Auth, {screen: Auth.Birth});
+        } else {
+          navigate(Entry.Content, {screen: Content.HomeTab});
+        }
+        // navigate(user.fresh ? Entry.Auth : Entry.Content, {to: Auth.Birth});
       } else {
         setIsJustChange(false);
-        navigate(Entry.Auth);
+        navigate(Entry.Auth, {screen: Auth.Login});
       }
     }, 500);
   }, [user, navigate, isJustChange]);

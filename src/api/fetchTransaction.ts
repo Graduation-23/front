@@ -6,7 +6,10 @@ export default function fetchTransactions(date: string) {
   return new Promise<ITransaction[]>(resolve => {
     client
       .get(`/openbank/transactions?date=${date}`)
-      .then(response => resolve(response.data.data))
+      .then(response => {
+        console.log(response.data.data);
+        resolve(response.data.data);
+      })
       .catch(logger.error);
   });
 }

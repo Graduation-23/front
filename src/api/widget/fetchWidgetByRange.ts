@@ -34,6 +34,7 @@ export default function fetchWidgetByRange({
     client
       .get(`/widget${query}`)
       .then(response => {
+        console.log('query ', query, response.data.data);
         resolve(response.data.data);
       })
       .catch(logger.error);
