@@ -3,7 +3,6 @@ import {useRef} from 'react';
 import {
   Platform,
   StyleSheet,
-  TouchableOpacity,
   View,
   ScrollView,
   ImageBackground,
@@ -13,7 +12,6 @@ import {AppText} from '../components/AppText';
 import GrowingPlant from '../features/Home/GrowingPlant';
 import ViewShot from 'react-native-view-shot';
 import Share from 'react-native-share';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import GoalGrid from '@/features/Home/Goal/GoalGrid';
 import backgroundImage from '../assets/backgroundImage.jpg';
 import {useRecoilValue} from 'recoil';
@@ -78,9 +76,10 @@ export default function HomeScreen() {
                 <AppText.Title family="round-a">
                   오늘은 {date.getMonth() + 1}월 {date.getDate()}일 입니다
                 </AppText.Title>
-                <TouchableOpacity onPress={onCapture}>
+                <View></View>
+                {/* <TouchableOpacity onPress={onCapture}>
                   <Icon name="share" size={30} color="black" />
-                </TouchableOpacity>
+                </TouchableOpacity> */}
               </View>
               <View style={styles.PlantContainer}>
                 <GrowingPlant kind="tree" level={treeLevel} type={tree} />
