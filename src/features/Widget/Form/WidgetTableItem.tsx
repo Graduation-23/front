@@ -63,6 +63,7 @@ export function WidgetTableItem({
           placeholder="지출 금액을 작성해주세요."
           keyboardType="numeric"
         />
+        <AppText family="round-b" text=" 원" style={styles.won} />
       </View>
     </LinearGradient>
   );
@@ -92,5 +93,8 @@ const styles = StyleSheet.create({
         fontSize: 22,
       },
     }),
+  },
+  won: {
+    marginRight: 30,
   },
 });

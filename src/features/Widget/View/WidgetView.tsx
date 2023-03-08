@@ -8,7 +8,7 @@ export default function WidgetView({items, totalCost}: WidgetViewProps) {
     <View style={styles.SpendList}>
       <AppText.Subtitle
         family="round-d"
-        text={`오늘의 지출 - ${totalCost} 원`}
+        text={`오늘의 지출 - ${totalCost.toLocaleString()} 원`}
         mv={5}
       />
       {items.map(el => (

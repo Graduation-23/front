@@ -39,7 +39,7 @@ export default function WidgetItem({item}: WidgetItem) {
       </View>
       <AppText
         viewStyle={styles.box}
-        text={` ${item.amount.toString()} 원`}
+        text={` ${item.amount.toLocaleString()} 원`}
         family="round-b"
       />
     </LinearGradient>
