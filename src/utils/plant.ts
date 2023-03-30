@@ -5,6 +5,7 @@ import flower_growings3 from '../assets/growings/flower_growings3.png';
 import flower_growings4 from '../assets/growings/flower_growings4.png';
 import flower_growings5 from '../assets/growings/flower_growings5.png';
 import flower_growings6 from '../assets/growings/flower_growings6.png';
+
 import acacia from '../assets/flowers/acacia.png';
 import apricot from '../assets/flowers/apricot.png';
 import azalea from '../assets/flowers/azalea.png';
@@ -40,7 +41,7 @@ import tree_growings4 from '../assets/growings/tree_growings4.png';
 import tree_growings5 from '../assets/growings/tree_growings5.png';
 import tree_growings6 from '../assets/growings/tree_growings6.png';
 import tree_growings7 from '../assets/growings/tree_growings7.png';
-import tree_growings8 from '../assets/growings/tree_growings8.png';
+
 import autumn_tree from '../assets/trees/autumn_tree.png';
 import bamboo from '../assets/trees/bamboo.png';
 import banana_tree from '../assets/trees/banana_tree.png';
@@ -58,10 +59,11 @@ import summer_tree from '../assets/trees/summer_tree.png';
 import wedding_cake_tree from '../assets/trees/wedding_cake_tree.png';
 import willow from '../assets/trees/willow.png';
 import winter_tree from '../assets/trees/winter_tree.png';
+
 import {ImageSourcePropType} from 'react-native';
 
 export const MAX_FLOWER_LEVEL = 7;
-export const MAX_TREE_LEVEL = 9;
+export const MAX_TREE_LEVEL = 7;
 
 export type IFlower =
   | 'acacia'
@@ -159,7 +161,7 @@ export const TreeType: {[key in ITree]: ImageSourcePropType} = {
   winter_tree,
 };
 
-export const FlowerImage = [
+export const FlowerGrowImage = [
   flower_growings0,
   flower_growings1,
   flower_growings2,
@@ -169,7 +171,7 @@ export const FlowerImage = [
   flower_growings6,
 ];
 
-export const TreeImage = [
+export const TreeGrowImage = [
   tree_growings0,
   tree_growings1,
   tree_growings2,
@@ -178,5 +180,53 @@ export const TreeImage = [
   tree_growings5,
   tree_growings6,
   tree_growings7,
-  tree_growings8,
+];
+
+export const FlowerImage = [
+  'acacia',
+  ' apricot',
+  'azalea',
+  'bellflower',
+  'black_lily',
+  'blue_bonnet',
+  'canola_flowers',
+  'cattleya',
+  'cosmos',
+  'cotton_flower',
+  'dandelion_fluff',
+  'gardenia_flower',
+  'hyacinth',
+  'lavender',
+  'lily',
+  'marigold',
+  'morning_glory',
+  'pansy',
+  'plum_blossom',
+  'poppy',
+  'red_rose',
+  'tulip',
+  'veronica_persica',
+  'white_clover',
+  'white_hibiscus',
+  'white_hydrangea',
+];
+
+export const TreeImage = [
+  'autumn_tree',
+  'bamboo',
+  'banana_tree',
+  'baobab_tree',
+  'birch',
+  'cedar',
+  'cherry_blossom',
+  'chestnut_tree',
+  'christmas_tree',
+  'loquat_tree',
+  'maple_tree',
+  'sequoia',
+  'spring_tree',
+  'summer_tree',
+  'wedding_cake_tree',
+  'willow',
+  'winter_tree',
 ];

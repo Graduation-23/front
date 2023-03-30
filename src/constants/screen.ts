@@ -1,6 +1,7 @@
 export const Entry = {
   Auth: 'AuthorizationNavigator',
   Content: 'ContentNavigator',
+  Loading: 'Loading',
 };
 
 export const Diary = Object.freeze({
@@ -15,6 +16,7 @@ export const Setting = Object.freeze({
   UserInfo: 'UserInfo',
   Notice: 'Notice',
   Card: 'SettingCard',
+  Achieve: 'Achieve',
 });
 
 export const Account = Object.freeze({

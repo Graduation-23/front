@@ -20,6 +20,7 @@ export default function DiaryEditGallery({
   removeImage,
 }: Props) {
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  //console.log(previewImagesUrls);
 
   const close = () => setSelectedId(null);
 
@@ -36,10 +37,10 @@ export default function DiaryEditGallery({
         onLongPress={id => setSelectedId(id)}
         imageUrls={previewImagesUrls}>
         <ImageUpload
-          style={{backgroundColor: '#bab9b994'}}
+          style={{backgroundColor: '#dddddd93'}}
           selectionLimit={selectLimit}
           setNewImages={appendNewImages}>
-          <AppText.Subtitle text="+" />
+          <AppText.Subtitle text="+" style={{color: '#626262'}} />
         </ImageUpload>
       </DiaryPreviewGallery>
 

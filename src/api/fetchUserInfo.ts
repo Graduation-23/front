@@ -1,4 +1,5 @@
 import client from './client';
+import logger from '@/utils/logger';
 
 export type IUser = {
   id: string;
@@ -11,13 +12,13 @@ export type IUser = {
 };
 
 export default function fetchUserInfo(fresh = false) {
-  return new Promise<IUser>((resolve, reject) => {
+  return new Promise<IUser>(resolve => {
     client
       .get('/user/')
       .then(response => {
         response.data.data.fresh = fresh;
         resolve(response.data.data);
       })
-      .catch(reject);
+      .catch(logger.error);
   });
 }

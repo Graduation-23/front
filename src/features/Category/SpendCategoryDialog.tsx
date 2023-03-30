@@ -1,5 +1,7 @@
-import {Dialog} from '@rneui/base';
+import {AppText} from '@/components/AppText';
+import {Dialog} from '@rneui/themed';
 import {useState} from 'react';
+import {StyleSheet} from 'react-native';
 import CategoryView from './CategoryView';
 
 interface SpendCategoryDialogProps {
@@ -24,15 +26,24 @@ export default function SpendCategoryDialog({
 
   return (
     <Dialog
-      overlayStyle={{backgroundColor: 'white'}}
       isVisible={openId !== null}
-      onBackdropPress={close}>
-      <Dialog.Title title="소비 카테고리" />
+      onBackdropPress={close}
+      overlayStyle={styles.DialogContainer}>
+      <AppText.Title text="Category" family="round-b" style={styles.Title} />
       <CategoryView tag={tag} setTag={setTag} />
       <Dialog.Actions>
         <Dialog.Button title="선택" onPress={handleConfirm} />
-        <Dialog.Button title="닫기" onPress={close} />
       </Dialog.Actions>
     </Dialog>
   );
 }
+
+const styles = StyleSheet.create({
+  Title: {
+    paddingLeft: 10,
+  },
+  DialogContainer: {
+    width: '85%',
+    paddingHorizontal: 10,
+  },
+});

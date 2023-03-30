@@ -22,14 +22,17 @@ export default function BookWidgetItem({item}: BookWidgetItemProps) {
       <View style={styles.container}>
         <View style={styles.header}>
           <AppText
-            style={[styles.financeText, {backgroundColor: fin.colorcode}]}>
-            {fin.anothername}
+            family="round-b"
+            style={[styles.financeText, {color: fin.colorcode}]}>
+            #{fin.anothername}
           </AppText>
-          <AppText style={styles.categoryText}>
-            {item.category} - {item.description}
+          <AppText family="round-b" style={styles.categoryText}>
+            #{item.category} - {item.description}
           </AppText>
         </View>
-        <AppText.Subtitle>-{item.amount.toLocaleString()} 원</AppText.Subtitle>
+        <AppText.Subtitle family="round-b" style={styles.amount}>
+          - {item.amount.toLocaleString()} 원
+        </AppText.Subtitle>
       </View>
       <Divider />
     </>
@@ -41,19 +44,19 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   categoryText: {
-    fontSize: 16,
-    color: 'gray',
-    padding: 4,
+    color: 'black',
     marginLeft: 8,
   },
   financeText: {
-    fontSize: 16,
-    color: 'white',
-    borderRadius: 5,
-    padding: 4,
+    color: 'black',
+    padding: 0,
   },
   header: {
     display: 'flex',
     flexDirection: 'row',
+    alignItems: 'baseline',
+  },
+  amount: {
+    marginTop: 5,
   },
 });

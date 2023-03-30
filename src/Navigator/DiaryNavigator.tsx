@@ -6,8 +6,7 @@ import DiaryScreen from '@screens/DiaryScreen';
 import DiaryWriteScreen from '@screens/DiaryWriteScreen';
 import DiaryWriteButton from '@features/Diary/Header/DiaryWriteButton';
 import DiaryUpdateButton from '@features/Diary/Header/DiaryUpdateButton';
-import {Text} from '@rneui/themed';
-
+import Icon from 'react-native-vector-icons/MaterialIcons';
 const Stack = createNativeStackNavigator();
 
 export default function DiaryNavigator() {
@@ -17,7 +16,9 @@ export default function DiaryNavigator() {
         name={Diary.Main}
         component={DiaryScreen}
         options={{
-          title: '일기',
+          headerTitle() {
+            return <AppText.Title family="round-d" text="Diary" />;
+          },
           headerRight() {
             return <DiaryWriteButton />;
           },
@@ -27,22 +28,24 @@ export default function DiaryNavigator() {
         name={Diary.Write}
         component={DiaryWriteScreen}
         options={({route, navigation}) => ({
+          headerBackVisible: false,
           headerTitle() {
-            return <AppText.Subtitle family="round-b" text="일기 수정" />;
+            return <AppText.Title family="round-d" text="Write" />;
           },
           headerRight() {
             return (
-              <Text
-                style={{color: '#29b6f6'}}
+              <Icon
+                name="done"
+                size={25}
                 onPress={() => {
                   if (route && navigation) {
                     navigation.navigate(Diary.Read, {
                       diaryId: (route.params as any)?.diaryId,
                     });
                   }
-                }}>
-                완료
-              </Text>
+                }}
+                style={{color: '#1393cf'}}
+              />
             );
           },
         })}
@@ -52,7 +55,7 @@ export default function DiaryNavigator() {
         component={DiaryReadScreen}
         options={({route}) => ({
           headerTitle() {
-            return <AppText.Subtitle family="round-b" text="일기 보기" />;
+            return <AppText.Title family="round-d" text="Today's" />;
           },
           headerRight() {
             return <DiaryUpdateButton id={(route.params as any).diaryId} />;

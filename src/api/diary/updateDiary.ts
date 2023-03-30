@@ -10,6 +10,7 @@ export interface updateDiaryEntryVariables extends IDiary {
 
 export default function updateDiary(entry: updateDiaryEntryVariables) {
   const form = Utils.transformObjToForm(entry);
+  console.log(form);
 
   return new Promise(resolve => {
     client

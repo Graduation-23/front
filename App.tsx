@@ -16,7 +16,7 @@ import {QueryClient, QueryClientProvider} from 'react-query';
 //import React from 'react';
 import {RecoilRoot} from 'recoil';
 import AuthenticationSecretary from './src/features/AuthenticationSecretary';
-import SMSWatcher from './src/features/SMSWatcher';
+// import SMSWatcher from './src/features/SMSWatcher';
 import AppNavigator from './src/Navigator/AppNavigator';
 import {theme} from './src/theme';
 import {linking} from './src/utils/linking';
@@ -27,7 +27,6 @@ const App = () => {
   return (
     <RecoilRoot>
       <QueryClientProvider client={queryClient}>
-        <SMSWatcher />
         <ThemeProvider theme={theme}>
           <NavigationContainer
             linking={linking}

@@ -1,17 +1,33 @@
 import {View, StyleSheet} from 'react-native';
 import {ListItem} from '@rneui/themed';
 import {AppText} from '../../components/AppText';
-import {useState} from 'react';
-import {useRecoilValue} from 'recoil';
+import {useState, useCallback} from 'react';
+import {useRecoilState} from 'recoil';
 import userAtom from '../../atom/userAtom';
-import {useFinance} from '../../query/finance';
 import UserInfoCardList from './UserInfoCardList';
 import {IFinance} from '@type/api';
+import DatePicker from 'react-native-date-picker';
+import Utils from '@/utils';
+import {useUpdateBirth} from '@/query/user';
+import fetchUserInfo from '@/api/fetchUserInfo';
+import useFinance from '@/hooks/useFinance';
 
 export default function UserInfoContentsAccordion() {
-  const user = useRecoilValue(userAtom);
+  const [user, setUser] = useRecoilState(userAtom);
   const [expanded, setExpanded] = useState(false);
-  const {data} = useFinance();
+  const {finances: data} = useFinance();
+  const [visible, setVisible] = useState(false);
+  const {mutateAsync} = useUpdateBirth();
+
+  const handleChangeBirth = useCallback(
+    (date: Date) => {
+      const dateString = Utils.formatYMD(date);
+      mutateAsync(dateString).then(() => {
+        fetchUserInfo().then(setUser);
+      });
+    },
+    [mutateAsync, setUser],
+  );
 
   return (
     <>
@@ -21,14 +37,14 @@ export default function UserInfoContentsAccordion() {
             <AppText family="round-d" text="ID" />
           </ListItem.Title>
           <ListItem.Content style={styles.AlignRight}>
-            <AppText family="round-d" text={`${user?.id}`} />
+            <AppText family="round-b" text={`${user?.id}`} />
           </ListItem.Content>
         </ListItem>
         <ListItem.Accordion
           content={
             <ListItem.Content>
               <ListItem.Title>
-                <AppText family="round-d" text="등록된 카드" />
+                <AppText family="round-b" text="등록된 카드" />
               </ListItem.Title>
             </ListItem.Content>
           }
@@ -49,20 +65,40 @@ export default function UserInfoContentsAccordion() {
         </ListItem.Accordion>
         <ListItem>
           <ListItem.Title>
-            <AppText family="round-d" text="생년월일" />
+            <AppText family="round-b" text="생년월일" />
           </ListItem.Title>
           <ListItem.Content style={styles.AlignRight}>
-            <AppText family="round-d" text={`${user?.birth}`} />
+            <AppText
+              onPress={() => setVisible(true)}
+              family="round-d"
+              text={`${user?.birth}`}
+            />
           </ListItem.Content>
         </ListItem>
         <ListItem>
           <ListItem.Title>
-            <AppText family="round-d" text="가입일자" />
+            <AppText family="round-b" text="가입일자" />
           </ListItem.Title>
           <ListItem.Content style={styles.AlignRight}>
             <AppText family="round-d" text={`${user?.created}`} />
           </ListItem.Content>
         </ListItem>
+        <DatePicker
+          title="생일"
+          modal
+          mode="date"
+          open={visible}
+          date={new Date()}
+          confirmText="선택"
+          cancelText="취소"
+          onConfirm={d => {
+            setVisible(false);
+            handleChangeBirth(d);
+          }}
+          onCancel={() => {
+            setVisible(false);
+          }}
+        />
       </View>
     </>
   );
@@ -71,6 +107,7 @@ export default function UserInfoContentsAccordion() {
 const styles = StyleSheet.create({
   List: {
     width: '100%',
+    marginTop: 10,
   },
   Text: {
     color: 'gray',

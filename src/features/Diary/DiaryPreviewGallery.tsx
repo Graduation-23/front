@@ -14,11 +14,12 @@ const GalleryItem = ({children}: {children: ReactNode}) => {
   return (
     <View
       style={{
-        width: 70,
-        height: 70,
+        width: 120,
+        height: 120,
         marginRight: 10,
         borderRadius: 7,
         overflow: 'hidden',
+        marginTop: 10,
       }}>
       {children}
     </View>
@@ -31,25 +32,32 @@ export default function DiaryPreviewGallery({
   children = '',
 }: DiaryPreviewGalleryProps) {
   return (
-    <ScrollView>
-      <View style={{display: 'flex', flexDirection: 'row'}}>
-        {Array.isArray(imageUrls) &&
-          imageUrls.map(el => (
-            <GalleryItem key={el}>
-              <Image
-                onLongPress={onLongPress.bind(null, el)}
-                style={{
-                  width: '100%',
-                  height: '100%',
-                }}
-                source={{
-                  uri: el,
-                }}
-              />
-            </GalleryItem>
-          ))}
-        <GalleryItem>{children}</GalleryItem>
-      </View>
-    </ScrollView>
+    <View>
+      <ScrollView horizontal>
+        <View
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            paddingHorizontal: 10,
+          }}>
+          {Array.isArray(imageUrls) &&
+            imageUrls.map(el => (
+              <GalleryItem key={el}>
+                <Image
+                  onLongPress={onLongPress.bind(null, el)}
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                  }}
+                  source={{
+                    uri: el,
+                  }}
+                />
+              </GalleryItem>
+            ))}
+          <GalleryItem>{children}</GalleryItem>
+        </View>
+      </ScrollView>
+    </View>
   );
 }

@@ -1,6 +1,11 @@
 import Utils from '@/utils';
-import {Input} from '@rneui/base';
-import {StyleSheet, View} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Platform,
+  TextInput,
+  TouchableOpacity,
+} from 'react-native';
 import useFinance from '@hooks/useFinance';
 import {useMemo} from 'react';
 import {AppText} from '@/components/AppText';
@@ -11,10 +16,12 @@ interface WidgetTableItem extends Widget.ItemType {
   setItem(item: Widget.ItemType): void;
   openCategoryDialog(): void;
   openFinanceDialog(): void;
+  onLongPress(): void;
 }
 
 export function WidgetTableItem({
   setItem,
+  onLongPress,
   openCategoryDialog,
   openFinanceDialog,
   ...item
@@ -30,65 +37,90 @@ export function WidgetTableItem({
   }, [finances, item.financeId]);
 
   return (
-    <LinearGradient
-      start={{x: 0, y: 0}}
-      end={{x: 1, y: 1}}
-      style={styles.itemContainer}
-      colors={['#454545', '#000', '#000', '#676767']}>
-      <View style={styles.box}>
-        <View style={{flexGrow: 1}}>
-          <Input
-            inputStyle={styles.input}
+    <TouchableOpacity activeOpacity={1} onLongPress={onLongPress}>
+      <LinearGradient
+        start={{x: 0, y: 0}}
+        end={{x: 1, y: 1}}
+        style={styles.itemContainer}
+        colors={['#89bad7cc', '#74b3d8cc']}>
+        <View style={styles.box}>
+          <TextInput
+            style={styles.input}
             value={item.description}
             onChangeText={Utils.bindFirstParameter(set, 'description')}
-            // inputStyle={styles.input}
-            placeholder="지출 명 입력..."
+            placeholder="지출명"
+          />
+          <View style={styles.Comment}>
+            <AppText.Subtitle
+              family="round-b"
+              onPress={openFinanceDialog}
+              style={{color: fItem.colorcode}}
+              text={`#${fItem.anothername} `}
+            />
+            <AppText.Subtitle
+              family="round-b"
+              onPress={openCategoryDialog}
+              text={` #${item.category} `}
+            />
+          </View>
+        </View>
+        <View style={styles.box}>
+          <TextInput
+            style={styles.input}
+            value={item.amount.toString()}
+            onChangeText={Utils.bindFirstParameter(set, 'amount')}
+            placeholder="지출 금액을 작성해주세요."
+            keyboardType="numeric"
           />
         </View>
-        <AppText
-          onPress={openFinanceDialog}
-          style={{color: fItem.colorcode}}
-          text={`#${fItem.anothername}`}
-        />
-        <AppText
-          onPress={openCategoryDialog}
-          style={{color: '#fff'}}
-          text={` #${item.category}`}
-        />
-      </View>
-      <View style={styles.box}>
-        <Input
-          style={styles.item}
-          inputStyle={styles.input}
-          value={item.amount.toString()}
-          onChangeText={Utils.bindFirstParameter(set, 'amount')}
-          // inputStyle={styles.input}
-          placeholder="지출 입력..."
-        />
-      </View>
-    </LinearGradient>
+      </LinearGradient>
+    </TouchableOpacity>
   );
 }
 
+/*
+
+ </View>
+      <View style={styles.box}>
+        <TextInput
+          style={styles.input}
+          value={item.amount.toString()}
+          onChangeText={Utils.bindFirstParameter(set, 'amount')}
+          placeholder="지출 금액을 작성해주세요."
+          keyboardType="numeric"
+        />
+        <AppText family="round-b" text=" 원" style={styles.won} />
+      </View>
+    </LinearGradient>
+
+*/
+
 const styles = StyleSheet.create({
   itemContainer: {
-    borderWidth: 1,
-    marginBottom: 20,
+    marginBottom: 15,
     borderRadius: 10,
-    backgroundColor: 'gray',
     padding: 5,
     width: '100%',
+  },
+  Comment: {
+    flexDirection: 'row',
     alignItems: 'center',
   },
   box: {
-    display: 'flex',
     flexDirection: 'row',
-  },
-  item: {
-    flexGrow: 1,
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   input: {
-    color: '#fff',
-    padding: 0,
+    paddingHorizontal: 5,
+    ...Platform.select({
+      android: {
+        fontFamily: 'Ownglyph_yoxaiov-Rg',
+        fontSize: 22,
+      },
+    }),
+  },
+  won: {
+    marginRight: 30,
   },
 });

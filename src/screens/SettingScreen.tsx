@@ -58,7 +58,7 @@ export default function SettingScreen({navigation}: any) {
         {/*앱 관련 */}
         <ListItem>
           <ListItem.Title style={styles.title}>
-            <AppText.Title family="round-d">앱</AppText.Title>
+            <AppText.Subtitle family="round-b">앱</AppText.Subtitle>
           </ListItem.Title>
         </ListItem>
         {/* mapping() */}
@@ -94,7 +94,7 @@ export default function SettingScreen({navigation}: any) {
         {/*금융 관련 */}
         <ListItem>
           <ListItem.Title style={styles.title}>
-            <AppText.Title family="round-d">금융</AppText.Title>
+            <AppText.Subtitle family="round-b">금융</AppText.Subtitle>
           </ListItem.Title>
         </ListItem>
         <ListItem>
@@ -113,14 +113,14 @@ export default function SettingScreen({navigation}: any) {
             label="결제 내역 연동"
             color="#5ed2b1"
             onPress={() => {
-              navigation.navigate('LinkUpPayment');
+              navigate(Setting.LinkUpPayment);
             }}
           />
         </ListItem>
         {/*회원 관련 */}
         <ListItem>
           <ListItem.Title style={styles.title}>
-            <AppText.Title family="round-d">개인</AppText.Title>
+            <AppText.Subtitle family="round-b">개인</AppText.Subtitle>
           </ListItem.Title>
         </ListItem>
         <ListItem>
@@ -129,7 +129,17 @@ export default function SettingScreen({navigation}: any) {
             label="회원 정보"
             color="#fce085"
             onPress={() => {
-              navigation.navigate('UserInfo');
+              navigate(Setting.UserInfo);
+            }}
+          />
+        </ListItem>
+        <ListItem>
+          <ListItems
+            icon="favorite"
+            label="업적"
+            color="#ff98d1"
+            onPress={() => {
+              navigate(Setting.Achieve);
             }}
           />
         </ListItem>

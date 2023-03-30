@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import {Image} from 'react-native';
 import {
-  FlowerImage,
+  FlowerGrowImage,
   FlowerType,
   IFlower,
   MAX_FLOWER_LEVEL,
@@ -31,7 +31,7 @@ export default function Flower({
         return (
           <Image
             style={{width: 80, height: 100}}
-            source={FlowerImage[level]}
+            source={FlowerGrowImage[level]}
             resizeMode="contain"
           />
         );
@@ -39,7 +39,7 @@ export default function Flower({
         return (
           <Image
             style={{width: 100, height: 120}}
-            source={FlowerImage[level]}
+            source={FlowerGrowImage[level]}
             resizeMode="contain"
           />
         );
@@ -47,7 +47,7 @@ export default function Flower({
         return (
           <Image
             style={{width: 120, height: 150}}
-            source={FlowerImage[level]}
+            source={FlowerGrowImage[level]}
             resizeMode="contain"
           />
         );
@@ -55,7 +55,7 @@ export default function Flower({
     return (
       <Image
         style={{width, height}}
-        source={FlowerImage[level]}
+        source={FlowerGrowImage[level]}
         resizeMode="contain"
       />
     );

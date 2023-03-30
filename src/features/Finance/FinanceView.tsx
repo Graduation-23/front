@@ -1,4 +1,4 @@
-import {View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import FinanceItem from './FinanceItem';
 import useFinance from '@hooks/useFinance';
 import {CashFinance} from '@/constants/finance';
@@ -13,11 +13,13 @@ export default function FinanceView({setFid, fid}: FinanceViewProps) {
 
   return (
     <View>
-      <FinanceItem
-        onClick={() => setFid(0)}
-        data={CashFinance}
-        selected={fid === 0}
-      />
+      <View style={styles.ItemContainer}>
+        <FinanceItem
+          onClick={() => setFid(0)}
+          data={CashFinance}
+          selected={fid === 0}
+        />
+      </View>
       {finances.map(el => (
         <FinanceItem
           key={el.id}
@@ -29,3 +31,9 @@ export default function FinanceView({setFid, fid}: FinanceViewProps) {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  ItemContainer: {
+    marginTop: 10,
+  },
+});

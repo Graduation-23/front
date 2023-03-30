@@ -1,42 +1,46 @@
 import {AppText} from '@/components/AppText';
-import {View, StyleSheet} from 'react-native';
-import {bodyDatas, heads} from './constants';
+import {useMonthGoal} from '@/query/goal';
+import {View, StyleSheet, TouchableOpacity} from 'react-native';
+import {heads} from './constants';
+import {useState} from 'react';
+import GoalRegDialog from './GoalRegDialog';
+import MonthGoalGrid from './MonthGoalGrid';
 
-type GoalGridProps = {};
+export default function GoalGrid() {
+  const {data: monthGoal} = useMonthGoal();
 
-export default function GoalGrid({}: GoalGridProps) {
+  const [mVisible, setMVisible] = useState(false);
+  const [isMonth, setIsMonth] = useState(false);
+
+  const handleMonth = () => {
+    setIsMonth(!isMonth);
+    setMVisible(!mVisible);
+  };
+
   return (
     <>
-      {/* <ImageBackground source={backgroundBottom}> */}
       <View style={styles.GridContainer}>
         <View style={styles.GridHeaders}>
           {heads.map((head, index) => (
-            <View key={index}>
-              <AppText.Subtitle
-                family="round-b"
-                text={head}
-                style={{color: '#004d40'}}
-              />
+            <View key={index} style={styles.Items}>
+              <AppText.Subtitle family="round-b" text={head} />
             </View>
           ))}
         </View>
-        <View>
-          {bodyDatas.map((datas, index) => (
-            <View key={index} style={styles.GridContents}>
-              {datas.map((week, index2) => (
-                <View key={index2} style={styles.GridDatas}>
-                  <AppText
-                    family="round-b"
-                    text={week}
-                    style={{color: '#004d40'}}
-                  />
-                </View>
-              ))}
-            </View>
-          ))}
-        </View>
+        {monthGoal && <MonthGoalGrid {...monthGoal} />}
+        {!monthGoal && (
+          <View style={styles.Btn}>
+            <TouchableOpacity onPress={handleMonth}>
+              <AppText family="round-b" text="월간목표 등록하기" />
+            </TouchableOpacity>
+          </View>
+        )}
       </View>
-      {/* </ImageBackground> */}
+      <GoalRegDialog
+        visible={mVisible}
+        toggleDialog={handleMonth}
+        select="월간"
+      />
     </>
   );
 }
@@ -56,17 +60,13 @@ const styles = StyleSheet.create({
     borderBottomColor: 'black',
     paddingVertical: 5,
   },
-  GridContents: {
-    flexGrow: 1,
-    flexDirection: 'row',
-    display: 'flex',
-    justifyContent: 'space-around',
-    paddingVertical: 5,
-  },
-  GridDatas: {
-    width: 100,
-    display: 'flex',
-    justifyContent: 'center',
+  Items: {
+    width: '25%',
     alignItems: 'center',
+  },
+  Btn: {
+    marginLeft: 10,
+    marginTop: 10,
+    height: 100,
   },
 });

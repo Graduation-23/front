@@ -29,7 +29,7 @@ export default function CardRegColorPicker({
         <PlainButton
           title={
             <AppText
-              family="round-d"
+              family="round-b"
               text="COLOR 선택"
               style={styles.FontSize20}
             />
@@ -43,7 +43,7 @@ export default function CardRegColorPicker({
             justifyContent: 'center',
             backgroundColor: color,
           }}>
-          <AppText family="round-d" text="미리보기" style={styles.FontSize20} />
+          <AppText family="round-b" text="미리보기" style={styles.FontSize20} />
         </View>
       </View>
 
@@ -64,6 +64,7 @@ const styles = StyleSheet.create({
     width: '80%',
     flexDirection: 'row',
     justifyContent: 'flex-start',
+    marginTop: 20,
   },
   Box: {
     borderWidth: 2,

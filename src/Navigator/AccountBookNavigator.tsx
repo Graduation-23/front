@@ -2,8 +2,9 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {Account} from '@constants/screen';
 import AccountBookScreen from '@screens/AccountBookScreen';
 import AccountChartScreen from '../screens/AccountChartScreen';
-import {Text} from '@rneui/base';
 import AccountHistoryScreen from '@/screens/AccountHistory';
+import {AppText} from '@/components/AppText';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Stack = createNativeStackNavigator();
 
@@ -14,16 +15,18 @@ export default function AccountBookNavigator() {
         name={Account.Main}
         component={AccountBookScreen}
         options={({navigation}) => ({
-          title: '지출 내역',
+          headerTitle() {
+            return <AppText.Title family="round-d" text="Pay" />;
+          },
           headerRight() {
             return (
-              <Text
+              <AppText
                 style={{color: '#29b6f6'}}
                 onPress={() => {
                   navigation.navigate(Account.History);
                 }}>
-                연혁
-              </Text>
+                <Icon name="chart-bar" size={25} />
+              </AppText>
             );
           },
         })}
@@ -32,14 +35,18 @@ export default function AccountBookNavigator() {
         name={Account.Chart}
         component={AccountChartScreen}
         options={{
-          title: '지출 분석',
+          headerTitle() {
+            return <AppText.Title family="round-d" text="Analysis" />;
+          },
         }}
       />
       <Stack.Screen
         name={Account.History}
         component={AccountHistoryScreen}
         options={{
-          title: '연혁',
+          headerTitle() {
+            return <AppText.Title family="round-d" text="History" />;
+          },
         }}
       />
     </Stack.Navigator>

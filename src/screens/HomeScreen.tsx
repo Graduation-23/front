@@ -1,4 +1,5 @@
-import {useRef, useState} from 'react';
+/* eslint-disable react-native/no-inline-styles */
+import {useRef} from 'react';
 import {
   Platform,
   StyleSheet,
@@ -6,36 +7,34 @@ import {
   View,
   ScrollView,
   ImageBackground,
+  Dimensions,
 } from 'react-native';
-//import {SafeAreaView} from 'react-native-safe-area-context';
 import {AppText} from '../components/AppText';
 import GrowingPlant from '../features/Home/GrowingPlant';
 import ViewShot from 'react-native-view-shot';
 import Share from 'react-native-share';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import GoalGrid from '@/features/Home/Goal/GoalGrid';
-import GoalRegDialog from '@/features/Home/Goal/GoalRegDialog';
-import {Button} from '@rneui/themed';
 import backgroundImage from '../assets/backgroundImage.jpg';
+import {useRecoilValue} from 'recoil';
+import flowerAtom from '@/atom/flowerAtom';
+import treeAtom from '@/atom/treeAtom';
+import flowerLevelAtom from '@/atom/flowerLevelAtom';
+import treeLevelAtom from '@/atom/treeLevelAtom';
 
 export default function HomeScreen() {
   const captureRef = useRef<any>(null);
-  const [wVisible, setWVisible] = useState(false);
-  const [mVisible, setMVisible] = useState(false);
+  const flower = useRecoilValue(flowerAtom);
+  const tree = useRecoilValue(treeAtom);
+  const flowerLevel = useRecoilValue(flowerLevelAtom);
+  const treeLevel = useRecoilValue(treeLevelAtom);
+
   const date = new Date();
 
-  const handleMonth = () => {
-    setMVisible(!mVisible);
-  };
-
-  const handleWeek = () => {
-    setWVisible(!wVisible);
-  };
-
-  // const onCapture = useCallback((uri: any) => {
-  //   console.log('캡처 할거야');
-  //   onShare(uri);
-  // }, []);
+  // useEffect(() => {
+  //   setTreeLevel(Utils.transformTreeLevel());
+  //   setFlowerLevel(Utils.transformFlowerLevel());
+  // }, [setFlowerLevel, setTreeLevel]);
 
   const onCapture = () => {
     try {
@@ -43,7 +42,6 @@ export default function HomeScreen() {
         captureRef.current
           ?.capture()
           .then((uri: any) => {
-            console.log('캡쳐하고싶다.', uri);
             onShare(uri);
           })
           .catch((err: any) => console.log('Error : ', err));
@@ -58,29 +56,23 @@ export default function HomeScreen() {
       Share.open({
         url: Platform.OS === 'ios' ? `file://${uri}` : uri,
       });
-      console.log('저장 성공!');
-    } catch {
-      console.log('저장 실패!');
-    }
+    } catch {}
   };
 
   return (
-    // <SafeAreaView style={styles.Container}>
-    // <ScrollView style={{minHeight: '100%', backgroundColor: 'red'}}>
-    <ImageBackground
-      imageStyle={{minHeight: '100%'}}
-      style={{minHeight: '100%'}}
-      source={backgroundImage}
-      resizeMode="cover">
-      <ScrollView>
+    <ScrollView>
+      <ImageBackground
+        style={{minHeight: Dimensions.get('window').height}}
+        source={backgroundImage}
+        resizeMode="stretch">
         <View style={styles.Container}>
-          <View style={styles.Tmp}>
-            <Button title="월간" onPress={handleMonth} />
-            <Button title="주간" onPress={handleWeek} />
-          </View>
           <ViewShot
             ref={captureRef}
-            options={{fileName: 'Capture-File', format: 'jpg', quality: 0.9}}>
+            options={{
+              fileName: 'Capture-File',
+              format: 'jpg',
+              quality: 0.9,
+            }}>
             <View style={styles.Capture}>
               <View style={styles.Header}>
                 <AppText.Title family="round-a">
@@ -91,32 +83,15 @@ export default function HomeScreen() {
                 </TouchableOpacity>
               </View>
               <View style={styles.PlantContainer}>
-                <GrowingPlant kind="tree" level={9} type="spring_tree" />
-                <GrowingPlant kind="flower" level={2} type="marigold" />
+                <GrowingPlant kind="tree" level={treeLevel} type={tree} />
+                <GrowingPlant kind="flower" level={flowerLevel} type={flower} />
               </View>
             </View>
           </ViewShot>
           <GoalGrid />
-
-          {mVisible && (
-            <GoalRegDialog
-              visible={mVisible}
-              toggleDialog={handleMonth}
-              select="월간"
-            />
-          )}
-          {wVisible && (
-            <GoalRegDialog
-              visible={wVisible}
-              toggleDialog={handleWeek}
-              select="주간"
-            />
-          )}
         </View>
-      </ScrollView>
-    </ImageBackground>
-    // </ScrollView>
-    // </SafeAreaView>
+      </ImageBackground>
+    </ScrollView>
   );
 }
 
@@ -124,12 +99,9 @@ const styles = StyleSheet.create({
   Container: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center',
+    marginTop: 20,
     marginBottom: 10,
     minHeight: '100%',
-  },
-  Tmp: {
-    flexDirection: 'row',
   },
   Header: {
     width: '100%',
@@ -137,6 +109,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'stretch',
     justifyContent: 'space-around',
+    marginBottom: 50,
   },
   Capture: {
     alignItems: 'center',
@@ -147,5 +120,6 @@ const styles = StyleSheet.create({
     alignItems: 'baseline',
     justifyContent: 'center',
     padding: 10,
+    marginTop: 120,
   },
 });

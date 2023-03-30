@@ -1,21 +1,21 @@
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, BackHandler} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {AppText} from '@components/AppText';
 import PlainButton from '@components/PlainButton';
-import {useState} from 'react';
+import {useCallback, useState} from 'react';
 import {format} from 'date-fns';
 import ko from 'date-fns/esm/locale/ko/index.js';
 import {Input} from '@rneui/themed';
 import DatePicker from 'react-native-date-picker';
 import {Auth} from '@constants/screen';
-import {useNavigation} from '@react-navigation/native';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {useUpdateBirth} from '@/query/user';
 import Utils from '@/utils';
 import {useSetRecoilState} from 'recoil';
 import userAtom from '@/atom/userAtom';
 import fetchUserInfo from '@/api/fetchUserInfo';
 
-const BirthRegScreen = ({}: any) => {
+const BirthRegScreen = ({route}: any) => {
   const [date, setDate] = useState(new Date());
   const [visible, setVisible] = useState(false);
   const {mutateAsync: update} = useUpdateBirth();
@@ -32,6 +32,23 @@ const BirthRegScreen = ({}: any) => {
       fetchUserInfo().then(setUser);
     });
   };
+
+  useFocusEffect(
+    useCallback(() => {
+      const onBackPress = () => {
+        if (route.name === Auth.Birth) {
+          return true;
+        } else {
+          return false;
+        }
+      };
+
+      BackHandler.addEventListener('hardwareBackPress', onBackPress);
+
+      return () =>
+        BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+    }, [route]),
+  );
 
   return (
     <SafeAreaView style={styles.Container}>
@@ -95,9 +112,6 @@ const BirthRegScreen = ({}: any) => {
         }}
         onCancel={() => {
           setVisible(false);
-        }}
-        onDateChange={d => {
-          console.log(d);
         }}
       />
     </SafeAreaView>

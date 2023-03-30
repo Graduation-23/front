@@ -1,11 +1,16 @@
 /* eslint-disable react-native/no-inline-styles */
 import {Image} from 'react-native';
-import {ITree, MAX_TREE_LEVEL, TreeImage, TreeType} from '../../../utils/plant';
+import {
+  ITree,
+  MAX_TREE_LEVEL,
+  TreeGrowImage,
+  TreeType,
+} from '../../../utils/plant';
 import {LevelImageProps} from './PlantLevel';
 
 export default function Tree({
   width = 250,
-  height = 300,
+  height = 250,
   level,
   type,
 }: LevelImageProps) {
@@ -21,45 +26,44 @@ export default function Tree({
     switch (level) {
       case 1:
       case 2:
-      case 3:
         return (
           <Image
             style={{width: 100, height: 100}}
-            source={TreeImage[level]}
+            source={TreeGrowImage[level]}
+            resizeMode="contain"
+          />
+        );
+      case 3:
+        return (
+          <Image
+            style={{width: 150, height: 150}}
+            source={TreeGrowImage[level]}
             resizeMode="contain"
           />
         );
       case 4:
-        return (
-          <Image
-            style={{width: 150, height: 150}}
-            source={TreeImage[level]}
-            resizeMode="contain"
-          />
-        );
       case 5:
-      case 6:
-      case 7:
         return (
           <Image
             style={{width: 170, height: 250}}
-            source={TreeImage[level]}
+            source={TreeGrowImage[level]}
             resizeMode="contain"
           />
         );
-      case 8:
+      case 6:
         return (
           <Image
             style={{width: 180, height: 250}}
-            source={TreeImage[level]}
+            source={TreeGrowImage[level]}
             resizeMode="contain"
           />
         );
+
       default:
         return (
           <Image
             style={{width: 250, height: 250}}
-            source={TreeImage[level]}
+            source={TreeGrowImage[level]}
             resizeMode="contain"
           />
         );

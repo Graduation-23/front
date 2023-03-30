@@ -1,5 +1,7 @@
 import client from '@api/client';
 
+import logger from '@/utils/logger';
+
 export type FetchSearchOptions = {
   type: Widget.SearchOption;
   payload?: any;
@@ -28,12 +30,13 @@ export default function fetchWidgetByRange({
       break;
   }
 
-  return new Promise<Widget.Type[]>((resolve, reject) => {
+  return new Promise<Widget.Type[]>(resolve => {
     client
       .get(`/widget${query}`)
       .then(response => {
+        console.log('query ', query, response.data.data);
         resolve(response.data.data);
       })
-      .catch(reject);
+      .catch(logger.error);
   });
 }

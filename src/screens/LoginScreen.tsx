@@ -5,10 +5,11 @@ import {
   View,
   TouchableOpacity,
   Image,
+  BackHandler,
 } from 'react-native';
 import {useSetRecoilState} from 'recoil';
 import {setAuthHeader} from '@api/client';
-import fetchUserInfo from '@api/fetchUserInfo';
+import fetchUserInfo from '@/api/fetchUserInfo';
 import signIn from '@api/signIn';
 import userAtom from '@atom/userAtom';
 import {AppText} from '@components/AppText';
@@ -20,8 +21,11 @@ import {AuthorizationStackParamList} from '../Navigator/AuthorizationNavigator';
 import {Divider} from '@rneui/themed';
 import google from '../assets/google.png';
 import PlainInput from '@/components/PlainInput';
+import {useFocusEffect} from '@react-navigation/native';
+import {useCallback} from 'react';
 
 const LoginScreen = ({
+  route,
   navigation,
 }: NativeStackScreenProps<AuthorizationStackParamList, 'Login'>) => {
   const setUser = useSetRecoilState(userAtom);
@@ -33,6 +37,23 @@ const LoginScreen = ({
       fetchUserInfo().then(setUser);
     });
   };
+
+  useFocusEffect(
+    useCallback(() => {
+      const onBackPress = () => {
+        if (route.name === Auth.Login) {
+          return true;
+        } else {
+          return false;
+        }
+      };
+
+      BackHandler.addEventListener('hardwareBackPress', onBackPress);
+
+      return () =>
+        BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+    }, [route]),
+  );
 
   return (
     <SafeAreaView style={styles.container}>
@@ -55,7 +76,16 @@ const LoginScreen = ({
       </View>
 
       <View style={styles.socialView}>
-        <ExternalLinkButton url="http://account-diary.kro.kr:8080/api/auth/google/uri">
+        <ExternalLinkButton
+          buttonStyle={{
+            backgroundColor: '#bbdefb',
+            height: 50,
+            borderRadius: 10,
+            borderColor: 'black',
+            justifyContent: 'space-around',
+            alignItems: 'center',
+          }}
+          url="http://account-diary.kro.kr:8080/api/auth/google/uri">
           <Image source={google} style={styles.img} />
           <AppText text="Google 계정으로 계속하기" family="round-b" />
         </ExternalLinkButton>

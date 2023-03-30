@@ -1,8 +1,8 @@
+/* eslint-disable react-native/no-inline-styles */
 import {AppText} from '@/components/AppText';
-import {ButtonGroup, Dialog} from '@rneui/base';
-import {Input} from '@rneui/themed';
+import {ButtonGroup, Dialog} from '@rneui/themed';
 import {useState} from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, TextInput, Platform} from 'react-native';
 
 interface ChartRangeSearchModalProps {
   visible: boolean;
@@ -22,41 +22,55 @@ export default function ChartRangeSearchModal({
   const [searchMonth, setSearchMonth] = useState('03');
   return (
     <Dialog
-      overlayStyle={{backgroundColor: 'white'}}
       isVisible={visible}
-      onBackdropPress={close}>
-      <Dialog.Title title="통계 범위 검색" />
+      onBackdropPress={close}
+      overlayStyle={{borderRadius: 20}}>
+      <AppText.Title
+        family="round-b"
+        text="통계 범위 검색"
+        style={styles.Title}
+      />
       <ButtonGroup
-        buttons={['특정 년', '특정 월']}
+        buttons={[
+          <AppText family="round-b" text="특정 년" />,
+          <AppText family="round-b" text="특정 월" />,
+        ]}
         selectedIndex={searchTypeIndex}
         onPress={setSearchTypeIndex}
-        containerStyle={{marginBottom: 20}}
+        containerStyle={{
+          borderRadius: 10,
+          borderColor: 'white',
+          width: '80%',
+        }}
+        selectedButtonStyle={{backgroundColor: '#b4dcff'}}
+        buttonStyle={{borderRadius: 10}}
+        buttonContainerStyle={{borderColor: 'white', borderRadius: 10}}
       />
       <View style={styles.row}>
-        <Input
+        <TextInput
           value={searchYear}
-          containerStyle={styles.inputContainer}
-          inputStyle={styles.input}
+          style={styles.input}
           onChangeText={setSearchYear}
           placeholder="년 입력"
+          keyboardType="numeric"
         />
-        <AppText mv={15} center family="round-c" text="년" />
+        <AppText center family="round-b" text="년" />
         {searchTypeIndex === 1 && (
           <>
-            <Input
-              containerStyle={styles.inputContainer}
-              inputStyle={styles.input}
+            <TextInput
+              style={styles.input}
               value={searchMonth}
               onChangeText={setSearchMonth}
               placeholder="월 입력"
+              keyboardType="numeric"
             />
-            <AppText mv={15} center family="round-c" text="월" />
+            <AppText center family="round-b" text="월" />
           </>
         )}
       </View>
       <Dialog.Actions>
         <Dialog.Button
-          title="설정"
+          title="확인"
           onPress={() => {
             if (searchTypeIndex === 0) {
               onSearchYear(parseInt(searchYear));
@@ -73,18 +87,21 @@ export default function ChartRangeSearchModal({
 }
 
 const styles = StyleSheet.create({
+  Title: {
+    marginBottom: 10,
+  },
   row: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'center',
-  },
-  inputContainer: {
-    width: 100,
-    padding: 0,
+    alignItems: 'center',
   },
   input: {
-    padding: 0,
     textAlign: 'right',
-    margin: 0,
+    ...Platform.select({
+      android: {
+        fontFamily: 'Ownglyph_yoxaiov-Rg',
+        fontSize: 20,
+      },
+    }),
   },
 });

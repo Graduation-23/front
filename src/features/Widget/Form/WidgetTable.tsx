@@ -1,6 +1,6 @@
 import Utils from '@/utils';
 import {useCallback, useState} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, ToastAndroid, View} from 'react-native';
 import SpendCategoryDialog from '../../Category/SpendCategoryDialog';
 import {WidgetTableItem} from './WidgetTableItem';
 import FinanceDialog from '../../Finance/FinanceDialog';
@@ -29,6 +29,14 @@ export default function WidgetTable({items, setItems}: WidgetTableProps) {
     [setItems, items],
   );
 
+  const deleteItem = useCallback(
+    (i: number) => {
+      setItems(items.filter((_, index) => index !== i));
+      ToastAndroid.show('삭제되었습니다.', ToastAndroid.SHORT);
+    },
+    [setItems, items],
+  );
+
   // #endregion
 
   return (
@@ -37,6 +45,7 @@ export default function WidgetTable({items, setItems}: WidgetTableProps) {
         {Array.isArray(items) &&
           items.map((el, i) => (
             <WidgetTableItem
+              onLongPress={() => deleteItem(i)}
               openFinanceDialog={openFinanceDialog(i)}
               openCategoryDialog={openCategoryDialog(i)}
               setItem={updateItem.bind(null, i)}
@@ -62,13 +71,5 @@ export default function WidgetTable({items, setItems}: WidgetTableProps) {
 const styles = StyleSheet.create({
   tableContainer: {
     width: '100%',
-    // backgroundColor: 'black',
-  },
-  buttonContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-  },
-  button: {
-    flexGrow: 1,
   },
 });

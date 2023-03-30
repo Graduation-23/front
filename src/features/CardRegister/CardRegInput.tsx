@@ -1,5 +1,4 @@
-import {Input} from '@rneui/themed';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, TextInput} from 'react-native';
 import {AppText} from '@components/AppText';
 
 type CardRegInputProps = {
@@ -20,10 +19,9 @@ export default function CardRegInput({
   return (
     <>
       <View style={styles.InputContainer}>
-        <Input
-          label={
-            <AppText family="round-d" text={text} style={styles.FontSize20} />
-          }
+        <AppText family="round-b" text={text} style={styles.FontSize20} />
+        <TextInput
+          style={styles.Input}
           placeholder={`${text} 입력`}
           onChangeText={onChangeText}
           value={value}
@@ -38,8 +36,18 @@ const styles = StyleSheet.create({
     width: '80%',
     flexDirection: 'row',
     justifyContent: 'flex-start',
+    alignItems: 'center',
+    marginBottom: 20,
   },
   FontSize20: {
     fontSize: 20,
+  },
+  Input: {
+    fontFamily: 'Ownglyph_yoxaiov-Rg',
+    fontSize: 20,
+    borderBottomWidth: 0.5,
+    paddingBottom: 7,
+    marginLeft: 10,
+    width: 150,
   },
 });

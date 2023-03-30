@@ -1,26 +1,27 @@
 import {AppText} from '@/components/AppText';
 
-import {StyleSheet, View} from 'react-native';
+import {Platform, StyleSheet, View} from 'react-native';
 
 interface BookHistoryHeaderProps {}
 
 export default function BookHistoryHeader({}: BookHistoryHeaderProps) {
-  return (
-    <View style={styles.container}>
-      <AppText style={styles.yearText}>연혁</AppText>
-    </View>
-  );
+  return <></>;
 }
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 30,
-    backgroundColor: '#fff',
+    width: '100%',
+    paddingTop: 20,
+    alignItems: 'center',
   },
   yearText: {
-    color: 'gray',
-    fontWeight: 'bold',
-    fontSize: 24,
-    paddingLeft: 20,
+    width: '90%',
+    padding: 10,
+    backgroundColor: '#c8e6fe',
+    ...Platform.select({
+      android: {
+        elevation: 10,
+      },
+    }),
   },
 });

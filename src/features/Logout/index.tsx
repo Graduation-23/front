@@ -1,5 +1,5 @@
 import {Dialog} from '@rneui/themed';
-import {View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {useSetRecoilState} from 'recoil';
 import {AppText} from '@components/AppText';
 import {saveRefreshToken} from '@utils/refreshToken';
@@ -25,9 +25,13 @@ const Logout = ({visible, toggleDialog}: Props) => {
 
   return (
     <View>
-      <Dialog isVisible={visible} onBackdropPress={toggleDialog}>
-        <Dialog.Title title="로그아웃" />
-        <AppText text="로그아웃 하시겠습니까?" />
+      <Dialog
+        isVisible={visible}
+        onBackdropPress={toggleDialog}
+        overlayStyle={styles.DialogContainer}>
+        <AppText.Title family="round-b" text="로그아웃" style={styles.Title} />
+
+        <AppText family="round-b" text="로그아웃 하시겠습니까?" />
         <Dialog.Actions>
           <Dialog.Button title="예" onPress={handlePress} />
           <Dialog.Button
@@ -43,3 +47,12 @@ const Logout = ({visible, toggleDialog}: Props) => {
 };
 
 export default Logout;
+
+const styles = StyleSheet.create({
+  DialogContainer: {
+    borderRadius: 20,
+  },
+  Title: {
+    marginBottom: 10,
+  },
+});

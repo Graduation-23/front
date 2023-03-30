@@ -32,3 +32,32 @@ export interface IFinance {
   colorcode: string;
   version: number;
 }
+
+export interface IMonthGoal {
+  amount: number;
+  id: number;
+  month: number;
+  name: string;
+  state: string;
+  user: string;
+  weekIds: number[];
+  year: number;
+  week: number;
+}
+export interface IWeekGoal {
+  amount: number;
+  goalMonth: number;
+  id: number;
+  name: string;
+  state: string;
+  week: number;
+  start: string;
+  end: string;
+}
+
+export interface ITransaction {
+  amount: number;
+  bankName: string;
+  content: string;
+  transactionType: string;
+}

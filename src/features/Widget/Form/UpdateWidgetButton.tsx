@@ -1,7 +1,7 @@
+import {AppText} from '@/components/AppText';
 import {useUpdateWidget} from '@/query/widget';
 import WidgetUtils from '@/utils/widget';
-import {Button} from '@rneui/base';
-import {ToastAndroid, Platform} from 'react-native';
+import {ToastAndroid, Platform, TouchableOpacity} from 'react-native';
 
 interface UpdateWidgetButtonProps {
   widget: Omit<Widget.Type, 'totalCost'>;
@@ -16,9 +16,13 @@ export default function UpdateWidgetButton({widget}: UpdateWidgetButtonProps) {
       totalCost: WidgetUtils.calcItemsTotalCost(widget.items),
     }).then(() => {
       if (Platform.OS === 'android') {
-        ToastAndroid.show('수정 완료', ToastAndroid.SHORT);
+        ToastAndroid.show('소비기록 저장 완료', ToastAndroid.SHORT);
       }
     });
   };
-  return <Button onPress={handlePress}>저장</Button>;
+  return (
+    <TouchableOpacity onPress={handlePress}>
+      <AppText family="round-b" text="소비기록 저장" />
+    </TouchableOpacity>
+  );
 }
