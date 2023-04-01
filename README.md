@@ -18,20 +18,24 @@
 ### 구글 인증
 
 - 흐름도
-  ![image](https://user-images.githubusercontent.com/67147940/229281302-e77d5479-d5e6-4131-b36f-22c55362cd35.png)
+   
+![image](https://user-images.githubusercontent.com/67147940/229281302-e77d5479-d5e6-4131-b36f-22c55362cd35.png)
 
 - 실행 사진
-  ![image](https://user-images.githubusercontent.com/67147940/229281559-857e727b-2037-4e80-90a2-7319741da0bc.png)
+   
+![image](https://user-images.githubusercontent.com/67147940/229281559-857e727b-2037-4e80-90a2-7319741da0bc.png)
 
-  ![image](https://user-images.githubusercontent.com/67147940/229281574-3bb7fb8f-3e43-470e-9e77-8c8e49a53194.png)
+![image](https://user-images.githubusercontent.com/67147940/229281574-3bb7fb8f-3e43-470e-9e77-8c8e49a53194.png)
 
 ### 금융 결제원 연동
 
 - 흐름도
-  ![image](https://user-images.githubusercontent.com/67147940/229281316-70e39023-c6b8-4720-bcea-c1b386399788.png)
+   
+![image](https://user-images.githubusercontent.com/67147940/229281316-70e39023-c6b8-4720-bcea-c1b386399788.png)
 - 동작 사진
-  ![image](https://user-images.githubusercontent.com/67147940/229281509-60af6d2c-0f15-442c-80d1-2177f4a7f24e.png)
-  ![image](https://user-images.githubusercontent.com/67147940/229281529-6a8e0a37-a1a4-4b37-b4ae-1caba1560f96.png)
+   
+![image](https://user-images.githubusercontent.com/67147940/229281509-60af6d2c-0f15-442c-80d1-2177f4a7f24e.png)
+![image](https://user-images.githubusercontent.com/67147940/229281529-6a8e0a37-a1a4-4b37-b4ae-1caba1560f96.png)
 
 ### 이미지 업로드
 
