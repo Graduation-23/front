@@ -9,5 +9,38 @@
 
 <img width="600" src="https://user-images.githubusercontent.com/64027019/226843671-7e39efa5-4c31-4ff7-9e93-9c52cb109aa3.png">
 
-## Paiary 실행 화면
+## 주요 기능
 
+### Deep Link
+
+`paiary-app://` 으로 접근 시, 어플리케이션으로 이동됨.
+
+### 구글 인증
+
+- 흐름도
+  ![image](https://user-images.githubusercontent.com/67147940/229281302-e77d5479-d5e6-4131-b36f-22c55362cd35.png)
+
+- 실행 사진
+  ![image](https://user-images.githubusercontent.com/67147940/229281559-857e727b-2037-4e80-90a2-7319741da0bc.png)
+
+  ![image](https://user-images.githubusercontent.com/67147940/229281574-3bb7fb8f-3e43-470e-9e77-8c8e49a53194.png)
+
+### 금융 결제원 연동
+
+- 흐름도
+  ![image](https://user-images.githubusercontent.com/67147940/229281316-70e39023-c6b8-4720-bcea-c1b386399788.png)
+- 동작 사진
+  ![image](https://user-images.githubusercontent.com/67147940/229281509-60af6d2c-0f15-442c-80d1-2177f4a7f24e.png)
+  ![image](https://user-images.githubusercontent.com/67147940/229281529-6a8e0a37-a1a4-4b37-b4ae-1caba1560f96.png)
+
+### 이미지 업로드
+
+![image](https://user-images.githubusercontent.com/67147940/229281414-26b1773d-085e-418c-9fca-f8666c4bc528.png)
+
+### 각종 차트 및 통계
+
+![image](https://user-images.githubusercontent.com/67147940/229281431-1a87d9d3-8788-4f2c-84b2-02ed315ccbec.png)
+
+![image](https://user-images.githubusercontent.com/67147940/229281452-8a72158e-aae0-406e-a27c-2216e64e9cb5.png)
+
+![image](https://user-images.githubusercontent.com/67147940/229281470-a218044c-7c74-4e57-b89f-cb9a5d033334.png)
